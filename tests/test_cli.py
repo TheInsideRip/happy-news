@@ -791,3 +791,80 @@ def test_front_page_with_only_today_still_works(monkeypatch, tmp_path):
 
     index_html = (root / "index.html").read_text(encoding="utf-8")
     assert "OnlyTodayStory" in index_html
+
+
+# ---------------------------------------------------------------------------
+# C1: a truncated data/editions/<date>.json froze the page forever, silently.
+#
+# `clock.already_published` is called from OUTSIDE the try block, so a bare
+# json.load raising JSONDecodeError there escaped `main` entirely: no
+# failures.log line, no health.json update, no toast, no failure counter --
+# and the identical crash on every subsequent run. The reader sees a page
+# that never changes again; the operator sees only a traceback in run.log.
+#
+# The trigger is real: the edition file used a plain truncate-then-write and
+# the scheduled tasks kill the process at 15 minutes.
+# ---------------------------------------------------------------------------
+
+
+def test_a_truncated_edition_file_does_not_crash_the_run_and_self_heals(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    editions_dir = root / "data" / "editions"
+    editions_dir.mkdir(parents=True)
+    # Exactly what a kill mid-write leaves behind.
+    (editions_dir / "2026-09-07.json").write_text(
+        '{\n  "date": "2026-09-07",\n  "slots": {\n    "morning": {\n      "stor',
+        encoding="utf-8",
+    )
+
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+    push_calls = _recording_push(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    # Before the fix this raised json.JSONDecodeError straight out of main().
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    edition = json.loads((editions_dir / "2026-09-07.json").read_text(encoding="utf-8"))
+    assert edition["slots"]["morning"]["stories"][0]["title"] == "Turtles recover"
+    assert "Turtles recover" in (root / "index.html").read_text(encoding="utf-8")
+    assert len(push_calls) == 1
+
+
+def test_the_edition_file_is_written_atomically(monkeypatch, tmp_path):
+    """A kill mid-write must not be able to produce the truncated file the
+    test above describes in the first place -- same temp-file-then-rename
+    guarantee alert.Health._write already gives health.json."""
+    root = _make_root(tmp_path)
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    saved = []
+    real_save = cli.clock.save_edition
+
+    def spy(editions_dir, day, data):
+        saved.append(day)
+        return real_save(editions_dir, day, data)
+
+    monkeypatch.setattr(cli.clock, "save_edition", spy)
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    assert saved, "the edition must be persisted through clock.save_edition"
+    editions_dir = root / "data" / "editions"
+    leftover = [p.name for p in editions_dir.iterdir() if not p.name.endswith(".json")]
+    assert leftover == [], f"temp files left behind: {leftover}"

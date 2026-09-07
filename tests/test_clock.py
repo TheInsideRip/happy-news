@@ -2,6 +2,8 @@ import json
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
+import pytest
+
 from happy_news import clock
 
 ET = ZoneInfo("America/New_York")
@@ -57,3 +59,85 @@ def test_empty_slot_does_not_count_as_published(tmp_path):
 
 def test_missing_file_is_not_published(tmp_path):
     assert not clock.already_published(tmp_path, date(2026, 9, 7), "morning")
+
+
+# ---------------------------------------------------------------------------
+# C1: a truncated edition file must never take down a run.
+#
+# `data/editions/<date>.json` was written with a plain truncate-then-write,
+# and the scheduled tasks kill the process at 15 minutes -- a kill landing
+# mid-write leaves a half-file. Because `clock.already_published` is called
+# from OUTSIDE cli's try/except, a bare json.load here raised straight out of
+# `main`: no failures.log, no health.json update, no toast, no failure
+# counter, and the identical crash on every subsequent run. The page freezes
+# and nothing anywhere says so. Degrade to the empty default instead: the run
+# then republishes the slot and overwrites the corrupt file with a good one.
+# ---------------------------------------------------------------------------
+
+
+def test_truncated_edition_file_degrades_to_the_empty_default(tmp_path):
+    day = date(2026, 9, 7)
+    (tmp_path / "2026-09-07.json").write_text(
+        '{"date": "2026-09-07", "slots": {"morning": {"stor', encoding="utf-8"
+    )
+
+    assert clock.load_edition(tmp_path, day) == {"date": "2026-09-07", "slots": {}}
+    assert clock.already_published(tmp_path, day, "morning") is False
+
+
+def test_empty_edition_file_degrades_to_the_empty_default(tmp_path):
+    """A zero-byte file is the most likely shape of an interrupted write."""
+    day = date(2026, 9, 7)
+    (tmp_path / "2026-09-07.json").write_text("", encoding="utf-8")
+
+    assert clock.load_edition(tmp_path, day) == {"date": "2026-09-07", "slots": {}}
+
+
+def test_undecodable_edition_file_degrades_to_the_empty_default(tmp_path):
+    """Raw bytes that are not valid UTF-8 raise UnicodeDecodeError, not
+    JSONDecodeError -- that must degrade too."""
+    day = date(2026, 9, 7)
+    (tmp_path / "2026-09-07.json").write_bytes(b'{"date": "2026-09-07", \xff\xfe')
+
+    assert clock.load_edition(tmp_path, day) == {"date": "2026-09-07", "slots": {}}
+
+
+def test_edition_file_holding_a_non_dict_degrades_to_the_empty_default(tmp_path):
+    day = date(2026, 9, 7)
+    (tmp_path / "2026-09-07.json").write_text("[1, 2, 3]", encoding="utf-8")
+
+    assert clock.load_edition(tmp_path, day) == {"date": "2026-09-07", "slots": {}}
+
+
+def test_save_edition_is_atomic_and_leaves_no_temp_file_behind(tmp_path):
+    """Same guarantee alert.Health._write already gives health.json: write to
+    a temp file in the same directory, then os.replace over the target, so a
+    kill mid-write can never leave a truncated edition file on disk."""
+    day = date(2026, 9, 7)
+    clock.save_edition(tmp_path, day, {"date": "2026-09-07", "slots": {}})
+
+    leftover = [p.name for p in tmp_path.iterdir() if p.name != "2026-09-07.json"]
+    assert leftover == [], f"temp files left behind: {leftover}"
+    assert clock.load_edition(tmp_path, day) == {"date": "2026-09-07", "slots": {}}
+
+
+def test_a_failed_save_leaves_the_previous_edition_file_intact(tmp_path, monkeypatch):
+    """The whole point of the rename: if the write blows up, the file that
+    was already there is untouched, not truncated."""
+    import os
+
+    day = date(2026, 9, 7)
+    good = {"date": "2026-09-07", "slots": {"morning": {"stories": [{"title": "t"}]}}}
+    clock.save_edition(tmp_path, day, good)
+
+    def boom(src, dst):
+        raise OSError("simulated crash during rename")
+
+    monkeypatch.setattr(os, "replace", boom)
+
+    with pytest.raises(OSError):
+        clock.save_edition(tmp_path, day, {"date": "2026-09-07", "slots": {}})
+
+    assert clock.load_edition(tmp_path, day) == good
+    leftover = [p.name for p in tmp_path.iterdir() if p.name != "2026-09-07.json"]
+    assert leftover == [], f"temp files left behind: {leftover}"

@@ -36,7 +36,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import json
 import logging
 import sys
 from datetime import date, timezone
@@ -220,13 +219,14 @@ def do_run(root: Path, *, dry: bool) -> int:
         }
         edition["updated_text"] = time_text
 
-        edition_path = clock.edition_path(editions_dir, today)
-
+        # clock.save_edition writes through a temp file + os.replace rather
+        # than truncating the target in place. The scheduled tasks kill this
+        # process at 15 minutes, and a kill landing inside a plain
+        # truncate-then-write left a half-written edition file that
+        # clock.already_published then choked on -- outside this try block,
+        # so with no alert of any kind (finding C1).
         def _persist(data: dict) -> None:
-            editions_dir.mkdir(parents=True, exist_ok=True)
-            edition_path.write_text(
-                json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
-            )
+            clock.save_edition(editions_dir, today, data)
 
         _persist(edition)
 
