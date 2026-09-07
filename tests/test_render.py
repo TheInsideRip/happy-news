@@ -82,6 +82,42 @@ def test_validate_rejects_a_non_http_url():
         render.validate(render.render_day(day, is_today=True))
 
 
+def test_validate_rejects_a_whitespace_only_summary():
+    day = {"date": "2026-09-07", "slots": {
+        "morning": {"published_at": "a", "note": None, "stories": [
+            dict(STORY, summary="   ")]},
+    }}
+    with pytest.raises(ValueError):
+        render.validate(render.render_day(day, is_today=True))
+
+
 def test_archive_index_lists_days_newest_first():
     html = render.render_archive_index(["2026-09-05", "2026-09-07", "2026-09-06"])
     assert html.index("2026-09-07") < html.index("2026-09-05")
+
+
+def test_archive_page_renders_without_crashing():
+    html = render.render_day(DAY, is_today=False)
+    assert "Monday, September 7" in html
+    assert '../assets/style.css' in html
+    assert 'href="assets/style.css"' not in html
+
+
+def test_slot_time_falls_back_to_published_at_when_no_time_text():
+    day = {"date": "2026-09-07", "slots": {
+        "morning": {"published_at": "2026-09-07T08:03:41-04:00", "note": None,
+                    "stories": [STORY]},
+    }}
+    html = render.render_day(day, is_today=True)
+    assert "8:03 am" in html
+
+
+def test_hostile_summary_source_and_label_are_escaped():
+    payload = "<script>alert(1)</script>"
+    day = {"date": "2026-09-07", "slots": {
+        "morning": {"published_at": "a", "note": None, "stories": [
+            dict(STORY, summary=payload, source=payload, label=payload)]},
+    }}
+    html = render.render_day(day, is_today=True)
+    assert payload not in html
+    assert html.count("&lt;script&gt;") >= 3

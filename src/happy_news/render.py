@@ -161,13 +161,20 @@ def render_archive_index(days: list[str]) -> str:
 
 
 _HREF = re.compile(r'href="([^"]+)"')
+_SUM = re.compile(r'<p class="sum">(.*?)</p>', re.DOTALL)
 
 
 def validate(page: str) -> None:
     if 'class="plate"' not in page:
         raise ValueError("page contains no story")
-    if '<p class="sum"></p>' in page:
-        raise ValueError("page contains an empty summary")
+    # A summary that is empty *or whitespace-only* must be rejected: the
+    # model is untrusted, and "   " renders as a visible, apparently-valid
+    # <p class="sum">   </p> that carries no readable text. Checking the
+    # rendered block's content for at least one non-whitespace character
+    # (rather than matching the literal empty-tag string) catches both.
+    for summary in _SUM.findall(page):
+        if not summary.strip():
+            raise ValueError("page contains an empty summary")
     for href in _HREF.findall(page):
         if href.startswith(("http://", "https://")):
             continue
