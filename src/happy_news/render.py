@@ -277,6 +277,12 @@ def validate(page: str) -> None:
     for href in _HREF.findall(page):
         if href.startswith(("http://", "https://")):
             continue
-        if href.startswith(("assets/", "../assets/", "archive/", "../", "#")) or href.endswith(".html"):
+        # There is deliberately no `href.endswith(".html")` escape hatch: it
+        # accepted any scheme at all, so `javascript:alert(1)//x.html` passed
+        # validation and shipped as a live link. Every legitimate link on a
+        # validated page is either http(s) (a story) or one of the fixed
+        # relative nav targets below. (archive/index.html's `<date>.html`
+        # links live on the one page validate() is never called on.)
+        if href.startswith(("assets/", "../assets/", "archive/", "../", "#")):
             continue
         raise ValueError(f"page contains a non-http link: {href}")

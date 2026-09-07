@@ -295,3 +295,33 @@ def test_last_updated_survives_an_unparseable_edition_date():
          "slots": {"morning": {"note": None, "stories": [STORY]}}},
     ])
     assert "Last updated 5:10 pm" in html
+
+
+def test_validate_rejects_a_javascript_url_dressed_up_as_html():
+    """The old `href.endswith(".html")` escape hatch accepted ANY scheme, so
+    a javascript: URL ending in .html sailed through validation and shipped
+    as a live link on the page."""
+    page = render.render_day({"date": "2026-09-07", "slots": {
+        "morning": {"published_at": "a", "note": None, "stories": [
+            dict(STORY, url="javascript:alert(1)//x.html")]},
+    }}, is_today=True)
+    with pytest.raises(ValueError, match="non-http link"):
+        render.validate(page)
+
+
+def test_validate_rejects_other_schemes_ending_in_html():
+    for hostile in ("data:text/html,<script>x</script>#x.html",
+                    "file:///C:/Windows/system32/x.html",
+                    "vbscript:msgbox(1)/x.html"):
+        page = render.render_day({"date": "2026-09-07", "slots": {
+            "morning": {"published_at": "a", "note": None,
+                        "stories": [dict(STORY, url=hostile)]},
+        }}, is_today=True)
+        with pytest.raises(ValueError, match="non-http link"):
+            render.validate(page)
+
+
+def test_validate_still_accepts_the_pages_own_nav_links():
+    render.validate(render.render_day(DAY, is_today=True))
+    render.validate(render.render_day(DAY, is_today=False))
+    render.validate(render.render_front([DAY]))

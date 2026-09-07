@@ -1033,3 +1033,58 @@ def test_a_genuine_pick_still_carries_its_timestamp(monkeypatch, tmp_path):
 
     edition = json.loads((root / "data" / "editions" / "2026-09-07.json").read_text(encoding="utf-8"))
     assert edition["slots"]["morning"]["stories"][0]["age_text"] == "3 hours ago"
+
+
+# ---------------------------------------------------------------------------
+# A stray file in data/editions/ used to fail every run, forever.
+#
+# `date.fromisoformat(path.stem)` raised on any *.json whose name is not a
+# plain ISO date -- a backup copy, an editor's `2026-09-07.json.json`, a
+# half-finished hand-edit -- and did so on EVERY subsequent run, turning one
+# junk file into permanent, total staleness.
+# ---------------------------------------------------------------------------
+
+
+def test_a_stray_file_in_the_editions_directory_is_ignored(tmp_path, caplog):
+    root = _make_root(tmp_path)
+    editions_dir = root / "data" / "editions"
+    editions_dir.mkdir(parents=True)
+    (editions_dir / "2026-09-07.json").write_text(
+        json.dumps(_edition_with_story("2026-09-07", "RealStory")), encoding="utf-8")
+    (editions_dir / "2026-09-06.json").write_text(
+        json.dumps(_edition_with_story("2026-09-06", "OlderStory")), encoding="utf-8")
+    # the strays
+    (editions_dir / "2026-09-07.json.json").write_text("{}", encoding="utf-8")
+    (editions_dir / "backup.json").write_text("{}", encoding="utf-8")
+    (editions_dir / "notes.json").write_text("nonsense", encoding="utf-8")
+
+    with caplog.at_level("WARNING"):
+        assert cli.main(["rebuild", "--root", str(root)]) == 0
+
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    assert "RealStory" in index_html
+    assert "OlderStory" in index_html
+    assert (root / "archive" / "2026-09-07.html").exists()
+    assert not (root / "archive" / "backup.html").exists()
+    assert any("not a YYYY-MM-DD" in rec.getMessage() for rec in caplog.records)
+
+
+def test_a_stray_file_does_not_break_a_live_run(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    editions_dir = root / "data" / "editions"
+    editions_dir.mkdir(parents=True)
+    (editions_dir / "keep-me-safe.json").write_text("{}", encoding="utf-8")
+
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+    assert "Turtles recover" in (root / "index.html").read_text(encoding="utf-8")

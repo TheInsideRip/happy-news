@@ -84,6 +84,24 @@ def _render_and_validate(edition: dict, *, is_today: bool) -> str | None:
 _FRONT_PAGE_DAYS = 7  # today plus up to 6 previous days; older days stay in the archive only
 
 
+def _edition_days(editions_dir: Path) -> list[date]:
+    """Every day that has an edition file, ignoring anything whose name is not
+    a plain ISO date.
+
+    `date.fromisoformat(path.stem)` raised on any stray *.json in
+    data/editions/ -- a backup copy, an editor's `2026-09-07.json.json`, a
+    half-finished hand-edit -- and did so on EVERY run from then on, turning
+    one junk file into permanent, total staleness. A file we cannot name a
+    day for simply is not an edition."""
+    days: list[date] = []
+    for path in sorted(editions_dir.glob("*.json")):
+        try:
+            days.append(date.fromisoformat(path.stem))
+        except ValueError:
+            _LOGGER.warning("ignoring %s: its name is not a YYYY-MM-DD date", path)
+    return days
+
+
 def _write_pages(root: Path, editions_dir: Path, today: date) -> None:
     """Rebuild index.html, every archive/<date>.html, and archive/index.html
     from data/editions/*.json. Only pages that pass validation are written;
@@ -97,11 +115,10 @@ def _write_pages(root: Path, editions_dir: Path, today: date) -> None:
     unaffected -- it still renders exactly one day, as before."""
     today_edition = clock.load_edition(editions_dir, today)
 
-    previous_days = sorted(
-        (date.fromisoformat(path.stem) for path in editions_dir.glob("*.json")),
-        reverse=True,
-    )
-    previous_days = [day for day in previous_days if day < today][: _FRONT_PAGE_DAYS - 1]
+    edition_days = _edition_days(editions_dir)
+
+    previous_days = sorted((day for day in edition_days if day < today), reverse=True)
+    previous_days = previous_days[: _FRONT_PAGE_DAYS - 1]
     front_editions = [today_edition] + [
         clock.load_edition(editions_dir, day) for day in previous_days
     ]
@@ -113,8 +130,7 @@ def _write_pages(root: Path, editions_dir: Path, today: date) -> None:
     archive = root / "archive"
     archive.mkdir(exist_ok=True)
     days: list[str] = []
-    for path in sorted(editions_dir.glob("*.json")):
-        day = date.fromisoformat(path.stem)
+    for day in sorted(edition_days):
         # today's edition was already loaded above -- re-reading and
         # re-parsing the same file here would be pure waste (Task 12 fix
         # round 1, finding 4). The render+validate call below still runs a
@@ -124,8 +140,8 @@ def _write_pages(root: Path, editions_dir: Path, today: date) -> None:
         day_page = _render_and_validate(day_edition, is_today=False)
         if day_page is None:
             continue
-        (archive / f"{path.stem}.html").write_text(day_page, encoding="utf-8")
-        days.append(path.stem)
+        (archive / f"{day.isoformat()}.html").write_text(day_page, encoding="utf-8")
+        days.append(day.isoformat())
 
     (archive / "index.html").write_text(render.render_archive_index(days), encoding="utf-8")
 

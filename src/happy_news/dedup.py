@@ -8,10 +8,13 @@ events, and a hard block built on one silently starves the page.
 from __future__ import annotations
 
 import json
+import logging
 from datetime import date, timedelta
 from pathlib import Path
 
 from . import normalize
+
+_LOGGER = logging.getLogger(__name__)
 
 SOFT_THRESHOLD = 0.75
 DEFAULT_WINDOW_DAYS = 548  # 18 months
@@ -30,14 +33,48 @@ class Memory:
         self._entries: list[dict] | None = None
 
     def _load(self) -> list[dict]:
-        if self._entries is None:
-            self._entries = []
-            if self.path.exists():
+        """Read seen.jsonl, skipping any line we cannot use.
+
+        Direct `entry["url_key"]` indexing meant a single malformed line --
+        a partial write, a hand-edit, a truncated append -- raised on EVERY
+        subsequent run, freezing the page permanently with the only evidence
+        a traceback in run.log. A bad line is dropped and counted instead.
+
+        Dropping a line does weaken the never-repeat guarantee for that one
+        story, so the bar for dropping is deliberately narrow: only entries
+        that cannot serve layers 1 and 2 at all (unparseable, not an object,
+        or with no usable url_key/title_key) are discarded. A usable entry
+        with, say, a broken `date` is kept -- the advisory layer-3 check
+        below simply skips it."""
+        if self._entries is not None:
+            return self._entries
+
+        self._entries = []
+        skipped = 0
+        if self.path.exists():
+            try:
                 with self.path.open(encoding="utf-8") as handle:
                     for line in handle:
                         line = line.strip()
-                        if line:
-                            self._entries.append(json.loads(line))
+                        if not line:
+                            continue
+                        try:
+                            entry = json.loads(line)
+                        except json.JSONDecodeError:
+                            skipped += 1
+                            continue
+                        if (not isinstance(entry, dict)
+                                or not isinstance(entry.get("url_key"), str)
+                                or not isinstance(entry.get("title_key"), str)):
+                            skipped += 1
+                            continue
+                        self._entries.append(entry)
+            except (OSError, UnicodeDecodeError) as error:
+                _LOGGER.error("could not finish reading %s (%s); %d entries loaded",
+                              self.path, error, len(self._entries))
+        if skipped:
+            _LOGGER.warning("%s: skipped %d unreadable line(s); %d entries loaded",
+                            self.path, skipped, len(self._entries))
         return self._entries
 
     def is_blocked(self, url: str, title: str) -> bool:
@@ -53,9 +90,16 @@ class Memory:
         cutoff = date.today() - timedelta(days=within_days)
         toks = normalize.tokens(title)
         for entry in self._load():
-            if date.fromisoformat(entry["date"]) < cutoff:
+            try:
+                entry_date = date.fromisoformat(str(entry.get("date")))
+            except (TypeError, ValueError):
+                continue  # no usable date: the advisory layer just skips it
+            if entry_date < cutoff:
                 continue
-            if jaccard(toks, entry["tokens"]) >= SOFT_THRESHOLD:
+            entry_tokens = entry.get("tokens")
+            if not isinstance(entry_tokens, list):
+                continue
+            if jaccard(toks, entry_tokens) >= SOFT_THRESHOLD:
                 return True
         return False
 
@@ -75,4 +119,5 @@ class Memory:
         entries.append(entry)
 
     def recent_titles(self, limit: int = 60) -> list[str]:
-        return [e["title"] for e in reversed(self._load())][:limit]
+        titles = [e.get("title") for e in reversed(self._load())]
+        return [t for t in titles if isinstance(t, str) and t][:limit]

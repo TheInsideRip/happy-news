@@ -1,3 +1,6 @@
+import json
+
+from happy_news import dedup, normalize
 from happy_news.dedup import Memory, jaccard, SOFT_THRESHOLD
 
 
@@ -87,3 +90,91 @@ def test_is_near_duplicate_respects_18_month_window(tmp_path):
 
     # But it SHOULD be near_duplicate if we expand the window beyond 600 days
     assert mem.is_near_duplicate(similar_title, within_days=700)
+
+
+# ---------------------------------------------------------------------------
+# One bad line in seen.jsonl used to fail every run, forever.
+#
+# Direct entry["url_key"] indexing raised KeyError/TypeError on the first
+# malformed line, on EVERY subsequent run, freezing the page permanently with
+# the only evidence a traceback in run.log.
+# ---------------------------------------------------------------------------
+
+
+def _write_lines(path, lines):
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def _good(url, title, day="2026-09-06"):
+    return json.dumps({
+        "url_key": normalize.url_key(url),
+        "title_key": normalize.title_key(title),
+        "tokens": normalize.tokens(title),
+        "title": title,
+        "date": day,
+        "slot": "morning",
+    })
+
+
+def test_a_malformed_line_does_not_break_the_whole_memory(tmp_path, caplog):
+    path = _write_lines(tmp_path / "seen.jsonl", [
+        _good("https://a.com/one", "Turtles recover"),
+        "{not json at all",                       # truncated append
+        '"just a string"',                        # valid JSON, wrong shape
+        "[1, 2, 3]",                              # valid JSON, wrong shape
+        '{"title": "no keys at all"}',            # dict, but unusable
+        _good("https://a.com/two", "Coral reef recovers"),
+    ])
+
+    memory = dedup.Memory(path)
+    with caplog.at_level("WARNING"):
+        assert memory.is_blocked("https://a.com/one", "x") is True
+    assert memory.is_blocked("https://a.com/two", "x") is True
+    assert memory.is_blocked("https://a.com/three", "x") is False
+    assert memory.recent_titles() == ["Coral reef recovers", "Turtles recover"]
+    # the count must be logged, not swallowed
+    assert any("skipped 4 unreadable" in rec.getMessage() for rec in caplog.records),         [rec.getMessage() for rec in caplog.records]
+
+
+def test_a_bad_date_only_disables_the_advisory_layer_for_that_entry(tmp_path):
+    """A usable entry with a broken date must still hard-block, or dropping
+    it would silently weaken the never-repeat promise."""
+    entry = json.loads(_good("https://a.com/one", "Turtles recover"))
+    entry["date"] = "not-a-date"
+    path = _write_lines(tmp_path / "seen.jsonl", [json.dumps(entry)])
+
+    memory = dedup.Memory(path)
+    assert memory.is_blocked("https://a.com/one", "x") is True
+    assert memory.is_near_duplicate("Turtles recover") is False  # skipped, not raised
+
+
+def test_a_bad_tokens_field_does_not_raise(tmp_path):
+    entry = json.loads(_good("https://a.com/one", "Turtles recover"))
+    entry["tokens"] = "not-a-list"
+    path = _write_lines(tmp_path / "seen.jsonl", [json.dumps(entry)])
+
+    memory = dedup.Memory(path)
+    assert memory.is_near_duplicate("Turtles recover") is False
+    assert memory.is_blocked("https://a.com/one", "x") is True
+
+
+def test_an_entry_with_no_title_is_skipped_by_recent_titles_not_fatal(tmp_path):
+    entry = json.loads(_good("https://a.com/one", "Turtles recover"))
+    del entry["title"]
+    path = _write_lines(tmp_path / "seen.jsonl", [
+        json.dumps(entry), _good("https://a.com/two", "Coral reef recovers")])
+
+    memory = dedup.Memory(path)
+    assert memory.recent_titles() == ["Coral reef recovers"]
+
+
+def test_remember_still_works_after_skipping_a_bad_line(tmp_path):
+    path = _write_lines(tmp_path / "seen.jsonl", ["{broken"])
+    memory = dedup.Memory(path)
+
+    memory.remember("https://a.com/new", "Brand new story", "2026-09-07", "morning")
+
+    assert memory.is_blocked("https://a.com/new", "x") is True
+    # the broken line is left on disk untouched -- this is an append-only log
+    assert "{broken" in path.read_text(encoding="utf-8")
