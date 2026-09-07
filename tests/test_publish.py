@@ -296,3 +296,124 @@ def test_a_real_conflicted_rebase_leaves_the_repo_clean_and_committable(tmp_path
     _git(["add", "index.html"], work)
     commit = _git(["commit", "-m", "next run"], work)
     assert commit.returncode == 0, commit.stdout + commit.stderr
+
+
+# ---------------------------------------------------------------------------
+# push_data(): the second, smaller commit-and-push covering only data/,
+# added after cli.do_run's memory.remember() / health.record_success() /
+# edition persist all complete -- those write seen.jsonl, health.json and
+# the edition file strictly AFTER push()'s commit already ran, so without
+# this second push the GitHub copy of the never-repeat memory always trails
+# the local copy by one run.
+# ---------------------------------------------------------------------------
+
+
+def _root_with_data(tmp_path):
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "seen.jsonl").write_text('{"url_key": "x"}\n', encoding="utf-8")
+    return tmp_path
+
+
+def test_push_data_stages_only_data(tmp_path):
+    """Even when index.html/archive/assets also exist (as they would in a
+    real run), push_data must stage only data/ -- it is deliberately a
+    smaller commit than push()'s, not a repeat of it."""
+    root = _root_with_data(tmp_path)
+    (root / "index.html").write_text("<html></html>", encoding="utf-8")
+    (root / "archive").mkdir()
+    (root / "assets").mkdir()
+    calls = []
+
+    def runner(args, cwd):
+        calls.append(args)
+        return 0, ""
+
+    publish.push_data(root, "msg", runner=runner)
+    verbs = [a[1] for a in calls]
+    assert verbs == ["add", "commit", "push"]
+
+    add_call = calls[0]
+    assert add_call[2:] == ["data"], "push_data must stage only data/, nothing else"
+
+
+def test_push_data_is_a_silent_noop_when_data_does_not_exist(tmp_path):
+    """Unlike push(), an empty root is not an error here -- there is simply
+    nothing yet to back up."""
+    calls = []
+
+    def runner(args, cwd):
+        calls.append(args)
+        return 0, ""
+
+    publish.push_data(tmp_path, "msg", runner=runner)  # must not raise
+    assert calls == [], "must not shell out to git when there is nothing to stage"
+
+
+def test_push_data_nothing_to_commit_is_not_an_error(tmp_path):
+    """Normal case: a drought produced no new memory entry, so by the time
+    push_data runs, data/ already matches what push()'s own commit staged
+    a moment earlier -- `git commit` reporting "nothing to commit" must be
+    silent, not raised as a failure."""
+    root = _root_with_data(tmp_path)
+
+    def runner(args, cwd):
+        if args[1] == "commit":
+            return 1, "nothing to commit, working tree clean"
+        return 0, ""
+
+    publish.push_data(root, "msg", runner=runner)  # must not raise
+
+
+def test_push_data_git_add_failure_raises(tmp_path):
+    root = _root_with_data(tmp_path)
+    calls = []
+
+    def runner(args, cwd):
+        calls.append(args)
+        if args[1] == "add":
+            return 128, "fatal: pathspec 'data' did not match any files"
+        return 0, ""
+
+    with pytest.raises(publish.PublishError):
+        publish.push_data(root, "msg", runner=runner)
+
+    verbs = [a[1] for a in calls]
+    assert verbs == ["add"], "commit/push must never run after a staging failure"
+
+
+def test_push_data_rejected_push_rebases_and_retries_once(tmp_path):
+    root = _root_with_data(tmp_path)
+    calls = []
+
+    def runner(args, cwd):
+        calls.append(args)
+        if args[1] == "push" and len([a for a in calls if a[1] == "push"]) == 1:
+            return 1, "rejected: non-fast-forward"
+        return 0, ""
+
+    publish.push_data(root, "msg", runner=runner)
+    verbs = [a[1] for a in calls]
+    assert verbs == ["add", "commit", "push", "pull", "push"]
+
+
+def test_push_data_second_push_failure_raises(tmp_path):
+    """push_data's caller (cli.do_run) is what turns this into a caught
+    warning -- push_data itself must still raise so the caller has
+    something to catch and log."""
+    root = _root_with_data(tmp_path)
+
+    def runner(args, cwd):
+        return (1, "rejected") if args[1] == "push" else (0, "")
+
+    with pytest.raises(publish.PublishError):
+        publish.push_data(root, "msg", runner=runner)
+
+
+def test_push_data_never_touches_the_main_pushs_tracked_paths():
+    """A pure regression guard: push_data's own list must never grow to
+    match push()'s full TRACKED list -- that would turn it back into a
+    second copy of the SAME commit rather than the smaller, data-only one
+    described in its docstring."""
+    assert publish.DATA_ONLY == ["data"]
+    assert publish.DATA_ONLY != publish.TRACKED

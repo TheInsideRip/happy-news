@@ -2,14 +2,19 @@
 
 No test here touches the network, invokes the real `claude` CLI, or runs a
 real `git push` -- `fetch.fetch_all`, `curate.ask`/`check_auth`, and
-`publish.push`/`publish.run_git` are always monkeypatched to canned,
-in-memory stand-ins. `alert.notify` is monkeypatched everywhere too, so no
-test pops a real Windows toast.
+`publish.push`/`publish.push_data`/`publish.run_git` are always monkeypatched
+to canned, in-memory stand-ins. `alert.notify` is monkeypatched everywhere
+too, so no test pops a real Windows toast. The one exception is the
+"leaves no uncommitted data files" test near the bottom, which runs a real
+local git repo with no remote at all -- `git push` itself is still faked
+there (see its docstring), so no test anywhere ever contacts a remote.
 """
 from __future__ import annotations
 
 import inspect
 import json
+import shutil
+import subprocess
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -59,15 +64,24 @@ def _no_push(monkeypatch):
         raise AssertionError("must not push")
 
     monkeypatch.setattr(cli.publish, "push", boom)
+    # The second, data-only push added after push() must never fire either
+    # in any scenario where the main push must not fire (dry-run, a run
+    # skipped because another instance already holds the lock, ...).
+    monkeypatch.setattr(cli.publish, "push_data", boom)
 
 
 def _recording_push(monkeypatch):
+    """Stub out both the main push and the second, data-only push added
+    after it -- into the SAME list, in call order. A full successful run now
+    makes two calls (content, then data), so callers that assert an exact
+    count must expect 2, not 1."""
     calls = []
 
     def fake_push(root, message, **kwargs):
         calls.append((root, message))
 
     monkeypatch.setattr(cli.publish, "push", fake_push)
+    monkeypatch.setattr(cli.publish, "push_data", fake_push)
     return calls
 
 
@@ -192,7 +206,9 @@ def test_run_publishes_a_tier1_story_end_to_end(monkeypatch, tmp_path):
     assert health["tiers"][-1]["tier"] == 1
     assert health["droughts"] == []
 
-    assert len(push_calls) == 1
+    # Two pushes: the main content push, then the second data-only push
+    # covering seen.jsonl/health.json which are written after the first.
+    assert len(push_calls) == 2
     assert push_calls[0][0] == root
     assert not notify_calls  # tier 1, a story was found: no alert needed
 
@@ -247,7 +263,7 @@ def test_a_failed_push_does_not_block_a_retry_in_the_same_window(monkeypatch, tm
     second_push_calls = _recording_push(monkeypatch)
 
     assert cli.main(["run", "--root", str(root)]) == 0
-    assert len(second_push_calls) == 1
+    assert len(second_push_calls) == 2  # content push, then the data-only push
 
     index_html = (root / "index.html").read_text(encoding="utf-8")
     assert "Turtles recover" in index_html
@@ -444,8 +460,10 @@ def test_exhausted_ladder_records_a_drought_not_a_failure_and_skips_the_page(mon
 
     assert any("defect" in msg.lower() for _, msg in notify_calls)
     # The data file still changed, so it is still committed/pushed even
-    # though no HTML page changed.
-    assert len(push_calls) == 1
+    # though no HTML page changed. Two pushes: the main content push, then
+    # the second data-only push (health.json changed even though seen.jsonl
+    # did not -- a drought never calls memory.remember()).
+    assert len(push_calls) == 2
 
     # Not already-published: a later run this window must still try.
     from happy_news import clock
@@ -834,7 +852,7 @@ def test_a_truncated_edition_file_does_not_crash_the_run_and_self_heals(monkeypa
     edition = json.loads((editions_dir / "2026-09-07.json").read_text(encoding="utf-8"))
     assert edition["slots"]["morning"]["stories"][0]["title"] == "Turtles recover"
     assert "Turtles recover" in (root / "index.html").read_text(encoding="utf-8")
-    assert len(push_calls) == 1
+    assert len(push_calls) == 2  # content push, then the data-only push
 
 
 def test_the_edition_file_is_written_atomically(monkeypatch, tmp_path):
@@ -1186,3 +1204,176 @@ def test_a_failed_push_records_no_tier_at_all(monkeypatch, tmp_path):
 
     health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
     assert health["tiers"] == [], "a run that never published has no tier to record"
+
+
+# ---------------------------------------------------------------------------
+# The second, data-only push added after `memory.remember()`,
+# `health.record_success()` and the edition persist have all completed.
+#
+# `publish.push`'s commit runs BEFORE those three, so seen.jsonl and
+# health.json are never in it -- the GitHub copy of the never-repeat memory
+# always trails the local copy by one run. `publish.push_data` closes that
+# gap. It is backup only (the local files are authoritative), so its
+# failures must never fail the run or touch the failure counter, and it must
+# never run at all during dry-run.
+# ---------------------------------------------------------------------------
+
+
+def _git(args, cwd):
+    # stdin=DEVNULL: under pytest's capture the inherited stdin handle can be
+    # invalid on Windows (WinError 6), and git must never wait on input here
+    # anyway.
+    return subprocess.run(["git", *args], cwd=str(cwd), capture_output=True,
+                          text=True, encoding="utf-8", timeout=60,
+                          stdin=subprocess.DEVNULL)
+
+
+def _init_real_git_repo(path):
+    _git(["init", "-b", "main"], path)
+    _git(["config", "user.email", "test@example.invalid"], path)
+    _git(["config", "user.name", "Test"], path)
+    _git(["config", "commit.gpgsign", "false"], path)
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="git is not on PATH")
+def test_a_successful_run_leaves_no_uncommitted_data_files(monkeypatch, tmp_path):
+    """The real proof the fix works: after a successful run, `git status` in
+    the repo root must be completely clean -- no modified or untracked
+    files under data/. Before the fix, seen.jsonl and health.json were
+    written after publish.push()'s commit and so were left uncommitted,
+    only to be picked up by the *next* run's commit.
+
+    This runs real git `add`/`commit`/`status` in a throwaway repo with no
+    remote configured at all -- `git push` itself is faked (always
+    "succeeds" without doing anything), so this never touches a network or
+    any actual remote, satisfying the same constraint the real-git tests in
+    test_publish.py already rely on."""
+    root = _make_root(tmp_path)
+    _init_real_git_repo(root)
+    # A first commit so the repo has a HEAD (a bare `git commit` with no
+    # parent works too, but this mirrors a real, already-published repo).
+    (root / ".gitkeep").write_text("", encoding="utf-8")
+    _git(["add", ".gitkeep"], root)
+    _git(["commit", "-m", "init"], root)
+
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    def fake_run_git(args, cwd):
+        if args[1] == "push":
+            return 0, ""  # never touch a remote -- there isn't one
+        completed = subprocess.run(["git", *args[1:]], cwd=str(cwd), capture_output=True,
+                                   text=True, encoding="utf-8", timeout=60,
+                                   stdin=subprocess.DEVNULL)
+        return completed.returncode, (completed.stdout or "") + (completed.stderr or "")
+
+    # publish.push and publish.push_data both fall back to publish.run_git
+    # when called with no runner (as cli.do_run calls them) -- patching the
+    # module-level function here is what lets both of those real calls
+    # through to real git, with only "push" faked.
+    monkeypatch.setattr(cli.publish, "run_git", fake_run_git)
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    # Scoped to data/ specifically: `feeds/` is also untracked in this
+    # throwaway repo (it is test setup, not one of push()/push_data()'s
+    # tracked paths) and that is not what this test is about.
+    status = _git(["status", "--porcelain", "--", "data"], root)
+    assert status.stdout.strip() == "", (
+        f"data files left uncommitted after a successful run: {status.stdout!r}"
+    )
+
+    # And the content actually landed in the commit, not just on disk.
+    tracked = _git(["show", "--stat", "HEAD"], root).stdout
+    assert "data/seen.jsonl" in tracked or "data" in tracked
+
+
+def test_a_failed_second_push_still_returns_0_and_does_not_touch_the_failure_counter(
+    monkeypatch, tmp_path, caplog,
+):
+    """The story already published successfully by the time the second push
+    runs. A backup hiccup here must not be reported as a run failure, and
+    must not increment consecutive_failures -- doing so would risk tripping
+    the "3 in a row" alarm over something that never affected the reader."""
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+
+    main_push_calls = []
+
+    def fake_push(root, message, **kwargs):
+        main_push_calls.append((root, message))
+
+    def failing_push_data(root, message, **kwargs):
+        raise publish.PublishError("push failed after rebase: simulated network failure")
+
+    monkeypatch.setattr(cli.publish, "push", fake_push)
+    monkeypatch.setattr(cli.publish, "push_data", failing_push_data)
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb")
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    with caplog.at_level("WARNING"):
+        assert cli.main(["run", "--root", str(root)]) == 0
+
+    # The main publish still happened and succeeded.
+    assert len(main_push_calls) == 1
+    assert "Turtles recover" in (root / "index.html").read_text(encoding="utf-8")
+
+    # The story is genuinely published: remembered and recorded as a success.
+    seen_lines = (root / "data" / "seen.jsonl").read_text(encoding="utf-8").strip().splitlines()
+    assert len(seen_lines) == 1
+
+    health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
+    assert health["consecutive_failures"] == 0
+    assert health["last_success"] is not None
+    assert health["failures"] == []
+
+    # No failure was ever logged -- this must never reach the top-level
+    # failure handler at all.
+    assert not (root / "logs" / "failures.log").exists()
+
+    assert any("push" in rec.message.lower() for rec in caplog.records), (
+        "the second push's failure must at least be logged, even though it "
+        "must not fail the run"
+    )
+
+
+def test_dry_run_pushes_nothing_including_the_second_data_push(monkeypatch, tmp_path):
+    """dry-run must never reach either push -- not the main content push,
+    and not the second, data-only push added after it. Easy to break by
+    accident: the second push lives at the very end of the same `do_run`
+    function dry-run also calls, so a careless refactor could hoist it
+    outside the `if dry: return 0` guard."""
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+
+    def boom_push(*a, **k):
+        raise AssertionError("dry-run must not call publish.push")
+
+    def boom_push_data(*a, **k):
+        raise AssertionError("dry-run must not call publish.push_data")
+
+    monkeypatch.setattr(cli.publish, "push", boom_push)
+    monkeypatch.setattr(cli.publish, "push_data", boom_push_data)
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb", priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    assert cli.main(["dry-run", "--root", str(root)]) == 0
+
+    assert not (root / "data").exists()

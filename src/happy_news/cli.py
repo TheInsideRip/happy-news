@@ -45,6 +45,15 @@ raises -- writes the snapshot straight back before re-raising. `memory
 last things that happen, only once `publish.push` has actually returned,
 since neither can be undone: the dedup log is permanent and append-only, and
 recording success before a push that then fails would misreport reality.
+
+Because of that ordering, `seen.jsonl` and `health.json` are always written
+*after* `publish.push`'s commit, so its commit never includes them -- the
+GitHub copy of the never-repeat memory trails the local copy by one run.
+Once everything above has finished, `do_run` makes a second, smaller
+commit-and-push with `publish.push_data` covering just `data/`. This is
+backup only (the local files are authoritative and are what this system
+actually reads), so a failure here is caught, logged as a warning, and never
+turns into a run failure or a tick on the consecutive-failure counter.
 """
 from __future__ import annotations
 
@@ -337,6 +346,27 @@ def do_run(root: Path, *, dry: bool) -> int:
             )
 
         health.record_success()
+
+        # A second, smaller commit-and-push covering just data/ -- the
+        # never-repeat memory (seen.jsonl), the health record, and this
+        # edition -- all of which were written above, strictly AFTER the
+        # main publish.push() call already ran. Without this, the GitHub
+        # copy of the never-repeat memory always trails the local copy by
+        # one run: harmless day to day (the local file is authoritative and
+        # is what this system actually reads), but a real exposure if the
+        # laptop were ever lost -- the most recent story would be missing
+        # from the backup and could be shown again.
+        #
+        # This runs only after the story has already published successfully,
+        # so a failure here must never fail the run or touch the
+        # consecutive-failure counter that drives the "3 in a row" alarm --
+        # that would turn a harmless backup hiccup into a false alarm about
+        # the publish itself.
+        try:
+            publish.push_data(root, f"{today} {slot}: sync data")
+        except Exception as error:  # noqa: BLE001 - backup-only push must never fail the run
+            _LOGGER.warning("second push (data backup) failed: %s", error)
+
         return 0
 
     except Exception as error:  # noqa: BLE001 - top level, must alert rather than crash silently
