@@ -55,10 +55,11 @@ later as a separate piece of work.
   normalize.py  canonical URL + title keys
         |
         v
-   dedup.py     drop anything ever published (3 mechanical layers)
+   dedup.py     block seen links + headlines; demote near-matches
         |
         v
   editorial.py  drop banned-politics candidates (cheap prefilter)
+        |            (nothing left? ladder.py widens the net and retries -- see 3.4)
         |
         v
    curate.py    ~80 candidates -> claude CLI -> 3 ranked picks, 1 published
@@ -103,12 +104,26 @@ in the prompt.
 
 ### 3.1 Categories
 
+Eight, deliberately wide. The narrow four-category list in the first draft made the
+system fragile: one bad night for environmental feeds and there was nothing to publish.
+Breadth is the cheapest insurance against a dry run, and at one story per timeframe
+there is no cost to having more places to look.
+
 | Category | Covers |
 |---|---|
 | `environment` | Climate wins, clean energy, conservation, restoration, **and all animal news** — wildlife recovery, species rebounds, rescues, habitat protection, animal-welfare law |
+| `science` | Space, discovery, archaeology, palaeontology, newly described species, research that produced a result |
+| `health` | Treatments approved, diseases pushed back, surgical and diagnostic firsts, public-health wins |
 | `technology` | Inventions and deployments that measurably help people or the planet |
-| `people` | Human interest, community, health and medical advances, science that helps people |
+| `people` | Human interest, community, kindness, generosity, ordinary people doing something good |
+| `culture` | Art and heritage restored or returned to its country, languages revived, landmarks saved, records set |
 | `government` | **Outcomes only** — see §3.3 |
+| `sport` | **Human moments only** — comebacks, sportsmanship, barriers broken. Never results, standings, transfers, or odds. |
+
+`environment` is expected to dominate simply because animal and conservation news is the
+richest and most reliably positive vein available. That is fine and not a flaw.
+
+`sport` is the one category most likely to be cut on taste; nothing else depends on it.
 
 ### 3.2 What counts as good news
 
@@ -166,19 +181,50 @@ being the binding constraint. Quality becomes the only thing being optimised.
 Two useful side effects: the whole day fits on one phone screen without scrolling, and
 the dedup memory grows at roughly a fifth of the previous rate.
 
-When a run cannot find one qualifying story, it escalates in this order and **never
-lowers the quality bar**:
+#### The escalation ladder
 
-1. Widen the time window from 24 hours to 72 hours.
-2. Pull from the full feed list rather than the priority subset.
-3. If still nothing, write an **empty slot** to the edition file carrying the reason, and
-   record a drought entry in the health log (§8). The page renders that slot with a quiet
-   line — *"A quiet morning. Nothing new made the cut."* — rather than omitting it, so
-   silence is legible rather than looking like a breakage.
+**A drought is a malfunction, not a news shortage.** At one story per timeframe across
+eight categories, "nothing good happened anywhere on earth" is not a state the world
+produces. If the system reports one, the cause is almost certainly local: dead feeds, an
+over-firing politics filter, or an over-eager duplicate check. The design treats it that
+way — the ladder reaches a long way before giving up, and giving up raises an alarm.
 
-An empty slot **does not count as published** for §4.1's purposes. Later runs inside the
-same window still try, so a quiet 8:00 can become a good 9:30 and replace the empty slot.
-Once the window closes, the empty slot stands for the day.
+The key realisation: **because nothing is ever repeated, a story only has to be *unseen*,
+not *fresh*.** A genuinely good piece from nine days ago that she has never read is worth
+more than a mediocre one from this morning. Reaching backwards is therefore nearly free,
+and it is the main reason droughts should be almost impossible.
+
+| Tier | Window | Sources | Escalation |
+|---|---|---|---|
+| 1 | 48 hours | Priority feeds | Normal operation |
+| 2 | 7 days | All feeds | Silent, routine |
+| 3 | 21 days | All feeds + soft-duplicate candidates released for model judging | Logged |
+| 4 | 90 days | All feeds + evergreen reserve | **Logged as a warning** |
+| 5 | — | Evergreen reserve only | **Logged as an error, alert raised** |
+
+The quality bar never moves. Only the size of the haystack does.
+
+**Tier 5 — the evergreen reserve.** A curated pool of roughly 100 timeless good stories:
+species pulled back from the brink, a disease driven to near-eradication, the ozone layer
+healing, a river brought back to life. Each is a real article she has never seen, and
+each is still true. These render with **`STILL TRUE`** in place of a timestamp rather
+than being dressed up as today's news — the honesty is what makes it work, and it reads
+as a feature rather than a fudge.
+
+**Display of older stories.** Anything over three days old shows its date ("BBC ·
+Tuesday") instead of a relative time, so nothing is quietly implied to be fresher than
+it is.
+
+**Reaching tier 4 or 5 is a diagnostic event.** The alert names the likely cause by
+checking, in order: how many feeds returned nothing, how many candidates the politics
+filter removed, and how many the duplicate check removed. Two tier-4-or-worse runs in a
+rolling week is treated as a broken system, not bad luck.
+
+**If even tier 5 is empty** — which means the reserve is exhausted or the code is
+broken — the slot is written empty with its reason, and the page renders a quiet line:
+*"A quiet morning. Nothing new made the cut."* An empty slot **does not count as
+published** for §4.1's purposes, so later runs inside the same window still try. Once the
+window closes, the empty slot stands for the day.
 
 ---
 
@@ -194,6 +240,7 @@ Each module is independently testable and has one job.
 | `normalize.py` | Canonical URL keys, title keys, token sets | — |
 | `dedup.py` | The permanent memory: read/append `seen.jsonl`, decide "have we shown this?" | normalize |
 | `editorial.py` | Good-news and politics filters, applied both pre- and post-model | config |
+| `ladder.py` | Own the tier progression: widen window, then sources, then release soft duplicates, then evergreen | config, fetch, dedup |
 | `curate.py` | Build the prompt, invoke the `claude` CLI, validate output, retry once | config, editorial |
 | `render.py` | Generate `index.html`, archive day pages, `archive/index.html`; validate before returning | — |
 | `publish.py` | Stage, commit, rebase, push to GitHub | — |
@@ -238,21 +285,39 @@ Lines is chosen so each run adds a handful of lines and the git diff stays clean
 {"url_key":"reuters.com/world/humpback-whale-numbers-recover","title_key":"9f2c...","tokens":["antarctic","humpback","numbers","recover","whale"],"title":"Humpback whale numbers recover in Antarctic","date":"2026-09-07","slot":"morning"}
 ```
 
-Four layers, checked in order:
+Four layers. **Only the first two can block a story outright.**
 
-| Layer | Method | Guarantee |
+| Layer | Method | Effect |
 |---|---|---|
-| 1. Same link | Exact match on `url_key` | **Absolute** |
-| 2. Same headline | Exact match on `title_key` | **Absolute** |
-| 3. Reworded | Jaccard similarity of `tokens` ≥ **0.60** against the last 18 months | Catches most rewordings |
-| 4. Same event, different words | The model is shown the last 60 published headlines and asked to reject same-event repeats | Catches most of the rest |
+| 1. Same link | Exact match on `url_key` | **Hard block, absolute** |
+| 2. Same headline | Exact match on `title_key` | **Hard block, absolute** |
+| 3. Reworded | Jaccard similarity of `tokens` ≥ **0.75** against the last 18 months | **Soft** — demoted, not removed |
+| 4. Same event | The model is shown the last 60 published headlines and asked whether this is the same event | Decides the soft cases |
+
+**Why layer 3 is soft — a defect caught during review.** With the originally specified
+0.60 threshold, these two headlines are 0.67 similar:
+
+> "Sea turtle numbers recover in **Florida**"
+> "Sea turtle numbers recover in **Australia**"
+
+Four shared tokens out of six — two entirely different stories, one silently destroyed.
+A mechanical word-overlap test cannot tell a rewording from a genuinely similar event,
+and a hard block built on one will quietly starve the page and look like a news shortage.
+So layer 3 now (a) uses a stricter 0.75 threshold, and (b) only **demotes** a candidate
+to the back of the queue. A demoted candidate is released for the model to judge at
+tier 3 of the ladder (§3.4), and layer 4 makes the actual same-or-different call.
+
+**Net effect:** the guarantees the reader cares about — never the same link, never the
+same headline — remain absolute, while the fuzzy layer can no longer cause a drought on
+its own.
 
 Duplicates *within* a single run (two feeds carrying the same story) are collapsed by
-layers 1–3 before the model ever sees them.
+layers 1–2, then ranked by layer 3.
 
-**Honest limitation:** layers 1 and 2 are perfect. Layers 3 and 4 are very good, not
-perfect. The same event written up by two outlets with genuinely different wording can
-slip through. This is a known, accepted gap.
+**Honest limitation:** layers 1 and 2 are perfect. Layer 4 is very good, not perfect. The
+same event written up by two outlets with genuinely different wording can still slip
+through. This is a known, accepted gap — and the mirror-image risk, blocking two
+different stories that merely sound alike, is the one the change above removes.
 
 **Key construction (normalize.py):**
 
@@ -488,7 +553,10 @@ all local logs.
 | CLI exceeds the 180s timeout | Kill it, retry once, then fail and alert |
 | Render validation fails | Abort before committing; nothing is published |
 | Git push conflict | `git pull --rebase` and retry once |
-| Zero qualifying stories | Publish nothing for the slot, record a drought entry in `health.json`; **not** treated as a failure |
+| Ladder reached tier 4 | Publish, but log a warning naming the likely cause (dead feeds / politics filter / duplicate check counts) |
+| Ladder reached tier 5 | Publish from the evergreen reserve, **raise an alert** — the live pipeline is not working |
+| Two tier-4-or-worse runs in a rolling week | Escalated alert: treated as a broken system, not bad luck |
+| Ladder exhausted, zero stories | Write an empty slot with its reason, record a drought in `health.json`, **raise an alert** — at one story across eight categories this indicates a defect, not a quiet news day |
 | Machine powered off at slot time | Task Scheduler catch-up publishes on next wake if still inside the window (§4.1) |
 | Any failed run | Windows toast notification + a line in `logs/failures.log` |
 | 3 consecutive failed runs | Escalated notification — the system is broken, not merely unlucky |
@@ -512,7 +580,8 @@ model responses are saved fixtures.
 |---|---|
 | `test_clock.py` | Slot detection at 07:59 / 08:00 / 13:59 / 14:00 / 23:59; both DST changeover weekends; already-published short-circuit |
 | `test_normalize.py` | Tracking-parameter stripping, `www.`, trailing slashes, fragments, casing, non-tracking params preserved |
-| `test_dedup.py` | Exact URL match, exact title match, Jaccard boundaries at 0.59 / 0.60 / 0.61, within-run collapsing, 18-month window edge |
+| `test_dedup.py` | Exact URL match, exact title match, Jaccard boundaries at 0.74 / 0.75 / 0.76, **the Florida/Australia turtle pair must NOT be blocked**, soft-demotion does not remove, within-run collapsing, 18-month window edge |
+| `test_ladder.py` | Each tier fires only when the one above returns nothing; the quality bar is identical at every tier; tier 4 and 5 raise the right alerts; evergreen items render `STILL TRUE`; an exhausted ladder writes an empty slot that does not count as published |
 | `test_editorial.py` | Each banned term fires; each outcome override rescues; false-positive guards (`primary school`, `clash of colours`) |
 | `test_curate.py` | Mocked subprocess: valid envelope parses, `is_error: true` handled, malformed JSON triggers exactly one retry, timeout kills and retries, schema violations rejected |
 | `test_render.py` | Golden-file comparison for a full day, a single-slot day, a short edition with a note, an empty archive, and HTML-escaping of hostile story text |
@@ -546,9 +615,10 @@ happy-news/                         (= E:\Satcey Happy News)
   feeds/
     sources.yaml                    # the feed list
     editorial.yaml                  # categories, banned terms, overrides
+    evergreen.yaml                  # the tier-5 reserve (~100 timeless stories)
   src/happy_news/
     __init__.py config.py clock.py fetch.py normalize.py
-    dedup.py editorial.py curate.py render.py publish.py alert.py cli.py
+    dedup.py editorial.py ladder.py curate.py render.py publish.py alert.py cli.py
   tests/
     fixtures/ test_*.py
   docs/superpowers/specs/
