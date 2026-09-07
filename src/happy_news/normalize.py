@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+import unicodedata
 from urllib.parse import parse_qsl, urlencode, urlsplit
 
 TRACKING_PREFIXES = ("utm_", "at_")
@@ -47,7 +48,25 @@ def url_key(url: str) -> str:
 
 
 def title_norm(title: str) -> str:
-    return _WHITESPACE.sub(" ", _PUNCT.sub(" ", title.lower())).strip()
+    """Lowercase and strip punctuation for a stable dedup key -- but first,
+    Unicode-normalize (NFKC) so two encodings of the same visible headline
+    produce the same key (finding R5). Without this, an NFD-decomposed
+    accent (an "e" plus a separate combining acute-accent codepoint, versus
+    the single precomposed "é") or a fullwidth-Unicode character swap (a
+    real, documented text-filter evasion technique) produced a different
+    title_key than the plain original -- letting a previously-published
+    headline slip back past the "never repeat" block wearing a disguise
+    that renders identically to the reader.
+
+    NFKC does not catch every visual lookalike: a genuine cross-script
+    confusable, such as a Cyrillic letter substituted for a similar-looking
+    Latin one, is a different character with no Unicode equivalence to the
+    Latin original at all, so it passes through unchanged. Closing that
+    gap needs a confusables-skeleton check (Unicode TR39), not
+    normalization -- see tests/test_normalize.py for both cases made
+    explicit."""
+    normalized = unicodedata.normalize("NFKC", title)
+    return _WHITESPACE.sub(" ", _PUNCT.sub(" ", normalized.lower())).strip()
 
 
 def title_key(title: str) -> str:
