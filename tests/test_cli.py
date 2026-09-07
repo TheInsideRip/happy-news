@@ -868,3 +868,110 @@ def test_the_edition_file_is_written_atomically(monkeypatch, tmp_path):
     editions_dir = root / "data" / "editions"
     leftover = [p.name for p in editions_dir.iterdir() if not p.name.endswith(".json")]
     assert leftover == [], f"temp files left behind: {leftover}"
+
+
+# ---------------------------------------------------------------------------
+# I1: only one run at a time.
+#
+# All three scheduled tasks are StartWhenAvailable=True, so a late morning
+# catch-up can overlap the 14:00 afternoon run (a run spans a 12-feed fetch
+# plus a model call of up to 180s). Both read the edition dict and write it
+# back whole: last writer wins and drops the other slot entirely -- while
+# that slot's story is already permanently in seen.jsonl, i.e. burned
+# without ever appearing. Concurrent git also collides on index.lock.
+# ---------------------------------------------------------------------------
+
+
+def test_a_second_concurrent_run_exits_quietly_and_publishes_nothing(monkeypatch, tmp_path, capsys):
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 14, 0, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+    _no_push(monkeypatch)
+    monkeypatch.setattr(
+        cli.fetch, "fetch_all",
+        lambda feeds, **k: (_ for _ in ()).throw(AssertionError("must not fetch")))
+
+    # The first run is still in flight: its lock file is on disk and fresh.
+    lock_path = root / "logs" / "run.lock"
+    lock_path.parent.mkdir(parents=True)
+    lock_path.write_text('{"pid": 4242}', encoding="utf-8")
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    out = capsys.readouterr().out.lower()
+    assert "already in progress" in out or "skipping" in out
+    assert not (root / "index.html").exists()
+    assert not (root / "data" / "editions").exists()
+    assert not (root / "data" / "seen.jsonl").exists()
+    # a skipped run is not a failure
+    assert not (root / "logs" / "failures.log").exists()
+    assert lock_path.exists(), "the running instance's lock must not be stolen"
+
+
+def test_a_normal_run_takes_and_releases_the_lock(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
+    held = []
+
+    def fetch_all(feeds, **k):
+        held.append((root / "logs" / "run.lock").exists())
+        return [candidate], []
+
+    monkeypatch.setattr(cli.fetch, "fetch_all", fetch_all)
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    assert held == [True], "the lock must be held for the whole run"
+    assert not (root / "logs" / "run.lock").exists(), "the lock must be released"
+
+
+def test_a_failed_run_still_releases_the_lock(monkeypatch, tmp_path):
+    """A wedged lock would freeze publishing forever -- exactly the silent
+    staleness this system exists to prevent."""
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb")
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    def failing_push(root, message, **kwargs):
+        raise publish.PublishError("push failed after rebase: simulated network failure")
+
+    monkeypatch.setattr(cli.publish, "push", failing_push)
+
+    assert cli.main(["run", "--root", str(root)]) == 1
+    assert not (root / "logs" / "run.lock").exists()
+
+
+def test_dry_run_is_not_blocked_by_a_running_publish(monkeypatch, tmp_path):
+    """dry-run writes nothing, so it can never collide -- the operator must
+    always be able to inspect what would publish."""
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+    _no_push(monkeypatch)
+
+    lock_path = root / "logs" / "run.lock"
+    lock_path.parent.mkdir(parents=True)
+    lock_path.write_text('{"pid": 4242}', encoding="utf-8")
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb", priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    assert cli.main(["dry-run", "--root", str(root)]) == 0
+    assert not (root / "index.html").exists()

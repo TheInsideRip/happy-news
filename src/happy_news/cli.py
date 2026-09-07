@@ -41,7 +41,8 @@ import sys
 from datetime import date, timezone
 from pathlib import Path
 
-from . import alert, clock, config, curate, dedup, fetch, ladder, normalize, publish, render
+from . import (alert, clock, config, curate, dedup, fetch, ladder, lock, normalize, publish,
+               render)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -361,8 +362,28 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     root = Path(args.root)
 
-    if args.command in ("run", "dry-run"):
-        return do_run(root, dry=args.command == "dry-run")
+    if args.command == "dry-run":
+        # dry-run writes nothing at all, so it can never collide with a real
+        # run and is deliberately left unlocked: the operator must always be
+        # able to inspect what would publish, even mid-run.
+        return do_run(root, dry=True)
+
+    if args.command == "run":
+        # Finding I1: all three scheduled tasks are StartWhenAvailable, so a
+        # late morning catch-up can overlap the 14:00 afternoon run. Both
+        # read the edition dict and write it back whole -- last writer wins
+        # and drops the other slot entirely, while that slot's story is
+        # already burned in the permanent seen.jsonl. Concurrent git also
+        # collides on index.lock. A run skipped because another is already
+        # in progress is a correct outcome, not a failure: say so, exit 0.
+        # The lock lives under logs/ (gitignored) so it is never committed.
+        try:
+            with lock.exclusive(root / "logs" / "run.lock"):
+                return do_run(root, dry=False)
+        except lock.LockBusy as busy:
+            _LOGGER.info("skipping: %s", busy)
+            print(f"another run is already in progress; skipping ({busy})")
+            return 0
     if args.command == "rebuild":
         return do_rebuild(root)
     return do_doctor(root)
