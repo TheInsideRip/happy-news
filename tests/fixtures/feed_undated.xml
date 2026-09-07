@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Example</title>
+<item>
+  <title>A story with no date</title>
+  <link>https://example.com/no-date</link>
+  <description>This item omits pubDate entirely.</description>
+</item>
+<item>
+  <title>A story with a date</title>
+  <link>https://example.com/dated</link>
+  <description>This item has a pubDate.</description>
+  <pubDate>Mon, 07 Sep 2026 09:12:00 GMT</pubDate>
+</item>
+</channel></rss>

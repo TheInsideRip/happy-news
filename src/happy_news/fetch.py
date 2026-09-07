@@ -1,6 +1,7 @@
 """Pull RSS feeds concurrently. One dead feed must never stop a run."""
 from __future__ import annotations
 
+import logging
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -10,6 +11,8 @@ import feedparser
 
 USER_AGENT = "StaceyHappyNews/1.0 (+https://theinsiderip.github.io/happy-news/)"
 BLURB_LIMIT = 300
+
+_LOGGER = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -44,6 +47,14 @@ def parse_feed(raw: bytes, source_name: str) -> list[Candidate]:
             continue
         blurb = (getattr(entry, "summary", "") or "").strip()[:BLURB_LIMIT]
         items.append(Candidate(title, link, source_name, _published(entry), blurb))
+
+    undated = sum(1 for item in items if item.published is None)
+    if undated:
+        _LOGGER.info(
+            "%s: %d item(s) have no publish date and will be excluded from any time window",
+            source_name,
+            undated,
+        )
     return items
 
 
@@ -56,11 +67,23 @@ def fetch_all(feeds: list[dict], *, timeout: int = 20) -> tuple[list[Candidate],
     results: list[Candidate] = []
     failed: list[str] = []
 
-    def one(feed: dict):
+    def one(feed):
+        # feeds/sources.yaml is hand-edited: a missing/blank key or a stray
+        # non-dict entry must be reported as a failure, never crash the run.
+        if not isinstance(feed, dict):
+            return "<invalid feed entry>", [], ValueError(f"feed entry is not a dict: {feed!r}")
+
+        name = feed.get("name") or None
+        url = feed.get("url") or None
+        label = name or url or "<unnamed feed>"
+
+        if not name or not url:
+            return label, [], ValueError(f"feed {label!r} is missing 'name' or 'url'")
+
         try:
-            return feed["name"], parse_feed(_get(feed["url"], timeout), feed["name"]), None
+            return name, parse_feed(_get(url, timeout), name), None
         except Exception as error:  # noqa: BLE001 - a dead feed is expected, not exceptional
-            return feed["name"], [], error
+            return name, [], error
 
     with ThreadPoolExecutor(max_workers=8) as pool:
         for name, items, error in pool.map(one, feeds):
