@@ -16,6 +16,13 @@ rem may not have it yet -- create it before anything tries to append to a
 rem file inside it.
 if not exist "logs" mkdir "logs"
 
+rem 18 runs a day append to logs\run.log and nothing ever trimmed it, so it
+rem grew without limit on the one laptop this system runs on. Rotate BEFORE
+rem opening the append redirect below, so nothing holds a handle on the file
+rem while it is rewritten. rotate_log.bat always exits 0 -- housekeeping must
+rem never stop a publish.
+call "%~dp0rotate_log.bat" "%~dp0logs\run.log"
+
 set "PYTHONPATH=%~dp0src"
 
 python -m happy_news run >> "logs\run.log" 2>&1
