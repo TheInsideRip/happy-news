@@ -61,13 +61,12 @@ def _age_text(published, now) -> str:
     return f"{hours} hour{'s' if hours != 1 else ''} ago"
 
 
-def _render_and_validate(edition: dict, *, is_today: bool) -> str | None:
-    """Render one day's page and validate it. Returns None -- meaning "skip,
-    don't write this page" -- only for the specific, expected case of a day
-    with no stories at all (a drought). Any other validation failure (an
-    empty summary, a non-http link) is a real defect and is re-raised so the
+def _validate_or_skip(page: str) -> str | None:
+    """Validate a rendered page. Returns None -- meaning "skip, don't write
+    this page" -- only for the specific, expected case of no stories at all
+    anywhere on the page (a drought). Any other validation failure (an empty
+    summary, a non-http link) is a real defect and is re-raised so the
     caller's top-level handler treats it as a failure."""
-    page = render.render_day(edition, is_today=is_today)
     try:
         render.validate(page)
     except ValueError as error:
@@ -77,15 +76,39 @@ def _render_and_validate(edition: dict, *, is_today: bool) -> str | None:
     return page
 
 
+def _render_and_validate(edition: dict, *, is_today: bool) -> str | None:
+    """Render one day's page (used for the archive pages) and validate it."""
+    return _validate_or_skip(render.render_day(edition, is_today=is_today))
+
+
+_FRONT_PAGE_DAYS = 7  # today plus up to 6 previous days; older days stay in the archive only
+
+
 def _write_pages(root: Path, editions_dir: Path, today: date) -> None:
     """Rebuild index.html, every archive/<date>.html, and archive/index.html
     from data/editions/*.json. Only pages that pass validation are written;
     archive/index.html is never validated (Task 12 ruling 6) since it is
-    legitimately a list of days, not a story page."""
+    legitimately a list of days, not a story page.
+
+    index.html (the front page) is no longer just today: the user asked for
+    more to read by scrolling instead of having to go hunting in the
+    archive, so it shows today plus the most recent previous days, newest
+    first, up to _FRONT_PAGE_DAYS total. Each archive/<date>.html page is
+    unaffected -- it still renders exactly one day, as before."""
     today_edition = clock.load_edition(editions_dir, today)
-    today_page = _render_and_validate(today_edition, is_today=True)
-    if today_page is not None:
-        (root / "index.html").write_text(today_page, encoding="utf-8")
+
+    previous_days = sorted(
+        (date.fromisoformat(path.stem) for path in editions_dir.glob("*.json")),
+        reverse=True,
+    )
+    previous_days = [day for day in previous_days if day < today][: _FRONT_PAGE_DAYS - 1]
+    front_editions = [today_edition] + [
+        clock.load_edition(editions_dir, day) for day in previous_days
+    ]
+
+    front_page = _validate_or_skip(render.render_front(front_editions))
+    if front_page is not None:
+        (root / "index.html").write_text(front_page, encoding="utf-8")
 
     archive = root / "archive"
     archive.mkdir(exist_ok=True)

@@ -141,6 +141,78 @@ def render_day(edition: dict, *, is_today: bool) -> str:
 </body></html>"""
 
 
+def _day_slots_html(edition: dict) -> tuple[str, str | None]:
+    """Render one edition's slot sections. Returns (html, newest-present-slot)
+    -- shared by render_day and render_front so both build a day's story
+    plates identically."""
+    slots = edition.get("slots", {})
+    present = [s for s in SLOT_ORDER if s in slots]
+    current = present[0] if present else None
+    body = "".join(_slot_html(name, slots[name]) for name in present)
+    return body, current
+
+
+def render_front(editions: list[dict]) -> str:
+    """Render the front page: `editions[0]` is today, and any further
+    elements are previous days, already in reverse-chronological (newest
+    first) order -- the caller decides how many (the brief: today plus up to
+    six previous, i.e. the last 7 days; older days stay in the archive only).
+
+    This is one continuous page, not several render_day() pages concatenated
+    -- there is a single masthead, times strip and stylesheet link at the
+    top. Each earlier day gets its own rule-and-date heading, reusing the
+    exact rule/heading pattern already used once at the top of every page,
+    so the boundary between days reads as a natural continuation of the
+    existing design while scrolling rather than a new page bolted on.
+
+    render_day itself is untouched: archive pages keep rendering exactly one
+    day each.
+    """
+    if not editions:
+        raise ValueError("render_front requires at least one edition (today)")
+
+    today_edition, *earlier_editions = editions
+
+    today_body, today_current = _day_slots_html(today_edition)
+    updated = today_edition.get("updated_text") or ""
+    if not updated and today_current:
+        updated = _format_time(today_edition.get("slots", {})[today_current].get("published_at"))
+    today_heading = f"Last updated {_e(updated)}" if updated else "Last updated"
+
+    sections = [f'<p class="sn-updated">{today_heading}</p><div class="day">{today_body}</div>']
+
+    for edition in earlier_editions:
+        body, _ = _day_slots_html(edition)
+        day = date.fromisoformat(edition["date"])
+        # %-d is a glibc strftime extension; it raises ValueError on Windows.
+        heading = f"{day.strftime('%A, %B')} {day.day}"
+        sections.append(
+            '<div class="sn-rule day-rule"></div>'
+            f'<p class="sn-updated">{heading}</p>'
+            f'<div class="day">{body}</div>'
+        )
+
+    return f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stacey Happy News</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Newsreader:opsz,wght@6..72,400&family=Alegreya+Sans:wght@400;700&display=swap">
+</head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">{TURTLE}{FLOWER}{LEAF}</svg>
+<div class="sn-bg" aria-hidden="true">
+<svg width="150" height="120" viewBox="0 0 100 80" fill="var(--st)" opacity=".13" style="top:220px;left:-40px"><use href="#turtle"/></svg>
+<svg width="46" height="46" viewBox="0 0 100 100" fill="var(--br)" opacity=".10" style="top:140px;right:8px"><use href="#flower"/></svg>
+</div>
+<h1 class="sn-title">Stacey<br>Happy News</h1>
+<div class="sn-rule"></div>
+{_times_strip(today_current)}
+{"".join(sections)}
+<p class="sn-foot"><a href="archive/">Archive</a></p>
+</body></html>"""
+
+
 def render_archive_index(days: list[str]) -> str:
     items = "".join(
         f'<li><a href="{_e(d)}.html">{_e(date.fromisoformat(d).strftime("%A, %B "))}{date.fromisoformat(d).day}</a></li>'

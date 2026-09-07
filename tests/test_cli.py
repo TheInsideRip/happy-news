@@ -696,3 +696,98 @@ def test_doctor_reports_missing_git_executable_instead_of_crashing(monkeypatch, 
 def test_cli_module_uses_ordinary_imports_only():
     source = inspect.getsource(cli)
     assert "__import__" not in source
+
+
+# ---------------------------------------------------------------------------
+# Front page shows today plus previous days, newest first -- "its fine to
+# scroll, i dont want that to limit info". Archive pages are unaffected: they
+# still render one day each (already covered by test_rebuild_regenerates_
+# pages_from_existing_editions above).
+# ---------------------------------------------------------------------------
+
+
+def _edition_with_story(day_str: str, title: str, time_text: str = "8:03 am") -> dict:
+    return {
+        "date": day_str,
+        "updated_text": time_text,
+        "slots": {
+            "morning": {
+                "published_at": f"{day_str}T08:03:00-04:00",
+                "time_text": time_text,
+                "note": None,
+                "stories": [dict(_story(title=title, url=f"https://example.com/{title}"),
+                                 age_text="1 hour ago", evergreen=False)],
+            }
+        },
+    }
+
+
+def test_front_page_includes_todays_and_previous_days_stories(tmp_path):
+    root = _make_root(tmp_path)
+    editions_dir = root / "data" / "editions"
+    editions_dir.mkdir(parents=True)
+    for day_str, title in [
+        ("2026-09-07", "TodayStory"),
+        ("2026-09-06", "YesterdayStory"),
+        ("2026-09-05", "TwoDaysAgoStory"),
+    ]:
+        edition = _edition_with_story(day_str, title)
+        (editions_dir / f"{day_str}.json").write_text(json.dumps(edition), encoding="utf-8")
+
+    assert cli.main(["rebuild", "--root", str(root)]) == 0
+
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    assert "TodayStory" in index_html
+    assert "YesterdayStory" in index_html
+    assert "TwoDaysAgoStory" in index_html
+    # today's story must appear first (newest first)
+    assert index_html.index("TodayStory") < index_html.index("YesterdayStory")
+    assert index_html.index("YesterdayStory") < index_html.index("TwoDaysAgoStory")
+
+    # archive pages are untouched: each is still exactly one day
+    archive_yesterday = (root / "archive" / "2026-09-06.html").read_text(encoding="utf-8")
+    assert "YesterdayStory" in archive_yesterday
+    assert "TodayStory" not in archive_yesterday
+    assert "TwoDaysAgoStory" not in archive_yesterday
+
+
+def test_front_page_shows_at_most_the_last_seven_days(tmp_path):
+    root = _make_root(tmp_path)
+    editions_dir = root / "data" / "editions"
+    editions_dir.mkdir(parents=True)
+    # today (2026-09-07) plus 9 previous days: only the 6 most recent
+    # previous days (2026-09-06 down to 2026-09-01) belong on the front page;
+    # 2026-08-31 and earlier must not appear there.
+    days = [date(2026, 9, 7) - timedelta(days=n) for n in range(10)]
+    for day in days:
+        day_str = day.isoformat()
+        title = f"Story{day_str}"
+        edition = _edition_with_story(day_str, title)
+        (editions_dir / f"{day_str}.json").write_text(json.dumps(edition), encoding="utf-8")
+
+    assert cli.main(["rebuild", "--root", str(root)]) == 0
+
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    for day in days[:7]:
+        assert f"Story{day.isoformat()}" in index_html
+    for day in days[7:]:
+        assert f"Story{day.isoformat()}" not in index_html
+
+    # the older days are still findable in the archive, just not the front page
+    archive_index = (root / "archive" / "index.html").read_text(encoding="utf-8")
+    assert days[9].isoformat() in archive_index
+
+
+def test_front_page_with_only_today_still_works(monkeypatch, tmp_path):
+    """No previous edition files at all yet (a brand new install) must not
+    crash -- the front page is just today, same as the old behaviour."""
+    root = _make_root(tmp_path)
+    editions_dir = root / "data" / "editions"
+    editions_dir.mkdir(parents=True)
+    edition = _edition_with_story("2026-09-07", "OnlyTodayStory")
+    (editions_dir / "2026-09-07.json").write_text(json.dumps(edition), encoding="utf-8")
+
+    assert cli.main(["rebuild", "--root", str(root)]) == 0
+
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    assert "OnlyTodayStory" in index_html

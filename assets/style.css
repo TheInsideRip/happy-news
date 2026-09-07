@@ -38,6 +38,10 @@ body{
   line-height:1.04;margin:0;color:var(--ink);letter-spacing:-.015em;
 }
 .sn-rule{height:2px;background:var(--br);width:32px;margin:9px 0 9px;}
+/* Front page only: the same rule reused as a divider between today and each
+   earlier day below it -- extra top margin (still the same rule token, same
+   color, same width) so the boundary reads clearly while scrolling. */
+.sn-rule.day-rule{margin:38px 0 9px;}
 .sn-times{
   display:flex;align-items:center;gap:6px;font-family:"Alegreya Sans",sans-serif;
   font-size:.62rem;font-weight:700;letter-spacing:.13em;color:var(--br);

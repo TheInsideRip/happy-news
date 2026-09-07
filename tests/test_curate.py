@@ -297,3 +297,23 @@ def test_build_system_prompt_bans_politics_and_asks_for_three_ranked_candidates(
 
     assert "Banned without exception: elections, polls, campaigns, candidates" in collapsed
     assert "Return THREE ranked candidates" in collapsed
+
+
+def test_build_system_prompt_asks_for_3_to_5_sentences_not_2_to_3():
+    """The user asked for fuller write-ups: she should not have to open the
+    link to understand what happened. The old "2-3 warm sentences" cap must
+    be gone entirely -- a stray "2-3" left behind (e.g. in an unrelated
+    example) would be confusing, so it must not appear anywhere."""
+    prompt = curate.build_system_prompt({"labels": ["earth", "world"]})
+    collapsed = " ".join(prompt.split())
+
+    assert "3-5 warm sentences" in collapsed
+    assert "2-3" not in collapsed
+
+
+def test_build_system_prompt_asks_summary_to_stand_in_for_the_link():
+    prompt = curate.build_system_prompt({"labels": ["earth", "world"]})
+    collapsed = " ".join(prompt.split())
+
+    assert "does not need to open the link" in collapsed
+    assert "not go past 5 sentences" in collapsed

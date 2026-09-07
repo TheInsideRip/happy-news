@@ -121,3 +121,117 @@ def test_hostile_summary_source_and_label_are_escaped():
     html = render.render_day(day, is_today=True)
     assert payload not in html
     assert html.count("&lt;script&gt;") >= 3
+
+
+# ---------------------------------------------------------------------------
+# render_front: today plus previous days, newest first, on one page.
+# render_day itself must keep working unchanged for archive pages -- every
+# test above this line still exercises the untouched render_day directly.
+# ---------------------------------------------------------------------------
+
+YESTERDAY = {
+    "date": "2026-09-06",
+    "slots": {
+        "evening": {"published_at": "2026-09-06T19:00:00-04:00", "note": None,
+                    "stories": [dict(STORY, title="YESTERDAYSTORY")]},
+    },
+}
+
+TWO_DAYS_AGO = {
+    "date": "2026-09-05",
+    "slots": {
+        "morning": {"published_at": "2026-09-05T08:00:00-04:00", "note": None,
+                    "stories": [dict(STORY, title="TWODAYSAGOSTORY")]},
+    },
+}
+
+
+def test_render_front_is_a_single_page_with_today_first():
+    html = render.render_front([DAY, YESTERDAY])
+    assert html.count("<!doctype html>") == 1
+    assert html.count("Stacey<br>Happy News") == 1
+    assert html.index("Sea turtle nests hit a record") < html.index("YESTERDAYSTORY")
+
+
+def test_render_front_shows_last_updated_for_today():
+    html = render.render_front([DAY])
+    assert "Last updated" in html
+
+
+def test_render_front_gives_each_earlier_day_a_date_heading():
+    html = render.render_front([DAY, YESTERDAY, TWO_DAYS_AGO])
+    assert "Sunday, September 6" in html
+    assert "Saturday, September 5" in html
+
+
+def test_render_front_with_only_today_matches_render_day_content():
+    html = render.render_front([DAY])
+    assert "Sea turtle nests hit a record" in html
+    assert "Last updated" in html
+    assert "Saturday" not in html and "Sunday" not in html
+
+
+def test_render_front_still_links_to_the_archive():
+    html = render.render_front([DAY, YESTERDAY])
+    assert 'href="archive/"' in html
+
+
+def test_render_front_escapes_hostile_text_in_an_earlier_day():
+    payload = "<script>alert(1)</script>"
+    hostile_yesterday = {
+        "date": "2026-09-06",
+        "slots": {"evening": {"published_at": "a", "note": None,
+                               "stories": [dict(STORY, title=payload)]}},
+    }
+    html = render.render_front([DAY, hostile_yesterday])
+    assert payload not in html
+    assert "&lt;script&gt;" in html
+
+
+def test_render_front_evergreen_story_in_an_earlier_day_is_still_true():
+    evergreen_yesterday = {
+        "date": "2026-09-06",
+        "slots": {"evening": {"published_at": "a", "note": None,
+                               "stories": [dict(STORY, evergreen=True)]}},
+    }
+    html = render.render_front([DAY, evergreen_yesterday])
+    assert "STILL TRUE" in html
+
+
+def test_validate_passes_a_clean_multi_day_front_page():
+    render.validate(render.render_front([DAY, YESTERDAY, TWO_DAYS_AGO]))
+
+
+def test_validate_rejects_a_whitespace_only_summary_in_an_earlier_day():
+    bad_yesterday = {
+        "date": "2026-09-06",
+        "slots": {"evening": {"published_at": "a", "note": None,
+                               "stories": [dict(STORY, summary="   ")]}},
+    }
+    with pytest.raises(ValueError):
+        render.validate(render.render_front([DAY, bad_yesterday]))
+
+
+def test_validate_rejects_a_non_http_link_in_an_earlier_day():
+    bad_yesterday = {
+        "date": "2026-09-06",
+        "slots": {"evening": {"published_at": "a", "note": None,
+                               "stories": [dict(STORY, url="javascript:alert(1)")]}},
+    }
+    with pytest.raises(ValueError):
+        render.validate(render.render_front([DAY, bad_yesterday]))
+
+
+def test_validate_rejects_a_front_page_with_no_story_anywhere():
+    empty = {"date": "2026-09-07", "slots": {}}
+    empty_yesterday = {"date": "2026-09-06", "slots": {}}
+    with pytest.raises(ValueError):
+        render.validate(render.render_front([empty, empty_yesterday]))
+
+
+def test_render_day_is_unaffected_by_render_front_existing():
+    """render_day must still work exactly as before, unchanged, for archive
+    pages -- it renders one day, never a stack of days."""
+    html = render.render_day(DAY, is_today=False)
+    assert "Monday, September 7" in html
+    assert '../assets/style.css' in html
