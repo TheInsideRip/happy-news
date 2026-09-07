@@ -235,3 +235,63 @@ def test_render_day_is_unaffected_by_render_front_existing():
     html = render.render_day(DAY, is_today=False)
     assert "Monday, September 7" in html
     assert '../assets/style.css' in html
+
+
+# ---------------------------------------------------------------------------
+# C2: "Last updated" must carry the DAY, not just the clock time.
+#
+# The reader's only healthy/stale signal was `Last updated 5:10 pm`. If the
+# laptop is off or asleep for a day or a week, no run happens -- so there is
+# no toast and no log line either -- and the page stays byte-identical to a
+# fresh one. Both of the spec's two independent places go silent at once for
+# the single most likely real-world failure. A day-stamped heading makes the
+# page itself say how old it is, without a run having to happen at all.
+# ---------------------------------------------------------------------------
+
+
+def test_last_updated_names_the_day_not_only_the_time():
+    html = render.render_day(dict(DAY, updated_text="5:10 pm"), is_today=True)
+    assert "Last updated Monday 7 Sep, 5:10 pm" in html
+
+
+def test_render_front_last_updated_names_the_day_not_only_the_time():
+    html = render.render_front([dict(DAY, updated_text="5:10 pm")])
+    assert "Last updated Monday 7 Sep, 5:10 pm" in html
+
+
+def test_a_week_old_page_does_not_look_identical_to_a_fresh_one():
+    """The exact failure: same slot, same time of day, seven days apart. If
+    the heading only carried the time these two pages would be identical."""
+    fresh = render.render_front([dict(DAY, updated_text="5:10 pm")])
+    stale = render.render_front([
+        dict(DAY, date="2026-08-31", updated_text="5:10 pm"),
+    ])
+    assert "Last updated Monday 7 Sep" in fresh
+    assert "Last updated Monday 31 Aug" in stale
+    assert fresh != stale
+
+
+def test_last_updated_falls_back_to_the_day_alone_when_no_time_is_known():
+    day = {"date": "2026-09-07", "slots": {
+        "morning": {"note": None, "stories": [STORY]},
+    }}
+    html = render.render_day(day, is_today=True)
+    assert "Last updated Monday 7 Sep" in html
+    assert "Last updated Monday 7 Sep," not in html  # no dangling comma
+
+
+def test_last_updated_survives_an_unparseable_edition_date():
+    """A malformed date must degrade to the old time-only heading, never
+    crash the page."""
+    html = render.render_day(
+        {"date": "not-a-date", "updated_text": "5:10 pm",
+         "slots": {"morning": {"note": None, "stories": [STORY]}}},
+        is_today=True,
+    )
+    assert "Last updated 5:10 pm" in html
+
+    html = render.render_front([
+        {"date": "not-a-date", "updated_text": "5:10 pm",
+         "slots": {"morning": {"note": None, "stories": [STORY]}}},
+    ])
+    assert "Last updated 5:10 pm" in html

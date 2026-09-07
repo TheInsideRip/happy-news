@@ -58,6 +58,51 @@ def _format_time(value) -> str:
     return moment.strftime("%I:%M %p").lstrip("0").lower()
 
 
+def _day_stamp(value) -> str:
+    """'Sunday 7 Sep' from an ISO date string. Empty string if it can't be
+    parsed -- a malformed date must degrade the heading, never crash the page."""
+    try:
+        day = date.fromisoformat(str(value))
+    except (TypeError, ValueError):
+        return ""
+    # %-d is a glibc strftime extension; it raises ValueError on Windows.
+    return f"{day.strftime('%A')} {day.day} {day.strftime('%b')}"
+
+
+def _updated_heading(edition: dict, current: str | None) -> str:
+    """The reader's only staleness signal, and the one line on the page that
+    has to be able to say "this is old" all by itself.
+
+    It used to read `Last updated 5:10 pm` -- no date. The most likely
+    real-world failure is the laptop being off or asleep: no run happens, so
+    there is no toast and no log line either, and a page a week stale was
+    byte-identical to a fresh one. Naming the day makes the page itself carry
+    the evidence, with no run required. It also stops the top block being the
+    only undated thing on a front page that now date-stamps every earlier day.
+
+    `updated_text` is normally stamped by the publish step; when it's missing
+    (e.g. this function is exercised on its own) fall back to the newest
+    slot's own published time rather than silently dropping the line."""
+    updated = edition.get("updated_text") or ""
+    if not updated and current:
+        updated = _format_time(edition.get("slots", {}).get(current, {}).get("published_at"))
+    parts = [part for part in (_day_stamp(edition.get("date")), updated) if part]
+    if not parts:
+        return "Last updated"
+    return "Last updated " + ", ".join(_e(part) for part in parts)
+
+
+def _archive_heading(value) -> str:
+    """'Monday, September 7' -- the dated heading used for a past day, both on
+    its own archive page and for each earlier day on the front page."""
+    try:
+        day = date.fromisoformat(str(value))
+    except (TypeError, ValueError):
+        return _e(value)
+    # %-d is a glibc strftime extension; it raises ValueError on Windows.
+    return f"{day.strftime('%A, %B')} {day.day}"
+
+
 def _times_strip(current: str | None) -> str:
     cells = []
     for label, slot in SLOT_TIMES:
@@ -99,24 +144,11 @@ def render_day(edition: dict, *, is_today: bool) -> str:
     present = [s for s in SLOT_ORDER if s in slots]
     current = present[0] if present else None
     body = "".join(_slot_html(name, slots[name]) for name in present)
-    day = date.fromisoformat(edition["date"])
 
-    # "Last updated" is the reader's only signal the machine is healthy, so
-    # it must show a real time whenever one is available -- not just the
-    # bare word. `updated_text` is normally stamped by the publish step;
-    # when it's missing (e.g. this function is exercised on its own) fall
-    # back to the newest slot's own published time rather than silently
-    # dropping the line, which the brief's original `is_today and updated`
-    # ternary did -- that made "Last updated" vanish entirely whenever
-    # updated_text wasn't set, even on today's page.
-    updated = edition.get("updated_text") or ""
-    if not updated and current:
-        updated = _format_time(slots[current].get("published_at"))
     if is_today:
-        heading = f"Last updated {_e(updated)}" if updated else "Last updated"
+        heading = _updated_heading(edition, current)
     else:
-        # %-d is a glibc strftime extension; it raises ValueError on Windows.
-        heading = f"{day.strftime('%A, %B')} {day.day}"
+        heading = _archive_heading(edition.get("date"))
 
     nav = '<a href="archive/">Archive</a>' if is_today else '<a href="../">Today</a>'
     return f"""<!doctype html>
@@ -174,18 +206,13 @@ def render_front(editions: list[dict]) -> str:
     today_edition, *earlier_editions = editions
 
     today_body, today_current = _day_slots_html(today_edition)
-    updated = today_edition.get("updated_text") or ""
-    if not updated and today_current:
-        updated = _format_time(today_edition.get("slots", {})[today_current].get("published_at"))
-    today_heading = f"Last updated {_e(updated)}" if updated else "Last updated"
+    today_heading = _updated_heading(today_edition, today_current)
 
     sections = [f'<p class="sn-updated">{today_heading}</p><div class="day">{today_body}</div>']
 
     for edition in earlier_editions:
         body, _ = _day_slots_html(edition)
-        day = date.fromisoformat(edition["date"])
-        # %-d is a glibc strftime extension; it raises ValueError on Windows.
-        heading = f"{day.strftime('%A, %B')} {day.day}"
+        heading = _archive_heading(edition.get("date"))
         sections.append(
             '<div class="sn-rule day-rule"></div>'
             f'<p class="sn-updated">{heading}</p>'
