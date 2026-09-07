@@ -17,7 +17,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-07T19:00:02.808389-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Beavers Are Having a Moment",
+          "url": "https://reasonstobecheerful.world/beavers-big-moment/",
+          "source": "Reasons to be Cheerful",
+          "label": "animals",
+          "summary": "In parts of Oregon that had been hit hard by drought, wildfires, and vanishing salmon, people are turning to an old ally for help: beavers. Their dams naturally slow and spread out water, recharge groundwater, and create lush wetlands that resist fire and support wildlife. After years of small, scattered fixes, communities are now actively welcoming beavers back and even helping them build in key spots. The result is real, measurable healing of landscapes that had been struggling for decades. It's a wonderful reminder that nature often already has the tools we need.",
+          "why_good": "It's a real, already-happening ecological restoration success story driven by a natural, low-cost solution, with no suffering or political framing.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "5:10 pm"
+  "updated_text": "7:00 pm"
 }
