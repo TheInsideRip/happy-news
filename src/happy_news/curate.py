@@ -185,6 +185,11 @@ def check_auth(*, timeout: int = 60, runner=None) -> None:
         "Output only the text requested. No prose, no code fences.",
         timeout,
     )
-    envelope = json.loads(raw)
+    try:
+        envelope = json.loads(raw)
+    except json.JSONDecodeError as error:
+        # doctor calls this expecting CurateError to mean "the CLI is
+        # unhappy" -- a raw JSONDecodeError escaping here would defeat that.
+        raise CurateError(f"claude CLI returned an unparseable envelope: {raw!r}") from error
     if envelope.get("is_error"):
         raise CurateError(f"claude CLI error: {envelope.get('result')}")
