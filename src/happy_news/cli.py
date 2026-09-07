@@ -4,7 +4,21 @@ Order of operations for `run`/`dry-run` matters: the slot check and the
 already-published check happen BEFORE `config.load` (see Task 12 ruling 1 in
 the SDD ledger) -- 15 of the 18 daily scheduled runs are expected to land
 outside a window or on an already-published slot, and those must exit in
-milliseconds without touching `feeds/*.yaml` or any other disk I/O.
+milliseconds without touching `feeds/*.yaml` or any other disk I/O. `run`
+now creates and deletes one lock file (`logs/run.lock`) around all of that
+-- see below -- which is two file operations, not a config read, and still
+leaves the early exit in the millisecond range. It has to sit outside the
+already-published check: two overlapping runs must not both read that check
+as "not yet done" and then both proceed.
+
+`run` holds an exclusive lock for its whole duration (finding I1). All three
+scheduled tasks are StartWhenAvailable=True, so a late morning catch-up can
+overlap the 14:00 afternoon run; both would read the edition dict and write
+it back whole, the last writer dropping the other slot entirely while that
+slot's story is already permanent in seen.jsonl. A second instance exits 0
+with a printed reason: a run skipped because another is in progress is a
+correct outcome, not a failure. `dry-run` is deliberately unlocked -- it
+writes nothing, so the operator can always inspect mid-run.
 
 `dry-run` writes nothing at all: no edition JSON, no health.json, no
 seen.jsonl, no HTML, no git. It runs the full pick (fetch + ladder + model)
