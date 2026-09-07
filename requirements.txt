@@ -1,3 +1,10 @@
 feedparser==6.0.11
 PyYAML==6.0.3
 pytest==8.3.4
+
+# clock.py evaluates ZoneInfo("America/New_York") at import time, and Windows
+# ships no system IANA database -- without this a clean install dies during
+# import, before do_run() has executed, so nothing writes failures.log,
+# health.json or a toast. It works today only because tzdata happens to be
+# installed already.
+tzdata==2025.3

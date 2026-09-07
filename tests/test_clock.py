@@ -141,3 +141,32 @@ def test_a_failed_save_leaves_the_previous_edition_file_intact(tmp_path, monkeyp
     assert clock.load_edition(tmp_path, day) == good
     leftover = [p.name for p in tmp_path.iterdir() if p.name != "2026-09-07.json"]
     assert leftover == [], f"temp files left behind: {leftover}"
+
+
+# ---------------------------------------------------------------------------
+# I3: tzdata must be a declared dependency.
+#
+# ZoneInfo("America/New_York") is evaluated at import time (line 1 of this
+# module's TZ constant) and Windows ships no system IANA tz database. On a
+# clean install the run therefore dies during import -- before do_run() has
+# executed, so nothing writes failures.log, updates health.json, or raises a
+# toast. Yet another way to fail silently.
+# ---------------------------------------------------------------------------
+
+
+def test_tzdata_is_a_pinned_requirement():
+    import re as _re
+    from happy_news import config
+
+    text = (config.PACKAGE_ROOT / "requirements.txt").read_text(encoding="utf-8")
+    assert _re.search(r"(?mi)^tzdata==\d", text), (
+        "tzdata must be pinned in requirements.txt: clock.py evaluates "
+        "ZoneInfo('America/New_York') at import and Windows has no system "
+        "tz database"
+    )
+
+
+def test_the_module_timezone_actually_resolves():
+    """Proves the dependency above is really needed and really satisfied."""
+    assert clock.TZ.key == "America/New_York"
+    assert clock.now_local().tzinfo is clock.TZ
