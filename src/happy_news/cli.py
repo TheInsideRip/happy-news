@@ -197,6 +197,16 @@ def do_run(root: Path, *, dry: bool) -> int:
                      if normalize.url_key(c.url) == normalize.url_key(story.get("url", ""))),
                     None,
                 )
+                if matched is None:
+                    # ladder._survives now rejects any non-evergreen pick whose
+                    # url_key is not in the pool it was shown (finding I2), so
+                    # this branch should be unreachable. If it ever fires, a
+                    # URL reached the page from nowhere -- say so loudly rather
+                    # than quietly shipping a live link with no timestamp.
+                    _LOGGER.warning(
+                        "published story %r has no matching candidate; age unknown",
+                        story.get("url", ""),
+                    )
                 story["age_text"] = _age_text(matched.published if matched else None, now_et)
             stories = [story]
 

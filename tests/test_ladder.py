@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
+import pytest
+
 from happy_news import ladder
 from happy_news.dedup import Memory
 from happy_news.fetch import Candidate
@@ -28,7 +30,8 @@ def picker(story):
 def test_tier1_publishes_a_fresh_story(tmp_path):
     story = {"title": "Turtles recover", "url": "https://a.com/t", "source": "BBC",
              "label": "earth", "summary": "Good.", "why_good": "It is good."}
-    result = ladder.select(candidates=[cand("Turtles recover", priority=True)],
+    result = ladder.select(candidates=[cand("Turtles recover", priority=True,
+                                            url="https://a.com/t")],
                            memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
                            evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
     assert result.tier == 1
@@ -43,7 +46,8 @@ def test_tier1_ignores_a_fresh_but_non_priority_candidate(tmp_path):
     would otherwise be a perfect tier-1 match on timing alone."""
     story = {"title": "Turtles recover", "url": "https://a.com/t", "source": "BBC",
              "label": "earth", "summary": "Good.", "why_good": "It is good."}
-    result = ladder.select(candidates=[cand("Turtles recover", priority=False)],
+    result = ladder.select(candidates=[cand("Turtles recover", priority=False,
+                                            url="https://a.com/t")],
                            memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
                            evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
     assert result.tier != 1
@@ -55,7 +59,8 @@ def test_same_non_priority_candidate_is_considered_at_tier2(tmp_path):
     priority -- only the time window changes."""
     story = {"title": "Turtles recover", "url": "https://a.com/t", "source": "BBC",
              "label": "earth", "summary": "Good.", "why_good": "It is good."}
-    result = ladder.select(candidates=[cand("Turtles recover", priority=False)],
+    result = ladder.select(candidates=[cand("Turtles recover", priority=False,
+                                            url="https://a.com/t")],
                            memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
                            evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
     assert result.tier == 2
@@ -89,7 +94,7 @@ def test_ladder_does_not_crash_or_hang_when_every_priority_feed_is_empty(tmp_pat
     story = {"title": "Coral reef recovers", "url": "https://a.com/c", "source": "BBC",
              "label": "earth", "summary": "Good.", "why_good": "It is good."}
     candidates = [
-        cand("Coral reef recovers", priority=False),
+        cand("Coral reef recovers", priority=False, url="https://a.com/c"),
         cand("Ocean cleanup expands", priority=False, url="https://a.com/ocean"),
     ]
     result = ladder.select(candidates=candidates,
@@ -104,7 +109,8 @@ def test_ladder_reaches_back_in_time_before_giving_up(tmp_path):
     """A story from 9 days ago that she has never seen is still new to her."""
     story = {"title": "Old but unseen", "url": "https://a.com/o", "source": "BBC",
              "label": "earth", "summary": "Good.", "why_good": "y"}
-    result = ladder.select(candidates=[cand("Old but unseen", hours_old=24 * 9)],
+    result = ladder.select(candidates=[cand("Old but unseen", hours_old=24 * 9,
+                                            url="https://a.com/o")],
                            memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
                            evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
     assert result.story["title"] == "Old but unseen"
@@ -138,7 +144,8 @@ def test_politics_filter_reapplied_after_the_model_answers(tmp_path):
     pass even if the post-model _survives() check were deleted, because the
     candidate would never make it into the pool in the first place.
     """
-    candidate = cand("Local turnout drive expands civic participation")
+    candidate = cand("Local turnout drive expands civic participation",
+                     url="https://a.com/e")
     bad = {"title": "Election turnout soars", "url": "https://a.com/e", "source": "BBC",
            "label": "government", "summary": "s", "why_good": "y"}
     result = ladder.select(candidates=[candidate],
@@ -159,7 +166,7 @@ def test_blocked_story_is_rejected_even_if_the_model_picks_it(tmp_path):
     memory = Memory(tmp_path / "s.jsonl")
     memory.remember("https://a.com/seen", "Already shown", "2026-09-07", "morning")
     candidate = cand("Fresh sounding headline", url="https://a.com/fresh")
-    seen = {"title": "Already shown", "url": "https://a.com/seen", "source": "BBC",
+    seen = {"title": "Already shown", "url": "https://a.com/fresh", "source": "BBC",
             "label": "earth", "summary": "s", "why_good": "y"}
     result = ladder.select(candidates=[candidate], memory=memory, editorial_cfg=ED,
                            evergreen=EVERGREEN, ask_fn=picker(seen), now=NOW)
@@ -242,3 +249,101 @@ def test_evergreen_source_dict_is_not_mutated(tmp_path):
     assert result.story["label"] == "world"
     assert reserve_item["label"] == "not-a-real-label"
     assert evergreen[0]["label"] == "not-a-real-label"
+
+
+# ---------------------------------------------------------------------------
+# I2: the published URL must come from the candidate pool.
+#
+# _survives re-checked politics and dedup but never provenance, and cli
+# treated "no candidate matches this URL" as normal, silently blanking
+# age_text. So a hallucinated or mistyped URL published as a live link with
+# no timestamp -- and memory.remember() then stored a key matching no real
+# feed item, leaving the real article free to be picked again later. That
+# breaks the never-repeat promise silently, which is the worst way to break
+# it.
+# ---------------------------------------------------------------------------
+
+
+def test_a_hallucinated_url_is_rejected_and_the_next_candidate_is_used(tmp_path):
+    real = cand("Turtles recover", priority=True, url="https://a.com/turtles")
+    hallucinated = {"title": "Turtles recover", "url": "https://a.com/not-a-real-link",
+                    "source": "BBC", "label": "earth", "summary": "Good.", "why_good": "y"}
+    genuine = {"title": "Turtles recover", "url": "https://a.com/turtles",
+               "source": "BBC", "label": "earth", "summary": "Good.", "why_good": "y"}
+
+    def ask(pool, recent_titles):
+        return [hallucinated, genuine]
+
+    result = ladder.select(candidates=[real], memory=Memory(tmp_path / "s.jsonl"),
+                           editorial_cfg=ED, evergreen=EVERGREEN, ask_fn=ask, now=NOW)
+
+    assert result.story["url"] == "https://a.com/turtles"
+    assert result.tier == 1
+
+
+def test_a_pick_with_no_matching_candidate_never_publishes(tmp_path):
+    """Nothing in the pool matches, so the ladder must fall all the way
+    through to the evergreen reserve rather than publish a link that came
+    from nowhere."""
+    real = cand("Turtles recover", priority=True, url="https://a.com/turtles")
+    invented = {"title": "Something wonderful", "url": "https://invented.example/story",
+                "source": "BBC", "label": "earth", "summary": "Good.", "why_good": "y"}
+
+    result = ladder.select(candidates=[real], memory=Memory(tmp_path / "s.jsonl"),
+                           editorial_cfg=ED, evergreen=EVERGREEN,
+                           ask_fn=picker(invented), now=NOW)
+
+    assert result.evergreen is True
+    assert result.story["url"] == "https://a.com/oz"
+
+
+def test_provenance_matches_on_url_key_not_raw_string(tmp_path):
+    """The model copies the URL out of the prompt, which may differ from the
+    feed's raw link by tracking parameters or a trailing slash. Those are the
+    same article and must not be rejected."""
+    real = cand("Turtles recover", priority=True,
+                url="https://www.a.com/turtles/?utm_source=rss")
+    story = {"title": "Turtles recover", "url": "https://a.com/turtles",
+             "source": "BBC", "label": "earth", "summary": "Good.", "why_good": "y"}
+
+    result = ladder.select(candidates=[real], memory=Memory(tmp_path / "s.jsonl"),
+                           editorial_cfg=ED, evergreen=EVERGREEN,
+                           ask_fn=picker(story), now=NOW)
+
+    assert result.tier == 1
+    assert result.story["title"] == "Turtles recover"
+
+
+def test_survives_rejects_a_url_outside_the_pool(tmp_path):
+    """Direct unit test of the provenance clause itself."""
+    memory = Memory(tmp_path / "s.jsonl")
+    story = {"title": "Turtles recover", "url": "https://a.com/turtles",
+             "summary": "Good."}
+
+    assert ladder._survives(story, memory, ED, {"a.com/turtles"}) is True
+    assert ladder._survives(story, memory, ED, {"a.com/something-else"}) is False
+    assert ladder._survives(story, memory, ED, set()) is False
+
+
+# ---------------------------------------------------------------------------
+# The politics filter must never fail open.
+# ---------------------------------------------------------------------------
+
+
+def test_an_empty_banned_terms_list_is_a_hard_error_not_a_disabled_filter(tmp_path):
+    """editorial_cfg.get("banned_terms", []) silently disabled the whole
+    politics filter if the YAML key were renamed or emptied: an empty list
+    matches nothing, so every political story sails through with no error and
+    no warning. The filter is the product's soul -- it must fail loudly."""
+    candidate = cand("Election turnout soars nationwide", priority=True,
+                     url="https://a.com/e")
+    story = {"title": "Election turnout soars", "url": "https://a.com/e",
+             "source": "BBC", "label": "world", "summary": "s", "why_good": "y"}
+
+    for broken in ({"labels": ["world"], "outcome_overrides": []},
+                   {"labels": ["world"], "banned_terms": [], "outcome_overrides": []},
+                   {"labels": ["world"], "banned_terms": None, "outcome_overrides": []}):
+        with pytest.raises(ValueError, match="banned_terms"):
+            ladder.select(candidates=[candidate], memory=Memory(tmp_path / "s.jsonl"),
+                          editorial_cfg=broken, evergreen=EVERGREEN,
+                          ask_fn=picker(story), now=NOW)

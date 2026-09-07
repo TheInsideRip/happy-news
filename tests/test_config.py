@@ -22,3 +22,39 @@ def test_missing_file_names_the_path(tmp_path):
     with pytest.raises(FileNotFoundError) as exc:
         config.load(tmp_path)
     assert "sources.yaml" in str(exc.value)
+
+
+def _write_config(tmp_path, editorial: str):
+    feeds = tmp_path / "feeds"
+    feeds.mkdir(exist_ok=True)
+    (feeds / "sources.yaml").write_text("feeds: []\n", encoding="utf-8")
+    (feeds / "editorial.yaml").write_text(editorial, encoding="utf-8")
+    (feeds / "evergreen.yaml").write_text("stories: []\n", encoding="utf-8")
+    return tmp_path
+
+
+def test_missing_banned_terms_is_a_hard_error(tmp_path):
+    """`editorial_cfg.get("banned_terms", [])` used to silently disable the
+    politics filter if the YAML key were ever renamed: an empty list matches
+    nothing. The filter is the product's soul -- refuse to start."""
+    _write_config(tmp_path, "labels: [earth]\noutcome_overrides: []\n")
+    with pytest.raises(ValueError, match="banned_terms"):
+        config.load(tmp_path)
+
+
+def test_empty_banned_terms_is_a_hard_error(tmp_path):
+    _write_config(tmp_path, "labels: [earth]\nbanned_terms: []\noutcome_overrides: []\n")
+    with pytest.raises(ValueError, match="banned_terms"):
+        config.load(tmp_path)
+
+
+def test_null_banned_terms_is_a_hard_error(tmp_path):
+    _write_config(tmp_path, "labels: [earth]\nbanned_terms:\noutcome_overrides: []\n")
+    with pytest.raises(ValueError, match="banned_terms"):
+        config.load(tmp_path)
+
+
+def test_the_real_shipped_editorial_yaml_has_banned_terms():
+    """The live config must satisfy the rule it enforces."""
+    cfg = config.load(config.PACKAGE_ROOT)
+    assert cfg.editorial["banned_terms"]

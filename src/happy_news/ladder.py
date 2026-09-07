@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from . import editorial as ed
-from . import fetch
+from . import fetch, normalize
 
 
 @dataclass(frozen=True)
@@ -50,10 +50,45 @@ class Result:
     evergreen: bool = False
 
 
-def _survives(story: dict, memory, editorial_cfg: dict) -> bool:
-    """Re-check the model's own pick in code. Never trust the prompt alone."""
+def _banned_terms(editorial_cfg: dict) -> list[str]:
+    """The politics filter is the product's soul and must never fail open.
+
+    `editorial_cfg.get("banned_terms", [])` silently disabled the entire
+    filter if the YAML key were ever renamed or emptied -- an empty banned
+    list matches nothing, so every political story sails through both the
+    prefilter and the post-model re-check with no error and no warning.
+    config.load() already rejects such a config at startup; this is the
+    second line of the same defence, for any caller that builds the dict
+    itself."""
+    terms = editorial_cfg.get("banned_terms") or []
+    if not terms:
+        raise ValueError(
+            "editorial config has no banned_terms -- the politics filter "
+            "would silently pass everything"
+        )
+    return terms
+
+
+def _survives(story: dict, memory, editorial_cfg: dict, pool_url_keys: set[str]) -> bool:
+    """Re-check the model's own pick in code. Never trust the prompt alone.
+
+    Provenance is checked first (finding I2). The model is asked to copy a URL
+    out of the candidate list, but it can hallucinate or mistype one -- and
+    nothing downstream noticed: cli matched the pick back to a candidate only
+    to compute age_text, and treated "no candidate has this URL" as normal,
+    quietly publishing a live link with no timestamp. Worse,
+    `memory.remember()` then stored a url_key matching nothing in any feed, so
+    the real article stayed unseen and could be picked again later -- silently
+    breaking the never-repeat promise this whole system rests on.
+
+    So: a pick whose url_key is not in the pool the model was shown is not a
+    story, it is a defect. Reject it and let the ladder try its next
+    candidate. (Evergreen picks never come through here: they are taken
+    straight from the reserve, not from a candidate pool.)"""
+    if normalize.url_key(story.get("url", "")) not in pool_url_keys:
+        return False
     text = f"{story.get('title', '')} {story.get('summary', '')}"
-    if ed.politics_blocked(text, editorial_cfg.get("banned_terms", []),
+    if ed.politics_blocked(text, _banned_terms(editorial_cfg),
                            editorial_cfg.get("outcome_overrides", [])):
         return False
     return not memory.is_blocked(story.get("url", ""), story.get("title", ""))
@@ -77,7 +112,7 @@ def _prefilter(candidates, memory, editorial_cfg, allow_near, priority_only=Fals
         if memory.is_blocked(c.url, c.title):
             continue
         if ed.politics_blocked(f"{c.title} {c.blurb}",
-                               editorial_cfg.get("banned_terms", []),
+                               _banned_terms(editorial_cfg),
                                editorial_cfg.get("outcome_overrides", [])):
             continue
         (demoted if memory.is_near_duplicate(c.title) else kept).append(c)
@@ -93,8 +128,11 @@ def select(*, candidates, memory, editorial_cfg, evergreen, ask_fn, now: datetim
                               tier.priority_only)
             pool = pool[:MAX_CANDIDATES]
             if pool:
+                # Exactly the URLs the model was shown -- a pick outside this
+                # set did not come from any feed (finding I2).
+                pool_url_keys = {normalize.url_key(c.url) for c in pool}
                 for story in ask_fn(pool, memory.recent_titles()) or []:
-                    if _survives(story, memory, editorial_cfg):
+                    if _survives(story, memory, editorial_cfg, pool_url_keys):
                         story["label"] = ed.normalise_label(story.get("label", ""), labels)
                         return Result(story=story, tier=tier.number)
         if tier.evergreen:

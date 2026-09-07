@@ -31,6 +31,18 @@ def load(root: Path | None = None) -> Config:
     sources = _read_yaml(feeds / "sources.yaml")
     editorial = _read_yaml(feeds / "editorial.yaml")
     evergreen_data = _read_yaml(feeds / "evergreen.yaml")
+
+    # The politics filter is the product's soul and must never fail open. An
+    # absent or empty `banned_terms` (a renamed YAML key, a bad edit) matches
+    # nothing, so every political story would sail silently through both the
+    # candidate prefilter and the post-model re-check. Refuse to start
+    # instead: a run that fails loudly is recorded, alerted and retried; one
+    # that quietly publishes politics is not.
+    if not editorial.get("banned_terms"):
+        raise ValueError(
+            f"{feeds / 'editorial.yaml'} has no non-empty 'banned_terms': the "
+            "politics filter would silently pass everything"
+        )
     return Config(
         root=root,
         sources=sources,

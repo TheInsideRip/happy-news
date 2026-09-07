@@ -975,3 +975,61 @@ def test_dry_run_is_not_blocked_by_a_running_publish(monkeypatch, tmp_path):
 
     assert cli.main(["dry-run", "--root", str(root)]) == 0
     assert not (root / "index.html").exists()
+
+
+# ---------------------------------------------------------------------------
+# I2: a URL the model invented must never reach the page or the dedup log.
+# ---------------------------------------------------------------------------
+
+
+def test_a_hallucinated_url_never_publishes_and_never_enters_the_dedup_log(monkeypatch, tmp_path):
+    """A mistyped or invented URL used to publish as a live link with a blank
+    timestamp, and memory.remember() then stored a key matching no real feed
+    item -- leaving the real article free to be picked again later, silently
+    breaking the never-repeat promise."""
+    evergreen_item = {"title": "Ozone healing", "url": "https://a.example/ozone",
+                      "source": "UNEP", "label": "earth", "summary": "Recovering."}
+    root = _make_root(tmp_path, evergreen=[evergreen_item])
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(
+        cli.curate, "ask",
+        lambda prompt, system, **k: [_story(url="https://example.com/turtles-typo")])
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    assert "turtles-typo" not in index_html
+    assert "Ozone healing" in index_html  # fell through to the reserve instead
+
+    seen = (root / "data" / "seen.jsonl").read_text(encoding="utf-8")
+    assert "turtles-typo" not in seen
+    # and the real article was NOT burned -- it can still be picked later
+    assert "example.com/turtles\"" not in seen
+
+
+def test_a_genuine_pick_still_carries_its_timestamp(monkeypatch, tmp_path):
+    """The provenance check must not cost a real story its age_text."""
+    root = _make_root(tmp_path)
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=3), "blurb",
+                          priority=True)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    edition = json.loads((root / "data" / "editions" / "2026-09-07.json").read_text(encoding="utf-8"))
+    assert edition["slots"]["morning"]["stories"][0]["age_text"] == "3 hours ago"
