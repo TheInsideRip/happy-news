@@ -68,10 +68,11 @@ class Memory:
             "date": date_str,
             "slot": slot,
         }
+        entries = self._load()  # load cache BEFORE file is modified
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(entry, ensure_ascii=False) + "\n")
-        self._load().append(entry)
+        entries.append(entry)
 
     def recent_titles(self, limit: int = 60) -> list[str]:
         return [e["title"] for e in reversed(self._load())][:limit]

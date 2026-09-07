@@ -55,3 +55,35 @@ def test_recent_titles_returns_newest_first(tmp_path):
     for i in range(5):
         mem.remember(f"https://a.com/{i}", f"Story number {i}", "2026-09-07", "morning")
     assert mem.recent_titles(limit=2) == ["Story number 4", "Story number 3"]
+
+
+def test_no_duplicate_on_first_entry(tmp_path):
+    """Cache length must match remember() calls. First entry must not be counted twice."""
+    mem = make(tmp_path)
+    for i in range(5):
+        mem.remember(f"https://a.com/{i}", f"Story {i}", "2026-09-07", "morning")
+    # Cache should have exactly 5 entries, no duplicates
+    assert len(mem._load()) == 5
+    # All 5 titles in order, newest first
+    titles = mem.recent_titles(limit=100)
+    assert len(titles) == 5
+    assert titles == ["Story 4", "Story 3", "Story 2", "Story 1", "Story 0"]
+
+
+def test_is_near_duplicate_respects_18_month_window(tmp_path):
+    """Old entries outside the 548-day window must not trigger near_duplicate."""
+    from datetime import date, timedelta
+    mem = make(tmp_path)
+
+    # Remember an entry from 600+ days ago
+    old_date = (date.today() - timedelta(days=600)).isoformat()
+    mem.remember("https://a.com/old", "Humpback whale numbers recover strongly worldwide today", old_date, "morning")
+
+    # A title with high Jaccard similarity to the old entry
+    similar_title = "Humpback whale numbers recover strongly worldwide"
+
+    # Should NOT be marked as near_duplicate because the entry is outside the 548-day window
+    assert not mem.is_near_duplicate(similar_title, within_days=548)
+
+    # But it SHOULD be near_duplicate if we expand the window beyond 600 days
+    assert mem.is_near_duplicate(similar_title, within_days=700)
