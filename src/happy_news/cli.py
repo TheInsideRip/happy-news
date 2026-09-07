@@ -197,7 +197,6 @@ def do_run(root: Path, *, dry: bool) -> int:
             return 0
 
         health = alert.Health(root / "data" / "health.json")
-        health.record_tier(result.tier)
 
         stories = []
         if result.story:
@@ -283,6 +282,11 @@ def do_run(root: Path, *, dry: bool) -> int:
         else:
             health.record_drought(result.note or "ladder exhausted")
 
+        # Recorded here, not before the push: a tier only means something once
+        # the run actually reached the reader. record_tier stamps the time and
+        # returns how many tier-4-or-worse runs fall inside the rolling week.
+        tier_alarms = health.record_tier(result.tier)
+
         if result.tier == 4:
             _LOGGER.warning(
                 "published from tier 4 (reached back 90 days through real feeds; "
@@ -300,6 +304,23 @@ def do_run(root: Path, *, dry: bool) -> int:
                     "No story found across every tier and the evergreen reserve. "
                     "This indicates a defect, not a quiet news day.",
                 )
+
+        # Spec section 8: "Two tier-4-or-worse runs in a rolling week is
+        # treated as a broken system, not bad luck." One deep reach is bad
+        # luck; two inside a week means the feeds, the politics filter or the
+        # duplicate check is quietly starving the ladder, and that must be
+        # said out loud rather than left in a log nobody reads.
+        if tier_alarms >= alert.ESCALATION_THRESHOLD:
+            _LOGGER.error(
+                "%d runs reached tier %d or worse in the last %d days",
+                tier_alarms, alert.TIER_ALARM, alert.ESCALATION_WINDOW_DAYS,
+            )
+            alert.notify(
+                "Stacey Happy News ESCALATED",
+                f"{tier_alarms} runs reached tier {alert.TIER_ALARM} or worse in the last "
+                f"{alert.ESCALATION_WINDOW_DAYS} days - treat this as a broken system, "
+                "not bad luck. Check dead feeds, the politics filter and the duplicate check.",
+            )
 
         health.record_success()
         return 0

@@ -5,14 +5,48 @@ import json
 import os
 import subprocess
 import tempfile
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 MAX_HISTORY = 200
 
+# Spec section 8: "Two tier-4-or-worse runs in a rolling week is treated as a
+# broken system, not bad luck." Tier 4 means the ladder had to reach back 90
+# days through real feeds; tier 5 means it fell to the timeless reserve or
+# found nothing at all.
+TIER_ALARM = 4
+ESCALATION_WINDOW_DAYS = 7
+ESCALATION_THRESHOLD = 2
+
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _tier_of(entry) -> tuple[int | None, datetime | None]:
+    """Read one entry from health.json's `tiers` list.
+
+    Entries used to be bare integers with no timestamp, so nothing could ever
+    ask "how many in the last week?" -- which is why the spec's escalation was
+    never implemented. Old bare integers are still read (they still say which
+    tier), but they carry no date and so can never fall inside a rolling
+    window."""
+    if isinstance(entry, bool):  # bool is an int subclass; never a tier
+        return None, None
+    if isinstance(entry, int):
+        return entry, None
+    if not isinstance(entry, dict):
+        return None, None
+    tier = entry.get("tier")
+    if isinstance(tier, bool) or not isinstance(tier, int):
+        return None, None
+    try:
+        moment = datetime.fromisoformat(str(entry.get("at")))
+    except (TypeError, ValueError):
+        return tier, None
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=timezone.utc)
+    return tier, moment
 
 
 class Health:
@@ -91,10 +125,39 @@ class Health:
         data["droughts"].append({"at": _now(), "reason": reason})
         self._write(data)
 
-    def record_tier(self, tier: int) -> None:
+    def record_tier(self, tier: int) -> int:
+        """Record the tier a run actually published from, with a timestamp.
+
+        Two things were wrong before. It wrote a bare integer, so the history
+        carried no dates and nothing could ever ask the spec's question
+        ("two tier-4-or-worse runs in a rolling week"); and it was called
+        before the push, so a run that never reached the reader still left a
+        tier on the record. Both made the escalation unimplementable.
+
+        Returns how many tier-4-or-worse runs fall inside the rolling week,
+        counting this one -- so the caller can escalate at the threshold."""
         data = self._read()
-        data["tiers"].append(tier)
+        data["tiers"].append({"at": _now(), "tier": int(tier)})
         self._write(data)
+        return self.recent_tier_alarms(history=data["tiers"])
+
+    def recent_tier_alarms(self, *, days: int = ESCALATION_WINDOW_DAYS,
+                           threshold: int = TIER_ALARM, history=None) -> int:
+        """How many runs at or above `threshold` published within `days`.
+
+        Undated entries (the old bare-integer format) are outside every
+        rolling window and never counted -- an escalation must be provable,
+        not guessed."""
+        entries = self._read()["tiers"] if history is None else history
+        cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+        count = 0
+        for entry in entries:
+            tier, at = _tier_of(entry)
+            if tier is None or at is None:
+                continue
+            if tier >= threshold and at >= cutoff:
+                count += 1
+        return count
 
     def consecutive_failures(self) -> int:
         return self._read()["consecutive_failures"]

@@ -189,7 +189,7 @@ def test_run_publishes_a_tier1_story_end_to_end(monkeypatch, tmp_path):
 
     health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
     assert health["consecutive_failures"] == 0
-    assert health["tiers"][-1] == 1
+    assert health["tiers"][-1]["tier"] == 1
     assert health["droughts"] == []
 
     assert len(push_calls) == 1
@@ -1088,3 +1088,101 @@ def test_a_stray_file_does_not_break_a_live_run(monkeypatch, tmp_path):
 
     assert cli.main(["run", "--root", str(root)]) == 0
     assert "Turtles recover" in (root / "index.html").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# Spec section 8: two tier-4-or-worse runs in a rolling week is a broken
+# system, not bad luck. health.record_tier wrote bare integers that nothing
+# read, and it ran before the push could fail, so this never worked.
+# ---------------------------------------------------------------------------
+
+
+def _deep_reach_run(monkeypatch, root, fake_now, title, url):
+    """A candidate old enough that only tier 4 (the 90-day window) finds it."""
+    candidate = Candidate(title, url, "BBC",
+                          fake_now.astimezone(timezone.utc) - timedelta(days=80), "blurb")
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask",
+                        lambda prompt, system, **k: [_story(title=title, url=url)])
+
+
+def test_a_second_tier4_run_inside_a_week_raises_an_escalated_alert(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    health_path = root / "data" / "health.json"
+    health_path.parent.mkdir(parents=True)
+    three_days_ago = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat()
+    health_path.write_text(json.dumps({
+        "consecutive_failures": 0, "last_success": None, "failures": [], "droughts": [],
+        "tiers": [{"at": three_days_ago, "tier": 4}],
+    }), encoding="utf-8")
+
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    notify_calls = _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+    _deep_reach_run(monkeypatch, root, fake_now, "Reached way back", "https://example.com/way-back")
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    assert any("ESCALATED" in title for title, _ in notify_calls), notify_calls
+    assert any("broken system" in msg for _, msg in notify_calls)
+
+
+def test_a_single_tier4_run_does_not_escalate(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    notify_calls = _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+    _deep_reach_run(monkeypatch, root, fake_now, "Reached way back", "https://example.com/way-back")
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+
+    assert not any("ESCALATED" in title for title, _ in notify_calls), notify_calls
+    health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
+    assert health["tiers"][-1]["tier"] == 4
+    assert health["tiers"][-1]["at"]
+
+
+def test_a_tier4_run_older_than_a_week_does_not_escalate(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    health_path = root / "data" / "health.json"
+    health_path.parent.mkdir(parents=True)
+    long_ago = (datetime.now(timezone.utc) - timedelta(days=9)).isoformat()
+    health_path.write_text(json.dumps({
+        "consecutive_failures": 0, "last_success": None, "failures": [], "droughts": [],
+        "tiers": [{"at": long_ago, "tier": 5}],
+    }), encoding="utf-8")
+
+    fake_now = datetime(2026, 9, 7, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: fake_now)
+    notify_calls = _quiet_notify(monkeypatch)
+    _recording_push(monkeypatch)
+    _deep_reach_run(monkeypatch, root, fake_now, "Reached way back", "https://example.com/way-back")
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+    assert not any("ESCALATED" in title for title, _ in notify_calls)
+
+
+def test_a_failed_push_records_no_tier_at_all(monkeypatch, tmp_path):
+    """record_tier ran before the push could fail, so a run that never
+    reached the reader still counted towards the escalation."""
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb")
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    def failing_push(root, message, **kwargs):
+        raise publish.PublishError("push failed after rebase: simulated network failure")
+
+    monkeypatch.setattr(cli.publish, "push", failing_push)
+
+    assert cli.main(["run", "--root", str(root)]) == 1
+
+    health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
+    assert health["tiers"] == [], "a run that never published has no tier to record"
