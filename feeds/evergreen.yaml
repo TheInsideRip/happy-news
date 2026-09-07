@@ -14,3 +14,238 @@ stories:
     source: NOAA
     label: animals
     summary: Hunted to a few hundred, some populations now number tens of thousands. The whaling ban worked, and it worked faster than anyone predicted.
+  - title: The River Thames has come back from the dead
+    url: "https://www.smithsonianmag.com/smart-news/once-deemed-biologically-dead-a-new-report-shows-londons-river-thames-recovering-180979061/"
+    source: Smithsonian Magazine
+    label: earth
+    summary: In 1957, scientists declared London's River Thames biologically dead - nothing could live in it. Decades of cleanup work later, seals, sharks, seahorses and eels have all moved back in. Researchers have counted well over a hundred seal pups born along its banks in a single year. A river everyone had given up on quietly became a home again.
+  - title: Acid rain, once a crisis, has largely been solved
+    url: "https://www.epa.gov/acidrain/acid-rain-program"
+    source: US Environmental Protection Agency
+    label: earth
+    summary: In the 1980s, acid rain was killing lakes and forests across North America. A simple fix - making power plants cut their sulfur dioxide emissions - turned out to work faster and cheaper than almost anyone expected. Emissions have been cut by roughly half since 1980, and lakes and streams that were once too acidic for fish are recovering. It is one of the clearest proof points that a big pollution problem can actually be fixed.
+  - title: Bhutan absorbs more carbon than it produces
+    url: "https://www.nationalgeographic.com/travel/article/carbon-negative-country-sustainability"
+    source: National Geographic
+    label: earth
+    summary: Bhutan is the only country in the world that is carbon negative - its forests soak up more carbon dioxide than the whole country emits. That is not an accident, its constitution requires at least 60 percent of the country to stay forested, forever. Today over 80 percent of Bhutan is covered in trees. It is a small country proving that a nation really can put nature first and keep the promise.
+  - title: Rwanda banned plastic bags and became one of Africa's cleanest countries
+    url: "https://www.globalcitizen.org/en/content/how-eliminating-plastic-bags-in-rwanda-saves-liv-2/"
+    source: Global Citizen
+    label: earth
+    summary: In 2008, Rwanda banned plastic bags outright - no manufacturing, no selling, no bringing them in from abroad. Once a month, everyone pitches in for a nationwide community clean-up called Umuganda. The result is a country genuinely famous for tidy streets, with its capital Kigali often called the cleanest city in Africa. A small policy, kept up for years, changed how an entire country looks and feels.
+  - title: The world's largest protected ocean area now guards Antarctica's Ross Sea
+    url: "https://www.fisheries.noaa.gov/national/international-affairs/marine-protected-area-antarcticas-ross-sea"
+    source: NOAA Fisheries
+    label: ocean
+    summary: In 2016, two dozen countries and the European Union agreed to protect the Ross Sea off Antarctica - home to huge numbers of penguins, seals and whales - from fishing. Covering some 600,000 square miles of ocean, it is the largest marine protected area on the planet. Scientists consider it one of the last truly intact ocean ecosystems left on Earth. Nations that do not always agree on much found a way to say yes to protecting it.
+  - title: Northern elephant seals came back from a remnant population of eight
+    url: "https://blog.nature.org/2014/05/12/northern-elephant-seals-a-dramatic-conservation-success/"
+    source: The Nature Conservancy
+    label: ocean
+    summary: Hunters chasing the oil in their blubber wiped out northern elephant seals so thoroughly that the species was believed extinct by 1884. Eight years later, a tiny remnant population was found hiding on a remote island off Mexico. Once hunting stopped and the species was protected, the seals did the rest themselves - today there are roughly 100,000 to 200,000 of them, hauling out on beaches up and down the California coast every year. Few comebacks from the edge of extinction have been this complete.
+  - title: Eastern Pacific gray whales recovered fully enough to come off the endangered list
+    url: "https://www.fisheries.noaa.gov/action/delisting-eastern-north-pacific-gray-whale-esa"
+    source: NOAA Fisheries
+    label: ocean
+    summary: Commercial whaling once pushed eastern Pacific gray whales to the brink. After decades of protection, their numbers climbed back to roughly what scientists believe they were before whaling began. In 1994, the United States removed them from the endangered species list - the first marine mammal ever to recover fully enough to earn that. Every winter they still make one of the longest migrations of any mammal, from Alaska to Mexico and back.
+  - title: Sea otters are thriving again along the California coast
+    url: "https://www.montereybayaquarium.org/change-impact/our-conservation-work/sea-otter-recovery-program"
+    source: Monterey Bay Aquarium
+    label: ocean
+    summary: Fur hunters drove sea otters to near extinction by the early 1900s, leaving only a tiny remnant colony hidden along the California coast. Decades of protection and hands-on rescue work - including aquariums raising orphaned pups - have helped the southern sea otter population grow to around 3,000 animals. They matter far beyond their own numbers too, by eating sea urchins, otters keep kelp forests healthy for hundreds of other species. A shy, whiskered animal turned out to be one of the coast's most important caretakers.
+  - title: The world's largest oyster reef restoration project is meeting its goals
+    url: "https://www.chesapeakebay.net/news/blog/chesapeake-bay-partners-complete-the-worlds-largest-oyster-reef-restoration-project"
+    source: Chesapeake Bay Program
+    label: ocean
+    summary: Oysters once filtered huge volumes of water through the Chesapeake Bay; overfishing and disease had reduced their reefs to a fraction of that. A coalition of states, scientists and conservation groups set out to rebuild them anyway, tributary by tributary. Well over a thousand acres of new oyster reef have gone in, and the restored reefs are meeting their density and health targets. It is patient, unglamorous work that is quietly bringing a whole bay back to life.
+  - title: The Iberian lynx made the greatest comeback of any cat species
+    url: "https://iucn.org/press-release/202406/iberian-lynx-rebounding-thanks-conservation-action-iucn-red-list"
+    source: IUCN Red List
+    label: animals
+    summary: In 2001, only 62 Iberian lynx were left alive, making it the most endangered cat species on Earth. Spain and Portugal responded with a huge effort - restoring habitat, protecting the rabbits lynx depend on for food, and reintroducing captive-bred cats into the wild. The population has since grown to more than 2,000, and in 2024 the lynx's status improved from Endangered to Vulnerable. Conservationists now call it the greatest recovery of any cat species ever achieved.
+  - title: California's giant condors were down to 22 birds - now hundreds fly free
+    url: "https://www.fws.gov/program/california-condor-recovery"
+    source: US Fish and Wildlife Service
+    label: animals
+    summary: By 1982, only 22 California condors were left alive anywhere in the world. Every single one was brought into a captive breeding program in a last-ditch effort to save the species. It worked, condors have since been released back into the wild across California, Arizona, Utah and Baja California, and more than 300 now fly free. North America's largest flying bird is still here because people refused to let it go.
+  - title: Mountain gorillas are the only great ape whose numbers are rising
+    url: "https://www.unesco.org/en/articles/africa-mountain-gorillas-make-comeback-0"
+    source: UNESCO
+    label: animals
+    summary: Mountain gorillas were once thought to be heading for extinction within decades. Instead, thanks to daily protection by park rangers in Rwanda, Uganda and the Democratic Republic of Congo, their numbers have climbed from around 620 in 1998 to over 1,000 today. In 2018 the IUCN downgraded their status from Critically Endangered to Endangered - a genuine step back from the edge. They remain the only wild great ape population known to be growing rather than shrinking.
+  - title: America's national bird flew back from the edge of extinction
+    url: "https://www.fws.gov/program/eagle-management"
+    source: US Fish and Wildlife Service
+    label: animals
+    summary: By 1963, the pesticide DDT had thinned bald eagle eggshells so badly that only 417 nesting pairs remained in the lower 48 states. Banning DDT in 1972, combined with decades of legal protection, let the species slowly rebuild. Bald eagles came off the endangered species list in 2007, and a 2021 survey counted over 300,000 of them. The bird on the Great Seal of the United States nearly disappeared, and then it didn't.
+  - title: Bringing wolves back to Yellowstone reshaped the whole park for the better
+    url: "https://education.nationalgeographic.org/resource/wolves-yellowstone/"
+    source: National Geographic Education
+    label: animals
+    summary: Wolves were hunted out of Yellowstone by the 1920s, and without them, elk herds grew so large they stripped the park's willows and aspens bare. In 1995, wildlife managers reintroduced fourteen wolves from Canada. In the years since, willows and aspens have rebounded, beaver numbers have grown, and the whole ecosystem is more balanced than it had been in generations. One missing predator turned out to hold an entire landscape together.
+  - title: The American bison came back from a last few dozen animals
+    url: "https://home.nps.gov/yell/learn/historyculture/bison-management.htm"
+    source: National Park Service
+    label: animals
+    summary: Tens of millions of bison once roamed the Great Plains. By the late 1880s, uncontrolled hunting had reduced Yellowstone's herd to only about two dozen animals, among the last wild bison left anywhere. Protection let that tiny herd grow back to well over a thousand within decades, and Yellowstone's bison continue to thrive today, alongside recovering herds across North America. A handful of survivors turned out to be enough to bring the species all the way back.
+  - title: A tiny songbird's recovery took it off the endangered species list
+    url: "https://www.fws.gov/species-publication-action/removing-kirtlands-warbler-federal-list-endangered-and-threatened-0"
+    source: US Fish and Wildlife Service
+    label: animals
+    summary: Kirtland's warbler nests almost nowhere else on Earth except young jack pine forests in Michigan, and by the 1970s its population had crashed to under 200 singing males. Recovery work - controlled burns to regrow its very specific habitat, plus control of a nest-parasite bird - slowly turned things around. By 2019, the population had passed 2,300 breeding pairs, more than double the recovery goal, and the warbler was removed from the endangered species list after nearly half a century of protection. A bird that needed one very particular kind of forest got that forest back.
+  - title: A cattle plague that killed millions of animals for centuries is gone for good
+    url: "https://news.un.org/en/story/2011/06/379902"
+    source: UN News
+    label: agriculture
+    summary: Rinderpest, also called cattle plague, killed cattle and other livestock by the millions for as long as anyone could remember, and the famines it caused sometimes killed people too. In 2011, the United Nations declared it fully eradicated worldwide - only the second disease in history, after smallpox, that humanity has ever wiped out completely. It took decades of vaccination campaigns across dozens of countries to get there. A threat that shaped agriculture for thousands of years simply does not exist anymore.
+  - title: One scientist's wheat is credited with saving a billion people from starvation
+    url: "https://www.worldfoodprize.org/en/dr_norman_e_borlaug/about_norman_borlaug/"
+    source: World Food Prize Foundation
+    label: agriculture
+    summary: In the 1940s and 50s, agricultural scientist Norman Borlaug bred new wheat varieties that resisted disease and produced far bigger harvests. Farmers across Mexico, and later India and Pakistan, adopted them during what became known as the Green Revolution, and the mass famines experts had predicted for those countries never happened. Borlaug won the Nobel Peace Prize in 1970 for the work. He is often described as having saved more lives than anyone else in history, just by growing better wheat.
+  - title: A vault carved into an Arctic mountain backs up the world's crops
+    url: "https://www.croptrust.org/what-we-do/programs/svalbard-global-seed-vault/"
+    source: Crop Trust
+    label: agriculture
+    summary: Deep inside a mountain on a Norwegian island near the North Pole sits a vault built to outlast wars, disasters and power outages. It holds more than 1.3 million seed samples from almost every country on Earth - duplicates of the seeds that farmers and scientists everywhere depend on. If a seed bank anywhere in the world is ever damaged or destroyed, its collection can be rebuilt from what is stored here. It is quiet, unglamorous insurance for humanity's entire food supply.
+  - title: India turned itself into the world's biggest milk producer, cooperative by cooperative
+    url: "https://www.livehistoryindia.com/story/eras/operation-flood-white-revolution"
+    source: Live History India
+    label: agriculture
+    summary: In 1970, India launched Operation Flood, linking millions of small dairy farmers into cooperatives so they could sell milk directly, rather than at whatever price a middleman offered. Farmers began earning directly from what their milk sold for, instead of losing most of the value along the way. Milk production rose from 20 million tonnes a year to over 200 million, and India became the world's largest milk producer. A cooperative model built for fairness ended up building an entire industry.
+  - title: The share of humanity living in extreme poverty has fallen by three-quarters
+    url: "https://www.worldbank.org/en/topic/poverty/overview"
+    source: World Bank
+    label: people
+    summary: In 1990, more than a third of the world's population lived in extreme poverty. Since then, that share has fallen to roughly one in ten people, even as the world's population grew by billions. More than a billion people have moved out of extreme poverty within a single generation. It is one of the biggest improvements in human welfare in history, and it happened largely without most people noticing.
+  - title: Billions of people have gained access to safe drinking water since 1990
+    url: "https://www.csmonitor.com/World/Points-of-Progress/2014/0902/Since-1990-billions-more-have-access-to-clean-water"
+    source: The Christian Science Monitor
+    label: people
+    summary: In 1990, a large share of the world's population had no reliable access to clean drinking water. Since then, more than two billion people have gained access to an improved water source, through new wells, pipes and treatment systems built one community at a time. That is more people than lived in the entire world a century ago. Clean water is easy to take for granted once you have it, and this is how millions more finally do.
+  - title: The average person alive today can expect to live twice as long as in 1900
+    url: "https://ourworldindata.org/life-expectancy"
+    source: Our World in Data
+    label: people
+    summary: In 1900, a newborn anywhere in the world could expect to live to about 32. By 2021, the global average had more than doubled to 71. Better nutrition, clean water, vaccines and modern medicine all added up, decade after decade, in nearly every country on Earth. It is easy to miss because it happened so gradually, but humanity roughly doubled its own lifespan in a little over a century.
+  - title: Global literacy has climbed from a minority to the vast majority
+    url: "https://www.unesco.org/en/literacy/need-know"
+    source: UNESCO
+    label: people
+    summary: In 1975, about two-thirds of the world's adults could read and write. By 2024, that had risen to 88 percent of adults and 93 percent of young people worldwide. Whole generations of schools, teachers and literacy campaigns made that happen, country by country. Reading, something so many of us take for granted, is now something the vast majority of humanity shares.
+  - title: Small loans, mostly to women, helped millions of families climb out of poverty
+    url: "https://grameenbank.org.bd/about/introduction"
+    source: Grameen Bank
+    label: people
+    summary: In 1983, economist Muhammad Yunus founded Grameen Bank in Bangladesh on a simple bet, that poor people, given small loans and no collateral requirement, would reliably pay them back and use the money to build a better life. He was right. Millions of borrowers, 98 percent of them women, have used these small loans to start businesses and support their families, and the idea of microcredit spread to dozens of countries. Yunus and Grameen Bank won the Nobel Peace Prize in 2006 for it.
+  - title: Smallpox, a disease that killed hundreds of millions, no longer exists anywhere
+    url: "https://www.who.int/news/item/08-05-2020-commemorating-smallpox-eradication-a-legacy-of-hope-for-covid-19-and-other-diseases"
+    source: World Health Organization
+    label: health
+    summary: Smallpox is estimated to have killed some 300 million people in the 20th century alone. In 1980, after a decade-long campaign that vaccinated people across the globe, the World Health Organization declared it eradicated - the first, and so far the only, human disease ever wiped off the face of the Earth entirely. No child born since has ever had to fear it. It remains the clearest proof that a disease, however terrible, can actually be beaten for good.
+  - title: A disease that used to blind entire villages has been pushed back across Africa
+    url: "https://www.cartercenter.org/programs/river-blindness/"
+    source: The Carter Center
+    label: health
+    summary: River blindness, spread by the bite of infected blackflies near fast-flowing rivers, once blinded so many people in parts of West Africa that some villages were abandoned entirely. Decades of donated medicine and patient community treatment programs, led by the Carter Center and its partners, have interrupted or eliminated its spread across large parts of Ethiopia, Nigeria, Sudan and Uganda, plus several countries in the Americas. Communities that once fled the riverbanks have been able to move back. It is slow, unglamorous work, and it is winning.
+  - title: Measles vaccination has saved tens of millions of lives since 2000
+    url: "https://www.who.int/news/item/28-11-2025-measles-deaths-down-88--since-2000--but-cases-surge"
+    source: World Health Organization
+    label: health
+    summary: Measles used to kill hundreds of thousands of children every year. Since 2000, a global vaccination push has cut measles deaths by 88 percent, and the World Health Organization estimates the vaccine has saved close to 59 million lives in that time. In the Americas, deaths from the disease have fallen to almost zero. A single, inexpensive vaccine, delivered often enough, turned out to be enough to save that many lives.
+  - title: The first-ever malaria vaccine is now protecting children across Africa
+    url: "https://www.who.int/initiatives/malaria-vaccine-implementation-programme"
+    source: World Health Organization
+    label: health
+    summary: For over a century, scientists tried and failed to build a vaccine against malaria, one of the deadliest diseases in human history. In October 2021, the World Health Organization recommended the first one ever shown to work, after pilot programs in Ghana, Kenya and Malawi reached over a million children with strong results. Countries across sub-Saharan Africa have since begun adding it to routine childhood immunizations. A disease that has haunted humanity forever finally has a vaccine against it.
+  - title: Gene editing was used to functionally cure a genetic disease for the first time
+    url: "https://www.statnews.com/2023/12/08/fda-approves-casgevy-crispr-based-medicine-for-treatment-of-sickle-cell-disease/"
+    source: STAT News
+    label: science
+    summary: Sickle cell disease causes lifelong pain and hospital stays for hundreds of thousands of people, most of them of African descent. In December 2023, the FDA approved Casgevy, a treatment that uses the gene-editing tool CRISPR to switch a patient's own blood stem cells to make healthy blood cells instead. In trials, it eliminated the disease's excruciating pain crises for most patients who received it. It was the first CRISPR-based medicine ever approved anywhere, turning a decade of gene-editing research into an actual cure.
+  - title: Scientists detected ripples in space itself, a century after Einstein predicted them
+    url: "https://www.jpl.nasa.gov/edu/resources/teachable-moment/gravitational-waves-detected-for-the-first-time/"
+    source: NASA/JPL
+    label: science
+    summary: In 1915, Albert Einstein predicted that massive cosmic events should send ripples through the fabric of space itself, though he doubted anyone would ever detect anything so faint. On September 14, 2015, two giant detectors in the United States picked up exactly that, the signal from two black holes colliding over a billion years ago. It confirmed one of the last untested predictions of general relativity and opened up an entirely new way of observing the universe. A hundred years after the idea, the universe answered back.
+  - title: Scientists finished mapping the entire human genome, ahead of schedule
+    url: "https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genome-project"
+    source: National Human Genome Research Institute
+    label: science
+    summary: In 1990, an international team of scientists set out to read every single letter of human DNA - all three billion of them. Most experts expected it to take fifteen years. It finished in April 2003, two years early and under budget, giving doctors and researchers everywhere a reference map that has since sped up the diagnosis and treatment of thousands of genetic diseases. One of the most ambitious scientific projects ever attempted simply got done.
+  - title: The Hubble Space Telescope is still working, decades after launch
+    url: "https://science.nasa.gov/mission/hubble/"
+    source: NASA
+    label: space
+    summary: Launched in 1990, the Hubble Space Telescope was expected to work for about fifteen years. Decades later, it is still taking pictures, having reshaped how scientists understand the age and scale of the universe along the way. A handful of astronaut repair missions kept it running long past its original expiry date. It remains one of the most productive scientific instruments humans have ever built.
+  - title: The most powerful space telescope ever built is sending back its first pictures of the universe
+    url: "https://science.nasa.gov/mission/webb/"
+    source: NASA
+    label: space
+    summary: The James Webb Space Telescope launched on Christmas Day 2021, folded up like origami to fit inside its rocket, and had to unfold itself perfectly in space with no one there to fix it if anything went wrong. Every single step worked. Since its first images were released in July 2022, it has been showing scientists galaxies as they looked over 13 billion years ago, closer to the beginning of the universe than any telescope had seen before.
+  - title: A spacecraft built to last five years is still talking to Earth after nearly fifty
+    url: "https://science.nasa.gov/mission/voyager/voyager-1/"
+    source: NASA
+    label: space
+    summary: NASA launched Voyager 1 in 1977 on a mission expected to last about five years, just long enough to fly past Jupiter and Saturn. It kept going. In 2012, it became the first human-made object to leave the solar system entirely, and it is still sending data back to Earth from interstellar space today, powered by a generator that has been quietly running since the 1970s. Few machines humans have ever built have outlived their job description by quite this much.
+  - title: Solar power has gotten roughly 90 percent cheaper in just over a decade
+    url: "https://www.pv-magazine.com/2024/09/27/global-average-solar-lcoe-stood-at-0-044-kwh-in-2023-says-irena/"
+    source: PV Magazine, citing IRENA
+    label: technology
+    summary: In 2010, electricity from solar panels cost about 46 cents per kilowatt-hour, far more than coal or gas. By 2023, that had fallen to about 4 cents - a drop of roughly 90 percent, according to the International Renewable Energy Agency. That collapse in cost is why solar panels have gone from a niche, expensive technology to one of the cheapest sources of new electricity in most of the world. It happened faster than almost any energy forecaster predicted.
+  - title: A free encyclopedia that anyone can edit became the largest ever written
+    url: "https://en.wikipedia.org/wiki/Wikipedia:About"
+    source: Wikipedia
+    label: technology
+    summary: When Wikipedia launched in 2001, the idea that volunteers across the internet could write a trustworthy encyclopedia together sounded far-fetched to a lot of people. Two decades and millions of volunteer editors later, it has grown into the largest reference work in history, with articles across hundreds of languages, all free to read. No one owns it and no one gets paid to write it. It is one of the largest genuinely cooperative projects humans have ever built.
+  - title: A simple phone-based payment system lifted hundreds of thousands of families out of poverty
+    url: "https://www.cgap.org/blog/why-does-m-pesa-lift-kenyans-out-of-poverty"
+    source: CGAP
+    label: technology
+    summary: In 2007, Kenya's Safaricom launched M-Pesa, a way to send and save money using nothing more than a basic mobile phone, no bank account required. It spread fast, because it solved a real problem, getting money safely to family in another town, or building up savings without a bank branch nearby. Research later found it had lifted roughly 200,000 Kenyan households out of poverty, with the biggest gains going to women running small businesses. A tool built to move money around ended up changing who could save it.
+  - title: A global treaty banning landmines cut casualties dramatically
+    url: "https://disarmament.unoda.org/en/our-work/conventional-arms/anti-personnel-landmines-convention"
+    source: UN Office for Disarmament Affairs
+    label: peace
+    summary: Landmines used to kill or maim tens of thousands of people a year, long after the wars that planted them had ended. In 1997, over a hundred countries signed the Ottawa Treaty, agreeing to stop making, using and stockpiling them, and to clear the ones already in the ground. More than 40 million stockpiled mines have since been destroyed, and annual casualties have fallen by roughly three-quarters. A treaty that many doubted could work has spent over two decades quietly proving that it does.
+  - title: One country built nuclear weapons, then chose to take them apart itself
+    url: "https://www.icanw.org/south_africa_from_nuclear_armed_state_to_disarmament_hero"
+    source: International Campaign to Abolish Nuclear Weapons
+    label: peace
+    summary: In the 1980s, South Africa secretly built six nuclear weapons. As apartheid ended in the early 1990s, the government made a choice no country has made before or since, it dismantled every one of them, voluntarily, and let international inspectors confirm it by 1994. South Africa then joined the treaty against nuclear weapons, as a country with none. It remains the only nation in history to build a nuclear arsenal and then give it up entirely.
+  - title: A peace agreement ended thirty years of violence in Northern Ireland
+    url: "https://www.cfr.org/backgrounders/moving-past-troubles-future-northern-ireland-peace"
+    source: Council on Foreign Relations
+    label: peace
+    summary: For three decades, sectarian violence known as the Troubles killed more than 3,500 people in Northern Ireland. In April 1998, after years of painstaking negotiation, the Good Friday Agreement created a power-sharing government and a path to lay down arms. Voters on both sides of the Irish border approved it overwhelmingly. More than 25 years later, the large-scale violence has not returned, and a generation has grown up never having known the conflict firsthand.
+  - title: A small country abolished its army and invested in schools instead
+    url: "https://www.futurepolicy.org/peace-and-security/military-spending/costa-ricas-abolition-of-the-army/"
+    source: World Future Council
+    label: government
+    summary: In 1948, Costa Rica's government made an unusual choice, it abolished its military entirely and wrote that decision into its constitution. Money that would have gone to an army has instead gone toward public education and healthcare for over 75 years since. Costa Rica now consistently ranks among the happiest and longest-living countries on Earth. It remains a rare, working example of a country choosing to invest in its people over its weapons.
+  - title: A massive rebuilding plan helped Europe recover from World War II faster than expected
+    url: "https://history.state.gov/milestones/1945-1952/marshall-plan"
+    source: US Department of State, Office of the Historian
+    label: government
+    summary: After World War II left much of Europe's economy in ruins, the United States committed roughly 13 billion dollars, a huge sum at the time, to help rebuild it. The Marshall Plan funded factories, farms and infrastructure across more than a dozen countries between 1948 and 1952. Historians widely credit it with sparking the fast industrial recovery that followed, and General George Marshall won the Nobel Peace Prize for the effort. It remains one of the most successful reconstruction programs in modern history.
+  - title: Sweden set a goal of zero road deaths, and got remarkably close
+    url: "https://smartcitysweden.com/best-practice/408/vision-zero-reducing-road-traffic-casualties-and-injuries/"
+    source: Smart City Sweden
+    label: government
+    summary: In 1997, Sweden adopted Vision Zero, a road safety policy built on one blunt idea, no one should be killed or seriously hurt just from using the road, and if the road design allows it to happen, the road design should change. Sweden rebuilt junctions, added barriers, and reworked speed limits around that principle for decades. Road deaths have been cut by roughly half since, even as traffic has grown, giving Sweden some of the safest roads in the world. A country decided a number most places treat as inevitable did not have to be.
+  - title: Astronauts from rival nations have shared a home in orbit for 25 straight years
+    url: "https://www.nasa.gov/international-space-station/"
+    source: NASA
+    label: world
+    summary: Since November 2000, the International Space Station has never once been empty, someone has been living and working aboard it, continuously, for 25 years and counting. It is built and run jointly by the space agencies of the United States, Russia, Europe, Japan and Canada, nations that have not always gotten along on the ground. Nearly 300 astronauts from around the world have called it home along the way. Even when countries disagree about almost everything else, this one project has kept going.
+  - title: Nearly every country on Earth agreed on a basic list of human rights
+    url: "https://www.un.org/en/about-us/universal-declaration-of-human-rights"
+    source: United Nations
+    label: world
+    summary: After the devastation of the Second World War, the newly formed United Nations set out to write down, for the first time, the rights every person should be entitled to just by being human. Delegates from 18 countries, chaired by Eleanor Roosevelt, spent two years drafting it. On December 10, 1948, the UN General Assembly adopted the Universal Declaration of Human Rights with not a single vote against it. It has since been translated into more languages than any other document in history.
+  - title: An entire continent was set aside for peace and science, and it has stayed that way
+    url: "https://www.bas.ac.uk/about/antarctica/the-antarctic-treaty/"
+    source: British Antarctic Survey
+    label: world
+    summary: In 1959, twelve countries that had been quarrelling over territorial claims in Antarctica signed a treaty instead, no military bases, no weapons testing, and open sharing of scientific research across the entire continent. It came into force in 1961 and has now been joined by more than 50 nations. The treaty has held for more than six decades without a single military conflict on the continent. It is proof that a whole continent can be shared instead of fought over, if enough countries actually decide to try.
