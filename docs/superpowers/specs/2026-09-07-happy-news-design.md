@@ -336,32 +336,59 @@ year. A non-issue indefinitely. Layer 3 only compares against the last 18 months
 
 ### 4.3 curate.py — invoking the model
 
-The `claude` CLI is invoked headless as a subprocess. Verified working shape on this
-machine (`C:\Users\kaimo\.local\bin\claude.exe`):
+The `claude` CLI is invoked headless as a subprocess. **This exact invocation is
+measured and verified on this machine** (`C:\Users\kaimo\.local\bin\claude.exe`):
 
 ```
-claude -p <prompt-from-stdin-or-arg>
+claude -p <prompt-from-file>
        --output-format json
        --model sonnet
+       --restricted
+       --strict-mcp-config
        --disallowed-tools "*"
+       --system-prompt <the editorial rulebook>
 ```
+
+**Every flag is load-bearing. Measured, not assumed:**
+
+| Invocation | Input tokens | Notional cost | Output |
+|---|---|---|---|
+| Plain `-p` | **~51,000** | $0.066 | Valid |
+| `+ --disallowed-tools --strict-mcp-config` | ~11,500 | $0.039 | **Malformed, plus unrelated prose** |
+| `+ --restricted --system-prompt` | **339** | **$0.0019** | **Clean, valid JSON** |
+
+- `--restricted` ignores user, project and local settings files. On this machine those
+  inject a `SessionStart` hook into every headless run; in the middle test the model
+  noticed it, wrote a paragraph about it, and then emitted invalid JSON. `--restricted`
+  removes the cause. It also strips the command- and code-running tools, which is the
+  correct security posture for a job that feeds untrusted RSS text to a model.
+- `--system-prompt` **replaces** the default system prompt rather than appending to it.
+  This is where the ~50,000 tokens go, and it is where the editorial rulebook belongs.
+- `--bare` looks like the right flag and is **not usable**: it reads `ANTHROPIC_API_KEY`
+  only and never touches the OAuth session, so it cannot run on the subscription.
+
+**Cost at real prompt size** (~9,400 in / ~700 out): roughly **$0.03–0.04 per run, about
+$3/month notional** against the subscription allowance. The naive invocation would have
+cost roughly ten times that in subscription usage for identical output.
 
 `--output-format json` returns an envelope, confirmed by live test:
 
 ```json
 {"type":"result","subtype":"success","is_error":false,"result":"<the model's text>",
- "session_id":"...","num_turns":1,"total_cost_usd":0,"usage":{...}}
+ "session_id":"...","num_turns":1,"total_cost_usd":0.0019,"usage":{...}}
 ```
 
-`curate.py` therefore does three things in order: parse the envelope, check
-`is_error` (the CLI exits non-zero and sets this on auth failure — see §8), then parse
-the model's JSON out of `result`.
+`curate.py` therefore does three things in order: parse the envelope, check `is_error`
+(the CLI exits non-zero and sets this on auth failure — see §8), then extract the JSON
+from `result`. **Extraction must be defensive** — scan for the first balanced `[...]`
+rather than assuming the whole of `result` is JSON. The middle test above proves the
+model can prepend prose even when told not to.
 
 - **Model:** `sonnet`. Selection and short summarisation do not need Opus, and this runs
   ~90 times a month against a shared subscription budget.
 - **Tools disabled.** The model is given text and asked for text. It must not read
-  files, run commands, or search. This is enforced with `--disallowed-tools`, not
-  requested in the prompt.
+  files, run commands, or search. Enforced by `--restricted` and `--disallowed-tools`,
+  not requested in the prompt.
 - **Input:** the editorial rulebook, the last 60 published headlines, and ~80 surviving
   candidates (title, source, publication time, feed summary truncated to 300
   characters). Passed via a temp file rather than a command-line argument, because the
@@ -636,7 +663,7 @@ publicly readable. That is acceptable: no secrets live in the repository.
 |---|---|
 | GitHub Pages hosting | $0 |
 | Storage | $0 |
-| Model usage | $0 in cash — consumes the existing Claude subscription's usage allowance, shared with other work on this machine |
+| Model usage | $0 in cash — consumes the existing Claude subscription's usage allowance, shared with other work on this machine. Measured at roughly $0.03–0.04 notional per run, about $3/month, using the verified invocation in §4.3 |
 | Maintenance | Occasional tuning of `editorial.yaml`; re-authenticating the CLI if the session lapses |
 
 Reconsider the GitHub Actions + API key route (~$1–4/month) if missed runs or auth
@@ -646,8 +673,9 @@ lapses prove annoying in practice. §2 keeps that move cheap by design.
 
 ## 12. Prerequisites before implementation
 
-1. **Sign the CLI in.** Run `claude` in a terminal and complete sign-in; confirm with
-   `cli.py doctor` once it exists. Blocking — nothing works until this is done.
+1. ~~**Sign the CLI in.**~~ **Done, verified 2026-09-07** — a live `claude -p` round-trip
+   returned `is_error: false` with valid output. `cli.py doctor` will re-check this on
+   demand, since the session can lapse again (§7).
 2. **Create the public repository** `TheInsideRip/happy-news` with Pages enabled on
    branch `main`, folder `/`. Awaiting explicit go-ahead; nothing will be created on
    GitHub without it.
