@@ -12,14 +12,22 @@ class PublishError(RuntimeError):
     pass
 
 
-def _run(args: list[str], cwd: Path) -> tuple[int, str]:
+def run_git(args: list[str], cwd: Path) -> tuple[int, str]:
+    """Run a git subprocess and capture combined stdout/stderr. Public so
+    other modules (cli.py's `doctor` command) can run one-off git checks
+    without reaching into a private helper."""
     completed = subprocess.run(args, cwd=str(cwd), capture_output=True,
                                text=True, encoding="utf-8", timeout=120)
     return completed.returncode, (completed.stdout or "") + (completed.stderr or "")
 
 
+# Backward-compatible private alias -- push() and any other in-module caller
+# may keep using the old name.
+_run = run_git
+
+
 def push(root: Path, message: str, *, runner=None) -> None:
-    run = runner or _run
+    run = runner or run_git
     root = Path(root)
 
     run(["git", "add", *TRACKED], root)
