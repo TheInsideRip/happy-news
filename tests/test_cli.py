@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import inspect
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -194,6 +194,115 @@ def test_run_publishes_a_tier1_story_end_to_end(monkeypatch, tmp_path):
     assert len(push_calls) == 1
     assert push_calls[0][0] == root
     assert not notify_calls  # tier 1, a story was found: no alert needed
+
+
+# ---------------------------------------------------------------------------
+# Fix round 1, finding 1: a failed push must not leave the edition file
+# looking published, or the next run in the same window silently no-ops
+# via clock.already_published() instead of genuinely retrying.
+# ---------------------------------------------------------------------------
+
+
+def test_a_failed_push_does_not_block_a_retry_in_the_same_window(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    _quiet_notify(monkeypatch)
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb")
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    first_push_calls = []
+
+    def failing_push(root, message, **kwargs):
+        first_push_calls.append(message)
+        raise publish.PublishError("push failed after rebase: simulated network failure")
+
+    monkeypatch.setattr(cli.publish, "push", failing_push)
+
+    # First run: the ladder finds a story and the page validates, but the
+    # push to git fails (network down, remote rejected it, whatever).
+    assert cli.main(["run", "--root", str(root)]) == 1
+    assert len(first_push_calls) == 1
+
+    # Nothing that failed may leave a trace that makes the slot look done.
+    editions_dir = root / "data" / "editions"
+    from happy_news import clock
+    assert clock.already_published(editions_dir, date(2026, 9, 7), "morning") is False
+
+    # The dedup memory is append-only and absolute -- a story that never
+    # reached the page must not be permanently burned.
+    seen_path = root / "data" / "seen.jsonl"
+    assert not seen_path.exists() or seen_path.read_text(encoding="utf-8").strip() == ""
+
+    health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
+    assert health["consecutive_failures"] == 1
+    assert health["last_success"] is None
+
+    # Second run, same window: must genuinely retry (fetch again, pick
+    # again, push again) rather than exiting quietly with "already published".
+    second_push_calls = _recording_push(monkeypatch)
+
+    assert cli.main(["run", "--root", str(root)]) == 0
+    assert len(second_push_calls) == 1
+
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    assert "Turtles recover" in index_html
+
+    edition = json.loads((editions_dir / "2026-09-07.json").read_text(encoding="utf-8"))
+    assert edition["slots"]["morning"]["stories"][0]["title"] == "Turtles recover"
+
+    seen_lines = seen_path.read_text(encoding="utf-8").strip().splitlines()
+    assert len(seen_lines) == 1
+
+    health = json.loads((root / "data" / "health.json").read_text(encoding="utf-8"))
+    assert health["consecutive_failures"] == 0
+    assert health["last_success"] is not None
+
+
+# ---------------------------------------------------------------------------
+# Fix round 1, finding 2: health.record_success() must not run before
+# publish.push() -- otherwise a failed push's failure count restarts at 1
+# instead of correctly extending whatever streak was already running.
+# ---------------------------------------------------------------------------
+
+
+def test_a_failed_push_correctly_extends_the_consecutive_failure_streak(monkeypatch, tmp_path):
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.clock, "now_local", lambda: datetime(2026, 9, 7, 8, 30, tzinfo=ET))
+    notify_calls = _quiet_notify(monkeypatch)
+
+    # Two failures already on record from earlier runs today.
+    health_path = root / "data" / "health.json"
+    health_path.parent.mkdir(parents=True)
+    health_path.write_text(json.dumps({
+        "consecutive_failures": 2, "last_success": None,
+        "failures": [{"at": "x", "reason": "boom"}, {"at": "y", "reason": "boom"}],
+        "droughts": [], "tiers": [],
+    }), encoding="utf-8")
+
+    now_utc = datetime.now(timezone.utc)
+    candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
+                          now_utc - timedelta(hours=2), "blurb")
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
+    monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
+
+    def failing_push(root, message, **kwargs):
+        raise publish.PublishError("push failed after rebase: simulated network failure")
+
+    monkeypatch.setattr(cli.publish, "push", failing_push)
+
+    assert cli.main(["run", "--root", str(root)]) == 1
+
+    health = json.loads(health_path.read_text(encoding="utf-8"))
+    # If record_success() had run before the push (resetting the counter to
+    # 0) and only then the push failed, this would read back as 1, not 3,
+    # and the "3 in a row" alarm below would never fire.
+    assert health["consecutive_failures"] == 3
+    assert health["last_success"] is None
+    assert any("3 in a row" in title for title, _ in notify_calls)
 
 
 # ---------------------------------------------------------------------------
@@ -542,6 +651,40 @@ def test_doctor_fails_when_git_check_fails(monkeypatch, tmp_path):
     monkeypatch.setattr(cli.publish, "run_git", lambda args, cwd: (1, "fatal: not a git repository"))
 
     assert cli.main(["doctor", "--root", str(root)]) == 1
+
+
+# ---------------------------------------------------------------------------
+# Fix round 1, finding 3: doctor must report a missing executable as a
+# failed check, not crash with a raw traceback.
+# ---------------------------------------------------------------------------
+
+
+def test_doctor_reports_missing_claude_executable_instead_of_crashing(monkeypatch, tmp_path, capsys):
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([], []))
+
+    def missing_exe(**k):
+        raise FileNotFoundError(2, "No such file or directory", r"C:\Users\kaimo\.local\bin\claude.exe")
+
+    monkeypatch.setattr(cli.curate, "check_auth", missing_exe)
+    monkeypatch.setattr(cli.publish, "run_git", lambda args, cwd: (0, "## main"))
+
+    assert cli.main(["doctor", "--root", str(root)]) == 1
+    assert "claude cli: failed" in capsys.readouterr().out.lower()
+
+
+def test_doctor_reports_missing_git_executable_instead_of_crashing(monkeypatch, tmp_path, capsys):
+    root = _make_root(tmp_path)
+    monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([], []))
+    monkeypatch.setattr(cli.curate, "check_auth", lambda **k: None)
+
+    def missing_git(args, cwd):
+        raise FileNotFoundError(2, "No such file or directory", "git")
+
+    monkeypatch.setattr(cli.publish, "run_git", missing_git)
+
+    assert cli.main(["doctor", "--root", str(root)]) == 1
+    assert "git: failed" in capsys.readouterr().out.lower()
 
 
 # ---------------------------------------------------------------------------
