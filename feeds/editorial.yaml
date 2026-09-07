@@ -5,6 +5,7 @@ banned_terms:
   - electoral
   - ballot
   - poll
+  - polls   # the filter matches whole words, so the plural needs its own entry
   - polling
   - campaign
   - candidate

@@ -42,3 +42,28 @@ def test_matching_is_case_insensitive():
 def test_unknown_label_falls_back_to_world():
     assert editorial.normalise_label("Animals", LABELS) == "animals"
     assert editorial.normalise_label("gastronomy", LABELS) == "world"
+
+
+# ---------------------------------------------------------------------------
+# The filter matches on whole words (\bterm\b), so every plural that appears
+# in real headlines needs its own entry. "polls" is the commoner form.
+# ---------------------------------------------------------------------------
+
+
+def _live_editorial():
+    from happy_news import config
+    return config.load(config.PACKAGE_ROOT).editorial
+
+
+def test_the_live_config_blocks_the_plural_polls():
+    cfg = _live_editorial()
+
+    def live_blocked(text):
+        return editorial.politics_blocked(text, cfg["banned_terms"],
+                                          cfg["outcome_overrides"])
+
+    assert live_blocked("Polls close as the country votes")
+    assert live_blocked("Exit polls suggest a record turnout")
+    # the singular still works, and a genuine good-news headline is untouched
+    assert live_blocked("A new poll shows falling trust")
+    assert not live_blocked("Sea turtle nests hit a record along a protected coastline")
