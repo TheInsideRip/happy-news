@@ -1,0 +1,13 @@
+feeds:
+  - {name: Positive News,        url: "https://www.positive.news/feed/",                          priority: true}
+  - {name: Good News Network,    url: "https://www.goodnewsnetwork.org/feed/",                    priority: true}
+  - {name: Reasons to be Cheerful, url: "https://reasonstobecheerful.world/feed/",                priority: true}
+  - {name: BBC Science,          url: "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml", priority: false}
+  - {name: BBC World,            url: "https://feeds.bbci.co.uk/news/world/rss.xml",              priority: false}
+  - {name: Guardian Environment, url: "https://www.theguardian.com/environment/rss",              priority: false}
+  - {name: Guardian Science,     url: "https://www.theguardian.com/science/rss",                   priority: false}
+  - {name: Mongabay,             url: "https://news.mongabay.com/feed/",                           priority: false}
+  - {name: NASA,                 url: "https://www.nasa.gov/news-release/feed/",                   priority: false}
+  - {name: Phys.org,             url: "https://phys.org/rss-feed/",                                priority: false}
+  - {name: ScienceDaily,         url: "https://www.sciencedaily.com/rss/top/science.xml",          priority: false}
+  - {name: Yale E360,            url: "https://e360.yale.edu/feed.rss",                            priority: false}

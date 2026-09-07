@@ -1,0 +1,16 @@
+stories:
+  - title: The ozone layer is on track to fully recover
+    url: "https://www.unep.org/news-and-stories/press-release/ozone-layer-recovery-track-helping-avoid-global-warming-05degc"
+    source: UN Environment Programme
+    label: earth
+    summary: The hole over Antarctica is closing. Scientists expect a full recovery within decades, because in 1987 nearly every country on earth agreed to stop making the chemicals causing it.
+  - title: Guinea worm disease has nearly been wiped out
+    url: "https://www.cartercenter.org/health/guinea_worm/index.html"
+    source: The Carter Center
+    label: health
+    summary: Cases have fallen from 3.5 million a year in the 1980s to a handful. No vaccine was ever needed - just clean water filters and patient, unglamorous work.
+  - title: Humpback whale numbers have recovered from near extinction
+    url: "https://www.noaa.gov/news/humpback-whale-populations-rebound"
+    source: NOAA
+    label: animals
+    summary: Hunted to a few hundred, some populations now number tens of thousands. The whaling ban worked, and it worked faster than anyone predicted.

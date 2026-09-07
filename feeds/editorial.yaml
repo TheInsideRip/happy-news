@@ -1,0 +1,58 @@
+labels: [earth, ocean, animals, agriculture, people, health, science, space, technology, peace, government, world]
+
+banned_terms:
+  - election
+  - electoral
+  - ballot
+  - poll
+  - polling
+  - campaign
+  - candidate
+  - primaries
+  - caucus
+  - midterm
+  - incumbent
+  - approval rating
+  - partisan
+  - filibuster
+  - shutdown
+  - impeach
+  - indict
+  - scandal
+  - subpoena
+  - slams
+  - blasts
+  - rips
+  - hits back
+  - feud
+  - spat
+  - clash
+  - clashes
+  - sues
+  - files suit
+  - Democrat
+  - Democrats
+  - Republican
+  - Republicans
+  - GOP
+  - left-wing
+  - right-wing
+
+outcome_overrides:
+  - court ruled
+  - court upheld
+  - judge ordered
+  - convicted
+  - treaty ratified
+  - agreement signed
+  - law took effect
+  - bill signed into law
+  - settlement reached
+  - ceasefire
+  - peace deal
+  - peace agreement
+  - truce
+  - returned home
+  - aid reached
+  - hostages released
+  - disarmament
