@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Example</title>
+<item>
+  <title>Sea turtle nests hit a record</title>
+  <link>https://example.com/turtles?utm_source=rss</link>
+  <description>Volunteers counted more nests than in any year since the survey began.</description>
+  <pubDate>Mon, 07 Sep 2026 09:12:00 GMT</pubDate>
+</item>
+<item>
+  <title>A town library started lending tools</title>
+  <link>https://example.com/library</link>
+  <description>One donated drill became several hundred items.</description>
+  <pubDate>Sat, 29 Aug 2026 11:00:00 GMT</pubDate>
+</item>
+</channel></rss>
