@@ -1,6 +1,6 @@
-# Satcey Happy News — Design Spec
+# Stacey Happy News — Design Spec
 
-**Date:** 2026-09-07 (revised same day: runtime moved from GitHub Actions to local)
+**Date:** 2026-09-07 (revised: local runtime; one story per timeframe; look approved)
 **Repo:** `TheInsideRip/happy-news` (public) — hosting only
 **Live URL:** `https://theinsiderip.github.io/happy-news/`
 **Runs on:** this Windows machine, via Task Scheduler, using the `claude` CLI
@@ -21,8 +21,8 @@ anywhere. There is no API key and no running cost.
 ### Success criteria
 
 1. The page opens on a phone in under one second and is readable without zooming.
-2. Three sections accumulate over the course of each day; a single check at any hour
-   catches everything published so far that day.
+2. Three sections accumulate over the course of each day, **one story each**; a single
+   check at any hour catches everything published so far that day, with no scrolling.
 3. Over any 30-day window, **no story URL and no story headline ever repeats**.
 4. No story reads as political combat (see §3.3).
 5. When a run fails or is missed, the reader can see the page is stale and the operator
@@ -61,7 +61,7 @@ later as a separate piece of work.
   editorial.py  drop banned-politics candidates (cheap prefilter)
         |
         v
-   curate.py    ~80 candidates -> claude CLI -> 3-5 picks + written summaries
+   curate.py    ~80 candidates -> claude CLI -> 3 ranked picks, 1 published
         |
         v
   editorial.py  hard filter re-applied to the model's output (code, not prompt)
@@ -152,24 +152,33 @@ tuning it requires no code change. The false-positive risk is real and accepted:
 slightly over-eager filter costs us a story, while an under-eager one costs the product
 its whole reason for existing.
 
-### 3.4 Edition size and thin runs
+### 3.4 One story per timeframe
 
-Target **3–5 stories per edition**. Three editions a day at six stories would demand 126
-non-repeating stories a week — far more than the good-news ecosystem produces. Short and
-excellent beats long and padded.
+**Exactly one story per edition. Three a day. No more.**
 
-**Minimum is 3, target is 5.** When a run cannot reach the minimum, it escalates in this
-order and **never lowers the quality bar**:
+This is the most consequential decision in the spec. Three editions at five stories
+would demand 105 non-repeating stories a week, and the good-news ecosystem does not
+produce that — "never repeat" turned it into a hard ceiling rather than a stretch goal.
+At **21 a week** the arithmetic inverts: the same wide net now feeds a far pickier
+filter, the model reads ~80 candidates and returns the single best one, and volume stops
+being the binding constraint. Quality becomes the only thing being optimised.
+
+Two useful side effects: the whole day fits on one phone screen without scrolling, and
+the dedup memory grows at roughly a fifth of the previous rate.
+
+When a run cannot find one qualifying story, it escalates in this order and **never
+lowers the quality bar**:
 
 1. Widen the time window from 24 hours to 72 hours.
 2. Pull from the full feed list rather than the priority subset.
-3. Publish whatever it has. At a count of 1 or 2, attach the quiet one-line note
-   *"A quieter stretch today."* At 3 or more, no note appears.
-4. If it finds **zero** qualifying stories, write nothing to the edition file for that
-   slot and record the reason in the health log (§8). Because the slot stays unfilled,
-   later runs **within the same window** will try again — a quiet 8:00 can still become
-   a good 9:30. If the window closes with the slot still empty, that slot is skipped for
-   the day and the page simply does not gain a section.
+3. If still nothing, write an **empty slot** to the edition file carrying the reason, and
+   record a drought entry in the health log (§8). The page renders that slot with a quiet
+   line — *"A quiet morning. Nothing new made the cut."* — rather than omitting it, so
+   silence is legible rather than looking like a breakage.
+
+An empty slot **does not count as published** for §4.1's purposes. Later runs inside the
+same window still try, so a quiet 8:00 can become a good 9:30 and replace the empty slot.
+Once the window closes, the empty slot stands for the day.
 
 ---
 
@@ -215,8 +224,9 @@ Logic on every run:
 
 1. Compute `now` in `America/New_York`.
 2. If `now` falls in no window, exit 0 — "not a publishing window."
-3. If `data/editions/<today>.json` already contains this slot, exit 0 — "already
-   published."
+3. If `data/editions/<today>.json` already contains this slot **with a story**, exit 0 —
+   "already published." An empty slot recorded during a drought (§3.4) does not count;
+   the run proceeds and may fill it.
 4. Otherwise, publish.
 
 ### 4.2 dedup.py — the "never twice" guarantee
@@ -255,9 +265,9 @@ slip through. This is a known, accepted gap.
 - `tokens` — title lowercased, stopwords and words under three characters removed,
   deduplicated, sorted.
 
-**Growth:** roughly 9–15 stories a day, about 4,000 a year, at ~200 bytes each — under
-1MB per year. A non-issue for a decade. Layer 3 only compares against the last 18
-months; layers 1 and 2 compare against all of history, forever.
+**Growth:** 3 stories a day, about 1,100 a year, at ~200 bytes each — roughly 220KB per
+year. A non-issue indefinitely. Layer 3 only compares against the last 18 months; layers
+1 and 2 compare against all of history, forever.
 
 ### 4.3 curate.py — invoking the model
 
@@ -291,9 +301,12 @@ the model's JSON out of `result`.
   candidates (title, source, publication time, feed summary truncated to 300
   characters). Passed via a temp file rather than a command-line argument, because the
   prompt is far past any safe Windows command-line length.
-- **Output:** a strict JSON array. Per story: `title`, `url`, `source`, `category`,
-  `summary` (2–3 warm sentences in plain English, no jargon), `why_good` (one line,
-  recorded for auditing, not displayed).
+- **Output:** a strict JSON array of **three ranked candidates**, best first. Per story:
+  `title`, `url`, `source`, `category`, `summary` (2–3 warm sentences in plain English,
+  no jargon), `why_good` (one line, recorded for auditing, not displayed). Only one is
+  published — the first that survives the §3.3 hard filter and a final dedup check.
+  Asking for three costs almost nothing and stops a single post-filter rejection from
+  wasting the whole run.
 - **Retry:** one retry on non-zero exit or unparseable output. A second failure ends the
   run and triggers an alert (§8).
 - **Timeout:** 180 seconds per attempt; a hung CLI must not leave a task running all day.
@@ -304,25 +317,52 @@ the model's JSON out of `result`.
 
 ### 4.4 render.py — the page
 
-`index.html` shows **today**, newest section on top:
+Approved look: **"Scute shell, garden-bed spine"** — see `design/scute-garden.html`,
+which is the visual reference the implementation must match.
+
+`index.html` shows **today**, newest timeframe on top, one story each:
 
 ```
-Satcey Happy News            Sunday, September 7
+Stacey Happy News
+────
+8:00 · 2:00 · [7:00]          <- current slot marked
+Last updated 7:04 pm
 
-  EVENING  · 7:04 pm
-    [category] Headline linking out
-    Source · 2 hours ago
-    Two or three warm sentences.
-    ...
+ ❀ EVENING  7:04 pm
+ │  ╭──────────────────────────╮
+ ┣──│ GOVERNMENT               │   <- "scute" plate: a turtle
+ │  │ Headline, linking out    │      shell plate, ridge down
+ │  │ AP · 3 hours ago         │      the middle
+ │  │ Two or three sentences.  │
+ │  ╰──────────────────────────╯
+ ❀ AFTERNOON  2:11 pm
+ │  ╭──────────────────────────╮
+ ┣──│ ...                      │
+ │  ╰──────────────────────────╯
+ ❀ MORNING  8:03 am
+    ╰──────────────────────────╯
 
-  AFTERNOON · 2:11 pm
-    ...
-
-  MORNING · 8:03 am
-    ...
-
-  Last updated 7:04 pm · Archive
+ Archive
 ```
+
+Structural elements each encode something real rather than decorating: the **stem** is
+the day, a **bloom** opens each timeframe, a **leaf** joins each story to the day, and
+the **plate** is a turtle scute. Turtles and flowers sit in the background at low opacity.
+
+**Design tokens** (light, then dark):
+
+| Role | Light | Dark |
+|---|---|---|
+| Ground | `#EFF3E7` | `#132019` |
+| Plate | `#E4ECD8` | `#1D2C23` |
+| Plate edge | `#CBDAB8` | `#31493A` |
+| Ink | `#16291D` | `#E7EFE3` |
+| Muted | `#5D7566` | `#93A996` |
+| Accent (berry) | `#7B2D4E` | `#EE93AC` |
+| Stem | `#6E9159` | `#6C9A5C` |
+
+**Type:** Fraunces (masthead and headlines), Newsreader (story text), Alegreya Sans
+(labels, times, sources). Loaded from Google Fonts with real fallback stacks.
 
 - **The "Last updated" line is required, not decorative.** It is the reader's only
   signal that the machine is healthy. If the page is stale, it says so plainly rather
@@ -379,7 +419,9 @@ data/
 }
 ```
 
-`note` carries the quiet "A quieter stretch today." line when a run publishes short.
+`stories` holds exactly one entry, or is empty during a drought — in which case `note`
+carries the quiet line the page displays (§3.4) and the slot does not count as published
+(§4.1).
 
 ---
 

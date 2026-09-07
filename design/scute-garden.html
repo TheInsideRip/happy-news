@@ -1,0 +1,321 @@
+<title>Stacey Happy News</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Alegreya+Sans:wght@400;500;700&display=swap">
+
+<style>
+/* ─── gallery chrome ───────────────────────────────────────────── */
+:root{
+  --page:#F3F6F0; --panel:#FFFFFF; --c-ink:#17251C; --c-soft:#5B6F61;
+  --c-line:#DBE3D5; --c-accent:#2E6B4E; --c-shadow:rgba(23,37,28,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#101713; --panel:#18201A; --c-ink:#E8F0E7; --c-soft:#98AC9C;
+    --c-line:#28342A; --c-accent:#7EC3A2; --c-shadow:rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --page:#101713; --panel:#18201A; --c-ink:#E8F0E7; --c-soft:#98AC9C;
+  --c-line:#28342A; --c-accent:#7EC3A2; --c-shadow:rgba(0,0,0,.45);
+}
+body{
+  background:var(--page); color:var(--c-ink);
+  font-family:"Alegreya Sans","Segoe UI",system-ui,sans-serif;
+  line-height:1.55; padding:2.5rem 1.25rem 4rem;
+}
+.wrap{max-width:1180px;margin:0 auto;}
+.masthead{max-width:44rem;margin:0 auto 2.5rem;}
+.eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--c-accent);font-weight:700;margin:0 0 .6rem;}
+.masthead h1{
+  font-family:"Fraunces",Georgia,serif;font-weight:700;
+  font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:0 0 .7rem;
+  text-wrap:balance;letter-spacing:-.01em;
+}
+.masthead p{margin:0 0 .5rem;color:var(--c-soft);font-size:1.02rem;max-width:38rem;}
+.sample-note{
+  display:inline-block;margin-top:.9rem;padding:.4rem .75rem;
+  border:1px solid var(--c-line);border-radius:2px;
+  font-size:.78rem;color:var(--c-soft);background:var(--panel);
+}
+.sample-note strong{color:var(--c-ink);font-weight:700;}
+.grid{display:grid;gap:2.25rem;grid-template-columns:1fr;justify-items:center;}
+@media (min-width:900px){.grid{grid-template-columns:repeat(3,1fr);align-items:start;}}
+.frame{display:flex;flex-direction:column;gap:.8rem;max-width:360px;width:100%;}
+.f-name{font-family:"Fraunces",Georgia,serif;font-size:1.1rem;font-weight:700;margin:0;}
+.f-why{margin:0;font-size:.88rem;color:var(--c-soft);}
+.phone{
+  position:relative;width:100%;aspect-ratio:340/680;border-radius:26px;
+  overflow:hidden;box-shadow:0 14px 34px -10px var(--c-shadow);border:1px solid var(--c-line);
+}
+.closing{max-width:44rem;margin:3rem auto 0;padding-top:1.75rem;border-top:1px solid var(--c-line);}
+.closing h2{font-family:"Fraunces",serif;font-size:1.15rem;margin:0 0 .6rem;}
+.closing p{margin:0 0 .7rem;color:var(--c-soft);font-size:.95rem;}
+.closing b{color:var(--c-ink);}
+
+/* ═══ THE PAGE ITSELF ══════════════════════════════════════════ */
+.sn{
+  --g:#EFF3E7; --pl:#E4ECD8; --ed:#CBDAB8; --ink:#16291D; --sf:#5D7566;
+  --br:#7B2D4E; --st:#6E9159; --bl:#C25A7C; --keel:#CBDAB8;
+  position:absolute;inset:0;background:var(--g);overflow:hidden;
+}
+.sn.dark{
+  --g:#132019; --pl:#1D2C23; --ed:#31493A; --ink:#E7EFE3; --sf:#93A996;
+  --br:#EE93AC; --st:#6C9A5C; --bl:#EE93AC; --keel:#31493A;
+}
+.sn-bg{position:absolute;inset:0;pointer-events:none;}
+.sn-bg svg{position:absolute;}
+.sn-inner{position:relative;height:100%;padding:22px 18px 0;box-sizing:border-box;}
+
+.sn-title{
+  font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.6rem;
+  line-height:1.04;margin:0;color:var(--ink);letter-spacing:-.015em;
+}
+.sn-rule{height:2px;background:var(--br);width:32px;margin:9px 0 9px;}
+.sn-times{
+  display:flex;align-items:center;gap:6px;font-family:"Alegreya Sans",sans-serif;
+  font-size:.62rem;font-weight:700;letter-spacing:.13em;color:var(--br);
+}
+.sn-times i{color:var(--ed);font-style:normal;}
+.sn-times .on{background:var(--br);color:var(--g);padding:2px 6px;border-radius:2px;letter-spacing:.1em;}
+.sn-updated{
+  font-family:"Alegreya Sans",sans-serif;font-size:.62rem;color:var(--sf);
+  margin:7px 0 20px;letter-spacing:.02em;
+}
+
+/* the garden-bed stem, carrying the day */
+.day{position:relative;padding-left:26px;}
+.day::before{content:"";position:absolute;left:7px;top:9px;bottom:18px;width:2px;background:var(--st);opacity:.55;}
+.slot{position:relative;margin:0 0 20px;}
+.slot:last-child{margin-bottom:0;}
+.slot-label{
+  font-family:"Alegreya Sans",sans-serif;font-size:.61rem;font-weight:700;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--sf);
+  margin:0 0 10px;display:flex;align-items:baseline;gap:7px;
+}
+.slot-label b{color:var(--ink);font-weight:700;}
+.bloom{position:absolute;left:-26px;top:-4px;width:18px;height:18px;color:var(--bl);}
+
+/* the scute plate */
+.plate{
+  position:relative;background:var(--pl);border:1px solid var(--ed);
+  border-radius:17px 17px 13px 13px / 22px 22px 11px 11px;
+  padding:13px 14px 14px;
+}
+.plate::before{
+  content:"";position:absolute;left:50%;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(var(--keel),transparent);opacity:.8;
+}
+.leaf{position:absolute;left:-20px;top:17px;width:16px;height:10px;color:var(--st);}
+.cat{
+  font-family:"Alegreya Sans",sans-serif;font-size:.56rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:700;color:var(--br);margin:0;
+}
+.hl{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.02rem;
+  line-height:1.2;margin:6px 0 5px;color:var(--ink);text-wrap:balance;
+}
+.meta{font-family:"Alegreya Sans",sans-serif;font-size:.63rem;color:var(--sf);margin:0;letter-spacing:.02em;}
+.sum{
+  font-family:"Newsreader",Georgia,serif;font-size:.81rem;line-height:1.5;
+  color:var(--ink);opacity:.86;margin:8px 0 0;
+}
+.waiting{
+  font-family:"Alegreya Sans",sans-serif;font-size:.66rem;color:var(--sf);
+  font-style:italic;margin:0;padding:2px 0 0;
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="turtle" viewBox="0 0 100 80">
+    <ellipse cx="70" cy="21" rx="9" ry="6" transform="rotate(-34 70 21)"/>
+    <ellipse cx="70" cy="59" rx="9" ry="6" transform="rotate(34 70 59)"/>
+    <ellipse cx="27" cy="22" rx="8" ry="5.5" transform="rotate(34 27 22)"/>
+    <ellipse cx="27" cy="58" rx="8" ry="5.5" transform="rotate(-34 27 58)"/>
+    <ellipse cx="16" cy="40" rx="6" ry="3"/>
+    <ellipse cx="84" cy="40" rx="9.5" ry="7"/>
+    <ellipse cx="48" cy="40" rx="30" ry="23"/>
+    <g fill="none" stroke="#fff" stroke-width="1.7" opacity=".45">
+      <ellipse cx="48" cy="40" rx="8" ry="7"/>
+      <ellipse cx="48" cy="24" rx="7" ry="5.5"/>
+      <ellipse cx="48" cy="56" rx="7" ry="5.5"/>
+      <ellipse cx="30" cy="40" rx="6.5" ry="7"/>
+      <ellipse cx="66" cy="40" rx="6.5" ry="7"/>
+    </g>
+  </symbol>
+  <symbol id="flower" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="27" rx="11.5" ry="19"/>
+    <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(72 50 50)"/>
+    <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(144 50 50)"/>
+    <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(216 50 50)"/>
+    <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(288 50 50)"/>
+    <circle cx="50" cy="50" r="8.5" fill="#fff" opacity=".5"/>
+  </symbol>
+  <symbol id="leaf" viewBox="0 0 100 60">
+    <path d="M2 30 C 30 -4, 72 -4, 98 30 C 72 64, 30 64, 2 30 Z"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="eyebrow">Chosen direction · Scute shell, garden-bed spine</p>
+    <h1>Stacey Happy News</h1>
+    <p>Shell-plate cards from Scute, hung off Garden Bed's growing stem. One story per timeframe, so the whole day fits on one screen with no scrolling.</p>
+    <p>The stem carries the day; a bloom opens each timeframe; a leaf connects it to its story. Newest sits on top, so what she hasn't seen is the first thing she reads.</p>
+    <p class="sample-note"><strong>Sample stories only.</strong> Placeholder headlines written to test the layout — not real news.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ══ 8:05 AM ══ -->
+    <div class="frame">
+      <h2 class="f-name">8:05 am</h2>
+      <p class="f-why">One story is the entire page. Nothing to scroll, nothing to skip.</p>
+      <div class="phone">
+        <div class="sn">
+          <div class="sn-bg" aria-hidden="true">
+            <svg width="150" height="120" viewBox="0 0 100 80" fill="#3E5A44" opacity=".14" style="bottom:96px;right:-42px;transform:rotate(9deg) scaleX(-1)"><use href="#turtle"/></svg>
+            <svg width="58" height="58" viewBox="0 0 100 100" fill="#7B2D4E" opacity=".11" style="top:210px;right:16px"><use href="#flower"/></svg>
+            <svg width="34" height="34" viewBox="0 0 100 100" fill="#6E9159" opacity=".16" style="bottom:56px;left:20px"><use href="#flower"/></svg>
+          </div>
+          <div class="sn-inner">
+            <h1 class="sn-title">Stacey<br>Happy News</h1>
+            <div class="sn-rule"></div>
+            <div class="sn-times"><span class="on">8:00</span><i>·</i><span>2:00</span><i>·</i><span>7:00</span></div>
+            <p class="sn-updated">Last updated 8:03 am</p>
+
+            <div class="day">
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Morning <b>8:03 am</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">Environment</p>
+                  <p class="hl">Sea turtle nests hit a record along a protected coastline</p>
+                  <p class="meta">BBC · 2 hours ago</p>
+                  <p class="sum">Volunteers counted more nests this season than in any year since the survey began. Two decades of quieter beachfront lighting are getting most of the credit, along with a stretch of cooler sand.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 7:04 PM ══ -->
+    <div class="frame">
+      <h2 class="f-name">7:04 pm</h2>
+      <p class="f-why">The finished day. Three stories, newest first, still one screen.</p>
+      <div class="phone">
+        <div class="sn">
+          <div class="sn-bg" aria-hidden="true">
+            <svg width="140" height="112" viewBox="0 0 100 80" fill="#3E5A44" opacity=".13" style="top:250px;left:-40px;transform:rotate(-11deg)"><use href="#turtle"/></svg>
+            <svg width="104" height="83" viewBox="0 0 100 80" fill="#3E5A44" opacity=".11" style="bottom:8px;right:-26px;transform:rotate(8deg) scaleX(-1)"><use href="#turtle"/></svg>
+            <svg width="46" height="46" viewBox="0 0 100 100" fill="#7B2D4E" opacity=".10" style="top:150px;right:14px"><use href="#flower"/></svg>
+            <svg width="30" height="30" viewBox="0 0 100 100" fill="#6E9159" opacity=".15" style="bottom:190px;right:24px"><use href="#flower"/></svg>
+          </div>
+          <div class="sn-inner">
+            <h1 class="sn-title">Stacey<br>Happy News</h1>
+            <div class="sn-rule"></div>
+            <div class="sn-times"><span>8:00</span><i>·</i><span>2:00</span><i>·</i><span class="on">7:00</span></div>
+            <p class="sn-updated">Last updated 7:04 pm</p>
+
+            <div class="day">
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Evening <b>7:04 pm</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">Government</p>
+                  <p class="hl">A city finished replacing its lead pipes a year early</p>
+                  <p class="meta">AP · 3 hours ago</p>
+                  <p class="sum">Every service line in the system has now been swapped out. The work wrapped up ahead of schedule and came in under the original budget.</p>
+                </article>
+              </div>
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Afternoon <b>2:11 pm</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">People</p>
+                  <p class="hl">A town's library started lending tools, and never stopped</p>
+                  <p class="meta">Positive News · 5 hours ago</p>
+                  <p class="sum">One donated drill and a single shelf became several hundred items, all free to borrow. The longest waiting list is for the extension ladder.</p>
+                </article>
+              </div>
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Morning <b>8:03 am</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">Environment</p>
+                  <p class="hl">Sea turtle nests hit a record along a protected coastline</p>
+                  <p class="meta">BBC · 11 hours ago</p>
+                  <p class="sum">Volunteers counted more nests this season than in any year since the survey began.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ DARK ══ -->
+    <div class="frame">
+      <h2 class="f-name">7:04 pm, dark</h2>
+      <p class="f-why">Same page after sunset. Switches itself with her phone.</p>
+      <div class="phone">
+        <div class="sn dark">
+          <div class="sn-bg" aria-hidden="true">
+            <svg width="140" height="112" viewBox="0 0 100 80" fill="#8FB68F" opacity=".10" style="top:250px;left:-40px;transform:rotate(-11deg)"><use href="#turtle"/></svg>
+            <svg width="104" height="83" viewBox="0 0 100 80" fill="#8FB68F" opacity=".08" style="bottom:8px;right:-26px;transform:rotate(8deg) scaleX(-1)"><use href="#turtle"/></svg>
+            <svg width="46" height="46" viewBox="0 0 100 100" fill="#EE93AC" opacity=".13" style="top:150px;right:14px"><use href="#flower"/></svg>
+            <svg width="30" height="30" viewBox="0 0 100 100" fill="#6C9A5C" opacity=".2" style="bottom:190px;right:24px"><use href="#flower"/></svg>
+          </div>
+          <div class="sn-inner">
+            <h1 class="sn-title">Stacey<br>Happy News</h1>
+            <div class="sn-rule"></div>
+            <div class="sn-times"><span>8:00</span><i>·</i><span>2:00</span><i>·</i><span class="on">7:00</span></div>
+            <p class="sn-updated">Last updated 7:04 pm</p>
+
+            <div class="day">
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Evening <b>7:04 pm</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">Government</p>
+                  <p class="hl">A city finished replacing its lead pipes a year early</p>
+                  <p class="meta">AP · 3 hours ago</p>
+                  <p class="sum">Every service line in the system has now been swapped out. The work wrapped up ahead of schedule and came in under the original budget.</p>
+                </article>
+              </div>
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Afternoon <b>2:11 pm</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">People</p>
+                  <p class="hl">A town's library started lending tools, and never stopped</p>
+                  <p class="meta">Positive News · 5 hours ago</p>
+                  <p class="sum">One donated drill and a single shelf became several hundred items, all free to borrow.</p>
+                </article>
+              </div>
+              <div class="slot">
+                <p class="slot-label"><svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Morning <b>8:03 am</b></p>
+                <article class="plate">
+                  <svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                  <p class="cat">Environment</p>
+                  <p class="hl">Sea turtle nests hit a record along a protected coastline</p>
+                  <p class="meta">BBC · 11 hours ago</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closing">
+    <h2>What one story per timeframe changes</h2>
+    <p>It drops the appetite from <b>126 non-repeating stories a week to 21</b>. That was the number I was most worried about — the good-news world does not produce 126 genuinely good, genuinely new stories a week, and "never repeat" made that a hard ceiling. At 21 it stops being a constraint and starts being a luxury: the same wide net now feeds a much pickier filter, so only the best thing found all morning makes it through.</p>
+    <p>It also means the whole day fits on one screen with no scrolling, and the memory file grows at roughly a quarter of the old rate.</p>
+    <p>Tell me what to adjust — turtle strength, the pink, headline size, or the plate shape — and I'll update the spec and start building.</p>
+  </div>
+
+</div>
