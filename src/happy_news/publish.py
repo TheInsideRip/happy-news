@@ -26,11 +26,31 @@ def run_git(args: list[str], cwd: Path) -> tuple[int, str]:
 _run = run_git
 
 
+def _existing_tracked(root: Path) -> list[str]:
+    """TRACKED paths that actually exist under root, in TRACKED order.
+
+    Real git fails a literal `git add` outright -- exit 128, nothing staged
+    at all, not even paths that do exist -- the moment any one pathspec
+    doesn't match a file. So we must never hand git a path we haven't
+    confirmed exists.
+    """
+    return [p for p in TRACKED if (root / p).exists()]
+
+
 def push(root: Path, message: str, *, runner=None) -> None:
     run = runner or run_git
     root = Path(root)
 
-    run(["git", "add", *TRACKED], root)
+    to_stage = _existing_tracked(root)
+    if not to_stage:
+        raise PublishError(
+            "nothing to stage: none of the tracked paths "
+            f"({', '.join(TRACKED)}) exist under {root}"
+        )
+
+    code, out = run(["git", "add", *to_stage], root)
+    if code != 0:
+        raise PublishError(f"git add failed: {out.strip()}")
 
     code, out = run(["git", "commit", "-m", message], root)
     if code != 0 and "nothing to commit" not in out.lower():

@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -17,12 +19,23 @@ class Health:
     def __init__(self, path: Path):
         self.path = Path(path)
 
+    @staticmethod
+    def _default() -> dict:
+        return {"consecutive_failures": 0, "last_success": None,
+                "failures": [], "droughts": [], "tiers": []}
+
     def _read(self) -> dict:
         if not self.path.exists():
-            return {"consecutive_failures": 0, "last_success": None,
-                    "failures": [], "droughts": [], "tiers": []}
-        with self.path.open(encoding="utf-8") as handle:
-            data = json.load(handle)
+            return self._default()
+        try:
+            with self.path.open(encoding="utf-8") as handle:
+                data = json.load(handle)
+        except (json.JSONDecodeError, OSError, UnicodeDecodeError):
+            # A crash mid-write (or any other on-disk corruption) must
+            # degrade to a fresh start, not take down the run.
+            return self._default()
+        if not isinstance(data, dict):
+            return self._default()
         # Ensure all expected keys exist (for backward compatibility with old files)
         for key in ("failures", "droughts", "tiers"):
             if key not in data:
@@ -41,8 +54,23 @@ class Health:
         for key in ("failures", "droughts", "tiers"):
             data[key] = data[key][-MAX_HISTORY:]
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        with self.path.open("w", encoding="utf-8") as handle:
-            json.dump(data, handle, indent=2)
+        # Write to a temp file in the same directory and rename over the
+        # target so a crash mid-write can never leave a truncated
+        # health.json behind -- os.replace is atomic on both POSIX and
+        # Windows (NTFS) when source and destination share a volume.
+        fd, tmp_name = tempfile.mkstemp(
+            dir=str(self.path.parent), prefix=self.path.name + ".", suffix=".tmp"
+        )
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                json.dump(data, handle, indent=2)
+            os.replace(tmp_name, self.path)
+        except BaseException:
+            try:
+                os.remove(tmp_name)
+            except OSError:
+                pass
+            raise
 
     def record_success(self) -> None:
         data = self._read()

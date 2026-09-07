@@ -1,5 +1,7 @@
 import json
-from happy_news.alert import Health, log_failure
+import subprocess
+
+from happy_news.alert import Health, log_failure, notify
 
 
 def test_failures_accumulate_then_reset(tmp_path):
@@ -46,3 +48,78 @@ def test_reading_old_health_json_with_missing_keys(tmp_path):
     assert "droughts" in data
     assert "tiers" in data
     assert "failures" in data
+
+
+def test_record_drought_does_not_touch_a_nonzero_failure_streak(tmp_path):
+    """A mutant that makes record_drought behave like record_success --
+    silently wiping a real failure streak -- must fail this test. Starting
+    from zero (as the original test did) can't catch that; it only ever
+    sees 0 -> 0."""
+    health = Health(tmp_path / "health.json")
+    health.record_failure("feeds down")
+    health.record_failure("feeds down")
+    assert health.consecutive_failures() == 2
+
+    health.record_drought("ladder exhausted")
+
+    assert health.consecutive_failures() == 2
+
+
+def test_corrupt_health_json_degrades_to_fresh_default(tmp_path):
+    """A crash mid-write leaves a truncated file. Reading it must not blow
+    up with json.JSONDecodeError -- it must degrade to a fresh default."""
+    path = tmp_path / "health.json"
+    path.write_text('{"consecutive_failures": 3, "fail', encoding="utf-8")  # truncated
+
+    health = Health(path)
+
+    assert health.consecutive_failures() == 0
+    # and the instance must still be usable afterward
+    assert health.record_failure("x") == 1
+
+
+def test_write_is_atomic_and_leaves_no_temp_file_behind(tmp_path):
+    """_write must go through a temp-file-then-rename so a crash mid-write
+    can never leave a truncated health.json on disk."""
+    path = tmp_path / "health.json"
+    health = Health(path)
+
+    health.record_success()
+
+    leftover = [p.name for p in tmp_path.iterdir() if p.name != "health.json"]
+    assert leftover == [], f"temp files left behind: {leftover}"
+    # and the final file is valid, complete JSON
+    json.loads(path.read_text(encoding="utf-8"))
+
+
+def test_notify_never_raises_when_the_subprocess_fails(monkeypatch):
+    def boom(*args, **kwargs):
+        raise OSError("powershell not found")
+
+    monkeypatch.setattr(subprocess, "run", boom)
+
+    notify("Stacey Happy News", "feeds are down")  # must not raise
+
+
+def test_notify_doubles_single_quotes_for_the_powershell_literal(monkeypatch):
+    """The title/message are interpolated into a PowerShell single-quoted
+    string literal. A bare `'` would terminate the literal early and
+    corrupt (or fail to run) the script, so every `'` must become `''`.
+    No real toast may fire -- subprocess.run is monkeypatched out."""
+    captured = {}
+
+    def fake_run(args, **kwargs):
+        captured["args"] = args
+        return None
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    notify("it's broken", "can't fetch feeds")
+
+    assert "args" in captured, "notify() must still invoke subprocess.run"
+    script = captured["args"][-1]
+    assert "it''s broken" in script
+    assert "can''t fetch feeds" in script
+    # the unescaped single-quote form must never appear
+    assert "it's broken" not in script
+    assert "can't fetch feeds" not in script
