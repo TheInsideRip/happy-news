@@ -1,8 +1,9 @@
 # Satcey Happy News — Design Spec
 
-**Date:** 2026-09-07
-**Repo:** `TheInsideRip/happy-news` (public)
+**Date:** 2026-09-07 (revised same day: runtime moved from GitHub Actions to local)
+**Repo:** `TheInsideRip/happy-news` (public) — hosting only
 **Live URL:** `https://theinsiderip.github.io/happy-news/`
+**Runs on:** this Windows machine, via Task Scheduler, using the `claude` CLI
 **Status:** Approved design, ready for implementation planning
 
 ---
@@ -13,8 +14,9 @@ A small, fast, mobile-first web page that publishes genuinely good news three ti
 day. Its audience is one person, checking on a phone, three times a day, looking for a
 bright spot. Everything below serves that.
 
-The system runs entirely inside GitHub Actions. There is no server to maintain and no
-hosting cost. The only external dependency is the Anthropic API.
+The work runs on this machine, matching the existing `TIR_*` / `CFB_*` / `MLB_*` task
+pattern. GitHub is used only to host the finished page so it is reachable from a phone
+anywhere. There is no API key and no running cost.
 
 ### Success criteria
 
@@ -23,21 +25,25 @@ hosting cost. The only external dependency is the Anthropic API.
    catches everything published so far that day.
 3. Over any 30-day window, **no story URL and no story headline ever repeats**.
 4. No story reads as political combat (see §3.3).
-5. At least 95% of scheduled slots publish, within roughly 20 minutes of the target time.
+5. When a run fails or is missed, the reader can see the page is stale and the operator
+   is alerted (§8). Silent staleness is the failure mode this design most guards against.
 
 ### Non-goals (deliberately excluded)
 
 No images. No search. No comments, accounts, email, or push notifications. No CMS or
 admin UI. No custom domain. No social posting. No JavaScript framework. No analytics.
-These are excluded to keep the page fast and the system small; any of them can be
-added later as a separate piece of work.
+These are excluded to keep the page fast and the system small; any of them can be added
+later as a separate piece of work.
 
 ---
 
 ## 2. Architecture
 
 ```
- GitHub Actions cron
+ Windows Task Scheduler  (08:00 / 14:00 / 19:00 local, + missed-run catch-up)
+        |
+        v
+   publish.bat  ->  python -m happy_news run
         |
         v
    clock.py ------ not a publishing window? --> exit 0
@@ -55,10 +61,10 @@ added later as a separate piece of work.
   editorial.py  drop banned-politics candidates (cheap prefilter)
         |
         v
-   curate.py    ~80 candidates -> Claude -> 3-5 picks + written summaries
+   curate.py    ~80 candidates -> claude CLI -> 3-5 picks + written summaries
         |
         v
-  editorial.py  hard filter re-applied to Claude's output (code, not prompt)
+  editorial.py  hard filter re-applied to the model's output (code, not prompt)
         |
         v
    dedup.py     re-check picks, then append to the permanent memory
@@ -68,22 +74,32 @@ added later as a separate piece of work.
         |
         v
   publish.py    git commit + push -> GitHub Pages serves it
+        |
+        v
+   alert.py     on failure: Windows notification + failure log
 ```
 
-**Rejected alternatives.** A separate host (Cloudflare Workers, Vercel) would give
-punctual-to-the-minute scheduling, but costs money and adds a second system to keep
-alive — not worth it for a ±15 minute difference. A JavaScript page loading a JSON
-data file would be easier to restyle later, but shows a blank screen if anything
-fails. We pre-render plain HTML: it loads instantly, on any connection, with scripting
-irrelevant.
+**Portability is a requirement, not an accident.** Only two modules know where the
+system is running: `curate.py` (how the model is called) and `publish.py` (how the
+result is pushed). Everything else is plain Python with no knowledge of Task Scheduler
+or GitHub. Moving to cloud execution later means swapping one function in `curate.py`
+for an API call and adding a workflow file — not a rewrite. This is a deliberate
+concession to the "assess and adjust" decision recorded below.
+
+**Rejected alternatives.** *GitHub Actions + Anthropic API key* would be immune to the
+laptop being off or the login expiring, at roughly $1–4/month. Rejected for now in
+favour of zero cost and consistency with the existing local task setup, with the
+explicit intent to reconsider if missed runs prove annoying in practice. *A JavaScript
+page loading a JSON data file* would be easier to restyle later, but shows a blank
+screen if anything fails; we pre-render plain HTML instead.
 
 ---
 
 ## 3. Editorial rules
 
-These rules are the product. They live in `feeds/editorial.yaml` and in the Claude
-prompt, and the hard filters are enforced **in code after Claude answers**, not merely
-requested in the prompt.
+These rules are the product. They live in `feeds/editorial.yaml` and in the prompt, and
+the hard filters are enforced **in code after the model answers**, not merely requested
+in the prompt.
 
 ### 3.1 Categories
 
@@ -101,8 +117,8 @@ measurably underway** — not a plan, a pledge, a forecast, or a study suggestin
 something might work someday. Prefer concrete, finished, verifiable outcomes.
 
 Rejected regardless of framing: anything whose core is suffering, disaster, crime, or
-loss, even when the article ends hopefully. A rescue after a tragedy is still a
-tragedy story.
+loss, even when the article ends hopefully. A rescue after a tragedy is still a tragedy
+story.
 
 ### 3.3 The politics rule — "outcomes only, no combat"
 
@@ -114,37 +130,36 @@ court ruling that is final and beneficial, a city or agency that fixed something
 scandals, resignations, accusations, predictions, and anything framed as a fight, a
 race, or a contest.
 
-Skews global rather than US-partisan. US domestic stories are allowed when they meet
-the outcomes-only bar.
+Skews global rather than US-partisan. US domestic stories are allowed when they meet the
+outcomes-only bar.
 
 **Implementation.** Two lists plus an override rule, all in `editorial.yaml`:
 
 - `banned_terms` — matched case-insensitively on word boundaries in headline and
-  summary. Seed list: `election`, `electoral`, `ballot`, `poll`, `polling`,
-  `campaign`, `candidate`, `primaries`, `caucus`, `midterm`, `incumbent`,
-  `approval rating`, `partisan`, `filibuster`, `shutdown`, `impeach`, `indict`,
-  `scandal`, `subpoena`, `slams`, `blasts`, `rips`, `hits back`, `feud`, `spat`,
-  `clash`, `sues`, `files suit`, `Democrat`, `Republican`, `GOP`, `left-wing`,
-  `right-wing`.
+  summary. Seed list: `election`, `electoral`, `ballot`, `poll`, `polling`, `campaign`,
+  `candidate`, `primaries`, `caucus`, `midterm`, `incumbent`, `approval rating`,
+  `partisan`, `filibuster`, `shutdown`, `impeach`, `indict`, `scandal`, `subpoena`,
+  `slams`, `blasts`, `rips`, `hits back`, `feud`, `spat`, `clash`, `sues`,
+  `files suit`, `Democrat`, `Republican`, `GOP`, `left-wing`, `right-wing`.
 - `outcome_overrides` — phrases that rescue an otherwise-banned candidate because they
-  mark a finished outcome: `court ruled`, `court upheld`, `judge ordered`,
-  `convicted`, `treaty ratified`, `agreement signed`, `law took effect`,
-  `bill signed into law`, `settlement reached`.
+  mark a finished outcome: `court ruled`, `court upheld`, `judge ordered`, `convicted`,
+  `treaty ratified`, `agreement signed`, `law took effect`, `bill signed into law`,
+  `settlement reached`.
 - **Rule:** reject if any `banned_term` matches **and** no `outcome_override` matches.
 
 This list is expected to be tuned during the first few weeks. It is data, not code, so
 tuning it requires no code change. The false-positive risk is real and accepted: a
-slightly over-eager filter costs us a story, while an under-eager one costs the
-product its whole reason for existing.
+slightly over-eager filter costs us a story, while an under-eager one costs the product
+its whole reason for existing.
 
 ### 3.4 Edition size and thin runs
 
-Target **3–5 stories per edition**. Three editions a day at six stories would demand
-126 non-repeating stories a week — far more than the good-news ecosystem produces.
-Short and excellent beats long and padded.
+Target **3–5 stories per edition**. Three editions a day at six stories would demand 126
+non-repeating stories a week — far more than the good-news ecosystem produces. Short and
+excellent beats long and padded.
 
-**Minimum is 3, target is 5.** When a run cannot reach the minimum, it escalates in
-this order and **never lowers the quality bar**:
+**Minimum is 3, target is 5.** When a run cannot reach the minimum, it escalates in this
+order and **never lowers the quality bar**:
 
 1. Widen the time window from 24 hours to 72 hours.
 2. Pull from the full feed list rather than the priority subset.
@@ -152,9 +167,9 @@ this order and **never lowers the quality bar**:
    *"A quieter stretch today."* At 3 or more, no note appears.
 4. If it finds **zero** qualifying stories, write nothing to the edition file for that
    slot and record the reason in the health log (§8). Because the slot stays unfilled,
-   later cron fires **within the same window** will try again — a quiet 8:00 can still
-   become a good 9:30. If the window closes with the slot still empty, that slot is
-   skipped for the day and the page simply does not gain a section.
+   later runs **within the same window** will try again — a quiet 8:00 can still become
+   a good 9:30. If the window closes with the slot still empty, that slot is skipped for
+   the day and the page simply does not gain a section.
 
 ---
 
@@ -165,29 +180,36 @@ Each module is independently testable and has one job.
 | Module | Responsibility | Depends on |
 |---|---|---|
 | `config.py` | Load `sources.yaml` / `editorial.yaml`, read env, expose typed settings | — |
-| `clock.py` | Determine the current slot in Eastern time; answer "should this run publish?" | config |
+| `clock.py` | Determine the current slot in local Eastern time; answer "should this run publish?" | config |
 | `fetch.py` | Fetch and parse RSS feeds concurrently, tolerate individual failures | config |
 | `normalize.py` | Canonical URL keys, title keys, token sets | — |
 | `dedup.py` | The permanent memory: read/append `seen.jsonl`, decide "have we shown this?" | normalize |
-| `editorial.py` | Good-news and politics filters, applied both pre- and post-Claude | config |
-| `curate.py` | Build the prompt, call Claude, validate structured output, retry once | config, editorial |
-| `render.py` | Generate `index.html`, archive day pages, and `archive/index.html`; validate before returning | — |
-| `publish.py` | Stage, commit, rebase, push | — |
-| `cli.py` | Entry point: `run`, `dry-run`, `rebuild` | all |
+| `editorial.py` | Good-news and politics filters, applied both pre- and post-model | config |
+| `curate.py` | Build the prompt, invoke the `claude` CLI, validate output, retry once | config, editorial |
+| `render.py` | Generate `index.html`, archive day pages, `archive/index.html`; validate before returning | — |
+| `publish.py` | Stage, commit, rebase, push to GitHub | — |
+| `alert.py` | Windows notification + failure log when a run fails | — |
+| `cli.py` | Entry point: `run`, `dry-run`, `rebuild`, `doctor` | all |
 
-### 4.1 clock.py — slots and daylight saving
+### 4.1 clock.py — slots and catch-up
 
-GitHub's scheduler only understands UTC, and 8am Eastern is a different UTC hour in
-summer than in winter. Rather than fight that, **the workflow fires more often than
-needed and the script decides.**
+Windows Task Scheduler fires at local time and handles daylight saving itself, so none
+of the UTC arithmetic a cloud scheduler would need is required here. `clock.py` still
+owns slot logic for two reasons: it makes duplicate and catch-up runs harmless, and it
+keeps the move to cloud execution cheap.
 
-Slot windows, in `America/New_York` (via Python's built-in `zoneinfo`):
+Slot windows, in local time (`America/New_York` via Python's built-in `zoneinfo`, so the
+logic is correct even if the machine's timezone changes):
 
 | Slot | Target | Accepts a run between |
 |---|---|---|
-| `morning` | 08:00 ET | 08:00 – 10:59 ET |
-| `afternoon` | 14:00 ET | 14:00 – 16:59 ET |
-| `evening` | 19:00 ET | 19:00 – 21:59 ET |
+| `morning` | 08:00 | 08:00 – 13:59 |
+| `afternoon` | 14:00 | 14:00 – 18:59 |
+| `evening` | 19:00 | 19:00 – 23:59 |
+
+The windows are deliberately wide and contiguous. Task Scheduler is configured to run a
+missed task as soon as possible, so a laptop that was asleep until 11:30 still delivers
+a morning edition rather than nothing.
 
 Logic on every run:
 
@@ -196,9 +218,6 @@ Logic on every run:
 3. If `data/editions/<today>.json` already contains this slot, exit 0 — "already
    published."
 4. Otherwise, publish.
-
-The three-hour windows absorb GitHub's lateness. The already-published check makes
-duplicate runs harmless. DST is handled once, correctly, by `zoneinfo`.
 
 ### 4.2 dedup.py — the "never twice" guarantee
 
@@ -216,10 +235,10 @@ Four layers, checked in order:
 | 1. Same link | Exact match on `url_key` | **Absolute** |
 | 2. Same headline | Exact match on `title_key` | **Absolute** |
 | 3. Reworded | Jaccard similarity of `tokens` ≥ **0.60** against the last 18 months | Catches most rewordings |
-| 4. Same event, different words | Claude is shown the last 60 published headlines and asked to reject same-event repeats | Catches most of the rest |
+| 4. Same event, different words | The model is shown the last 60 published headlines and asked to reject same-event repeats | Catches most of the rest |
 
 Duplicates *within* a single run (two feeds carrying the same story) are collapsed by
-layers 1–3 before Claude ever sees them.
+layers 1–3 before the model ever sees them.
 
 **Honest limitation:** layers 1 and 2 are perfect. Layers 3 and 4 are very good, not
 perfect. The same event written up by two outlets with genuinely different wording can
@@ -227,10 +246,10 @@ slip through. This is a known, accepted gap.
 
 **Key construction (normalize.py):**
 
-- `url_key` — lowercase host with `www.` removed, path with trailing slash and
-  fragment removed, query string kept but with tracking parameters dropped
-  (`utm_*`, `fbclid`, `gclid`, `ref`, `source`, `mc_cid`, `mc_eid`, `at_*`, `cmp`,
-  `ito`). Non-tracking parameters are kept, because some sites route by `?p=123`.
+- `url_key` — lowercase host with `www.` removed, path with trailing slash and fragment
+  removed, query string kept but with tracking parameters dropped (`utm_*`, `fbclid`,
+  `gclid`, `ref`, `source`, `mc_cid`, `mc_eid`, `at_*`, `cmp`, `ito`). Non-tracking
+  parameters are kept, because some sites route by `?p=123`.
 - `title_key` — SHA-1 of the title lowercased, punctuation stripped, whitespace
   collapsed.
 - `tokens` — title lowercased, stopwords and words under three characters removed,
@@ -240,20 +259,48 @@ slip through. This is a known, accepted gap.
 1MB per year. A non-issue for a decade. Layer 3 only compares against the last 18
 months; layers 1 and 2 compare against all of history, forever.
 
-### 4.3 curate.py — the Claude call
+### 4.3 curate.py — invoking the model
 
-- **Model:** `claude-sonnet-5`. Selection and short summarisation do not need Opus, and
-  Sonnet is materially cheaper for a job that runs 90 times a month. Exact model ID and
-  pricing to be confirmed against the `claude-api` skill at implementation time.
+The `claude` CLI is invoked headless as a subprocess. Verified working shape on this
+machine (`C:\Users\kaimo\.local\bin\claude.exe`):
+
+```
+claude -p <prompt-from-stdin-or-arg>
+       --output-format json
+       --model sonnet
+       --disallowed-tools "*"
+```
+
+`--output-format json` returns an envelope, confirmed by live test:
+
+```json
+{"type":"result","subtype":"success","is_error":false,"result":"<the model's text>",
+ "session_id":"...","num_turns":1,"total_cost_usd":0,"usage":{...}}
+```
+
+`curate.py` therefore does three things in order: parse the envelope, check
+`is_error` (the CLI exits non-zero and sets this on auth failure — see §8), then parse
+the model's JSON out of `result`.
+
+- **Model:** `sonnet`. Selection and short summarisation do not need Opus, and this runs
+  ~90 times a month against a shared subscription budget.
+- **Tools disabled.** The model is given text and asked for text. It must not read
+  files, run commands, or search. This is enforced with `--disallowed-tools`, not
+  requested in the prompt.
 - **Input:** the editorial rulebook, the last 60 published headlines, and ~80 surviving
   candidates (title, source, publication time, feed summary truncated to 300
-  characters).
-- **Output:** structured, via tool-use/JSON-schema so parsing cannot drift. Per story:
-  `title`, `url`, `source`, `category`, `summary` (2–3 warm sentences in plain English,
-  no jargon), and `why_good` (one line, recorded for auditing, not displayed).
-- **Retry:** one retry on network failure or schema-invalid output. A second failure
-  ends the run; the next backup cron picks up the slot.
-- **Estimated tokens:** ~9,000 in, ~700 out per run.
+  characters). Passed via a temp file rather than a command-line argument, because the
+  prompt is far past any safe Windows command-line length.
+- **Output:** a strict JSON array. Per story: `title`, `url`, `source`, `category`,
+  `summary` (2–3 warm sentences in plain English, no jargon), `why_good` (one line,
+  recorded for auditing, not displayed).
+- **Retry:** one retry on non-zero exit or unparseable output. A second failure ends the
+  run and triggers an alert (§8).
+- **Timeout:** 180 seconds per attempt; a hung CLI must not leave a task running all day.
+- **Prompt-injection posture:** feed content is untrusted input. The prompt states that
+  candidate text is data to be judged, never instructions to follow, and the output is
+  schema-validated and re-filtered in code afterwards, so a malicious headline cannot
+  change system behaviour.
 
 ### 4.4 render.py — the page
 
@@ -274,16 +321,20 @@ Satcey Happy News            Sunday, September 7
   MORNING · 8:03 am
     ...
 
-  Updated 3x daily · Archive
+  Last updated 7:04 pm · Archive
 ```
 
+- **The "Last updated" line is required, not decorative.** It is the reader's only
+  signal that the machine is healthy. If the page is stale, it says so plainly rather
+  than looking like a normal day with less news.
 - Mobile-first CSS in `assets/style.css`. System font stack, ~17px base, generous
   line-height, `max-width: 38rem`, respects `prefers-color-scheme` for dark mode.
 - No images, no JavaScript, no external requests. The page is self-contained apart from
   one stylesheet.
-- Links open in a new tab with `rel="noopener noreferrer"`.
-- At midnight ET the next run writes a fresh `index.html`; the finished day already
-  exists at `archive/YYYY-MM-DD.html`.
+- Links open in a new tab with `rel="noopener noreferrer"`. All model-produced text is
+  HTML-escaped on render.
+- At midnight the next run writes a fresh `index.html`; the finished day already exists
+  at `archive/YYYY-MM-DD.html`.
 - `archive/index.html` is a reverse-chronological list of days.
 - **Validation before write:** the HTML must parse, contain at least one story, have no
   empty summaries, and every URL must be `http`/`https`. Rendering happens to a scratch
@@ -299,7 +350,7 @@ Satcey Happy News            Sunday, September 7
 ```
 data/
   seen.jsonl              # permanent dedup memory, append-only (see §4.2)
-  health.json             # consecutive-failure counter and last-run record
+  health.json             # last successful run, consecutive-failure counter, drought log
   editions/
     2026-09-07.json       # one file per day, the source of truth for rendering
 ```
@@ -334,38 +385,53 @@ data/
 
 ## 6. Scheduling
 
-`.github/workflows/publish.yml`:
+Three Windows Scheduled Tasks, matching the shape of the existing `TIR_AutoPublish_*`
+entries:
 
-```yaml
-on:
-  schedule:
-    - cron: "0,30 0,1,12,13,14,18,19,20,23 * * *"
-  workflow_dispatch:
-concurrency:
-  group: publish
-  cancel-in-progress: false
-permissions:
-  contents: write
-```
+| Task name | Trigger |
+|---|---|
+| `HappyNews_Morning` | Daily 08:00 |
+| `HappyNews_Afternoon` | Daily 14:00 |
+| `HappyNews_Evening` | Daily 19:00 |
 
-That is 18 short runs a day. Roughly three do real work; the rest exit within seconds
-after `clock.py` says "not a publishing window" or "already published." The extra fires
-exist because GitHub genuinely does skip scheduled runs under load, and on a public
-repository Actions minutes are free, so redundancy costs nothing.
+Each runs `E:\Satcey Happy News\publish.bat <slot>` with these settings:
 
-`workflow_dispatch` allows a manual run from the GitHub UI or phone.
+- **Run task as soon as possible after a scheduled start is missed** — enabled. This is
+  what turns "laptop was asleep at 8" into "morning edition at 11:30" instead of nothing.
+- **Wake the computer to run this task** — enabled. Recovers sleeping-laptop runs
+  outright; does nothing if the machine is fully powered off.
+- **Run whether user is logged on or not** — enabled.
+- Stop the task if it runs longer than 15 minutes.
 
-**Stated expectation:** publication lands within roughly 20 minutes of 8:00 am, 2:00 pm,
-and 7:00 pm Eastern. Not to the minute. GitHub's scheduler does not offer that, and this
-design does not pretend otherwise.
+Task Scheduler handles local time and daylight saving natively, so no UTC mapping is
+needed. `clock.py`'s already-published check makes a catch-up run that overlaps a normal
+run harmless.
+
+**Stated expectation:** the page updates within a few minutes of 8:00 am, 2:00 pm, and
+7:00 pm when the machine is on or asleep, and not at all while it is powered off. That
+last case is the accepted cost of running locally, and §8 makes it visible rather than
+silent.
 
 ---
 
-## 7. Secrets
+## 7. Credentials
 
-`ANTHROPIC_API_KEY` is stored **only** as a GitHub Actions repository secret. It is
-never committed, never logged, and never written to any generated file. `.gitignore`
-excludes `.env`. The repository is public, so this rule is absolute.
+**There is no API key.** The `claude` CLI authenticates with the existing Claude
+subscription via a stored OAuth session.
+
+**Known risk, discovered during design:** a live test on 2026-09-07 returned
+`Failed to authenticate: OAuth session expired and could not be refreshed`. The
+standalone CLI's credentials are separate from the desktop app's, and they had lapsed.
+
+- **Fix:** run `claude` interactively once and sign in. Regular 3×/day use is expected
+  to keep the session refreshed thereafter.
+- **This is the single most likely cause of long-term silent failure**, which is why
+  §8's alerting and §4.4's "Last updated" line are requirements rather than polish.
+- `cli.py doctor` performs a cheap authenticated round-trip and reports pass/fail, so
+  the session can be checked without waiting for a scheduled run to break.
+
+Nothing secret is committed. The repository is public; `.gitignore` excludes `.env` and
+all local logs.
 
 ---
 
@@ -374,48 +440,56 @@ excludes `.env`. The repository is public, so this rule is absolute.
 | Failure | Behaviour |
 |---|---|
 | One or more feeds unreachable | Log and continue with the feeds that worked |
-| All feeds unreachable | Fail the run; the next backup cron retries |
-| Claude call fails or returns invalid output | Retry once, then fail the run; backup cron retries |
+| All feeds unreachable | Fail the run, alert |
+| `claude` CLI auth expired | Fail the run, alert with the specific remedy ("run `claude` and sign in") |
+| CLI returns invalid output or non-zero | Retry once, then fail the run and alert |
+| CLI exceeds the 180s timeout | Kill it, retry once, then fail and alert |
 | Render validation fails | Abort before committing; nothing is published |
 | Git push conflict | `git pull --rebase` and retry once |
-| Zero qualifying stories | Publish nothing for the slot, record the reason in `health.json` |
-| 3 consecutive failed runs | Open a GitHub issue (only one open at a time), so the failure surfaces via GitHub rather than via the reader |
+| Zero qualifying stories | Publish nothing for the slot, record a drought entry in `health.json`; **not** treated as a failure |
+| Machine powered off at slot time | Task Scheduler catch-up publishes on next wake if still inside the window (§4.1) |
+| Any failed run | Windows toast notification + a line in `logs/failures.log` |
+| 3 consecutive failed runs | Escalated notification — the system is broken, not merely unlucky |
 
-**"Failed run" means a run that entered a publishing window and then errored.** The
-majority of the 18 daily fires exit early — outside a window, or slot already published
-— and those are not failures and never touch the counter. A successful publish resets
-the counter to zero. A zero-story run (§3.4, step 4) is not a failure either; it is
-recorded separately in `health.json` so a persistent drought is still visible.
+**"Failed run" means a run that entered a publishing window and then errored.** Runs
+that exit early — outside a window, or slot already published — are not failures and
+never touch the counter. A successful publish resets the counter to zero.
+
+**Staleness is visible in two independent places:** to the operator via notification and
+log, and to the reader via the "Last updated" line on the page itself. Neither depends
+on the other working.
 
 ---
 
 ## 9. Testing
 
-`pytest`, with **no network access in any test**. All feed XML and Claude responses are
-saved fixtures.
+`pytest`, with **no network access and no CLI invocation in any test**. All feed XML and
+model responses are saved fixtures.
 
 | Test file | Covers |
 |---|---|
-| `test_clock.py` | Slot detection at 07:59 / 08:00 / 10:59 / 11:00 ET; both DST changeover weekends; already-published short-circuit |
+| `test_clock.py` | Slot detection at 07:59 / 08:00 / 13:59 / 14:00 / 23:59; both DST changeover weekends; already-published short-circuit |
 | `test_normalize.py` | Tracking-parameter stripping, `www.`, trailing slashes, fragments, casing, non-tracking params preserved |
 | `test_dedup.py` | Exact URL match, exact title match, Jaccard boundaries at 0.59 / 0.60 / 0.61, within-run collapsing, 18-month window edge |
 | `test_editorial.py` | Each banned term fires; each outcome override rescues; false-positive guards (`primary school`, `clash of colours`) |
-| `test_curate.py` | Mocked API: valid response parses, malformed JSON triggers exactly one retry, schema violations rejected |
-| `test_render.py` | Golden-file comparison for a full day, a single-slot day, a short edition with a note, and an empty archive |
+| `test_curate.py` | Mocked subprocess: valid envelope parses, `is_error: true` handled, malformed JSON triggers exactly one retry, timeout kills and retries, schema violations rejected |
+| `test_render.py` | Golden-file comparison for a full day, a single-slot day, a short edition with a note, an empty archive, and HTML-escaping of hostile story text |
 
-`cli.py dry-run` builds the page locally, prints what would publish, and writes nothing
-— so the output can be reviewed before it ever goes live.
+`cli.py dry-run` builds the page locally, prints what would publish, and writes nothing —
+so the output can be reviewed before it ever goes live. `cli.py doctor` checks CLI auth,
+feed reachability, and git push access in one command.
 
 ---
 
 ## 10. Repository layout
 
 ```
-happy-news/
+happy-news/                         (= E:\Satcey Happy News)
   .nojekyll
   .gitignore
   README.md
   requirements.txt
+  publish.bat                       # what Task Scheduler runs
   index.html                        # generated
   assets/style.css                  # hand-written
   archive/
@@ -425,15 +499,16 @@ happy-news/
     seen.jsonl
     health.json
     editions/2026-09-07.json
+  logs/                             # gitignored
+    failures.log
   feeds/
     sources.yaml                    # the feed list
     editorial.yaml                  # categories, banned terms, overrides
   src/happy_news/
     __init__.py config.py clock.py fetch.py normalize.py
-    dedup.py editorial.py curate.py render.py publish.py cli.py
+    dedup.py editorial.py curate.py render.py publish.py alert.py cli.py
   tests/
     fixtures/ test_*.py
-  .github/workflows/publish.yml
   docs/superpowers/specs/
 ```
 
@@ -448,18 +523,21 @@ publicly readable. That is acceptable: no secrets live in the repository.
 | Item | Cost |
 |---|---|
 | GitHub Pages hosting | $0 |
-| GitHub Actions (public repo) | $0 |
 | Storage | $0 |
-| Anthropic API | ~$1–4 / month, to be confirmed against current pricing at build time |
-| Maintenance | None expected after launch, beyond occasional tuning of `editorial.yaml` |
+| Model usage | $0 in cash — consumes the existing Claude subscription's usage allowance, shared with other work on this machine |
+| Maintenance | Occasional tuning of `editorial.yaml`; re-authenticating the CLI if the session lapses |
+
+Reconsider the GitHub Actions + API key route (~$1–4/month) if missed runs or auth
+lapses prove annoying in practice. §2 keeps that move cheap by design.
 
 ---
 
 ## 12. Prerequisites before implementation
 
-1. An Anthropic API key from `console.anthropic.com` (separate from a Claude
-   subscription), added as the repository secret `ANTHROPIC_API_KEY`.
-2. The public repository `TheInsideRip/happy-news` created, with Pages enabled on
-   branch `main`, folder `/`.
+1. **Sign the CLI in.** Run `claude` in a terminal and complete sign-in; confirm with
+   `cli.py doctor` once it exists. Blocking — nothing works until this is done.
+2. **Create the public repository** `TheInsideRip/happy-news` with Pages enabled on
+   branch `main`, folder `/`. Awaiting explicit go-ahead; nothing will be created on
+   GitHub without it.
 
-Both are user actions. Neither blocks writing the implementation plan.
+Neither blocks writing the implementation plan.
