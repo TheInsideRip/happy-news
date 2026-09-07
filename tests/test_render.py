@@ -325,3 +325,65 @@ def test_validate_still_accepts_the_pages_own_nav_links():
     render.validate(render.render_day(DAY, is_today=True))
     render.validate(render.render_day(DAY, is_today=False))
     render.validate(render.render_front([DAY]))
+
+
+# ---------------------------------------------------------------------------
+# R1: story hrefs must be http(s), full stop -- the `../`/relative-path
+# allowances in the general href allowlist exist for the page's OWN chrome
+# links (stylesheet, archive/, nav), not for story links. Conflating the two
+# let a story link somewhere that is not a story: a relative path like
+# `../../../../etc/passwd` passed validate() unchanged and rendered as the
+# headline's live href, because the general allowlist treats any href
+# starting with `../` as a legitimate chrome link.
+# ---------------------------------------------------------------------------
+
+R1_PAYLOADS = [
+    "../../../../etc/passwd",
+    "javascript:location.replace('https://evil.example/prize')//x.html",
+    "data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==#x.html",
+    "javascript:alert(1)",
+    "//evil.example/x",
+    "file:///C:/Windows/win.ini",
+]
+
+
+def test_validate_rejects_a_relative_path_story_link():
+    """The exact payload found in review: a story url of
+    `../../../../etc/passwd` must never validate, even though `../` alone is
+    an allowed prefix for the page's own chrome links."""
+    day = {"date": "2026-09-07", "slots": {
+        "morning": {"published_at": "a", "note": None, "stories": [
+            dict(STORY, url="../../../../etc/passwd")]},
+    }}
+    with pytest.raises(ValueError):
+        render.validate(render.render_day(day, is_today=True))
+
+
+def test_validate_rejects_every_r1_payload_as_a_story_link():
+    for payload in R1_PAYLOADS:
+        day = {"date": "2026-09-07", "slots": {
+            "morning": {"published_at": "a", "note": None, "stories": [
+                dict(STORY, url=payload)]},
+        }}
+        with pytest.raises(ValueError):
+            render.validate(render.render_day(day, is_today=True))
+
+
+def test_validate_still_accepts_a_genuine_https_story_link():
+    day = {"date": "2026-09-07", "slots": {
+        "morning": {"published_at": "a", "note": None, "stories": [
+            dict(STORY, url="https://legit.example/story")]},
+    }}
+    render.validate(render.render_day(day, is_today=True))  # must not raise
+
+
+def test_validate_rejects_a_relative_path_story_link_in_render_front():
+    """Same story-link-vs-chrome-link distinction on the multi-day front
+    page, where an earlier day's story could try the same trick."""
+    bad_yesterday = {
+        "date": "2026-09-06",
+        "slots": {"evening": {"published_at": "a", "note": None,
+                               "stories": [dict(STORY, url="../../../../etc/passwd")]}},
+    }
+    with pytest.raises(ValueError):
+        render.validate(render.render_front([DAY, bad_yesterday]))

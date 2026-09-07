@@ -118,7 +118,7 @@ def _story_html(story: dict) -> str:
         '<article class="plate">'
         '<svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>'
         f'<p class="cat">{_e(story.get("label", "world"))}</p>'
-        f'<h2 class="hl"><a href="{_e(story.get("url"))}" target="_blank" rel="noopener noreferrer">{_e(story.get("title"))}</a></h2>'
+        f'<h2 class="hl"><a class="story-link" href="{_e(story.get("url"))}" target="_blank" rel="noopener noreferrer">{_e(story.get("title"))}</a></h2>'
         f'<p class="meta">{meta}</p>'
         f'<p class="sum">{_e(story.get("summary"))}</p>'
         "</article>"
@@ -261,6 +261,11 @@ def render_archive_index(days: list[str]) -> str:
 
 _HREF = re.compile(r'href="([^"]+)"')
 _SUM = re.compile(r'<p class="sum">(.*?)</p>', re.DOTALL)
+# Story anchors are marked with this class specifically so validate() can
+# find exactly the story links and hold them to a stricter rule than the
+# page's own chrome links (R1). `_STORY_HREF` only matches that marked
+# anchor -- the stylesheet link and nav links never carry class="story-link".
+_STORY_HREF = re.compile(r'<a class="story-link" href="([^"]+)"')
 
 
 def validate(page: str) -> None:
@@ -274,15 +279,26 @@ def validate(page: str) -> None:
     for summary in _SUM.findall(page):
         if not summary.strip():
             raise ValueError("page contains an empty summary")
+    # Story links get their own, stricter rule, checked first: http(s) only,
+    # full stop. The `../` and other relative-path allowances below exist
+    # for the page's OWN chrome links (stylesheet, archive/, nav) -- not for
+    # a story. Conflating the two let a story link anywhere on the reader's
+    # filesystem via a relative path (`../../../../etc/passwd`) as long as it
+    # merely started with an allowed prefix; a story's target must instead be
+    # an actual, external http(s) URL, with no exceptions.
+    for href in _STORY_HREF.findall(page):
+        if not href.startswith(("http://", "https://")):
+            raise ValueError(f"page contains a non-http link: {href}")
     for href in _HREF.findall(page):
         if href.startswith(("http://", "https://")):
             continue
         # There is deliberately no `href.endswith(".html")` escape hatch: it
         # accepted any scheme at all, so `javascript:alert(1)//x.html` passed
         # validation and shipped as a live link. Every legitimate link on a
-        # validated page is either http(s) (a story) or one of the fixed
-        # relative nav targets below. (archive/index.html's `<date>.html`
-        # links live on the one page validate() is never called on.)
+        # validated page is either http(s) (a story, already checked above)
+        # or one of the fixed relative chrome targets below. (archive/
+        # index.html's `<date>.html` links live on the one page validate()
+        # is never called on.)
         if href.startswith(("assets/", "../assets/", "archive/", "../", "#")):
             continue
         raise ValueError(f"page contains a non-http link: {href}")
