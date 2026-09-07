@@ -4,24 +4,22 @@
    .frame, .masthead, .wrap, .closing, .f-name, .f-why, .eyebrow,
    .sample-note, .direction, .d-name) is dropped -- it never ships.
 
-   One deliberate change from the mockup: the mockup toggled dark mode with a
-   `.dark` class because it had to show both themes side by side in a
-   gallery. The real page has no such class -- it must follow the reader's
-   own phone. So the dark palette lives in `@media (prefers-color-scheme:
-   dark)`, redefining only the custom properties on :root. The complete
-   light palette is defined on bare :root first; no colour exists only
-   inside the media query. */
+   One deliberate change from the mockup: the mockup could toggle a `.dark`
+   class because it had to show both themes side by side in a gallery. The
+   real page commits to a single look, on purpose -- it must read the same
+   at 7pm as at 8am, so there is no dark-mode palette and no
+   `@media (prefers-color-scheme: dark)` block. The complete palette is
+   defined once, on bare :root, so nothing is inherited from the browser or
+   host. */
 
 :root{
-  --g:#EFF3E7; --pl:#E4ECD8; --ed:#CBDAB8; --ink:#16291D; --sf:#5D7566;
-  --br:#7B2D4E; --st:#6E9159; --bl:#C25A7C; --keel:#CBDAB8;
+  --g:#D7E4C8; --pl:#F1F6EA; --ed:#BCD0A6; --ink:#16291D; --sf:#4C6555;
+  --br:#7B2D4E; --st:#5E8449; --bl:#C25A7C; --keel:#DDE9D0;
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --g:#132019; --pl:#1D2C23; --ed:#31493A; --ink:#E7EFE3; --sf:#93A996;
-    --br:#EE93AC; --st:#6C9A5C; --bl:#EE93AC; --keel:#31493A;
-  }
-}
+/* --sf deepened one step past the brief's #55705E: measured against the new,
+   deeper --g the slot-label use (small caps, .61rem) came out at 4.09:1,
+   under the 4.5:1 small-text minimum. #4C6555 restores 4.79:1 on --g and
+   5.79:1 on --pl, comfortably readable in both places it's used. */
 
 html,body{background:var(--g);color:var(--ink);margin:0;}
 body{
