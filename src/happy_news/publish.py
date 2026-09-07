@@ -60,7 +60,20 @@ def push(root: Path, message: str, *, runner=None) -> None:
     if code == 0:
         return
 
-    run(["git", "pull", "--rebase"], root)
+    # `git pull --rebase`'s exit code used to be discarded. A conflicted
+    # rebase leaves the repository mid-rebase, and from that moment every
+    # later commit fails -- so every later run fails -- until someone runs
+    # `git rebase --abort` by hand. One transient conflict froze the page for
+    # good. Abort it here so the working tree is left clean and the next
+    # scheduled run genuinely retries.
+    rebase_code, rebase_out = run(["git", "pull", "--rebase"], root)
+    if rebase_code != 0:
+        abort_code, abort_out = run(["git", "rebase", "--abort"], root)
+        detail = rebase_out.strip()
+        if abort_code != 0:
+            detail = f"{detail} (rebase --abort also failed: {abort_out.strip()})"
+        raise PublishError(f"pull --rebase failed, rebase aborted: {detail}")
+
     code, out = run(["git", "push"], root)
     if code != 0:
         raise PublishError(f"push failed after rebase: {out.strip()}")
