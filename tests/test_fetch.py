@@ -1,6 +1,10 @@
 import logging
+import time
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+
+import pytest
 
 from happy_news import fetch
 
@@ -150,3 +154,164 @@ def test_fetch_all_survives_malformed_priority_value(monkeypatch):
     items, failed = fetch.fetch_all(feeds)
     assert failed == []
     assert items
+
+
+# ---------------------------------------------------------------------------
+# R2: a feed response has no size limit. `_get` used a single
+# `response.read()`, which buffers the entire body regardless of size -- a
+# feed serving 500 MB is fully read into memory, and with 8 concurrent
+# workers that is a multi-GB spike on the user's laptop.
+# ---------------------------------------------------------------------------
+
+
+class _FakeResponse:
+    """Stands in for the object `urllib.request.urlopen(...)` returns as a
+    context manager: supports `read1(n)` (one chunk per call, like the real
+    `http.client.HTTPResponse.read1`) and nothing else `_get` needs."""
+
+    def __init__(self, chunks, delay=0.0):
+        self._chunks = list(chunks)
+        self._delay = delay
+
+    def read1(self, n=-1):
+        if self._delay:
+            time.sleep(self._delay)
+        return self._chunks.pop(0) if self._chunks else b""
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc_info):
+        return False
+
+
+def test_get_rejects_a_response_over_the_size_cap(monkeypatch):
+    """A feed serving far more than any real RSS feed ever would must be
+    rejected, not buffered in full."""
+    oversized_chunk = b"x" * (fetch.MAX_RESPONSE_BYTES // 2 + 1)
+    fake = _FakeResponse([oversized_chunk, oversized_chunk, oversized_chunk])
+    monkeypatch.setattr(urllib.request, "urlopen", lambda *a, **k: fake)
+
+    with pytest.raises(ValueError):
+        fetch._get("https://evil.example/huge-feed", 20)
+
+
+def test_get_never_buffers_past_the_cap(monkeypatch):
+    """`_get` must abort as soon as the running total crosses the cap,
+    rather than reading every chunk a malicious server offers first -- this
+    is what "read incrementally" actually buys over reading it all then
+    checking `len()`. The fake server below has an infinite supply of
+    chunks; if `_get` ever asked for dozens of them before giving up, this
+    test would still terminate, but `calls` would be far larger than it
+    needs to be to cross the cap."""
+    chunk_size = fetch.MAX_RESPONSE_BYTES // 4
+    calls = []
+
+    class _CountingResponse(_FakeResponse):
+        def read1(self, n=-1):
+            calls.append(1)
+            return b"x" * chunk_size
+
+    fake = _CountingResponse([])
+    monkeypatch.setattr(urllib.request, "urlopen", lambda *a, **k: fake)
+
+    with pytest.raises(ValueError):
+        fetch._get("https://evil.example/huge-feed", 20)
+    # The cap is crossed on the 5th chunk (4 * chunk_size <= cap < 5 *
+    # chunk_size); _get must not have kept asking for more after that.
+    assert len(calls) <= 6
+
+
+def test_fetch_all_reports_an_oversized_feed_as_failed_not_a_crash(monkeypatch):
+    def fake_get(url, timeout):
+        if "huge" in url:
+            raise ValueError("response exceeded the size cap")
+        return (FIX / "feed_ok.xml").read_bytes()
+
+    monkeypatch.setattr(fetch, "_get", fake_get)
+    feeds = [
+        {"name": "Huge", "url": "https://huge.example/rss"},
+        {"name": "Good", "url": "https://good.example/rss"},
+    ]
+    items, failed = fetch.fetch_all(feeds)
+    assert failed == ["Huge"]
+    assert len(items) == 2
+
+
+# ---------------------------------------------------------------------------
+# R3: a slow-drip feed hangs the whole run. `_get` streamed under a
+# per-recv 20s timeout, so a server sending one byte every 19 seconds never
+# tripped it -- and `fetch_all` exited via `with ThreadPoolExecutor(...)`,
+# whose `__exit__` waits for every thread, so one hung feed blocked the
+# entire run until Task Scheduler killed it at 15 minutes.
+# ---------------------------------------------------------------------------
+
+
+def test_get_enforces_a_total_deadline_even_though_each_read_is_fast_enough(monkeypatch):
+    """Simulates the exact drip: every single read1() call returns quickly
+    (well under any per-operation timeout), but there are infinitely many of
+    them, so the total time blows a small deadline. `_get` must notice and
+    abort rather than patiently accumulating forever.
+
+    `FEED_DEADLINE_SECONDS` is monkeypatched down rather than passed as an
+    argument to `_get`, deliberately: `_get`'s call signature must stay
+    `_get(url, timeout)` so every existing `monkeypatch.setattr(fetch,
+    "_get", fake_get)` two-argument fake in this file keeps working
+    unchanged. (A version of this test that instead called
+    `fetch._get(url, timeout, deadline=0.2)` would raise TypeError against
+    the pre-fix `_get` and pass for the wrong reason -- the assertion below
+    would never actually run.)"""
+    def trickle():
+        while True:
+            yield b"x"
+
+    class _DripResponse(_FakeResponse):
+        def __init__(self):
+            self._gen = trickle()
+
+        def read1(self, n=-1):
+            time.sleep(0.02)  # fast per-call, but this never ends
+            return next(self._gen)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc_info):
+            return False
+
+    monkeypatch.setattr(urllib.request, "urlopen", lambda *a, **k: _DripResponse())
+    monkeypatch.setattr(fetch, "FEED_DEADLINE_SECONDS", 0.2)
+
+    start = time.monotonic()
+    with pytest.raises(TimeoutError):
+        fetch._get("https://slow.example/rss", 20)
+    elapsed = time.monotonic() - start
+    assert elapsed < 2, f"_get took {elapsed}s -- the per-feed deadline was not enforced"
+
+
+def test_fetch_all_abandons_a_feed_that_blows_its_deadline_and_returns_promptly(monkeypatch):
+    """The whole-run version of the same finding: fetch_all itself must
+    return within its budget and name the offending feed as failed, rather
+    than blocking on `with ThreadPoolExecutor(...)`'s wait-for-every-thread
+    exit -- a genuinely slow feed's worker thread is left running in the
+    background instead."""
+    def fake_get(url, timeout):
+        if "slow" in url:
+            time.sleep(0.6)  # longer than the deadline below, but still short
+            return (FIX / "feed_ok.xml").read_bytes()
+        return (FIX / "feed_ok.xml").read_bytes()
+
+    monkeypatch.setattr(fetch, "_get", fake_get)
+    feeds = [
+        {"name": "Slow", "url": "https://slow.example/rss"},
+        {"name": "Fast", "url": "https://fast.example/rss"},
+    ]
+
+    start = time.monotonic()
+    items, failed = fetch.fetch_all(feeds, deadline=0.1)
+    elapsed = time.monotonic() - start
+
+    assert elapsed < 0.5, f"fetch_all took {elapsed}s -- it waited on the slow feed's thread"
+    assert failed == ["Slow"]
+    assert len(items) == 2
+    assert all(i.source == "Fast" for i in items)
