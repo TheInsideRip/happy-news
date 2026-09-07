@@ -41,6 +41,18 @@ TIERS = [
 QUIET_NOTE = "A quiet morning. Nothing new made the cut."
 MAX_CANDIDATES = 80
 
+# R4: without a per-feed cap, a single compromised feed publishing enough
+# items can supply every candidate in the pool -- verified: one priority
+# feed publishing 80+ items filled 80/80 of the tier-1 pool, starving every
+# honest source and maximising the prompt-injection surface the model is
+# shown (the candidate list is untrusted text the model is told to treat as
+# data, but more of it from one attacker-controlled source is strictly
+# worse). 15 is chosen so twelve feeds can still fill MAX_CANDIDATES (80)
+# comfortably even when several are quiet on a given day -- 12 * 15 = 180,
+# more than double what's needed -- while capping any one source's share of
+# an 80-slot pool to under a fifth instead of the 100% seen in review.
+PER_FEED_CAP = 15
+
 
 @dataclass
 class Result:
@@ -94,6 +106,31 @@ def _survives(story: dict, memory, editorial_cfg: dict, pool_url_keys: set[str])
     return not memory.is_blocked(story.get("url", ""), story.get("title", ""))
 
 
+def _cap_per_feed(candidates, cap):
+    """Keep at most `cap` items per feed (`Candidate.source`), most-recent
+    first, before the pool is assembled (finding R4): without this, a
+    single compromised feed publishing enough items can fill every
+    candidate slot on its own -- verified in review at 80/80 of the tier-1
+    pool from one source.
+
+    Undated items (`published is None`) sort after dated ones within their
+    feed rather than raising. `within_window` has already dropped anything
+    undated from every pool this actually runs on in `select()`, but
+    sorting a mixed bool/datetime key this way keeps the function safe even
+    if it's ever called on an unfiltered list, without assuming anything
+    about timezone-awareness that would make comparing two `None`s or a
+    `None` against a real datetime raise.
+    """
+    by_source: dict[str, list] = {}
+    for c in candidates:
+        by_source.setdefault(c.source, []).append(c)
+    kept = []
+    for items in by_source.values():
+        items.sort(key=lambda c: (c.published is not None, c.published), reverse=True)
+        kept.extend(items[:cap])
+    return kept
+
+
 def _prefilter(candidates, memory, editorial_cfg, allow_near, priority_only=False):
     """Hard blocks and the politics filter apply identically at every tier --
     only near-duplicates (advisory, layer 3) are ever demoted rather than
@@ -124,6 +161,7 @@ def select(*, candidates, memory, editorial_cfg, evergreen, ask_fn, now: datetim
     for tier in TIERS:
         if tier.hours is not None:
             pool = fetch.within_window(list(candidates), tier.hours, now)
+            pool = _cap_per_feed(pool, PER_FEED_CAP)
             pool = _prefilter(pool, memory, editorial_cfg, tier.allow_near_duplicates,
                               tier.priority_only)
             pool = pool[:MAX_CANDIDATES]

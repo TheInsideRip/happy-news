@@ -1,3 +1,4 @@
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -347,3 +348,81 @@ def test_an_empty_banned_terms_list_is_a_hard_error_not_a_disabled_filter(tmp_pa
             ladder.select(candidates=[candidate], memory=Memory(tmp_path / "s.jsonl"),
                           editorial_cfg=broken, evergreen=EVERGREEN,
                           ask_fn=picker(story), now=NOW)
+
+
+# ---------------------------------------------------------------------------
+# R4: one compromised feed can fill every candidate slot. Verified: a single
+# priority feed publishing 80+ items supplied 80/80 of the tier-1
+# candidates, starving every honest source and maximising the
+# prompt-injection surface the model is shown. A per-feed cap, applied
+# before the pool is assembled, fixes this: no single source can supply more
+# than PER_FEED_CAP candidates, however many items it actually publishes.
+# ---------------------------------------------------------------------------
+
+
+def test_cap_per_feed_keeps_at_most_the_cap_and_keeps_the_most_recent(tmp_path):
+    """Direct unit test of _cap_per_feed: one source with far more than the
+    cap, one source with fewer than it. The compromised source is capped;
+    the honest one is untouched; and the SURVIVING items from the
+    compromised source are its most recent ones, not an arbitrary subset."""
+    compromised = [
+        Candidate(f"Compromised {i}", f"https://evil.example/{i}", "Compromised",
+                  NOW - timedelta(hours=i), "blurb")
+        for i in range(40)
+    ]
+    honest = [
+        Candidate("Honest one", "https://honest.example/a", "Honest", NOW - timedelta(hours=1), "blurb"),
+        Candidate("Honest two", "https://honest.example/b", "Honest", NOW - timedelta(hours=2), "blurb"),
+    ]
+
+    capped = ladder._cap_per_feed(compromised + honest, ladder.PER_FEED_CAP)
+    counts = Counter(c.source for c in capped)
+
+    assert counts["Compromised"] == ladder.PER_FEED_CAP
+    assert counts["Honest"] == 2
+
+    kept_compromised_urls = {c.url for c in capped if c.source == "Compromised"}
+    most_recent_urls = {c.url for c in sorted(compromised, key=lambda c: c.published, reverse=True)[:ladder.PER_FEED_CAP]}
+    assert kept_compromised_urls == most_recent_urls
+
+
+def test_tier_pool_caps_a_single_feed_so_it_cannot_fill_every_slot(tmp_path):
+    """The exact defect found in review, reproduced end to end through
+    select(): a single priority feed publishing 80 fresh items must not
+    supply 80/80 of the tier-1 pool the model is shown, starving the one
+    honest source entirely. ask_fn captures the pool it's handed so this
+    test can inspect it directly."""
+    compromised = [
+        Candidate(f"Compromised story {i}", f"https://evil.example/{i}", "Compromised",
+                  NOW - timedelta(hours=1), "blurb", priority=True)
+        for i in range(80)
+    ]
+    honest = [Candidate("Honest headline", "https://honest.example/a", "Honest",
+                         NOW - timedelta(hours=1), "blurb", priority=True)]
+
+    # ask_fn returning [] means no tier ever succeeds, so select() keeps
+    # widening all the way to tier 4 (every dated tier), calling ask_fn once
+    # per tier along the way. Only the FIRST call -- tier 1's pool, the one
+    # this finding is actually about -- is what matters here; capturing
+    # every call would conflate tier 1's cap with tiers 2-4's separately
+    # capped pools stacking up across repeated calls.
+    calls = []
+
+    def ask(pool, recent_titles):
+        calls.append(list(pool))
+        return []
+
+    ladder.select(candidates=compromised + honest, memory=Memory(tmp_path / "s.jsonl"),
+                  editorial_cfg=ED, evergreen=[], ask_fn=ask, now=NOW)
+
+    tier1_pool = calls[0]
+    counts = Counter(c.source for c in tier1_pool)
+    assert counts["Compromised"] <= ladder.PER_FEED_CAP
+    assert counts["Honest"] == 1
+
+
+def test_per_feed_cap_still_lets_twelve_feeds_fill_the_pool(tmp_path):
+    """The cap must not be so tight that a normal day of twelve honest feeds
+    can't fill the candidate pool -- PER_FEED_CAP * 12 must comfortably
+    clear MAX_CANDIDATES."""
+    assert ladder.PER_FEED_CAP * 12 >= ladder.MAX_CANDIDATES * 2
