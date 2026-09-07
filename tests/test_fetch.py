@@ -105,3 +105,48 @@ def test_fetch_all_mixes_good_and_malformed_entries(monkeypatch):
     items, failed = fetch.fetch_all(feeds)
     assert len(items) == 2
     assert len(failed) == 4
+
+
+def test_parse_feed_sets_priority_flag():
+    priority_items = fetch.parse_feed((FIX / "feed_ok.xml").read_bytes(), "Example", priority=True)
+    assert priority_items
+    assert all(item.priority is True for item in priority_items)
+
+    default_items = fetch.parse_feed((FIX / "feed_ok.xml").read_bytes(), "Example")
+    assert default_items
+    assert all(item.priority is False for item in default_items)
+
+
+def test_fetch_all_sets_priority_from_feed_config(monkeypatch):
+    def fake_get(url, timeout):
+        return (FIX / "feed_ok.xml").read_bytes()
+
+    monkeypatch.setattr(fetch, "_get", fake_get)
+    feeds = [
+        {"name": "Priority Feed", "url": "https://priority.example/rss", "priority": True},
+        {"name": "Regular Feed", "url": "https://regular.example/rss"},
+        {"name": "Explicit False", "url": "https://explicit.example/rss", "priority": False},
+    ]
+    items, failed = fetch.fetch_all(feeds)
+    assert failed == []
+
+    priority_items = [i for i in items if i.source == "Priority Feed"]
+    regular_items = [i for i in items if i.source == "Regular Feed"]
+    explicit_false_items = [i for i in items if i.source == "Explicit False"]
+
+    assert priority_items and all(i.priority is True for i in priority_items)
+    assert regular_items and all(i.priority is False for i in regular_items)
+    assert explicit_false_items and all(i.priority is False for i in explicit_false_items)
+
+
+def test_fetch_all_survives_malformed_priority_value(monkeypatch):
+    """A hand-edited sources.yaml could put a non-bool under `priority` --
+    that must still never crash the run (same contract as missing name/url)."""
+    def fake_get(url, timeout):
+        return (FIX / "feed_ok.xml").read_bytes()
+
+    monkeypatch.setattr(fetch, "_get", fake_get)
+    feeds = [{"name": "Weird", "url": "https://weird.example/rss", "priority": "not-a-bool"}]
+    items, failed = fetch.fetch_all(feeds)
+    assert failed == []
+    assert items

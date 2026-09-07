@@ -10,13 +10,13 @@ EVERGREEN = [{"title": "Ozone healing", "url": "https://a.com/oz", "source": "UN
               "label": "earth", "summary": "Recovering."}]
 
 
-def cand(title, hours_old=2, url=None):
+def cand(title, hours_old=2, url=None, priority=False):
     # The brief's own helper used NOW.replace(hour=12 - hours_old), which
     # raises ValueError for any hours_old outside roughly -11..12 (e.g. the
     # brief's own hours_old=24*9=216 in test_ladder_reaches_back_in_time_
     # before_giving_up). timedelta works for any magnitude.
     return Candidate(title, url or f"https://a.com/{abs(hash(title))}", "Src",
-                     NOW - timedelta(hours=hours_old), "blurb")
+                     NOW - timedelta(hours=hours_old), "blurb", priority=priority)
 
 
 def picker(story):
@@ -28,11 +28,75 @@ def picker(story):
 def test_tier1_publishes_a_fresh_story(tmp_path):
     story = {"title": "Turtles recover", "url": "https://a.com/t", "source": "BBC",
              "label": "earth", "summary": "Good.", "why_good": "It is good."}
-    result = ladder.select(candidates=[cand("Turtles recover")],
+    result = ladder.select(candidates=[cand("Turtles recover", priority=True)],
                            memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
                            evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
     assert result.tier == 1
     assert result.story["title"] == "Turtles recover"
+    assert not result.evergreen
+
+
+def test_tier1_ignores_a_fresh_but_non_priority_candidate(tmp_path):
+    """Tier 1 means 'a dedicated priority outlet had something today', not
+    'anything surfaced in the last 48 hours'. A fresh candidate whose source
+    is not flagged priority=True must not satisfy tier 1, even though it
+    would otherwise be a perfect tier-1 match on timing alone."""
+    story = {"title": "Turtles recover", "url": "https://a.com/t", "source": "BBC",
+             "label": "earth", "summary": "Good.", "why_good": "It is good."}
+    result = ladder.select(candidates=[cand("Turtles recover", priority=False)],
+                           memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
+                           evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
+    assert result.tier != 1
+
+
+def test_same_non_priority_candidate_is_considered_at_tier2(tmp_path):
+    """The exact candidate tier 1 must reject on priority grounds alone is
+    still found once the ladder reaches tier 2, which does not filter by
+    priority -- only the time window changes."""
+    story = {"title": "Turtles recover", "url": "https://a.com/t", "source": "BBC",
+             "label": "earth", "summary": "Good.", "why_good": "It is good."}
+    result = ladder.select(candidates=[cand("Turtles recover", priority=False)],
+                           memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
+                           evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
+    assert result.tier == 2
+    assert result.story["title"] == "Turtles recover"
+    assert not result.evergreen
+
+
+def test_prefilter_enforces_priority_only_when_the_tier_asks_for_it(tmp_path):
+    """Direct unit test of _prefilter's new priority_only parameter, isolated
+    from timing/window concerns: a tier-1-shaped call (priority_only=True)
+    must drop the non-priority candidate; a tier-2-shaped call
+    (priority_only=False) must keep both."""
+    memory = Memory(tmp_path / "s.jsonl")
+    non_priority = cand("Coral reef recovers", priority=False)
+    priority = cand("Turtles saved from extinction", priority=True)
+    pool = [non_priority, priority]
+
+    tier1_pool = ladder._prefilter(pool, memory, ED, allow_near=False, priority_only=True)
+    assert tier1_pool == [priority]
+
+    tier2_pool = ladder._prefilter(pool, memory, ED, allow_near=False, priority_only=False)
+    assert tier2_pool == [non_priority, priority]
+
+
+def test_ladder_does_not_crash_or_hang_when_every_priority_feed_is_empty(tmp_path):
+    """Judgement call: if every priority feed is down or empty, no candidate
+    anywhere in the pool carries priority=True. Tier 1's pool must correctly
+    come up empty -- not crash, not hang, not skip a tier -- and the ladder
+    must fall straight through to tier 2 exactly as it would for any other
+    empty-tier-1-pool case."""
+    story = {"title": "Coral reef recovers", "url": "https://a.com/c", "source": "BBC",
+             "label": "earth", "summary": "Good.", "why_good": "It is good."}
+    candidates = [
+        cand("Coral reef recovers", priority=False),
+        cand("Ocean cleanup expands", priority=False, url="https://a.com/ocean"),
+    ]
+    result = ladder.select(candidates=candidates,
+                           memory=Memory(tmp_path / "s.jsonl"), editorial_cfg=ED,
+                           evergreen=EVERGREEN, ask_fn=picker(story), now=NOW)
+    assert result.tier == 2
+    assert result.story is not None
     assert not result.evergreen
 
 

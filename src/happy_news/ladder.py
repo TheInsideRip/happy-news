@@ -59,13 +59,21 @@ def _survives(story: dict, memory, editorial_cfg: dict) -> bool:
     return not memory.is_blocked(story.get("url", ""), story.get("title", ""))
 
 
-def _prefilter(candidates, memory, editorial_cfg, allow_near):
+def _prefilter(candidates, memory, editorial_cfg, allow_near, priority_only=False):
     """Hard blocks and the politics filter apply identically at every tier --
     only near-duplicates (advisory, layer 3) are ever demoted rather than
     kept, and only released when the tier allows it. Kept candidates always
-    precede demoted ones so the model sees the better candidates first."""
+    precede demoted ones so the model sees the better candidates first.
+
+    priority_only is tier 1's own restriction: when True, only candidates
+    from a dedicated priority outlet (fetch.Candidate.priority) are even
+    considered -- everything else is dropped before the quality bar (hard
+    blocks, politics, near-duplicates) is ever applied. Tiers 2 and beyond
+    pass priority_only=False and see the full haystack."""
     kept, demoted = [], []
     for c in candidates:
+        if priority_only and not c.priority:
+            continue
         if memory.is_blocked(c.url, c.title):
             continue
         if ed.politics_blocked(f"{c.title} {c.blurb}",
@@ -81,7 +89,8 @@ def select(*, candidates, memory, editorial_cfg, evergreen, ask_fn, now: datetim
     for tier in TIERS:
         if tier.hours is not None:
             pool = fetch.within_window(list(candidates), tier.hours, now)
-            pool = _prefilter(pool, memory, editorial_cfg, tier.allow_near_duplicates)
+            pool = _prefilter(pool, memory, editorial_cfg, tier.allow_near_duplicates,
+                              tier.priority_only)
             pool = pool[:MAX_CANDIDATES]
             if pool:
                 for story in ask_fn(pool, memory.recent_titles()) or []:

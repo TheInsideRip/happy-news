@@ -22,6 +22,7 @@ class Candidate:
     source: str
     published: datetime | None
     blurb: str
+    priority: bool = False
 
 
 def _get(url: str, timeout: int) -> bytes:
@@ -37,7 +38,7 @@ def _published(entry) -> datetime | None:
     return datetime(*parsed[:6], tzinfo=timezone.utc)
 
 
-def parse_feed(raw: bytes, source_name: str) -> list[Candidate]:
+def parse_feed(raw: bytes, source_name: str, priority: bool = False) -> list[Candidate]:
     parsed = feedparser.parse(raw)
     items: list[Candidate] = []
     for entry in getattr(parsed, "entries", []):
@@ -46,7 +47,7 @@ def parse_feed(raw: bytes, source_name: str) -> list[Candidate]:
         if not title or not link.startswith(("http://", "https://")):
             continue
         blurb = (getattr(entry, "summary", "") or "").strip()[:BLURB_LIMIT]
-        items.append(Candidate(title, link, source_name, _published(entry), blurb))
+        items.append(Candidate(title, link, source_name, _published(entry), blurb, priority))
 
     undated = sum(1 for item in items if item.published is None)
     if undated:
@@ -76,12 +77,13 @@ def fetch_all(feeds: list[dict], *, timeout: int = 20) -> tuple[list[Candidate],
         name = feed.get("name") or None
         url = feed.get("url") or None
         label = name or url or "<unnamed feed>"
+        priority = feed.get("priority", False)
 
         if not name or not url:
             return label, [], ValueError(f"feed {label!r} is missing 'name' or 'url'")
 
         try:
-            return name, parse_feed(_get(url, timeout), name), None
+            return name, parse_feed(_get(url, timeout), name, priority), None
         except Exception as error:  # noqa: BLE001 - a dead feed is expected, not exceptional
             return name, [], error
 

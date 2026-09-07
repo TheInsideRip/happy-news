@@ -141,7 +141,7 @@ def test_dry_run_prints_the_chosen_story(monkeypatch, tmp_path, capsys):
 
     now_utc = datetime.now(timezone.utc)
     candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
-                          now_utc - timedelta(hours=2), "blurb")
+                          now_utc - timedelta(hours=2), "blurb", priority=True)
     monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
     monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
 
@@ -167,7 +167,8 @@ def test_run_publishes_a_tier1_story_end_to_end(monkeypatch, tmp_path):
     # candidate's published time must be relative to that same fake "now"
     # (not the real wall clock) for "N hours ago" to come out exact.
     candidate = Candidate("Turtles recover", "https://example.com/turtles", "BBC",
-                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb")
+                          fake_now.astimezone(timezone.utc) - timedelta(hours=2), "blurb",
+                          priority=True)
     monkeypatch.setattr(cli.fetch, "fetch_all", lambda feeds, **k: ([candidate], []))
     monkeypatch.setattr(cli.curate, "ask", lambda prompt, system, **k: [_story()])
 
