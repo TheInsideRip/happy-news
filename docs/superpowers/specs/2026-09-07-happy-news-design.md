@@ -102,28 +102,44 @@ These rules are the product. They live in `feeds/editorial.yaml` and in the prom
 the hard filters are enforced **in code after the model answers**, not merely requested
 in the prompt.
 
-### 3.1 Categories
+### 3.1 Scope, and why categories are labels rather than a filter
 
-Eight, deliberately wide. The narrow four-category list in the first draft made the
-system fragile: one bad night for environmental feeds and there was nothing to publish.
-Breadth is the cheapest insurance against a dry run, and at one story per timeframe
-there is no cost to having more places to look.
+**The scope is: good news for humans and for the planet. That is the whole gate.**
 
-| Category | Covers |
+A story is admitted if it passes three tests, and only these three:
+
+1. It is genuinely good news for people or the earth (§3.2).
+2. It actually happened — not a plan, pledge, or forecast (§3.2).
+3. It survives the politics rule (§3.3).
+
+**Categories are labels applied *after* a story is admitted, purely so the page can show
+a word above the headline. They are never a filter.** This is a correction to an earlier
+draft, where the list was written as a closed set and a good story that fitted none of
+the boxes could be silently dropped. That is backwards: the taxonomy must never be able
+to reject something worth reading.
+
+| Label | Covers |
 |---|---|
-| `environment` | Climate wins, clean energy, conservation, restoration, **and all animal news** — wildlife recovery, species rebounds, rescues, habitat protection, animal-welfare law |
-| `science` | Space, discovery, archaeology, palaeontology, newly described species, research that produced a result |
-| `health` | Treatments approved, diseases pushed back, surgical and diagnostic firsts, public-health wins |
+| `earth` | Climate wins, clean energy, restoration, preservation, conservation, forests, rivers |
+| `ocean` | Marine life, reefs, fisheries, sea protection, coastal recovery |
+| `animals` | Wildlife recovery, species rebounds, rescues, habitat protection, animal-welfare law |
+| `agriculture` | Farming, food security, soil, crops, water, the people who grow things |
+| `people` | Community, kindness, generosity, ordinary people doing something good |
+| `health` | Treatments approved, diseases pushed back, surgical and public-health wins |
+| `science` | Discovery, archaeology, palaeontology, research that produced a result |
+| `space` | Missions, launches, landings, what we found out there |
 | `technology` | Inventions and deployments that measurably help people or the planet |
-| `people` | Human interest, community, kindness, generosity, ordinary people doing something good |
-| `culture` | Art and heritage restored or returned to its country, languages revived, landmarks saved, records set |
+| `peace` | Ceasefires, treaties, reconciliation, disarmament, aid reaching people, refugees going home |
 | `government` | **Outcomes only** — see §3.3 |
-| `sport` | **Human moments only** — comebacks, sportsmanship, barriers broken. Never results, standings, transfers, or odds. |
+| `world` | **The catch-all.** Anything genuinely good that fits none of the above |
 
-`environment` is expected to dominate simply because animal and conservation news is the
-richest and most reliably positive vein available. That is fine and not a flaw.
+**The `world` label is load-bearing, not filler.** It is what makes "and so on" real: an
+excellent story that matches no listed label is published under `world`, never discarded.
+Any label being over-represented is fine — `animals` and `earth` are expected to dominate
+simply because they are the richest and most reliably positive veins available.
 
-`sport` is the one category most likely to be cut on taste; nothing else depends on it.
+**Explicitly out of scope:** sport in all forms — results, standings, transfers, odds,
+and human-interest sport moments alike.
 
 ### 3.2 What counts as good news
 
@@ -159,7 +175,13 @@ outcomes-only bar.
 - `outcome_overrides` — phrases that rescue an otherwise-banned candidate because they
   mark a finished outcome: `court ruled`, `court upheld`, `judge ordered`, `convicted`,
   `treaty ratified`, `agreement signed`, `law took effect`, `bill signed into law`,
-  `settlement reached`.
+  `settlement reached`, `ceasefire`, `peace deal`, `truce`, `peace agreement`,
+  `returned home`, `aid reached`, `hostages released`, `disarmament`.
+
+  The peace-related overrides matter more than they look. A ceasefire story routinely
+  reads "after months of clashes, a ceasefire was signed" — the banned term `clash`
+  appears in the very sentence that makes it good news. Without the override, the
+  `peace` label would be nearly unusable.
 - **Rule:** reject if any `banned_term` matches **and** no `outcome_override` matches.
 
 This list is expected to be tuned during the first few weeks. It is data, not code, so
@@ -184,7 +206,7 @@ the dedup memory grows at roughly a fifth of the previous rate.
 #### The escalation ladder
 
 **A drought is a malfunction, not a news shortage.** At one story per timeframe across
-eight categories, "nothing good happened anywhere on earth" is not a state the world
+twelve labels covering everything good that happens to people or the planet, "nothing good happened anywhere on earth" is not a state the world
 produces. If the system reports one, the cause is almost certainly local: dead feeds, an
 over-firing politics filter, or an over-eager duplicate check. The design treats it that
 way — the ladder reaches a long way before giving up, and giving up raises an alarm.
@@ -583,7 +605,7 @@ all local logs.
 | Ladder reached tier 4 | Publish, but log a warning naming the likely cause (dead feeds / politics filter / duplicate check counts) |
 | Ladder reached tier 5 | Publish from the evergreen reserve, **raise an alert** — the live pipeline is not working |
 | Two tier-4-or-worse runs in a rolling week | Escalated alert: treated as a broken system, not bad luck |
-| Ladder exhausted, zero stories | Write an empty slot with its reason, record a drought in `health.json`, **raise an alert** — at one story across eight categories this indicates a defect, not a quiet news day |
+| Ladder exhausted, zero stories | Write an empty slot with its reason, record a drought in `health.json`, **raise an alert** — at one story across the full scope this indicates a defect, not a quiet news day |
 | Machine powered off at slot time | Task Scheduler catch-up publishes on next wake if still inside the window (§4.1) |
 | Any failed run | Windows toast notification + a line in `logs/failures.log` |
 | 3 consecutive failed runs | Escalated notification — the system is broken, not merely unlucky |
