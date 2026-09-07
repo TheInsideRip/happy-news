@@ -1,0 +1,395 @@
+<title>Three Looks for Stacey</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Alegreya:ital,wght@0,500;0,700;1,500&family=Alegreya+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Karla:wght@400;500;700&display=swap">
+
+<style>
+/* ─── gallery chrome (theme-aware) ─────────────────────────────── */
+:root{
+  --page:#F3F6F0; --panel:#FFFFFF; --c-ink:#17251C; --c-soft:#5B6F61;
+  --c-line:#DBE3D5; --c-accent:#2E6B4E; --c-shadow:rgba(23,37,28,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#101713; --panel:#18201A; --c-ink:#E8F0E7; --c-soft:#98AC9C;
+    --c-line:#28342A; --c-accent:#7EC3A2; --c-shadow:rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --page:#101713; --panel:#18201A; --c-ink:#E8F0E7; --c-soft:#98AC9C;
+  --c-line:#28342A; --c-accent:#7EC3A2; --c-shadow:rgba(0,0,0,.45);
+}
+
+body{
+  background:var(--page); color:var(--c-ink);
+  font-family:"Alegreya Sans","Segoe UI",system-ui,sans-serif;
+  line-height:1.55; padding:2.5rem 1.25rem 4rem;
+}
+.wrap{max-width:1180px;margin:0 auto;}
+
+.masthead{max-width:44rem;margin:0 auto 2.5rem;}
+.eyebrow{
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--c-accent);font-weight:700;margin:0 0 .6rem;
+}
+.masthead h1{
+  font-family:"Fraunces","Georgia",serif;font-weight:700;
+  font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:0 0 .7rem;
+  text-wrap:balance;letter-spacing:-.01em;
+}
+.masthead p{margin:0 0 .5rem;color:var(--c-soft);font-size:1.02rem;max-width:38rem;}
+.sample-note{
+  display:inline-block;margin-top:.9rem;padding:.4rem .75rem;
+  border:1px solid var(--c-line);border-radius:2px;
+  font-size:.78rem;color:var(--c-soft);background:var(--panel);
+}
+.sample-note strong{color:var(--c-ink);font-weight:700;}
+
+.grid{display:grid;gap:2.25rem;grid-template-columns:1fr;justify-items:center;}
+@media (min-width:900px){.grid{grid-template-columns:repeat(3,1fr);align-items:start;}}
+
+.direction{display:flex;flex-direction:column;gap:.85rem;max-width:360px;width:100%;}
+.d-name{
+  font-family:"Fraunces","Georgia",serif;font-size:1.25rem;font-weight:700;
+  margin:0;display:flex;align-items:baseline;gap:.5rem;
+}
+.d-name span{
+  font-family:"Alegreya Sans",sans-serif;font-size:.68rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--c-accent);
+}
+.d-why{margin:0;font-size:.9rem;color:var(--c-soft);}
+
+/* the phone shell */
+.phone{
+  position:relative;width:100%;aspect-ratio:340/660;border-radius:26px;
+  overflow:hidden;box-shadow:0 14px 34px -10px var(--c-shadow);
+  border:1px solid var(--c-line);
+}
+.screen{position:absolute;inset:0;overflow:hidden;}
+.bg{position:absolute;inset:0;pointer-events:none;}
+.bg svg{position:absolute;}
+.inner{position:relative;height:100%;padding:20px 18px 0;box-sizing:border-box;}
+
+.closing{max-width:44rem;margin:3rem auto 0;padding-top:1.75rem;border-top:1px solid var(--c-line);}
+.closing h2{font-family:"Fraunces",serif;font-size:1.15rem;margin:0 0 .6rem;}
+.closing p{margin:0 0 .7rem;color:var(--c-soft);font-size:.95rem;}
+.closing b{color:var(--c-ink);}
+
+/* ─── shared story bones (each direction restyles) ─────────────── */
+.cat{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;}
+.hl{margin:0;text-wrap:balance;}
+.meta{font-size:.66rem;letter-spacing:.03em;}
+.sum{margin:0;}
+
+/* ═══ DIRECTION 1 — SCUTE ══════════════════════════════════════ */
+.d1{background:#EFF3E7;}
+.d1 .bg{color:#3E5A44;}
+.d1 .inner{font-family:"Newsreader",Georgia,serif;color:#16291D;}
+.d1-title{
+  font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.62rem;
+  line-height:1.05;margin:0;color:#16291D;letter-spacing:-.015em;
+}
+.d1-rule{height:2px;background:#7B2D4E;width:34px;margin:9px 0 8px;}
+.d1-times{
+  display:flex;align-items:center;gap:6px;font-family:"Alegreya Sans",sans-serif;
+  font-size:.62rem;font-weight:700;letter-spacing:.13em;color:#7B2D4E;
+}
+.d1-times i{color:#C6D2B4;font-style:normal;}
+.d1-times .on{
+  background:#7B2D4E;color:#EFF3E7;padding:2px 6px;border-radius:2px;letter-spacing:.1em;
+}
+.d1-updated{
+  font-family:"Alegreya Sans",sans-serif;font-size:.62rem;color:#5D7566;
+  margin:6px 0 16px;letter-spacing:.02em;
+}
+.d1-slot{
+  font-family:"Alegreya Sans",sans-serif;font-size:.6rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:#47604F;
+  margin:0 0 9px;display:flex;align-items:center;gap:7px;
+}
+.d1-slot::after{content:"";flex:1;height:1px;background:#CFDCBE;}
+.plate{
+  position:relative;background:#E3EBD7;
+  border-radius:16px 16px 13px 13px / 20px 20px 11px 11px;
+  border:1px solid #CEDCBC;padding:11px 13px 12px;margin:0 0 9px;
+}
+.plate::before{ /* the keel — a real scute has a ridge down the middle */
+  content:"";position:absolute;left:50%;top:7px;bottom:7px;width:1px;
+  background:linear-gradient(#CEDCBC,transparent);opacity:.75;
+}
+.plate .cat{color:#7B2D4E;display:flex;align-items:center;gap:5px;}
+.plate .hl{font-size:.92rem;font-weight:600;line-height:1.25;margin:4px 0 3px;}
+.plate .meta{font-family:"Alegreya Sans",sans-serif;color:#5D7566;}
+.plate .sum{font-size:.76rem;line-height:1.45;color:#33493A;margin-top:5px;}
+
+/* ═══ DIRECTION 2 — GARDEN BED ═════════════════════════════════ */
+.d2{background:#EDF1E4;}
+.d2 .inner{font-family:"Alegreya Sans",sans-serif;color:#26332A;padding-left:16px;}
+.d2-title{
+  font-family:"Alegreya",Georgia,serif;font-style:italic;font-weight:700;
+  font-size:1.72rem;line-height:1.02;margin:0;color:#1F3324;letter-spacing:-.01em;
+}
+.d2-times{
+  display:flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;color:#5C8A4A;margin-top:9px;
+}
+.d2-times i{color:#B7CBA9;font-style:normal;}
+.d2-times .on{color:#E0728E;border-bottom:2px solid #E0728E;padding-bottom:1px;}
+.d2-updated{font-size:.62rem;color:#6E8574;margin:5px 0 15px;}
+.d2-row{position:relative;padding-left:22px;}
+.d2-row::before{ /* the continuous stem */
+  content:"";position:absolute;left:5px;top:0;bottom:-4px;width:2px;background:#8FB57C;
+}
+.d2-row:last-child::before{bottom:auto;height:34px;}
+.d2-slot{
+  position:relative;font-family:"Alegreya",serif;font-style:italic;font-size:.86rem;
+  font-weight:700;color:#3F6B34;margin:0 0 9px;
+}
+.d2-bloom{position:absolute;left:-24px;top:-3px;width:19px;height:19px;color:#E0728E;}
+.d2-card{
+  position:relative;background:#fff;border-radius:3px;padding:10px 12px 11px;
+  margin:0 0 10px;box-shadow:0 2px 7px -3px rgba(38,51,42,.24);
+}
+.d2-leaf{position:absolute;left:-19px;top:13px;width:15px;height:9px;color:#8FB57C;}
+.d2-card .cat{color:#5C8A4A;}
+.d2-card .hl{
+  font-family:"Alegreya",Georgia,serif;font-size:.93rem;font-weight:700;
+  line-height:1.22;margin:4px 0 3px;color:#1F3324;
+}
+.d2-card .meta{color:#78907E;}
+.d2-card .sum{font-size:.76rem;line-height:1.45;color:#3D5344;margin-top:5px;}
+
+/* ═══ DIRECTION 3 — POND ═══════════════════════════════════════ */
+.d3{background:#E7EFEA;}
+.d3 .bg{color:#0F3A31;}
+.d3 .inner{font-family:"Karla",system-ui,sans-serif;color:#0F3A31;padding:26px 20px 0;}
+.d3-title{
+  font-family:"Instrument Serif",Georgia,serif;font-size:2.05rem;font-weight:400;
+  line-height:.98;margin:0;color:#0F3A31;letter-spacing:-.005em;
+}
+.d3-pads{display:flex;align-items:center;gap:9px;margin:15px 0 6px;}
+.d3-pad{
+  display:flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;
+  letter-spacing:.09em;color:#557A6C;
+}
+.d3-pad::before{
+  content:"";width:8px;height:8px;border-radius:50% 50% 50% 0;
+  background:#BBD3C6;transform:rotate(-45deg);
+}
+.d3-pad.on{color:#0F3A31;}
+.d3-pad.on::before{background:#E0A32B;}
+.d3-updated{font-size:.6rem;color:#6E8C7E;margin:0 0 20px;letter-spacing:.02em;}
+.d3-slot{
+  font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#7C9B8C;margin:0 0 12px;
+}
+.d3-story{padding:0 0 13px;margin:0 0 13px;border-bottom:1px solid #D2E1D8;}
+.d3-story:last-of-type{border-bottom:none;}
+.d3-story .cat{color:#D9758F;}
+.d3-story .hl{
+  font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:1.06rem;
+  line-height:1.15;margin:5px 0 4px;color:#0F3A31;
+}
+.d3-story .meta{color:#7C9B8C;}
+.d3-story .sum{font-size:.76rem;line-height:1.5;color:#31584B;margin-top:6px;}
+
+.drift{animation:drift 26s ease-in-out infinite alternate;}
+.drift2{animation:drift 34s ease-in-out infinite alternate-reverse;}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(9px,-11px)}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2{animation:none;}}
+
+a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--c-accent);outline-offset:3px;}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="turtle" viewBox="0 0 100 80">
+    <ellipse cx="70" cy="21" rx="9" ry="6" transform="rotate(-34 70 21)"/>
+    <ellipse cx="70" cy="59" rx="9" ry="6" transform="rotate(34 70 59)"/>
+    <ellipse cx="27" cy="22" rx="8" ry="5.5" transform="rotate(34 27 22)"/>
+    <ellipse cx="27" cy="58" rx="8" ry="5.5" transform="rotate(-34 27 58)"/>
+    <ellipse cx="16" cy="40" rx="6" ry="3"/>
+    <ellipse cx="84" cy="40" rx="9.5" ry="7"/>
+    <ellipse cx="48" cy="40" rx="30" ry="23"/>
+    <g fill="none" stroke="#fff" stroke-width="1.6" opacity=".5">
+      <ellipse cx="48" cy="40" rx="8" ry="7"/>
+      <ellipse cx="48" cy="24" rx="7" ry="5.5"/>
+      <ellipse cx="48" cy="56" rx="7" ry="5.5"/>
+      <ellipse cx="30" cy="40" rx="6.5" ry="7"/>
+      <ellipse cx="66" cy="40" rx="6.5" ry="7"/>
+    </g>
+  </symbol>
+  <symbol id="flower" viewBox="0 0 100 100">
+    <g>
+      <ellipse cx="50" cy="27" rx="11.5" ry="19"/>
+      <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(72 50 50)"/>
+      <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(144 50 50)"/>
+      <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(216 50 50)"/>
+      <ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate(288 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="8.5" fill="#fff" opacity=".55"/>
+  </symbol>
+  <symbol id="leaf" viewBox="0 0 100 60">
+    <path d="M2 30 C 30 -4, 72 -4, 98 30 C 72 64, 30 64, 2 30 Z"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="eyebrow">Design directions · pick one or mix</p>
+    <h1>Three looks for Stacey Happy News</h1>
+    <p>Each one is green, has turtles and flowers in the background, and carries the update times up top with the most recent one marked — so she can tell at a glance whether she's seen this batch.</p>
+    <p>The difference is how much the page decorates itself. Left is the most structured, right is the quietest.</p>
+    <p class="sample-note"><strong>Sample stories only.</strong> These headlines are placeholders written to test the layout — not real news.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ══ 1. SCUTE ══ -->
+    <div class="direction">
+      <h2 class="d-name">Scute <span>Structured</span></h2>
+      <p class="d-why">A turtle's shell is made of plates called scutes. Each story sits on one, ridge down the middle and all.</p>
+      <div class="phone d1">
+        <div class="screen">
+          <div class="bg" aria-hidden="true">
+            <svg width="150" height="120" viewBox="0 0 100 80" fill="currentColor" opacity=".15" style="top:132px;left:-34px;transform:rotate(-12deg)"><use href="#turtle"/></svg>
+            <svg width="118" height="94" viewBox="0 0 100 80" fill="currentColor" opacity=".13" style="bottom:34px;right:-30px;transform:rotate(9deg) scaleX(-1)"><use href="#turtle"/></svg>
+            <svg width="54" height="54" viewBox="0 0 100 100" fill="#7B2D4E" opacity=".10" style="top:96px;right:12px"><use href="#flower"/></svg>
+            <svg width="34" height="34" viewBox="0 0 100 100" fill="#7B2D4E" opacity=".09" style="bottom:150px;left:14px"><use href="#flower"/></svg>
+            <svg width="26" height="26" viewBox="0 0 100 100" fill="#5C7A5F" opacity=".13" style="top:330px;right:26px"><use href="#flower"/></svg>
+          </div>
+          <div class="inner">
+            <h1 class="d1-title">Stacey<br>Happy News</h1>
+            <div class="d1-rule"></div>
+            <div class="d1-times"><span>8:00</span><i>·</i><span>2:00</span><i>·</i><span class="on">7:00</span></div>
+            <p class="d1-updated">Last updated 7:04 pm</p>
+
+            <p class="d1-slot">Evening</p>
+            <article class="plate">
+              <p class="cat">Environment</p>
+              <p class="hl">Sea turtle nests hit a record along a protected coastline</p>
+              <p class="meta">BBC · 2 hours ago</p>
+              <p class="sum">Volunteers counted more nests this season than in any year since the survey began. Two decades of quieter beachfront lighting are getting most of the credit.</p>
+            </article>
+            <article class="plate">
+              <p class="cat">People</p>
+              <p class="hl">A town's library started lending tools, and never stopped</p>
+              <p class="meta">Positive News · 4 hours ago</p>
+              <p class="sum">What began with a donated drill and one shelf is now several hundred items. Borrowing is free, and the waiting list is mostly for the ladder.</p>
+            </article>
+
+            <p class="d1-slot">Afternoon</p>
+            <article class="plate">
+              <p class="cat">Technology</p>
+              <p class="hl">A cheap buried sensor is helping farmers water less</p>
+              <p class="meta">Reuters · 5 hours ago</p>
+              <p class="sum">The device sits in the soil and reports how thirsty it actually is.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 2. GARDEN BED ══ -->
+    <div class="direction">
+      <h2 class="d-name">Garden Bed <span>Floral</span></h2>
+      <p class="d-why">A stem grows down the whole page. A leaf marks every story, a bloom opens every section.</p>
+      <div class="phone d2">
+        <div class="screen">
+          <div class="bg" aria-hidden="true">
+            <svg width="70" height="70" viewBox="0 0 100 100" fill="#E0728E" opacity=".13" style="top:-14px;right:-16px"><use href="#flower"/></svg>
+            <svg width="44" height="44" viewBox="0 0 100 100" fill="#E8B33C" opacity=".18" style="top:44px;right:26px"><use href="#flower"/></svg>
+            <svg width="52" height="52" viewBox="0 0 100 100" fill="#8FB57C" opacity=".16" style="bottom:96px;right:-12px"><use href="#flower"/></svg>
+            <svg width="88" height="70" viewBox="0 0 100 80" fill="#5C8A4A" opacity=".30" style="bottom:10px;right:14px"><use href="#turtle"/></svg>
+            <svg width="30" height="30" viewBox="0 0 100 100" fill="#E0728E" opacity=".14" style="bottom:58px;left:8px"><use href="#flower"/></svg>
+          </div>
+          <div class="inner">
+            <h1 class="d2-title">Stacey<br>Happy News</h1>
+            <div class="d2-times"><span>8:00</span><i>·</i><span>2:00</span><i>·</i><span class="on">7:00</span></div>
+            <p class="d2-updated">Last updated 7:04 pm</p>
+
+            <div class="d2-row">
+              <p class="d2-slot"><svg class="d2-bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Evening</p>
+              <article class="d2-card">
+                <svg class="d2-leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                <p class="cat">Environment</p>
+                <p class="hl">Sea turtle nests hit a record along a protected coastline</p>
+                <p class="meta">BBC · 2 hours ago</p>
+                <p class="sum">Volunteers counted more nests this season than in any year since the survey began. Quieter beachfront lighting gets the credit.</p>
+              </article>
+              <article class="d2-card">
+                <svg class="d2-leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                <p class="cat">People</p>
+                <p class="hl">A town's library started lending tools, and never stopped</p>
+                <p class="meta">Positive News · 4 hours ago</p>
+                <p class="sum">One donated drill became several hundred items. The waiting list is mostly for the ladder.</p>
+              </article>
+            </div>
+
+            <div class="d2-row">
+              <p class="d2-slot"><svg class="d2-bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>Afternoon</p>
+              <article class="d2-card">
+                <svg class="d2-leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>
+                <p class="cat">Government</p>
+                <p class="hl">A city finished replacing its lead pipes a year early</p>
+                <p class="meta">AP · 6 hours ago</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 3. POND ══ -->
+    <div class="direction">
+      <h2 class="d-name">Pond <span>Quietest</span></h2>
+      <p class="d-why">No boxes at all. Turtles drift behind the words, and the update times sit on lily pads.</p>
+      <div class="phone d3">
+        <div class="screen">
+          <div class="bg" aria-hidden="true">
+            <svg class="drift" width="132" height="106" viewBox="0 0 100 80" fill="currentColor" opacity=".17" style="top:112px;left:-30px;transform:rotate(-18deg)"><use href="#turtle"/></svg>
+            <svg class="drift2" width="96" height="77" viewBox="0 0 100 80" fill="currentColor" opacity=".15" style="top:330px;right:-24px;transform:rotate(14deg) scaleX(-1)"><use href="#turtle"/></svg>
+            <svg class="drift" width="60" height="48" viewBox="0 0 100 80" fill="currentColor" opacity=".13" style="bottom:44px;left:24px;transform:rotate(6deg)"><use href="#turtle"/></svg>
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="#D9758F" opacity=".16" style="top:250px;left:16px"><use href="#flower"/></svg>
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="#E0A32B" opacity=".2" style="bottom:130px;right:22px"><use href="#flower"/></svg>
+          </div>
+          <div class="inner">
+            <h1 class="d3-title">Stacey<br>Happy News</h1>
+            <div class="d3-pads">
+              <span class="d3-pad">8:00</span>
+              <span class="d3-pad">2:00</span>
+              <span class="d3-pad on">7:00</span>
+            </div>
+            <p class="d3-updated">Last updated 7:04 pm</p>
+
+            <p class="d3-slot">Evening</p>
+            <article class="d3-story">
+              <p class="cat">Environment</p>
+              <p class="hl">Sea turtle nests hit a record along a protected coastline</p>
+              <p class="meta">BBC · 2 hours ago</p>
+              <p class="sum">Volunteers counted more nests this season than in any year since the survey began. Two decades of quieter beachfront lighting are getting most of the credit.</p>
+            </article>
+            <article class="d3-story">
+              <p class="cat">People</p>
+              <p class="hl">A town's library started lending tools</p>
+              <p class="meta">Positive News · 4 hours ago</p>
+              <p class="sum">One donated drill and a shelf became several hundred items. Borrowing is free, and the waiting list is mostly for the ladder.</p>
+            </article>
+            <article class="d3-story">
+              <p class="cat">Technology</p>
+              <p class="hl">A buried sensor is helping farmers water less</p>
+              <p class="meta">Reuters · 5 hours ago</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closing">
+    <h2>What I need from you</h2>
+    <p>Pick one, or mix them — <b>"Scute's shell plates but Pond's calm spacing"</b> is a perfectly good answer, and so is <b>"more flowers, fewer turtles."</b></p>
+    <p>Worth knowing: the real page gets a dark version too, so the 7:00 pm read is easy on the eyes. These mockups show the daytime look only.</p>
+    <p>Show her before you decide. She's the one opening it three times a day.</p>
+  </div>
+
+</div>
