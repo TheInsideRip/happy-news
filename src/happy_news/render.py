@@ -1,0 +1,176 @@
+"""Build the page. Every value that reaches HTML is escaped -- feed and model
+text is untrusted input."""
+from __future__ import annotations
+
+import html
+import re
+from datetime import date, datetime
+
+from .clock import SLOT_ORDER
+
+SLOT_TIMES = [("8:00", "morning"), ("2:00", "afternoon"), ("7:00", "evening")]
+
+TURTLE = (
+    '<symbol id="turtle" viewBox="0 0 100 80">'
+    '<ellipse cx="70" cy="21" rx="9" ry="6" transform="rotate(-34 70 21)"/>'
+    '<ellipse cx="70" cy="59" rx="9" ry="6" transform="rotate(34 70 59)"/>'
+    '<ellipse cx="27" cy="22" rx="8" ry="5.5" transform="rotate(34 27 22)"/>'
+    '<ellipse cx="27" cy="58" rx="8" ry="5.5" transform="rotate(-34 27 58)"/>'
+    '<ellipse cx="16" cy="40" rx="6" ry="3"/>'
+    '<ellipse cx="84" cy="40" rx="9.5" ry="7"/>'
+    '<ellipse cx="48" cy="40" rx="30" ry="23"/>'
+    '<g fill="none" stroke="#fff" stroke-width="1.7" opacity=".45">'
+    '<ellipse cx="48" cy="40" rx="8" ry="7"/>'
+    '<ellipse cx="48" cy="24" rx="7" ry="5.5"/>'
+    '<ellipse cx="48" cy="56" rx="7" ry="5.5"/>'
+    '<ellipse cx="30" cy="40" rx="6.5" ry="7"/>'
+    '<ellipse cx="66" cy="40" rx="6.5" ry="7"/>'
+    "</g></symbol>"
+)
+FLOWER = (
+    '<symbol id="flower" viewBox="0 0 100 100">'
+    + "".join(
+        f'<ellipse cx="50" cy="27" rx="11.5" ry="19" transform="rotate({d} 50 50)"/>'
+        for d in (0, 72, 144, 216, 288)
+    )
+    + '<circle cx="50" cy="50" r="8.5" fill="#fff" opacity=".5"/></symbol>'
+)
+LEAF = (
+    '<symbol id="leaf" viewBox="0 0 100 60">'
+    '<path d="M2 30 C 30 -4, 72 -4, 98 30 C 72 64, 30 64, 2 30 Z"/></symbol>'
+)
+
+
+def _e(value) -> str:
+    return html.escape(str(value or ""), quote=True)
+
+
+def _format_time(value) -> str:
+    """Format an ISO-8601 timestamp as e.g. '8:03 am'. Empty string if it
+    can't be parsed -- a malformed or missing timestamp must never crash the
+    page, only fall back to no time shown."""
+    if not value:
+        return ""
+    try:
+        moment = datetime.fromisoformat(str(value))
+    except ValueError:
+        return ""
+    return moment.strftime("%I:%M %p").lstrip("0").lower()
+
+
+def _times_strip(current: str | None) -> str:
+    cells = []
+    for label, slot in SLOT_TIMES:
+        cls = ' class="on"' if slot == current else ""
+        cells.append(f"<span{cls}>{label}</span>")
+    return '<div class="sn-times">' + "<i>·</i>".join(cells) + "</div>"
+
+
+def _story_html(story: dict) -> str:
+    stamp = "STILL TRUE" if story.get("evergreen") else _e(story.get("age_text", ""))
+    meta = f'{_e(story.get("source"))} · {stamp}' if stamp else _e(story.get("source"))
+    return (
+        '<article class="plate">'
+        '<svg class="leaf" viewBox="0 0 100 60" fill="currentColor" aria-hidden="true"><use href="#leaf"/></svg>'
+        f'<p class="cat">{_e(story.get("label", "world"))}</p>'
+        f'<h2 class="hl"><a href="{_e(story.get("url"))}" target="_blank" rel="noopener noreferrer">{_e(story.get("title"))}</a></h2>'
+        f'<p class="meta">{meta}</p>'
+        f'<p class="sum">{_e(story.get("summary"))}</p>'
+        "</article>"
+    )
+
+
+def _slot_html(name: str, block: dict) -> str:
+    bloom = '<svg class="bloom" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#flower"/></svg>'
+    when = _e(block.get("time_text") or _format_time(block.get("published_at")))
+    body = (
+        "".join(_story_html(s) for s in block.get("stories", []))
+        or f'<p class="waiting">{_e(block.get("note"))}</p>'
+    )
+    return (
+        '<section class="slot">'
+        f'<p class="slot-label">{bloom}{name.capitalize()} <b>{when}</b></p>'
+        f"{body}</section>"
+    )
+
+
+def render_day(edition: dict, *, is_today: bool) -> str:
+    slots = edition.get("slots", {})
+    present = [s for s in SLOT_ORDER if s in slots]
+    current = present[0] if present else None
+    body = "".join(_slot_html(name, slots[name]) for name in present)
+    day = date.fromisoformat(edition["date"])
+
+    # "Last updated" is the reader's only signal the machine is healthy, so
+    # it must show a real time whenever one is available -- not just the
+    # bare word. `updated_text` is normally stamped by the publish step;
+    # when it's missing (e.g. this function is exercised on its own) fall
+    # back to the newest slot's own published time rather than silently
+    # dropping the line, which the brief's original `is_today and updated`
+    # ternary did -- that made "Last updated" vanish entirely whenever
+    # updated_text wasn't set, even on today's page.
+    updated = edition.get("updated_text") or ""
+    if not updated and current:
+        updated = _format_time(slots[current].get("published_at"))
+    if is_today:
+        heading = f"Last updated {_e(updated)}" if updated else "Last updated"
+    else:
+        # %-d is a glibc strftime extension; it raises ValueError on Windows.
+        heading = f"{day.strftime('%A, %B')} {day.day}"
+
+    nav = '<a href="archive/">Archive</a>' if is_today else '<a href="../">Today</a>'
+    return f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stacey Happy News</title>
+<link rel="stylesheet" href="{'assets' if is_today else '../assets'}/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Newsreader:opsz,wght@6..72,400&family=Alegreya+Sans:wght@400;700&display=swap">
+</head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">{TURTLE}{FLOWER}{LEAF}</svg>
+<div class="sn-bg" aria-hidden="true">
+<svg width="150" height="120" viewBox="0 0 100 80" fill="var(--st)" opacity=".13" style="top:220px;left:-40px"><use href="#turtle"/></svg>
+<svg width="46" height="46" viewBox="0 0 100 100" fill="var(--br)" opacity=".10" style="top:140px;right:8px"><use href="#flower"/></svg>
+</div>
+<h1 class="sn-title">Stacey<br>Happy News</h1>
+<div class="sn-rule"></div>
+{_times_strip(current if is_today else None)}
+<p class="sn-updated">{heading}</p>
+<div class="day">{body}</div>
+<p class="sn-foot">{nav}</p>
+</body></html>"""
+
+
+def render_archive_index(days: list[str]) -> str:
+    items = "".join(
+        f'<li><a href="{_e(d)}.html">{_e(date.fromisoformat(d).strftime("%A, %B "))}{date.fromisoformat(d).day}</a></li>'
+        for d in sorted(days, reverse=True)
+    )
+    return f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stacey Happy News — Archive</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<h1 class="sn-title">Archive</h1>
+<div class="sn-rule"></div>
+<ul class="archive-list">{items}</ul>
+<p class="sn-foot"><a href="../">Today</a></p>
+</body></html>"""
+
+
+_HREF = re.compile(r'href="([^"]+)"')
+
+
+def validate(page: str) -> None:
+    if 'class="plate"' not in page:
+        raise ValueError("page contains no story")
+    if '<p class="sum"></p>' in page:
+        raise ValueError("page contains an empty summary")
+    for href in _HREF.findall(page):
+        if href.startswith(("http://", "https://")):
+            continue
+        if href.startswith(("assets/", "../assets/", "archive/", "../", "#")) or href.endswith(".html"):
+            continue
+        raise ValueError(f"page contains a non-http link: {href}")

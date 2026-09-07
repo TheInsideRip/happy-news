@@ -1,0 +1,113 @@
+/* Stacey Happy News — the page itself.
+   Ported from design/scute-garden.html (the "Scute garden" mockup). Only the
+   real page rules are here; the mockup's gallery chrome (.phone, .grid,
+   .frame, .masthead, .wrap, .closing, .f-name, .f-why, .eyebrow,
+   .sample-note, .direction, .d-name) is dropped -- it never ships.
+
+   One deliberate change from the mockup: the mockup toggled dark mode with a
+   `.dark` class because it had to show both themes side by side in a
+   gallery. The real page has no such class -- it must follow the reader's
+   own phone. So the dark palette lives in `@media (prefers-color-scheme:
+   dark)`, redefining only the custom properties on :root. The complete
+   light palette is defined on bare :root first; no colour exists only
+   inside the media query. */
+
+:root{
+  --g:#EFF3E7; --pl:#E4ECD8; --ed:#CBDAB8; --ink:#16291D; --sf:#5D7566;
+  --br:#7B2D4E; --st:#6E9159; --bl:#C25A7C; --keel:#CBDAB8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --g:#132019; --pl:#1D2C23; --ed:#31493A; --ink:#E7EFE3; --sf:#93A996;
+    --br:#EE93AC; --st:#6C9A5C; --bl:#EE93AC; --keel:#31493A;
+  }
+}
+
+html,body{background:var(--g);color:var(--ink);margin:0;}
+body{
+  font-family:"Newsreader",Georgia,serif;
+  padding:26px 20px 60px; max-width:38rem; margin:0 auto;
+  -webkit-text-size-adjust:100%;
+  position:relative;   /* gives .sn-bg a containing block sized to the page */
+  overflow-x:hidden;    /* decorative watermarks bleed past the edge on purpose */
+}
+
+.sn-bg{position:absolute;inset:0;pointer-events:none;}
+.sn-bg svg{position:absolute;}
+
+.sn-title{
+  font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.6rem;
+  line-height:1.04;margin:0;color:var(--ink);letter-spacing:-.015em;
+}
+.sn-rule{height:2px;background:var(--br);width:32px;margin:9px 0 9px;}
+.sn-times{
+  display:flex;align-items:center;gap:6px;font-family:"Alegreya Sans",sans-serif;
+  font-size:.62rem;font-weight:700;letter-spacing:.13em;color:var(--br);
+}
+.sn-times i{color:var(--ed);font-style:normal;}
+.sn-times .on{background:var(--br);color:var(--g);padding:2px 6px;border-radius:2px;letter-spacing:.1em;}
+.sn-updated{
+  font-family:"Alegreya Sans",sans-serif;font-size:.62rem;color:var(--sf);
+  margin:7px 0 20px;letter-spacing:.02em;
+}
+.sn-foot{
+  font-family:"Alegreya Sans",sans-serif;font-size:.68rem;color:var(--sf);
+  margin:28px 0 0;letter-spacing:.02em;
+}
+.sn-foot a{color:var(--br);text-decoration:none;}
+.sn-foot a:hover,.sn-foot a:focus{text-decoration:underline;}
+
+/* the garden-bed stem, carrying the day */
+.day{position:relative;padding-left:26px;}
+.day::before{content:"";position:absolute;left:7px;top:9px;bottom:18px;width:2px;background:var(--st);opacity:.55;}
+.slot{position:relative;margin:0 0 20px;}
+.slot:last-child{margin-bottom:0;}
+.slot-label{
+  font-family:"Alegreya Sans",sans-serif;font-size:.61rem;font-weight:700;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--sf);
+  margin:0 0 10px;display:flex;align-items:baseline;gap:7px;
+}
+.slot-label b{color:var(--ink);font-weight:700;}
+.bloom{position:absolute;left:-26px;top:-4px;width:18px;height:18px;color:var(--bl);}
+
+/* the scute plate */
+.plate{
+  position:relative;background:var(--pl);border:1px solid var(--ed);
+  border-radius:17px 17px 13px 13px / 22px 22px 11px 11px;
+  padding:13px 14px 14px;
+}
+.plate::before{
+  content:"";position:absolute;left:50%;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(var(--keel),transparent);opacity:.8;
+}
+.leaf{position:absolute;left:-20px;top:17px;width:16px;height:10px;color:var(--st);}
+.cat{
+  font-family:"Alegreya Sans",sans-serif;font-size:.56rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:700;color:var(--br);margin:0;
+}
+.hl{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.02rem;
+  line-height:1.2;margin:6px 0 5px;color:var(--ink);text-wrap:balance;
+}
+.hl a{color:inherit;text-decoration:none;}
+.hl a:hover,.hl a:focus{text-decoration:underline;}
+.meta{font-family:"Alegreya Sans",sans-serif;font-size:.63rem;color:var(--sf);margin:0;letter-spacing:.02em;}
+.sum{
+  font-family:"Newsreader",Georgia,serif;font-size:.81rem;line-height:1.5;
+  color:var(--ink);opacity:.86;margin:8px 0 0;
+}
+.waiting{
+  font-family:"Alegreya Sans",sans-serif;font-size:.66rem;color:var(--sf);
+  font-style:italic;margin:0;padding:2px 0 0;
+}
+
+/* the archive index -- not part of the mockup, styled to match its system */
+.archive-list{list-style:none;margin:20px 0 0;padding:0;}
+.archive-list li{margin:0 0 10px;}
+.archive-list a{
+  font-family:"Fraunces",Georgia,serif;font-size:1rem;color:var(--ink);
+  text-decoration:none;border-bottom:1px solid var(--ed);
+}
+.archive-list a:hover,.archive-list a:focus{color:var(--br);}
+
+a:focus-visible{outline:2px solid var(--br);outline-offset:3px;}

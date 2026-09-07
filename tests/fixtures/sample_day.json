@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-07",
+  "updated_text": "7:04 pm",
+  "slots": {
+    "evening": {
+      "published_at": "2026-09-07T19:04:00-04:00",
+      "note": null,
+      "stories": [
+        {
+          "title": "A city finished replacing its lead pipes a year early",
+          "url": "https://example.com/lead-pipes",
+          "source": "AP",
+          "label": "government",
+          "summary": "Every service line in the system has now been swapped out. The work wrapped up ahead of schedule and came in under the original budget.",
+          "age_text": "3 hours ago"
+        }
+      ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-07T14:11:00-04:00",
+      "note": null,
+      "stories": [
+        {
+          "title": "A town's library started lending tools, and never stopped",
+          "url": "https://example.com/tool-library",
+          "source": "Positive News",
+          "label": "people",
+          "summary": "One donated drill and a single shelf became several hundred items, all free to borrow. The longest waiting list is for the extension ladder.",
+          "age_text": "5 hours ago"
+        }
+      ]
+    },
+    "morning": {
+      "published_at": "2026-09-07T08:03:00-04:00",
+      "note": null,
+      "stories": [
+        {
+          "title": "Sea turtle nests hit a record along a protected coastline",
+          "url": "https://example.com/turtles",
+          "source": "BBC",
+          "label": "environment",
+          "summary": "Volunteers counted more nests this season than in any year since the survey began. Two decades of quieter beachfront lighting are getting most of the credit, along with a stretch of cooler sand.",
+          "age_text": "11 hours ago"
+        }
+      ]
+    }
+  }
+}
