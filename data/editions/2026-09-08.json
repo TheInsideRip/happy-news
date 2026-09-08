@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-08",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-08T08:00:03.093159-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "S. Carolina Aquarium Celebrates 'Baby Boom' of Critically-Endangered Penguin Chicks",
+          "url": "https://www.goodnewsnetwork.org/s-carolina-aquarium-celebrates-baby-boom-of-critically-endangered-penguin-chicks/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "An aquarium in Myrtle Beach just welcomed five new African penguin chicks, joining two others born earlier this year for a record-breaking season. African penguins are critically endangered, so every new chick is a real boost for the species' survival. The aquarium's care team has been carefully managing breeding pairs to help build a healthy, growing colony. It's a sweet reminder that dedicated zookeepers and aquariums can make a real difference for animals in trouble. Seven fuzzy new penguin babies is about as good as good news gets.",
+          "why_good": "A real, verified increase in a critically endangered species' population thanks to conservation work, with no suffering or controversy involved.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
