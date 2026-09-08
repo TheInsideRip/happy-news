@@ -34,7 +34,24 @@
           "age_text": "23 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-08T19:00:01.644312-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "FDA Immediately Approves Drug That's Doubling Lifespan for Late Pancreatic Cancer Patients",
+          "url": "https://www.goodnewsnetwork.org/fda-immediately-approves-drug-thats-doubling-lifespan-for-late-pancreatic-cancer-patients/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "The FDA has just approved a new twice-daily pill for people with advanced pancreatic cancer, one of the toughest cancers to treat. In trials, patients taking it lived roughly twice as long as those who didn't, even after standard chemotherapy had stopped working. Pancreatic cancer survival rates have been stuck at painfully low numbers for decades, so a treatment that meaningfully extends life is a huge step forward. Doctors are hopeful this gives patients and families more precious time together.",
+          "why_good": "A real, already-approved drug is measurably doubling survival time for patients with one of the deadliest cancers.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
