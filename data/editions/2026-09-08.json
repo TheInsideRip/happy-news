@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-08T14:00:03.049931-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "22-yo with Down Syndrome Becomes Certified Fitness Instructor, Leads Class of 60 at Local Gym",
+          "url": "https://www.goodnewsnetwork.org/22-yo-with-down-syndrome-becomes-certified-fitness-instructor-leads-class-of-60-at-local-gym/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A 22-year-old woman in Utah named Aubry Allbridge just became a fully certified fitness instructor for a popular barre program. Her gym co-owner had noticed her passion and drive over the years and encouraged her to go for it. Aubry recently led her very first class, guiding a room of 60 people through a workout with confidence. It's a wonderful reminder that with the right support, people with Down Syndrome can lead, teach, and inspire others in ways big and small.",
+          "why_good": "It's a real, already-happened achievement that shows inclusion in action, with no suffering at its core, just a young woman succeeding at something she worked hard for.",
+          "evergreen": false,
+          "age_text": "23 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
