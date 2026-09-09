@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-09T14:00:03.045724-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Arthritis Drug Demonstrates Substantial Hair Regrowth in 1,400 Alopecia Patients",
+          "url": "https://www.goodnewsnetwork.org/arthritis-drug-demonstrates-substantial-hair-regrowth-in-1400-alopecia-patients/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "Doctors found that an existing arthritis medication helped people with severe alopecia regrow their hair, in some cases getting all of it back. The condition affects about 2% of people worldwide and happens when the immune system mistakenly attacks hair follicles. In this real-world trial of 1,400 patients, many saw substantial regrowth after taking the drug. Because it's already an approved medicine, this could mean a real treatment option much sooner for people who've struggled with hair loss for years. It's a rare case where a repurposed drug delivers a big win for a condition with few good treatments.",
+          "why_good": "A completed trial in 1,400 real patients showing actual hair regrowth from an existing drug is a concrete medical win, not a forecast.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
