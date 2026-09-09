@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-09T19:00:02.859508-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "A ‘Living Roof’ is Growing Atop Ford’s Largest Factory–Saving Energy and Boosting Birds",
+          "url": "https://www.goodnewsnetwork.org/living-roof-grows-atop-fords-largest-factory-saving-energy-and-boosting-biodiversity/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Ford's massive River Rouge factory in Michigan now has a giant green roof covering acres of the building. The plants growing up there help insulate the factory, cutting down on energy use for heating and cooling. They also soak up rainwater and give birds and pollinators a place to land in an otherwise industrial area. It's a neat full-circle moment too, since Henry Ford once considered turning that same land into a bird sanctuary over a century ago. Big factories don't often double as wildlife habitat, but this one now does.",
+          "why_good": "A real, already-built green roof on a major factory that cuts energy use and creates habitat for birds and pollinators.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
