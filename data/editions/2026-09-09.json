@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-09",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-09T08:00:02.987916-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Yard Work Reveals Largest Trove of Viking Silver Ever Discovered in Denmark",
+          "url": "https://www.goodnewsnetwork.org/yard-work-reveals-largest-trove-of-viking-silver-ever-discovered-in-denmark/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "A man in Denmark was just digging a new terrace in his backyard when his shovel hit something unexpected. What he found turned out to be the largest hoard of Viking-era silver ever unearthed in the country. Archaeologists are thrilled, since discoveries like this help fill in gaps about how people lived over a thousand years ago. It's a wonderful reminder that history is still hiding right under our feet, waiting to be found.",
+          "why_good": "A real, already-happened discovery that enriches shared human history and brings joy without any suffering or controversy attached.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
