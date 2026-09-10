@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-10",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-10T08:00:02.570740-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "The 'National Park' That Stretches From Coast to Coast",
+          "url": "https://reasonstobecheerful.world/the-national-park-that-stretches-from-coast-to-coast/",
+          "source": "Reasons to be Cheerful",
+          "label": "earth",
+          "summary": "A rewilding idea started on one ecologist's Pennsylvania property has grown into a nationwide movement to turn ordinary yards into a patchwork 'homegrown national park.' On his own land, wood thrushes have returned to nest and rare luna moths are showing up in record numbers, real proof that small changes add up. Thousands of people across the country have joined in, replacing lawns with native plants that feed birds, bees, and butterflies. It shows that you don't need a huge wilderness to help nature bounce back, just a shared shift in how we treat the land around us. The results are already visible, not just hoped for.",
+          "why_good": "It documents an actual, working conservation program with measurable ecological results, not a plan or study.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
