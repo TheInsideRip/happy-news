@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-10T14:00:02.067852-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "91-Year-Old 'Greybeard' Becomes Oldest Person to Hike the Appalachian Trail",
+          "url": "https://www.goodnewsnetwork.org/91-yo-greybeard-becomes-oldest-person-to-hike-the-appalachian-trial-after-359-days-and-71-falls/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A 91-year-old man from Kentucky has just become the oldest person ever to hike the entire Appalachian Trail, all 2,190-plus miles of it. It took him 359 days and he took 71 falls along the way, but he kept getting back up and finishing what he started. He grew up in the Kentucky backwoods long before the trail even existed, and now his name is etched into hiking history. It's a wonderful reminder that age doesn't have to be a limit on big dreams.",
+          "why_good": "A real, completed personal achievement that shows resilience and possibility at any age, with no downside or controversy attached.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
