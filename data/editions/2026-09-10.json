@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-10T19:00:01.807563-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Humanity's 3rd Visit to Mercury Kicks Off with the Successful Arrival of BepiColombo Mission",
+          "url": "https://www.goodnewsnetwork.org/humanitys-3rd-visit-to-mercury-kicks-off-with-the-successful-arrival-of-bepicolombo-mission/",
+          "source": "Good News Network",
+          "label": "space",
+          "summary": "A spacecraft called BepiColombo has successfully arrived at Mercury, only the third mission ever to reach our solar system's innermost planet. It's a joint project between European and Japanese space agencies, and getting there took years of careful looping around the sun to slow down enough to be captured by Mercury's gravity. Scientists are thrilled because Mercury is still one of the least understood planets, and this mission should teach us a lot about how it formed. It's a reminder of how much patient, careful engineering it takes to explore even our closest planetary neighbors. No explosions, no drama, just years of hard work paying off exactly as planned.",
+          "why_good": "A genuine scientific achievement that actually happened, expanding human knowledge peacefully and without controversy.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
