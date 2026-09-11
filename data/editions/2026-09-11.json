@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-11T14:00:01.837336-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Hotel Staff Give Girl's Lost Plushie the VIP Treatment Before Sending Her Home with a Note",
+          "url": "https://www.goodnewsnetwork.org/hotel-staff-give-girls-lost-plushie-the-vip-treatment-before-sending-her-home-with-a-note-look/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A young girl named Julia left her beloved stuffed animal, Rosie, behind at a hotel in Taormina, Sicily. Instead of just mailing it back, the staff at the Four Seasons gave Rosie a mini vacation of her own, complete with photos of her lounging by the pool and enjoying a spa day. They sent Rosie home with a sweet handwritten note describing her adventures, turning a child's disappointment into pure delight. It's a small gesture that shows how much care strangers can put into making someone's day.",
+          "why_good": "A real act of kindness by hotel staff that turned a child's loss into a joyful surprise, with no political or tragic undertones.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
