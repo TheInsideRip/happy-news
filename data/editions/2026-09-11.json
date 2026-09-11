@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-11",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-11T08:00:02.344843-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Kenyan Startup Makes Robotic Hands That Translate Teacher's Voice into Signs for Deaf Students",
+          "url": "https://www.goodnewsnetwork.org/kenyan-startup-makes-robotic-hands-that-translate-teachers-voice-into-signs-for-deaf-students/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "A young entrepreneur in Kenya has built a robotic hand that listens to a teacher's voice and instantly signs it out for deaf students in the classroom. Kenya has around 300,000 children who are deaf or hard of hearing, but very few are enrolled in school and there's no standardized sign language training for teachers. This invention could finally bridge that gap, letting kids learn alongside their hearing classmates without needing a human interpreter in every room. It's a clever, low-cost piece of tech built specifically to solve a real problem for real kids.",
+          "why_good": "A working invention already deployed to help thousands of deaf children access education, with no political angle.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
