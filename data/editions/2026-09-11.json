@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-11T19:00:02.197556-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "First Permit to Clean Up Old Mine Waste Issued for WA State Under 2024 'Good Samaritan Act'",
+          "url": "https://www.goodnewsnetwork.org/first-permit-to-clean-up-old-mine-waste-issued-for-wa-state-under-2024-good-samaritan-act/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "The US Environmental Protection Agency just issued its very first permit under a new law designed to clean up old, abandoned mines. The permit went to Trout Unlimited, a nonprofit that protects rivers and streams, so they can start cleaning up toxic runoff in Washington State. Before this law, groups often avoided cleaning up old mine sites because they feared getting stuck with legal liability for pollution they didn't cause. Now that barrier is gone, which means more polluted waterways across the country could finally get restored. It's a real, tangible win for rivers, fish, and the communities who depend on them.",
+          "why_good": "A real law is now being used in practice to fix actual environmental damage, with no political fighting involved.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
