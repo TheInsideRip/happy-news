@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-12",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-12T08:00:02.292029-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Luxurious Bath Complex Used by Roman Emperor Found in Serbia",
+          "url": "https://www.goodnewsnetwork.org/luxurious-bath-complex-used-by-roman-emperor-found-in-serbia/",
+          "source": "Good News Network",
+          "label": "world",
+          "summary": "Archaeologists in Serbia have uncovered a stunning ancient Roman bath complex that once belonged to Emperor Maximinus Daza. The site includes three separate bathing pools and even a sauna, showing off some seriously impressive engineering for its time. It's a rare, well-preserved glimpse into daily luxury from the late Roman Empire. Finds like this help historians piece together how people actually lived nearly 1,700 years ago. It's a nice reminder that the past still has surprises buried just beneath our feet.",
+          "why_good": "A genuine, newly confirmed archaeological discovery that enriches our understanding of history with no political, criminal, or tragic undertone.",
+          "evergreen": false,
+          "age_text": "22 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
