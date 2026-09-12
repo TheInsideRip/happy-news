@@ -34,7 +34,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-12T19:00:01.954322-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Massive Footprints Reveal First Ever Adult T Rex Trackway, a 66-Million-Year-old Walk Through North Dakota",
+          "url": "https://www.goodnewsnetwork.org/massive-footprints-reveal-first-ever-adult-t-rex-trackway/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Scientists have confirmed something paleontologists have hoped to find for over a century: an actual trail of footprints left by an adult Tyrannosaurus rex. Found in North Dakota, the tracks are 66 million years old and let researchers see, for the first time, a sequence of steps rather than just a single isolated print. This gives scientists real clues about how these massive predators actually walked and moved through their world. It's a small discovery with a big payoff for understanding one of history's most famous animals.",
+          "why_good": "A genuine scientific discovery that already happened, adding real knowledge about the natural world with no downside for anyone.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
