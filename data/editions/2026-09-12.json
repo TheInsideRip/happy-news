@@ -17,7 +17,24 @@
           "age_text": "22 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-12T14:00:02.232223-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Homeless Man Who Went Viral Playing Piano in a Church Has Now Raised $50,000 for Charity",
+          "url": "https://www.goodnewsnetwork.org/homeless-guy-famous-for-playing-piano-in-church-raising-50k/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Two years ago, a homeless man named Rhys Wynne-Jones was filmed playing piano beautifully inside a church in Penzance, England, and the video went viral. Since then his life has completely turned around, and he's used his new platform to give back rather than just receive help. He has now raised an incredible $50,000 for charity through his music. It's a lovely reminder that talent and dignity don't disappear when someone loses their home, and that a moment of kindness can ripple outward for years. He went from sleeping rough to lifting others up.",
+          "why_good": "A real person's life measurably improved and he turned his own hardship into tens of thousands of dollars of help for others, a genuine and verified turnaround with no political angle.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
