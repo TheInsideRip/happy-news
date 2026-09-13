@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-13",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-13T08:00:02.422111-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "The Blackout of '65 Left 800K Trapped in NYC Subway – 6 Hours Later People Were Inspired by Each Other",
+          "url": "https://www.goodnewsnetwork.org/the-massive-blackout-of-65-left-people-inspired-by-each-other/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Back in 1965, a massive power outage swept across the northeastern U.S. and Canada, trapping thousands of New Yorkers underground on subway trains for hours. One woman, now in her senior years, recently shared her memory of that night with Good News Network, recalling how total strangers looked out for each other in the dark. People shared food, told jokes, and kept each other calm until the lights finally came back on. Six decades later, her story is a gentle reminder that people tend to bring out the best in each other when things get hard.",
+          "why_good": "A real, firsthand account of strangers showing warmth and community spirit during a crisis, with no political angle.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
