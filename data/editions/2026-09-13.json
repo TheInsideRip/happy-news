@@ -34,7 +34,24 @@
           "age_text": "6 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-13T19:00:02.309196-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "She Asked for a Sign and a Kingfisher Landed in Her Hand for 10 Minutes",
+          "url": "https://www.goodnewsnetwork.org/woman-asked-for-a-sign-and-a-kingfisher-sits-on-her-hand/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A young woman out for a walk in England had a moment that felt almost magical. Right after she quietly wished for 'a sign,' a wild kingfisher swooped down and perched calmly on her open hand. It stayed there for a full ten minutes, letting her get an up-close look at one of nature's shyest and most colorful birds. She said she was amazed, and honestly, so are we. Sometimes the world just hands you a little wonder.",
+          "why_good": "It's a real, verified moment of unexpected connection with wildlife that brought genuine joy to someone's day, with no downside or suffering involved.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
