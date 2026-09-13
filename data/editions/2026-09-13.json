@@ -17,7 +17,24 @@
           "age_text": "14 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-13T14:00:01.979327-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Elephants Can Think Before They Act and Resist Impulsive Behavior, Shows Study",
+          "url": "https://www.goodnewsnetwork.org/elephants-can-think-before-they-act-and-resist-impulsive-behavior/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Scientists at the National Elephant Institute in Thailand ran experiments and found that Asian elephants can actually pause and resist an impulse instead of just reacting. That means these gentle giants have a level of self-control and forward thinking once believed to belong mostly to humans and a few other smart species like chimps and crows. Researchers watched the elephants weigh their options before acting, showing real patience rather than instinct alone. It's a lovely reminder of just how rich and thoughtful animal minds can be. Findings like this help build the case for treating elephants with even more respect and care.",
+          "why_good": "It's a genuine, completed scientific finding (not a future promise) that deepens our appreciation and care for a beloved, intelligent species, with no downside or suffering involved.",
+          "evergreen": false,
+          "age_text": "6 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
