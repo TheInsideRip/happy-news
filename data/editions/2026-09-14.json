@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-14T19:00:01.965010-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Former Industrial Ground Goes from Dump to Diversity and Hosts 64% of UK's Black-Necked Grebes",
+          "url": "https://www.goodnewsnetwork.org/former-industrial-ground-goes-from-dump-to-diversity-and-hosts-64-of-uks-black-necked-grebes/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A patch of land in the UK that used to be a dumping ground for canal dredging waste has been quietly turned into a thriving wetland. Conservationists reshaped the site into nesting habitat, and it now shelters nearly two-thirds of all the black-necked grebes in the entire country. These are strikingly pretty little waterfowl with golden feathers and ruby-red eyes, and they'd struggled to find safe places to nest. It's a lovely reminder that even land we've written off as ruined can be brought back to life for wildlife.",
+          "why_good": "A real, completed habitat restoration that already benefits a majority of a vulnerable bird species in the UK.",
+          "evergreen": false,
+          "age_text": "11 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
