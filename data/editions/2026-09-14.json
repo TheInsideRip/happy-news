@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-14",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-14T08:00:02.606947-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "How 'Housing First' Is Helping People Leave Rough Sleeping Behind",
+          "url": "https://www.positive.news/society/how-housing-first-is-helping-people-leave-rough-sleeping-behind/",
+          "source": "Positive News",
+          "label": "people",
+          "summary": "There's a program that flips the usual approach to homelessness on its head: instead of asking people to solve their problems before getting housing, it gives them a stable home first. It turns out that once someone has a safe place to live, everything else — health, addiction recovery, finding work — gets a lot easier to tackle. The results have been striking, with far more people staying housed long-term compared to older approaches. It's a simple idea that's proving itself in real communities right now.",
+          "why_good": "It's a real, already-running program with measured results helping people escape homelessness for good, not a proposal or study.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
