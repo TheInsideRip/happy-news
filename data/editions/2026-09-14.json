@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-14T14:00:02.288753-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Following Timor-Leste's Triumph, All of Southeast Asia Has Eliminated Trachoma",
+          "url": "https://www.goodnewsnetwork.org/following-timor-lestes-triumph-all-of-southeast-asia-has-eliminated-trachoma/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "The World Health Organization just certified Timor-Leste as having eliminated trachoma, the leading infectious cause of blindness worldwide. With this milestone, every single country in the WHO's Southeast Asia region has now wiped out the disease as a public health threat. That means millions fewer people will go blind from something entirely preventable. It's the result of years of quiet, steady public health work finally paying off across an entire region.",
+          "why_good": "A real, certified regional public health achievement that permanently protects people's eyesight.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
