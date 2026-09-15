@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-15T14:00:02.356260-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Wind Turbines Provide Half of Rancher's Income Since He Decided to Invite Them on His Land",
+          "url": "https://www.goodnewsnetwork.org/wind-turbines-have-made-up-half-this-ranchers-income-since-fateful-choice-to-allow-them-on-his-land/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Back in 2006, a Kansas rancher named Peter Ferrell agreed to let wind turbines go up on his land, and it turned out to be one of the best decisions of his life. Fifty turbines now stand among his Flint Hills pastures, quietly spinning away while his cattle graze right alongside them. The royalties they generate have grown to cover half of his income, money that's helping him pass the family ranch down to his kids. It's a simple story of clean energy and traditional farming working side by side, with everybody benefiting.",
+          "why_good": "A real, years-long example of renewable energy directly improving a family's livelihood while coexisting with traditional agriculture.",
+          "evergreen": false,
+          "age_text": "6 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
