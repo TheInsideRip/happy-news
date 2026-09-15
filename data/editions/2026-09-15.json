@@ -34,7 +34,24 @@
           "age_text": "6 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-15T19:00:01.784005-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Christian Bale Opens Long-Dreamed of Foster Care Village Aimed at Keeping Siblings Together",
+          "url": "https://www.goodnewsnetwork.org/christian-bale-opens-long-dreamed-of-foster-care-village-aimed-at-keeping-siblings-together/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Actor Christian Bale just cut the ribbon on a brand-new foster care village in Palmdale, California, a project he's been dreaming about for years. The whole point of the place, called Together California, is to make sure brothers and sisters in foster care can stay together instead of being split up into separate homes. It's a real, physical place now open and ready to welcome kids. Keeping siblings together during hard times can make all the difference for a child's sense of stability and love. It's a beautiful example of someone using their platform to build something lasting for kids who need it most.",
+          "why_good": "A real foster care facility has actually opened and is operating, directly helping vulnerable children stay connected to their siblings.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
