@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-15",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-15T08:00:01.901672-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "How Afghan Women Are Rebuilding Reproductive Health Care",
+          "url": "https://reasonstobecheerful.world/how-afghan-women-are-rebuilding-reproductive-health-care/",
+          "source": "Reasons to be Cheerful",
+          "label": "health",
+          "summary": "In parts of Afghanistan where health care has been hard to come by, local women are stepping in to fill the gap. Midwives are running small family health houses in villages, giving pregnant women regular checkups, screening for anemia, and helping them through safe deliveries. One mother, now pregnant with her sixth child, says she finally feels like one of the lucky ones because of the care she's getting close to home. It's a quiet but real example of communities finding ways to protect mothers and babies even in tough circumstances.",
+          "why_good": "It's a real, ongoing program that is measurably improving maternal health care for women in Afghanistan, not a plan or a study.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
