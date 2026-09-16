@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-16T19:00:02.174431-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Nashville Singer-Songwriter Becomes Local Celebrity Rescuing Foxes and Saving Them from Mange",
+          "url": "https://www.goodnewsnetwork.org/nashville-singer-songwriter-becomes-local-celebrity-rescuing-foxes-and-saving-them-from-mange/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A country songwriter in Nashville named Jerry Vandiver has quietly become a local hero to the city's red foxes. Tennessee has been dealing with a bad outbreak of mange, a painful skin disease that can be deadly for foxes if left untreated. In his spare time, Jerry has been trapping sick foxes, treating them with medicine, and releasing them back to health. His gentle persistence has saved many animals and turned him into a beloved figure in his community. It's a lovely reminder of how much good one caring neighbor can do.",
+          "why_good": "A real, ongoing act of kindness that has genuinely helped sick wild animals recover, with no political angle at all.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
