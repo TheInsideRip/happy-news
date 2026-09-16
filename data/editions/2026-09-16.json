@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-16",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-16T08:00:02.223061-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "20,000 Salmon Return to the Klamath River",
+          "url": "https://reasonstobecheerful.world/what-were-reading-klamath-river-salmon-return/",
+          "source": "Reasons to be Cheerful",
+          "label": "earth",
+          "summary": "After the largest dam removal project in U.S. history opened up the Klamath River last year, something wonderful has happened: about 20,000 chinook salmon have swum upstream to spawn in waters they haven't reached in over a century. The river runs through Oregon and California and was blocked for decades by four hydroelectric dams that cut salmon off from their historic spawning grounds. Local tribes fought for years to see these dams removed, and this massive salmon run is proof their work paid off. It's a rare and heartening example of a big environmental fix actually delivering results in real time.",
+          "why_good": "A concrete environmental restoration (dam removal) has already produced a measurable, joyful outcome for wildlife and the river ecosystem.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
