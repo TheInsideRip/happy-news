@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-16T14:00:02.353071-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Mexico Reintroduced Bison into Precious Desert Ecosystem After Century-Long Absence",
+          "url": "https://www.goodnewsnetwork.org/mexico-reintroduced-bison-into-precious-desert-ecosystem-after-century-long-absence/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Bison are roaming Mexico's Chihuahua Desert again after being gone for roughly 200 years. Conservationists carried out a series of reintroductions to bring the massive grazers back to this vital desert reserve. Bison act like natural gardeners, shaping the land and helping native plants thrive wherever they roam. Their return is seen as a major win for restoring the health of this fragile ecosystem for the long haul. It's a hopeful sign that lost wildlife can find its way home again.",
+          "why_good": "A real, completed conservation action that restores a keystone species and strengthens a fragile desert ecosystem.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
