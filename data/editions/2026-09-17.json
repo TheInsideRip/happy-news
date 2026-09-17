@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-17T19:00:01.951339-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Team Sequesters Plastic and Makes New Products Before it Breaks Down in Environment",
+          "url": "https://www.goodnewsnetwork.org/team-sequesters-plastic-and-makes-new-products-before-it-breaks-down-in-environment/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A family in San Carlos, California has built a business around recycling the toughest kind of plastic there is. Nick Schick and his parents work with thermoplastics, the hard-to-recycle polymers that usually just pile up in landfills or break into microplastics. Instead, they melt them down and turn them into brand-new products before that plastic ever has a chance to pollute the environment. It's a simple, hands-on solution that's already up and running, not just an idea on paper. Small operations like this one show a real path for keeping stubborn plastic waste out of nature for good.",
+          "why_good": "It's a real, operating recycling effort that is already diverting hard-to-recycle plastic from the environment, not a proposal or study.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
