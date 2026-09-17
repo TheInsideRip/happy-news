@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-17",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-17T08:00:02.249883-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Students Win James Dyson Award for Device That Screens Students for Concussions in Just 60 Seconds",
+          "url": "https://www.goodnewsnetwork.org/students-win-james-dyson-award-for-device-that-screens-students-for-concussions-in-just-60-seconds/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "Three students at Harvard built a simple, low-cost headset that can screen young athletes for concussions in just a couple of minutes using eye-tracking. It's cheap enough that schools without medical staff on hand could actually use it on the sidelines. Their invention just won the prestigious James Dyson Award, which recognizes real, working solutions to everyday problems. This means faster, safer decisions when a kid takes a hard hit during a game. It's a small piece of tech that could protect a lot of young brains.",
+          "why_good": "A real, working invention that just won a major award, making concussion detection faster and more accessible for kids in sports.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
