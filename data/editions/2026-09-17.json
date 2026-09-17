@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-17T14:00:02.284696-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Chinese Scientists Develop New Oil Refining Method That Cuts Energy Use by 90%",
+          "url": "https://www.goodnewsnetwork.org/chinese-scientists-develop-new-oil-refining-method-that-cuts-energy-use-by-90/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "Scientists in China have found a clever new way to refine crude oil without the usual repeated boiling process that guzzles huge amounts of energy. Instead, they separate the oil's molecules at room temperature, and it actually worked in the lab. This could cut the energy used in oil refining by a stunning 90 percent. Refining is one of the most energy-hungry industrial processes on Earth, so a breakthrough like this could mean a lot less pollution and wasted power down the line. It's a great example of scientists rethinking an old, wasteful process from the ground up.",
+          "why_good": "A real, lab-confirmed breakthrough that could dramatically cut energy waste and emissions from a major global industry.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
