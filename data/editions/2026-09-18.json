@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-18T14:00:01.950506-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Cataract Surgery Restores Sight for 54-Year-Old Chimpanzee at Chimp Haven",
+          "url": "https://www.goodnewsnetwork.org/cataract-surgery-restores-sight-for-54-year-old-chimpanzee-the-first-such-procedure-at-chimp-haven/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A 54-year-old chimpanzee named Pierre had gone completely blind from cataracts at Chimp Haven, the world's largest chimpanzee sanctuary. Veterinary teams performed the sanctuary's first-ever cataract surgery on him, and it worked. Pierre can now see again and is adjusting well back with his troop. It's a small but touching reminder of how far animal care has come, giving an elderly chimp his sight back in his golden years.",
+          "why_good": "A real, completed medical procedure that restored a suffering animal's quality of life, with no tragedy or loss at its core.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
