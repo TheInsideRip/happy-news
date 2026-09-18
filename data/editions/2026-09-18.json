@@ -34,7 +34,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-18T19:00:01.746657-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Company’s Textile Dyes Work Through Magnetism, Cutting Fashion’s Water-Use, Energy, and Pollution",
+          "url": "https://www.goodnewsnetwork.org/companys-textile-dyes-work-through-magnetism-cutting-fashions-water-use-energy-and-pollution/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A French startup has invented a completely new way to dye fabric, using magnetism instead of the usual hot, chemical-heavy vats. The dyeing process is responsible for about half of all fashion-industry emissions, so this is a big deal. Their method works at room temperature, uses far less water and energy, and skips toxic chemicals altogether. The color still lasts just as long as traditional dye. It's a real, working product already cutting fashion's environmental footprint, not just a lab idea.",
+          "why_good": "A real, already-functioning invention that cuts water use, energy use, and toxic pollution in one of the world's dirtiest industries.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
