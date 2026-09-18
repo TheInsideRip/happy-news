@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-18",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-18T08:00:01.932769-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "New Cat Species Identified for the First Time in Over 100 Years — Meet the Tilcayo",
+          "url": "https://www.goodnewsnetwork.org/new-cat-species-identified-for-the-first-time-in-over-100-years-meet-the-tilcayo/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Scientists have confirmed a brand-new species of wild cat, found high in the mountains of Bolivia. Named the Tilcayo, it's smaller than the average housecat and had never been formally recognized by science before now. This is the first time in over a century that a new cat species has been identified anywhere in the world. It's a wonderful reminder that our planet still holds surprises, and that there are dedicated explorers out there finding them.",
+          "why_good": "A genuine, verified scientific discovery of a new mammal species is happening-now good news for biodiversity, with no political angle at all.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
