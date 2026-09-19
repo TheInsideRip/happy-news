@@ -34,7 +34,24 @@
           "age_text": "26 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-19T19:00:01.970137-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Chesapeake Bay Blue Crab Numbers See Encouraging Bounceback in New Survey",
+          "url": "https://www.goodnewsnetwork.org/chesapeake-bay-blue-crab-numbers-see-encouraging-bounceback-in-new-survey/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Blue crabs in the Chesapeake Bay have been struggling for years, but the newest field survey shows their numbers are finally climbing back up. Conservation groups had put special protections and habitat restoration efforts in place, and it looks like those steps are paying off. A healthier crab population means better news for local fishing communities and for the whole bay ecosystem, since crabs are a key part of the food web. It's a small but real sign that patient, science-based conservation work can actually turn things around. Scientists say they'll keep watching closely, but for now this is a genuine win.",
+          "why_good": "It reports an actual measured increase in a wild population, resulting from real conservation action, benefiting both nature and local livelihoods.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
