@@ -17,7 +17,24 @@
           "age_text": "30 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-19T14:00:01.961668-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Unsealed for the First Time, This 600-yo Tomb in Peru Was Just Declared the 'Discovery of the Decade'",
+          "url": "https://www.goodnewsnetwork.org/unsealed-for-the-first-time-this-600-yo-tomb-in-peru-was-just-declared-the-discovery-of-the-decade/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Archaeologists in Peru just opened a 600-year-old tomb that had never been touched, and what they found inside is being called the discovery of the decade. It sits inside Chan Chan, a UNESCO World Heritage site that was once the capital of a major Andean civilization. Inside were the remains of 38 people along with a treasure trove of grave goods, offering an incredible window into a society from centuries ago. Finds like this help us understand more about the rich cultures that thrived in South America long before European contact. It's a wonderful reminder of how much history is still waiting to be uncovered.",
+          "why_good": "A genuine, completed archaeological discovery that expands human knowledge and celebrates an ancient culture, with no suffering, disaster, or politics involved.",
+          "evergreen": false,
+          "age_text": "26 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
