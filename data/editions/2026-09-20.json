@@ -17,7 +17,24 @@
           "age_text": "14 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-20T14:00:02.052765-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "165-Mile Bike Trail Through Minnesota Finally Completed After 30 Years",
+          "url": "https://www.goodnewsnetwork.org/165mi-bike-trail-through-minnesota-finally-completed-after-30-yrs/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "After three decades of planning, fundraising, and construction, Minnesota has finished a paved bike trail that stretches an incredible 165 miles. It winds from the Mississippi River all the way up to the wild Boundary Waters, linking small towns and natural scenery along the way. That makes it one of the longest paved cycling trails in the entire country. It's a huge win for outdoor lovers, local economies, and anyone who wants a beautiful, car-free way to get around. Decades of community persistence finally paid off in a big way.",
+          "why_good": "A real, finished piece of public infrastructure that gives people a lasting way to enjoy nature and get around without a car.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
