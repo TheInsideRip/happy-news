@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-20",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-20T08:00:01.897522-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "New York City is Putting 'The Park' Back in Park Avenue – And Adding a Protected Bike Lane",
+          "url": "https://www.goodnewsnetwork.org/new-york-city-is-putting-the-park-back-in-park-avenue/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "New York City just unveiled a plan to bring back the leafy, walkable feel that Park Avenue had a century ago, before it became mostly a wide road for cars. The redesign will add more trees, benches, and green space, plus a protected bike lane running the length of the avenue. It's a hopeful sign that one of Manhattan's busiest streets could soon feel like an actual park again, living up to its name. The goal is a safer, greener stretch of the city for everyone who walks, bikes, or just wants a shady bench to sit on.",
+          "why_good": "A concrete city initiative to reclaim urban space for people, trees, and safer cycling — a genuine quality-of-life improvement, not political combat.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
