@@ -34,7 +34,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-20T19:00:02.401146-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Couple Fosters 59 Dogs in Retirement: 'We love to get them out of the kennels'",
+          "url": "https://www.goodnewsnetwork.org/couple-fosters-59-dogs-in-retirement-we-love-to-get-them-out-of-the-kennels/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A British couple in their 60s, Nicole and Gary Wordsworth, have spent the last 15 years opening their home to dogs in need. Working with the Battersea Dogs Home in Buckinghamshire, they've now fostered an incredible 59 pups, giving each one a warm bed and loving care while it waits for a forever family. Even in retirement, they have no plans to stop, saying they simply love getting the dogs out of the kennels and into a real home. It's a beautiful reminder of what steady, quiet kindness can add up to over the years. Every one of those 59 dogs got a softer landing because of them.",
+          "why_good": "It's a real, ongoing act of kindness that has directly improved the lives of dozens of real animals, with no political or tragic framing.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
