@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-21T19:00:02.249368-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "New AI Model Can Detect Heart Disease Markers in Simple Electrocardiogram Readings",
+          "url": "https://www.goodnewsnetwork.org/new-ai-model-can-detect-heart-disease-markers-in-simple-electrocardiogram-readings-a-breakthrough/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "Scientists in the UK have built a new artificial intelligence tool that can spot early warning signs of heart disease from a simple, routine heart scan called an electrocardiogram. This is a scan many people already get, so doctors won't need any special new equipment to catch problems earlier. The AI can scan results in seconds and flag anything concerning for a doctor to review, acting like a extra set of careful eyes. Catching heart trouble sooner means more people can get treatment before a serious event happens. It's a simple upgrade to an already common test that could quietly save a lot of lives.",
+          "why_good": "A real medical technology has been developed and shown to work, giving doctors a faster way to catch heart disease early using tests already in wide use.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
