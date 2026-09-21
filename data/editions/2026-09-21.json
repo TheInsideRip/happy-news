@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-21",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-21T08:00:02.158975-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Number of Young People Out of Work and Education Falls Below One Million in the UK",
+          "url": "https://www.positive.news/society/number-of-young-people-out-of-work-and-education-falls-below-one-million/",
+          "source": "Positive News",
+          "label": "people",
+          "summary": "New figures out of the UK show that the number of young people who are not in work, school, or training has dropped below one million for the first time in a while. That's real progress for a country that's had one of the highest rates of disconnected youth in Europe. It means more young adults are building skills, earning a paycheck, or working toward a future career instead of feeling stuck. Small shifts like this tend to ripple outward, helping families and communities too.",
+          "why_good": "It reports an actual measured improvement in young people's economic prospects, based on new government figures, not a plan or forecast.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
