@@ -17,7 +17,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-21T14:00:02.112210-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Korean Drone Rescue Program Helps Mozambique Achieve Zero Fatalities During Worst Flood in Decades",
+          "url": "https://www.goodnewsnetwork.org/korean-drone-rescue-program-helps-mozambique-achieve-zero-fatalities-during-worst-flood-in-decades/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "Back in January, a community in northern Mozambique faced one of the worst floods the region has seen in decades. Thanks to a squadron of drones flown by trained pilots, rescue teams could see exactly where people were trapped and get help to them fast. The result: not a single life was lost in the flooding. It's a powerful example of how a relatively small, smart piece of technology can turn a natural disaster from a tragedy into a story of successful teamwork.",
+          "why_good": "A real disaster response that actually worked, with a verified zero-fatality outcome, thanks to a technology program that already happened rather than one still being planned.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
