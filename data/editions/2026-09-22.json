@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-22",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-22T08:00:01.941327-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Rural French Mayors Rally to Save Their Local Cafe-Bistro, and Help Reverse National Trend",
+          "url": "https://www.goodnewsnetwork.org/rural-french-mayors-rally-to-save-their-local-cafe-bistro-and-help-reverse-national-trend/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A tiny village in Burgundy, France was about to lose its only cafe-bistro, the kind of place locals call the true heart of small-town life. Instead of watching it close for good, the mayor and town council stepped in and found a way to keep it open. It's part of a bigger, hopeful shift happening across rural France, where more of these beloved gathering spots are being saved rather than shuttered. It's a lovely reminder that community spaces are worth fighting for, and that local leaders can make a real difference.",
+          "why_good": "A concrete, already-completed community rescue that revived a local gathering place and reflects a positive national trend, with no political conflict involved.",
+          "evergreen": false,
+          "age_text": "20 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
