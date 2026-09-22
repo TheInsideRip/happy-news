@@ -34,7 +34,24 @@
           "age_text": "30 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-22T19:00:03.283353-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Prisoners Prove Unlikely Heroes to Monarch Butterflies Thanks to Wisconsin Correctional Program",
+          "url": "https://www.goodnewsnetwork.org/prisoners-prove-unlikely-heroes-to-monarch-butterflies-thanks-to-wisconsin-correctional-program/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "At a Wisconsin prison, inmates have taken on a surprising new job: raising monarch butterflies from tiny caterpillars all the way to release. The program started as a way to give men who can't do physical labor a meaningful way to contribute, and it's grown into a real boost for the declining monarch population. Participants learn to care for the delicate insects, track their growth, and release them once they're ready to fly free. It's a small program with a big payoff, both for the butterflies and for the people finding purpose behind bars.",
+          "why_good": "A real, already-running program that helps a struggling species while giving incarcerated people a meaningful, positive role — good for both people and the planet, with no political framing.",
+          "evergreen": false,
+          "age_text": "11 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
