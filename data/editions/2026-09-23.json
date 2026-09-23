@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-23T19:00:02.467212-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Bikes Outnumbered Cars on Scottish Rush Hour Route for the First Time Ever",
+          "url": "https://www.goodnewsnetwork.org/bikes-outnumbered-cars-on-scottish-rush-hour-route-for-the-first-time-ever/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "In Edinburgh, more people rode bikes than drove cars during a May morning rush hour, a first in the city's history. It happened thanks to new protected bike lanes and popular e-bike rental schemes making cycling safer and easier. Cycling Scotland tracked the numbers and confirmed the milestone across several busy routes. It's a real sign that when cities build safe places to cycle, people happily leave their cars at home. Less traffic and cleaner air for everyone who lives there.",
+          "why_good": "A measurable, real shift toward greener commuting driven by actual infrastructure investment, not a plan or forecast.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
