@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-23T14:00:02.658536-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Scientists Pioneer Chemical Bath Method to Restore Aging EV Batteries Without Breaking Them Down",
+          "url": "https://www.goodnewsnetwork.org/scientists-pioneer-chemical-bath-method-to-restore-aging-ev-batteries-without-breaking-them-down/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "Cornell University scientists have found a clever way to bring old electric car batteries back to life. Instead of tearing a worn-out battery apart to recycle its materials, they give it a special chemical bath that restores much of its lost range and power. This could save huge amounts of energy and money compared to building brand-new recycling plants. It's a small process with a big potential payoff for making electric cars more affordable and sustainable in the long run.",
+          "why_good": "A real, demonstrated fix for a major clean-energy bottleneck (battery degradation) that could cut waste and costs without new factories.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
