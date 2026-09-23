@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-23",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-23T08:00:02.675631-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Flagship Restoration Project in Brazil's Cerrado Savannah Working to Restore 4.4 Million Acres",
+          "url": "https://www.goodnewsnetwork.org/flagship-restoration-project-in-brazils-cerrado-savannah-working-to-restore-4-4-million-acres/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Brazil's Cerrado savanna, a vast tropical grassland that's home to incredible wildlife, is getting a huge helping hand. A restoration program there was just honored at a UN conference as one of the three most ambitious and effective ecosystem-repair efforts happening anywhere in the world right now. The project is already working to bring back native plants and habitat across 4.4 million acres, an area roughly the size of Massachusetts. It's proof that large-scale land healing isn't just a dream, it's actually underway.",
+          "why_good": "A real, ongoing restoration effort recognized by international experts for its scale and effectiveness in healing a critical ecosystem.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
