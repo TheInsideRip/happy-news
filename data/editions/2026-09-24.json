@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-24",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-24T08:00:02.636979-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Portuguese Company Turns Cork Wood into Limitless Material, Even to Insulate Spacecraft",
+          "url": "https://www.goodnewsnetwork.org/portuguese-company-turns-cork-wood-into-limitless-material-even-to-insulate-spacecraft/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A 150-year-old Portuguese company that has made wine corks since the days of the monarchy has found remarkable new uses for cork. Because cork oak bark can be harvested again and again without harming the tree, it's one of the most renewable materials on Earth. The company has turned it into insulation strong and light enough to protect spacecraft from extreme heat. It's a lovely example of an old, sustainable craft finding a cutting-edge new purpose. Nothing about it required cutting down a single tree.",
+          "why_good": "A real, already-operating company turning a renewable natural material into high-tech, planet-friendly products.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
