@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-24T14:00:02.609678-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Teens Set World Record for Most Sports Balls Recycled in One Day, Diverting 2,675 Pounds from Landfills",
+          "url": "https://www.goodnewsnetwork.org/teens-set-world-record-for-most-sports-balls-recycled-in-one-day-diverting-2675-pounds-from-landfills/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A group of teen environmentalists in California set out to break a Guinness World Record for recycling sports balls, and they pulled it off. In one day, they collected around 22,000 old racquet sport balls weighing over 2,675 pounds, keeping all of it out of landfills. The balls will be broken down and turned into new materials instead of sitting in the trash for years. It's a fun reminder that young people are finding creative ways to tackle waste, one bouncy ball at a time.",
+          "why_good": "An actual completed event (a world record achieved) that kept real waste out of landfills, led by young people, with zero political content.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
