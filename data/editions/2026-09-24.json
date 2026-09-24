@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-24T19:00:02.904485-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Australian Biologists Livestream a Remote Desert Waterhole and All Its Wild Visitors",
+          "url": "https://www.goodnewsnetwork.org/australian-biologists-livestream-a-remote-desert-waterhole-and-all-its-wild-visitors/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Deep in an Australian national park, over a mile from the nearest parking spot, scientists have set up a live camera at a lonely desert waterhole. Now anyone with an internet connection can watch dingoes, wallabies, frogs, and even a wedge-tailed eagle stop by for a drink. It's a rare window into a wild, hard-to-reach corner of the world that most people will never get to visit in person. The project lets researchers keep an eye on the animals while giving the rest of us a free, real-time nature show. It's a small but lovely reminder of how much life is quietly going on in the wild places we don't see.",
+          "why_good": "A real, already-running project that brings ordinary people a genuine, uplifting connection to wildlife and remote nature, with no downside or controversy.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
