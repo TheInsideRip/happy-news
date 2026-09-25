@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-25T14:00:02.962466-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Nonprofit Puts Ex-Cons to Work with Paid Apprenticeships as Machinists",
+          "url": "https://www.goodnewsnetwork.org/nonprofit-puts-ex-cons-to-work-with-paid-apprenticeships-as-machinists/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "In San Diego, a nonprofit called Rise Up Industries is turning a converted machine shop into a launchpad for men who just got out of prison. They learn real machinist trade skills and get paid while they train, giving them a genuine shot at a stable career instead of returning to old patterns. It's already helped many rebuild their lives after decades behind bars. This kind of hands-on second chance is exactly the sort of program that quietly changes lives for good.",
+          "why_good": "It's a real, operating program giving formerly incarcerated people paid job training and a path to stable careers, with no political framing.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
