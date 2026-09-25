@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-25T19:00:02.530341-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Kosovo Declared Free of Landmines",
+          "url": "https://www.positive.news/society/good-news-stories-from-week-39-of-2026/",
+          "source": "Positive News",
+          "label": "peace",
+          "summary": "More than 25 years after the war ended, Kosovo has officially been cleared of landmines and unexploded bombs left behind by the conflict. Deminers worked for decades, inch by inch, to make farmland, roads, and villages safe again. This means families can finally walk their own fields and children can play outside without fear of buried explosives. It's the kind of quiet, patient work that rarely makes headlines but changes everyday life completely.",
+          "why_good": "A real, completed humanitarian milestone that removes a lingering danger from war and lets ordinary life return to normal, with no political framing involved.",
+          "evergreen": false,
+          "age_text": "17 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
