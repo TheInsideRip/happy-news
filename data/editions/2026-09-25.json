@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-25",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-25T08:00:02.754603-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Nairobi Is Transforming Neglected Libraries Into Vibrant Civic Hubs",
+          "url": "https://reasonstobecheerful.world/nairobi-libraries-civic-hubs/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "In Nairobi, once-neglected public libraries are being turned into buzzing community centers with reliable electricity, wifi, and quiet study space. For residents like Sunil Totti, who lives in a neighborhood with unreliable power, these libraries have become a lifeline for things like job interviews and schoolwork. The renovated spaces now host job training, youth programs, and cultural events, turning them into true civic hubs rather than just rooms full of books. It's a simple, low-cost fix that's making a real difference in people's daily lives. Local officials and community groups worked together to make the transformation happen.",
+          "why_good": "A real, completed civic improvement that directly helps ordinary people access opportunity, education, and community space.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
