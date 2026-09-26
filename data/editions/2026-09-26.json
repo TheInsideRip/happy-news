@@ -17,7 +17,24 @@
           "age_text": "24 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-26T14:00:03.768363-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Seahorse habitats 'healing' thanks to eco-moorings",
+          "url": "https://www.bbc.co.uk/news/articles/cqrm90n3m90po?at_medium=RSS&at_campaign=rss",
+          "source": "BBC Science",
+          "label": "ocean",
+          "summary": "Off the coast of England, a beautiful seagrass meadow at Studland Bay had been getting scarred by boats dropping heavy anchor chains. Conservationists swapped those chains for special eco-friendly moorings that don't drag on the seafloor, and a new study confirms it's working. The torn-up patches are now visibly healing and regrowing. That matters because these meadows are a vital nursery for seahorses and other marine life. It's a lovely example of a small, practical fix actually paying off in nature.",
+          "why_good": "A completed intervention with verified, measurable ecological recovery; no politics, no disaster framing.",
+          "evergreen": false,
+          "age_text": "11 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
