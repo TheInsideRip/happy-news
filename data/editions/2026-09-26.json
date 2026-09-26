@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-26",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-26T08:00:02.643333-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "'Gamechanging' brain tumour test reduces diagnosis from eight weeks to two hours",
+          "url": "https://www.theguardian.com/society/2026/sep/25/gamechanging-brain-tumour-test-reduces-diagnosis-eight-weeks-two-hours",
+          "source": "Guardian Science",
+          "label": "health",
+          "summary": "Doctors in England now have a rapid new test that can identify a brain tumour type while a patient is still on the operating table. What used to take up to eight weeks of waiting for lab results can now be known in about two hours. That means surgeons can make better decisions about treatment right away, instead of leaving patients and families in limbo for weeks. NHS England is already piloting it in five hospitals around the country.",
+          "why_good": "A real, working medical breakthrough that is already being used on actual patients, cutting an agonizing wait down to hours.",
+          "evergreen": false,
+          "age_text": "24 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
