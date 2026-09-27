@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-27",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-27T08:00:02.752382-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "NYC Forces DoorDash to Pay $131 Million After Underpaying Delivery Workers",
+          "url": "https://www.goodnewsnetwork.org/nyc-collects-131-million-from-doordash-for-delivery-workers-unfairly-paid/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "New York City's consumer protection office just wrapped up a major enforcement case against DoorDash, and the results are already in workers' pockets. The city found the company had been shorting delivery drivers who worked hard every day to get food to people's doors. DoorDash has now paid $131.5 million total, with more than $115 million of that going straight to the workers who were owed it. It's a real win that shows city rules meant to protect gig workers actually have teeth. Thousands of delivery workers are getting money back that they rightfully earned.",
+          "why_good": "This is a completed enforcement action, not a proposal, that put real money directly into the hands of workers who were shortchanged, showing that consumer protection laws can be enforced effectively.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
