@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-27T19:00:02.638357-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Archaeologists Risked Their Lives to Save 30,000 Treasures from ISIS Terrorists—New Study Shows How",
+          "url": "https://www.goodnewsnetwork.org/archaeologists-risked-their-lives-to-save-thousands-of-treasures-from-isis-terrorists/",
+          "source": "Good News Network",
+          "label": "world",
+          "summary": "A new study reveals the remarkable story of archaeologists and museum staff who rushed to protect Syria's cultural heritage as danger closed in. Working quickly and quietly, they managed to save around 30,000 priceless artifacts from the Deir ez-Zor Museum before the area fell into the wrong hands. These objects, some thousands of years old, hold pieces of human history that could have been lost forever. Thanks to their courage and quick thinking, that history survives today for future generations to study and appreciate. It's a powerful reminder of how much people are willing to risk to protect what matters.",
+          "why_good": "It's an actual, completed rescue of irreplaceable cultural heritage through human courage and ingenuity, with a clearly positive, lasting outcome — not an ongoing conflict story.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "7:00 pm"
 }

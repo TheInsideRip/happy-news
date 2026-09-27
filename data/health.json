@@ -1,7 +1,12 @@
 {
-  "consecutive_failures": 0,
+  "consecutive_failures": 1,
   "last_success": "2026-09-27T12:00:25.628571+00:00",
-  "failures": [],
+  "failures": [
+    {
+      "at": "2026-09-27T18:00:09.978320+00:00",
+      "reason": "model output unusable after one retry: model returned no stories"
+    }
+  ],
   "droughts": [],
   "tiers": [
     1,
