@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-28T14:00:02.631876-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Vietnam Swiftly Protects Forests Containing the Last of the World's Most-Endangered Monkey",
+          "url": "https://www.goodnewsnetwork.org/vietnam-swiftly-protects-forests-containing-the-last-of-the-worlds-most-endangered-monkey/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Vietnam has just set aside about 7,500 acres of stunning limestone mountains and forest to create a new conservation reserve. It's home to the Delacour's langur, one of the rarest primates on Earth, with only a small population left in the wild. This protection didn't take years of red tape -- officials moved quickly once they understood how urgent the threat was. Now these striking black-and-white monkeys, along with the wild landscape they depend on, have a real safeguard for the future. It's a rare case of conservation happening at the speed the crisis actually demanded.",
+          "why_good": "A real, finalized land protection that directly saves a critically endangered species from extinction -- not a proposal, an accomplished designation.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
