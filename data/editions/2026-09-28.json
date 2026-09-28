@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-28",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-28T08:00:02.797430-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "18 Year-Old from the Bronx Starts Nonprofit to Sponsor School Children in Ghana",
+          "url": "https://www.goodnewsnetwork.org/18-year-old-from-the-bronx-starts-nonprofit-to-sponsor-school-children-in-ghana/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Max Owobu, an 18-year-old high school senior from the Bronx, started his own nonprofit to help sponsor school children in Ghana. While juggling exams and college applications like any other senior, he also found time to travel to Ghana to see the work in person. His organization helps cover the costs that keep kids in the classroom. It's a heartwarming reminder of what young people can build when they decide to help others. His generosity is already changing lives on the other side of the world.",
+          "why_good": "A real, completed act of youth-led generosity that is already helping children access education.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
