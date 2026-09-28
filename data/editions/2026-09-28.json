@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-28T19:00:02.620946-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Researchers Unearth a Clay Tablet Inscribed With the World's Oldest Peace Treaty",
+          "url": "https://www.goodnewsnetwork.org/researchers-unearth-a-clay-tablet-inscribed-with-the-worlds-oldest-peace-treaty/",
+          "source": "Good News Network",
+          "label": "peace",
+          "summary": "Archaeologists have uncovered an ancient clay tablet recording what's believed to be the world's oldest surviving peace treaty, a pact between ancient Egypt and the Hittite Empire. Written in Akkadian more than 3,000 years ago, the tablet describes lasting peace and brotherhood between the two nations after years of conflict. It's a remarkable reminder that even history's fiercest rivals once found a way to lay down their weapons and choose cooperation instead. The discovery gives historians a rare, tangible piece of humanity's long story of choosing peace over war.",
+          "why_good": "It's a genuine archaeological discovery documenting a real historical peace agreement, offering an uplifting, non-political story about reconciliation between former enemies.",
+          "evergreen": false,
+          "age_text": "9 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
