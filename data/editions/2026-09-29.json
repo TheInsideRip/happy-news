@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-29T14:00:02.614773-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "A Strategy of Cash-for-Photos Turns Animal Hunters into Animal Protectors in Indonesia",
+          "url": "https://www.goodnewsnetwork.org/a-strategy-of-cash-for-photos-turns-animal-hunters-into-animal-protectors-in-indonesia/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "On the island of Borneo, people who used to hunt endangered birds and orangutans are now getting paid to photograph them instead. Nine villages in Indonesia's West Kalimantan province have joined a pay-per-picture program that gives families extra income for protecting wildlife rather than harming it. The shift has turned former hunters into some of the animals' biggest defenders, since a living creature is now worth more to them than a dead one. It's a simple, clever way to align people's livelihoods with conservation, and it's already making a real difference on the ground.",
+          "why_good": "A real, working program that turned hunters into protectors and is measurably helping endangered species survive.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
