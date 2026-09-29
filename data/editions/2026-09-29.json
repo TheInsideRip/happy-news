@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-29",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-29T08:00:02.865004-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Norway's Newest Marine Protected Area Shelters Rich Marine Habitat, Whales, and Seabirds",
+          "url": "https://www.goodnewsnetwork.org/norways-newest-marine-protected-area-shelters-rich-marine-habitat-whales-and-seabirds/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Norway just created a huge new protected area in the ocean called Andfjorden, covering about 714 square miles of sea. That's roughly the size of 260,000 football pitches, all now safeguarded for whales, seabirds, and a wonderfully rich mix of marine life living both above and below the water. The government made this official on September 18th, so it's already law and already protecting these waters. It's a real, lasting win for one of the planet's most beautiful and biodiverse coastlines.",
+          "why_good": "A government took concrete, finalized action to permanently protect a huge stretch of ocean habitat for whales and seabirds -- not a proposal or study, but an established protected area.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
