@@ -34,7 +34,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-29T19:00:02.632044-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "'The forest is life': how Indigenous communities in Peru are preventing wildfires",
+          "url": "https://www.positive.news/environment/the-forest-is-life-how-indigenous-communities-in-peru-are-preventing-wildfires/",
+          "source": "Positive News",
+          "label": "earth",
+          "summary": "While wildfires have been getting worse across much of Peru, some Indigenous communities are actually seeing them decline. In the community of Paamari, people have combined traditional knowledge with active forest management to stop fires before they spread. Their methods are working so well that they're becoming a model other communities want to copy. It's a reminder that the people who know a forest best are often its best protectors. Real fires prevented, real forest saved.",
+          "why_good": "It's a real, ongoing success story of a community actually reducing wildfires through action they've already taken, protecting both people and a vital ecosystem.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
