@@ -34,7 +34,24 @@
           "age_text": "6 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-09-30T19:00:02.710927-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "New Gobi Desert Fossil Rewrites a Chapter of Mammal Evolution",
+          "url": "https://www.goodnewsnetwork.org/new-gobi-desert-fossil-rewrites-a-chapter-of-mammal-evolution/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Scientists found a beautifully preserved fossil in Mongolia's Gobi Desert that's changing what we know about early mammals living alongside dinosaurs. The little creature, just described in the journal Nature, turns out to belong to a totally different family tree than researchers had long assumed. It's a reminder that our understanding of ancient life is still being rewritten, one careful discovery at a time. No plans or predictions here, just real scientists examining a real fossil and finding something surprising. It's the kind of quiet scientific win that expands human knowledge a little more.",
+          "why_good": "A genuine scientific discovery that actually happened, peer-reviewed and published, expanding our understanding of life's history without any suffering or controversy attached.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
