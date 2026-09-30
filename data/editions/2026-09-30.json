@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-30",
+  "slots": {
+    "morning": {
+      "published_at": "2026-09-30T08:00:02.912112-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "First Ever Recorded Sea Turtle Nests on America's West Coast",
+          "url": "https://www.goodnewsnetwork.org/first-ever-recorded-sea-turtle-nests-on-americas-west-coast/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "For the first time ever, olive ridley sea turtles have laid their eggs on beaches in Southern California. Scientists were stunned to discover the nests, since these turtles have never been recorded building nests anywhere on the U.S. West Coast before. It's a rare and exciting milestone for marine biologists who study these threatened creatures. Researchers are now monitoring the nests closely, hopeful that healthy hatchlings will soon make their way to the sea. It's a small sign that ocean habitats along the coast may be shifting in the turtles' favor.",
+          "why_good": "A real, documented first-of-its-kind wildlife event that expands where an endangered species is thriving.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
