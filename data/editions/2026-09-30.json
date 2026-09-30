@@ -17,7 +17,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-09-30T14:00:02.903425-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Coastal Golf Course Turned into Vital Wetland Habitat for Seabirds",
+          "url": "https://www.goodnewsnetwork.org/coastal-golf-course-turned-into-vital-wetland-habitat-for-seabirds/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A golf course along England's coast has been turned into a brand-new wetland nature reserve. Even before it officially opened, plovers, terns, avocets, and lapwings had already moved in to nest and feed there. It's a lovely example of reclaiming developed land and handing it back to nature. The birds clearly didn't wait for an invitation — they just showed up and settled in.",
+          "why_good": "Real, completed habitat restoration that is already benefiting wild seabird populations, with no political angle.",
+          "evergreen": false,
+          "age_text": "6 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
