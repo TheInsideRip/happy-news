@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-01T14:00:02.710701-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Chinese Commercial Reactor Achieves Nuclear Fusion with Clean Hydrogen-Boron Fuel",
+          "url": "https://www.goodnewsnetwork.org/chinese-commercial-reactor-achieves-nuclear-fusion-with-clean-hydrogen-boron-fuel/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Engineers in China just pulled off something remarkable: they briefly achieved nuclear fusion using hydrogen and boron as fuel, a combination that's far cleaner and more abundant than what's typically used. An independent international team reviewed the results and called it a real, meaningful step forward for fusion energy. This matters because hydrogen-boron fusion produces almost no radioactive waste, making it an exciting path toward safer, limitless clean power down the road. It's a small but genuine breakthrough in the decades-long quest to harness the same energy that powers the sun.",
+          "why_good": "A real, verified scientific achievement that advances clean energy technology, independently reviewed and confirmed as significant.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
