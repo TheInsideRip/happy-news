@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-01T19:00:02.934212-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Genetic Analysis All But Confirms the Most Unique of Humpback Populations Is Actually a Subspecies",
+          "url": "https://www.goodnewsnetwork.org/genetic-analysis-all-but-confirms-the-most-unique-of-humpback-populations-is-actually-a-subspecies/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Scientists have confirmed something pretty special: the humpback whales living in the Arabian Sea are so genetically distinct from their cousins elsewhere that they count as their own subspecies. These whales stay in warm tropical waters year-round instead of migrating, which makes them unique in the whale world. This discovery helps conservationists understand exactly how rare and precious this small population is, so they can protect it properly. It's a reminder of how much wonder is still being uncovered in our oceans.",
+          "why_good": "A real scientific finding that deepens our understanding and protection of a rare whale population, with no disaster or suffering at its core.",
+          "evergreen": false,
+          "age_text": "9 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
