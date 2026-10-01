@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-01",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-01T08:00:02.841230-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Stunning Collection of Stolen Greek Artifacts Spanning 5,000 Years Were Just Returned to Greece",
+          "url": "https://www.goodnewsnetwork.org/stunning-collection-of-stolen-greek-artifacts-spanning-5000-years-were-just-returned-to-greece/",
+          "source": "Good News Network",
+          "label": "world",
+          "summary": "A huge collection of ancient Greek treasures, some going back 5,000 years, has just been sent home to Greece. The pieces, including two bronze helmets, ancient armor, and a marble bust of a Roman emperor, had been stolen and ended up in New York, some even on display at the Met. Investigators tracked them down and authorities made the call to return them to their rightful home. It's a reminder that pieces of history, no matter how long they've been missing, can still find their way back where they belong.",
+          "why_good": "Real stolen cultural heritage was recovered and physically repatriated, restoring history to the people it belongs to.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
