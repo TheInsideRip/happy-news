@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-02",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-02T08:00:03.192292-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "'Flourishing' Sycamore Gap Tree Has Ring of New Shoots Already 3-Feet Tall",
+          "url": "https://www.goodnewsnetwork.org/flourishing-sycamore-gap-tree-has-ring-of-new-shoots-already-3-feet-tall/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Remember the beloved Sycamore Gap tree in England that was illegally cut down a few years ago? New aerial photos show its stump is very much alive, surrounded by a ring of fresh shoots that have already grown three feet tall. The tree, famous for standing in a dramatic dip along Hadrian's Wall, is proving that even after a heartbreaking loss, nature finds a way to come back. Local conservationists have been tending the site, and the regrowth is a hopeful sign that the tree's story isn't over. It's a small but moving reminder that life is resilient.",
+          "why_good": "A genuine, verified act of nature's recovery and resilience, not tied to any disaster narrative or politics.",
+          "evergreen": false,
+          "age_text": "17 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
