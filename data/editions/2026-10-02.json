@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-02T19:00:02.875624-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Antarctica's Wind Farm Saves 122,000 Gallons of Diesel Over 15 Years Powering McMurdo Station",
+          "url": "https://www.goodnewsnetwork.org/antarcticas-wind-farm-saves-122000-gallons-of-diesel-over-15-years-powering-mcmurdo-station/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "Three wind turbines spinning on Antarctica's Ross Island have quietly been doing their job for 15 years, helping power the McMurdo research station in one of the harshest climates on Earth. Over that time they've saved about 122,000 gallons of diesel fuel that would otherwise have had to be shipped in and burned. That's less pollution and less risky fuel hauling in a fragile, precious place. It's proof that clean energy can hold up even in the most extreme conditions on the planet.",
+          "why_good": "A real, 15-year track record of renewable energy cutting fossil fuel use in one of the world's most sensitive environments - not a plan, an actual result.",
+          "evergreen": false,
+          "age_text": "9 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
