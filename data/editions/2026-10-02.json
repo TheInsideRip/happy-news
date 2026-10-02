@@ -17,7 +17,24 @@
           "age_text": "17 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-02T14:00:02.803802-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "UK's National Museums to Continue 25-Year Policy of Free Entry for Foreign Visitors",
+          "url": "https://www.goodnewsnetwork.org/uks-national-museums-to-continue-25-year-policy-of-free-entry-for-foreign-visitors/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "After months of talks, the UK government has confirmed that its 14 national museums, including the British Museum and the National Gallery, will stay free for everyone to visit, including tourists from abroad. This keeps a 25-year tradition alive that lets millions of people experience world-class art and history without paying a cent. Museum leaders and the tourism industry had worried this door to culture might start closing, but it's staying wide open. It's a small decision with a big ripple effect, especially for families and travelers on a budget. Free access to history and art is one of those quiet gifts that keeps giving, year after year.",
+          "why_good": "A government decision that preserves genuinely free, equal access to culture and education for millions of people, with no political combat involved.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
