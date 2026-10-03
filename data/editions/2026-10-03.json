@@ -34,7 +34,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-03T19:00:04.000766-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "The Spark: The 'Community Lighthouses' Where Neighbors Help Neighbors",
+          "url": "https://reasonstobecheerful.world/the-spark-the-community-lighthouses/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "Communities in several cities have set up what they call 'Lighthouses' — real, physical places where neighbors can go for help, supplies, or just company when times are hard. These hubs were built and are already running, staffed by local volunteers who know their neighborhoods best. They've become a steady source of support, from charging phones during outages to connecting people with food and resources. It's a simple idea — neighbors looking out for neighbors — but it's working, building stronger, more resilient communities one block at a time.",
+          "why_good": "It describes an actual, already-operating community program that demonstrably helps people, with no political framing.",
+          "evergreen": false,
+          "age_text": "38 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
