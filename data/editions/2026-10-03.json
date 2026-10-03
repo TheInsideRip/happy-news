@@ -17,7 +17,24 @@
           "age_text": "24 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-03T14:00:04.604209-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Ancient Christian Complex Reopens in Syria After 14 Years, a War, and an Earthquake",
+          "url": "https://www.goodnewsnetwork.org/ancient-christian-site-reopens-in-syria-after-14-years-a-war-and-an-earthquake/",
+          "source": "Good News Network",
+          "label": "world",
+          "summary": "A beautiful 5th-century Christian heritage site in Aleppo, Syria, has reopened its doors to visitors for the first time in 14 years. The Saint Simeon church complex was damaged by years of war and then an earthquake, but it has now been carefully restored and cleared of wreckage. Syria's antiquities officials held a ceremony on October 2nd to welcome the public back in. It's a hopeful sign of recovery and renewal for a region that has seen so much hardship, and a reminder that history and beauty can be rebuilt.",
+          "why_good": "A real, completed restoration that reopened a historic site to the public, offering a tangible sign of rebuilding and cultural renewal with no political framing.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
