@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-03",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-03T08:00:02.759940-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "30 Years of Clean-Up and Monitoring Work at Closed Copper Mine Wins Honors for World's Top Miner",
+          "url": "https://www.goodnewsnetwork.org/30-years-of-clean-up-and-monitoring-work-at-closed-copper-mine-wins-honors-for-worlds-top-miner/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "In British Columbia, a mining company was honored for something rare: sticking around for 30 years after the mine closed to clean up and keep monitoring the land and water. British Columbia was actually the first place in Canada to require this kind of long-term care by law, and this award shows the system working as intended. It's a reminder that old industrial sites don't have to stay scars on the landscape forever. Careful, patient follow-through turned a former copper mine into a model for responsible closure.",
+          "why_good": "It shows a real, decades-long environmental commitment that actually happened and is now being recognized, proving reclamation laws and corporate follow-through can genuinely heal land after mining ends.",
+          "evergreen": false,
+          "age_text": "24 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
