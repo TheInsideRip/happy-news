@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-04",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-04T08:00:02.802214-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Fan 'Storms Out' as Team Loses on TV, Only to Become Hero for Woman Stuck in Mud Chest-high",
+          "url": "https://www.goodnewsnetwork.org/fan-storms-out-as-team-loses-and-finds-woman-stuck-in-mud/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A man named Alastair stepped outside in frustration after watching his favorite football team lose badly on TV. While cooling off outdoors, he heard cries for help and found a woman trapped chest-high in thick mud, unable to free herself. He acted fast and managed to pull her to safety before the situation turned dangerous. What started as a disappointing evening turned into the night he saved someone's life. It's a sweet reminder that help can show up in the most unexpected moments.",
+          "why_good": "A real rescue where quick action by an ordinary person saved someone from real danger, with a happy ending and no political angle.",
+          "evergreen": false,
+          "age_text": "21 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
