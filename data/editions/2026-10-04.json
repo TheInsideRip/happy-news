@@ -17,7 +17,24 @@
           "age_text": "21 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-04T14:00:02.783402-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Rare 1-in-100M 'Ghost' Lobster Finds a New Home at University Marine Center",
+          "url": "https://www.goodnewsnetwork.org/100m-ghost-lobster-goes-to-college/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A strikingly pale 'ghost' lobster, the kind of find that only turns up about once in a hundred million catches, has a new home just in time for Halloween. Instead of ending up on a dinner plate, it was donated to the University of New England's Marine Science Center in Maine. Scientists there get the rare chance to study what makes its coloring so unusual, which could teach us more about lobster genetics. It's a happy ending for a one-of-a-kind creature, and a neat opportunity for researchers and visitors alike.",
+          "why_good": "A real, already-completed event where a rare animal was saved from being eaten and given to science and the public to enjoy and learn from.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
