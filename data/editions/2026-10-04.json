@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-04T19:00:02.807747-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Finalists Win Big Laughs in The Comedy Wildlife Photography Awards",
+          "url": "https://www.goodnewsnetwork.org/finalists-win-big-laughs-in-the-comedy-wildlife-photography-awards-look/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "The finalists for this year's Comedy Wildlife Photography Awards have just been revealed, and they're guaranteed to make you smile. Forty hilarious photos made the cut, capturing animals in the middle of silly, unplanned moments only nature could produce. The contest, sponsored by Nikon, celebrates wildlife photographers who manage to catch these funny split-second expressions in the wild. It's a lighthearted reminder that even serious wildlife conservation work can come with plenty of laughs.",
+          "why_good": "A real, completed announcement of award finalists that brings pure, harmless joy and celebrates wildlife photography without any suffering or controversy attached.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
