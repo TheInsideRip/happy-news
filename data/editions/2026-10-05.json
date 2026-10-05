@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-05T19:00:03.059622-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Fighting Wildfires from Prison, A New Law Gives Ex-Cons Route to California Fire Dept. Jobs on Release",
+          "url": "https://www.goodnewsnetwork.org/fighting-wildfires-from-prison-a-new-law-gives-ex-cons-route-to-california-fire-dept-jobs-on-release/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "For years, many California prisoners have fought wildfires as part of special crews, but once released, old rules kept them from becoming paid firefighters. California just signed a new law changing that, clearing the way for former inmates to join fire departments once they're free. It turns hard-won firefighting experience into a real career instead of a dead end. Thousands of people who already know how to do this dangerous, vital work now have a legitimate path forward. It's a second chance built on skills they already have.",
+          "why_good": "A real law was signed that measurably opens stable careers to formerly incarcerated people, helping both them and short-staffed fire departments.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
