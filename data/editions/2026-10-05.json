@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-05",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-05T08:00:03.009774-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Orphaned, Rescued, and Rewilded, Female Gorilla Becomes a Mother in Historic Conservation Success",
+          "url": "https://www.goodnewsnetwork.org/orphaned-rescued-and-rewilded-female-gorilla-becomes-a-mother-in-historic-conservation-success/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A female eastern lowland gorilla who was orphaned as a baby and later rescued and returned to the wild has just become a mother herself. She gave birth back in May in Virunga National Park in the Democratic Republic of the Congo, the very forest she was reintroduced to years ago. Eastern lowland gorillas are critically endangered, so every new baby matters, but this one is extra special because it proves rewilding orphaned gorillas can actually lead to them thriving and raising families of their own. It's a hopeful sign for the whole species' future.",
+          "why_good": "It's a real, confirmed birth that shows a rescued, rewilded gorilla successfully living wild and reproducing, a milestone for an endangered species' conservation.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
