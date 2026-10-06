@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-06",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-06T08:00:03.296360-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Virginia Becomes Latest State to Enact 'Clean Slate' Law, to Help Residents Move on from Minor Offenses",
+          "url": "https://www.goodnewsnetwork.org/virginia-becomes-latest-state-to-enact-clean-slate-law-to-help-residents-move-on-from-minor-offenses/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "Virginia just put a new law into effect that automatically seals thousands of old misdemeanor convictions from public view. That means people who made a small mistake years ago no longer have it show up when they apply for a job, an apartment, or a loan. The sealing happens automatically, so nobody has to hire a lawyer or navigate paperwork to get this second chance. It's part of a growing wave of states giving people a real path forward instead of a permanent record holding them back.",
+          "why_good": "A real law took effect that directly removes a barrier to jobs and housing for thousands of people, with no downside and no political fight attached.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
