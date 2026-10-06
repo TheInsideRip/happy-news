@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-06T14:00:03.001605-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "The Hospital That Silenced the Machines",
+          "url": "https://reasonstobecheerful.world/the-hospital-that-silenced-the-machines/",
+          "source": "Reasons to be Cheerful",
+          "label": "health",
+          "summary": "A hospital has found a clever way to cut down on the constant beeping that fills intensive care wards. Instead of just adding soft tiles or asking staff to be quieter, they redesigned how alarms work so machines only sound off when something truly needs attention. The result is a calmer, quieter space where patients can actually rest and heal, and staff aren't worn down by alarm fatigue. It's a simple idea with a big payoff: better sleep and less stress for people who are already having a hard time. Hospitals elsewhere are taking notice.",
+          "why_good": "A real, already-implemented change that improves patient recovery and staff wellbeing in hospitals.",
+          "evergreen": false,
+          "age_text": "33 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
