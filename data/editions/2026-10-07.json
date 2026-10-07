@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-07T19:00:02.921264-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "'You're Walking!' – Dad Surprises Children Having Recovered Ability to Walk After Serious Brain Injury",
+          "url": "https://www.goodnewsnetwork.org/youre-walking-dad-surprises-children-having-recovered-ability-to-walk-after-serious-brain-injury/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "A father who was badly hurt in a car accident spent three years working hard to recover. Through all that time and effort, he slowly regained strength and mobility that doctors weren't sure would come back. Recently, he surprised his own children by walking into the room on his own two feet, no help needed. The kids, who had only known him using mobility aids, were overjoyed and amazed. It's a beautiful reminder of what patience, determination, and love can accomplish.",
+          "why_good": "A real recovery that actually happened, centered on perseverance and family joy rather than the original accident.",
+          "evergreen": false,
+          "age_text": "11 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
