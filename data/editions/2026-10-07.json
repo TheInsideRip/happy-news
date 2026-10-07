@@ -17,7 +17,24 @@
           "age_text": "28 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-07T14:00:03.065518-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Saudi Solar Park Proves Brilliant Breeding Ground for Threatened Sand Gazelles",
+          "url": "https://www.goodnewsnetwork.org/saudi-solar-park-proves-brilliant-breeding-ground-for-threatened-sand-gazelles/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A massive solar farm on Saudi Arabia's Red Sea coast has turned into an unexpected safe haven for endangered Arabian sand gazelles. Because the fenced, quiet site keeps out predators and poachers, the gazelles have been breeding steadily and their numbers are climbing. It's a lovely example of clean energy infrastructure doing double duty for wildlife. Conservationists say the herd is thriving better here than in many traditional reserves. One big solar project, two big wins for the planet.",
+          "why_good": "A real, already-happening conservation success where clean energy infrastructure is directly helping a threatened species recover, with no political angle.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
