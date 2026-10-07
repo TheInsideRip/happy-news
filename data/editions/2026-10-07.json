@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-07",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-07T08:00:02.993270-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "The women putting community at the heart of elephant conservation",
+          "url": "https://www.positive.news/environment/the-women-putting-community-at-the-heart-of-elephant-conservation/",
+          "source": "Positive News",
+          "label": "animals",
+          "summary": "Across parts of Africa, women are stepping into leadership roles in elephant conservation, bringing a community-first approach that's changing how wildlife protection works. Instead of top-down rules, these women are building trust with local villages, training neighbors as rangers and educators, and finding ways for people and elephants to share land peacefully. Their programs are already easing old tensions between farmers and herds and giving elephants safer corridors to roam. It's a quiet but real shift in who gets to lead conservation, and it's working.",
+          "why_good": "Highlights real, functioning community-led conservation programs that are reducing human-elephant conflict and empowering women leaders, with no political framing or suffering-centered narrative.",
+          "evergreen": false,
+          "age_text": "28 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
