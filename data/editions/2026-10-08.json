@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-08T14:00:03.127225-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "How NYC Students Saved School Lunch",
+          "url": "https://reasonstobecheerful.world/how-nyc-students-saved-school-lunch/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "A group of New York City students decided they were tired of skipping the cafeteria because the food was bad and eating there felt embarrassing. Instead of just complaining, they worked with their school to redesign the lunch program itself, improving the food and the whole experience of eating together. More students are now actually showing up to eat real meals instead of avoiding the cafeteria. It's a simple, human win: kids got a say in something that affects them every single day, and it worked.",
+          "why_good": "A real, already-implemented improvement to kids' daily nutrition and school life, driven by the students themselves, with no political fight involved.",
+          "evergreen": false,
+          "age_text": "9 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
