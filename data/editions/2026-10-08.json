@@ -34,7 +34,24 @@
           "age_text": "9 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-08T19:00:03.336611-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "NYC Parks Extends Late Night Soccer at 5 Fields for Night Workers–And Their Reactions Are Awesome",
+          "url": "https://www.goodnewsnetwork.org/nyc-parks-extends-late-night-soccer-at-5-fields-for-night-workers-and-their-reactions-are-awesome-watch/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "New York City decided to keep the lights on at five soccer fields across all five boroughs so that people who work overnight shifts can finally get a chance to play. It's a small change with a big impact: thousands of nurses, delivery drivers, and other night-shift workers no longer have to choose between a paycheck and a pickup game. So far more than 4,500 people have shown up to enjoy the fields. It's a simple, thoughtful fix that makes city life a little fairer for people whose schedules don't match the usual nine-to-five. Watching their genuine excitement in the video is a nice reminder that good policy doesn't have to be complicated.",
+          "why_good": "A real city program was implemented and is already serving thousands of people who are often overlooked, with no political controversy attached.",
+          "evergreen": false,
+          "age_text": "7 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
