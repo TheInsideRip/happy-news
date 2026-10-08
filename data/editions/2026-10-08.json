@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-08",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-08T08:00:03.338946-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "More Than 14,000 Derelict Explosives Cleared from Libyan City and Nearby Farmland",
+          "url": "https://www.goodnewsnetwork.org/more-than-14000-derelict-explosives-cleared-from-libyan-city-and-nearby-farmland/",
+          "source": "Good News Network",
+          "label": "peace",
+          "summary": "A coastal city in Libya and the farmland around it are a lot safer this year, thanks to a careful team effort. The United Nations' mission in Libya, Italian aid workers, local Libyan partners, and the demining group HALO Trust worked together to clear more than 14,000 old landmines and unexploded bombs left over from past conflict. That means farmers can till their fields without fear, and families can walk their own streets without worrying about what's buried beneath them. It's slow, careful work, but it's already done and it's already making daily life safer for real people.",
+          "why_good": "A real, completed humanitarian achievement that directly removes danger from people's homes and farmland, with no political framing.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
