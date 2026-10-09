@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-09T14:00:02.532547-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Australia Announces 3 New National Parks to Protect Gliders, Owls, and Other Victoria Wildlife",
+          "url": "https://www.goodnewsnetwork.org/australia-announces-3-new-national-parks-to-protect-gliders-owls-and-other-victoria-wildlife/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "More than 250 square miles of forest in Victoria, Australia have officially become protected land this week. Lawmakers created three brand-new national parks, including one big enough to be the largest in the group, giving a permanent safe home to gliders, owls, and other local wildlife. This isn't just a plan on paper, the protections are now in effect. It's a real win for animals that were losing their forest homes, and for anyone who loves knowing wild places are being kept wild.",
+          "why_good": "A law protecting a huge stretch of forest has taken effect, giving lasting habitat protection to vulnerable species.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
