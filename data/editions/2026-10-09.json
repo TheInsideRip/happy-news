@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-09",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-09T08:00:03.153243-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Gen Z Is Rescuing Millions in Medical Supplies",
+          "url": "https://reasonstobecheerful.world/gen-z-is-rescuing-millions-in-medical-supplies/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "A group of young volunteers has been swooping in to save mountains of still-good medical supplies from being thrown away. In one recent haul, they picked up about 30,000 pounds of sealed N95 masks and hot-and-cold packs from a hospital in Columbus, Ohio, worth roughly a quarter million dollars, all with plenty of shelf life left. Instead of landing in a dumpster, these supplies get redirected to clinics and communities that actually need them. It's a simple idea with a big payoff: less waste, more care for people who need it. And it's young people leading the charge.",
+          "why_good": "It's a real, already-completed act of rescuing valuable resources from waste and getting them to people who need them, with no political angle at all.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
