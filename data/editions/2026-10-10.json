@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-10",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-10T08:00:02.569356-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "World's Largest 'Glacial Archeology' Expedition Recovers 48 Stone Age Arrowheads and Shafts",
+          "url": "https://www.goodnewsnetwork.org/worlds-largest-glacial-archeology-expedition-recovers-48-stone-age-arrowheads-and-shafts/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "High in the mountains of southern Norway, a team of scientists has spent 20 years combing melting glaciers for traces of ancient life, and their latest haul is a treasure trove. They just pulled 48 arrowheads and shafts from the ice, some thousands of years old and made from different materials depending on the era. Each piece is like a little time capsule, giving historians new clues about how hunters lived and adapted over centuries. It's a wonderful reminder that our planet still has stories buried in it, just waiting to be found. No digging required, just patience and a bit of melting ice.",
+          "why_good": "A real discovery that happened, adds to human knowledge, no suffering involved, and is genuinely delightful and awe-inspiring.",
+          "evergreen": false,
+          "age_text": "24 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
