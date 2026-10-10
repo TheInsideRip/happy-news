@@ -17,7 +17,24 @@
           "age_text": "24 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-10T14:00:05.442107-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Daughter Gets to Join Dad as Co-Pilot, With Mom Serving on Flight's Cabin Crew",
+          "url": "https://www.goodnewsnetwork.org/daughter-gets-to-join-dad-as-co-pilot-with-mom-serving-on-cabin-crew/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A 22-year-old pilot named Zoë flew her very first flight as co-pilot sitting right next to her dad, who was the captain. To make the day even sweeter, her mom was working that same flight as part of the cabin crew. It happened on a KLM flight out of Amsterdam, and the whole family got to share this huge career milestone together in the sky. It's a lovely reminder of how dreams can run in families and come full circle in the most unexpected ways.",
+          "why_good": "A real, heartwarming family milestone that actually happened, with no suffering or controversy attached.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
