@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-10T19:00:08.444040-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Sloth Bear Named By Julia Roberts is Flourishing After Rescue From Dancing Trade in India",
+          "url": "https://www.goodnewsnetwork.org/sloth-bear-given-a-name-by-julia-roberts-is-flourishing/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Back in 2009, actress Julia Roberts was filming in India when she met a sloth bear who had been cruelly forced to dance for tourists. She helped give the rescued bear a name, and now, years later, the sanctuary caring for her says she is truly thriving. The bear has fully healed from her old life of abuse and gets to live the way bears are meant to: foraging, resting, and behaving naturally. It's a lovely reminder that rescue and sanctuary care really can undo old harm. A small, happy update on a long-running success story.",
+          "why_good": "A real animal, rescued from genuine cruelty, is now confirmed to be living a healthy, natural life years later -- a concrete, happy outcome with no political angle.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
