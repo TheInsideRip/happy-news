@@ -34,7 +34,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-11T19:44:00.511313-04:00",
+      "time_text": "7:44 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "New Way to Relieve Arthritic Knees Without Drugs or Surgery by Changing Your Gait",
+          "url": "https://www.goodnewsnetwork.org/new-way-to-relieve-arthritic-knees-without-drugs-or-surgery-by-changing-your-gait/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "Researchers found that a simple change in the way people walk can ease the pain of knee arthritis just as well as medication does, without any pills or surgery involved. Nearly a quarter of people over 40 deal with this kind of joint pain, so a free, drug-free option is a big deal. The approach also appears to slow down the wear and tear on the cartilage itself, not just mask the pain. That means relief now and possibly healthier knees down the road. It's a hopeful, low-cost option for millions of achy knees.",
+          "why_good": "A real study showed a practical, accessible, drug-free way to reduce arthritis pain and protect joint health, which is genuinely good news for people's bodies and wallets.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:44 pm"
 }
