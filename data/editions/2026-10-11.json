@@ -17,7 +17,24 @@
           "age_text": "22 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-11T14:00:06.702106-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Giant Tortoise Population is Thriving – Survey Finds 180,000 on One Island Chain",
+          "url": "https://www.goodnewsnetwork.org/giant-tortoise-population-is-thriving-survey-finds-180000-on-one-island-chain/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Scientists just finished counting the giant tortoises on Aldabra, a remote atoll in the Seychelles, and found about 180,000 of them living there. That's the highest number ever recorded and makes it the largest population of free-roaming giant tortoises left on Earth. These gentle giants were once hunted to the edge of extinction, so seeing their numbers this strong is a real conservation win. It shows that protecting a place and leaving animals alone to live and breed in peace can truly work wonders over time.",
+          "why_good": "Confirms a real, measured recovery of an endangered species in the wild, based on an actual completed survey rather than a prediction.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
