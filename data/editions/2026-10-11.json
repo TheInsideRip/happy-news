@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-11",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-11T08:00:02.789645-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Lost Italian Statue by Trevi Fountain Artist Discovered in Salvage Yard Among the Garden Ornaments",
+          "url": "https://www.goodnewsnetwork.org/lost-italian-statue-by-trevi-fountain-artist-discovered-in-salvage-yard/",
+          "source": "Good News Network",
+          "label": "world",
+          "summary": "A beautiful piece of art history nearly slipped away unnoticed. A small bronze model, created centuries ago by Pietro Bracci, the same sculptor behind Rome's famous Trevi Fountain, turned up sitting among garden ornaments in a salvage yard. It was being sold for about $400, a tiny fraction of its true worth. Experts have now confirmed its origins, meaning this lost treasure gets a second life being properly appreciated. It's a lovely reminder that history sometimes hides in the most unexpected places.",
+          "why_good": "A genuine historical rediscovery that happened, preserving cultural heritage without any controversy or harm involved.",
+          "evergreen": false,
+          "age_text": "22 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
