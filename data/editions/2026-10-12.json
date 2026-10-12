@@ -17,7 +17,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-12T14:00:02.495652-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "‘Like Caring for a Pet’ – the App That Lets You Know if Your Neighborhood Tree Is Thirsty",
+          "url": "https://www.goodnewsnetwork.org/like-caring-for-a-pet-the-app-that-lets-you-know-if-your-neighborhood-tree-is-thirsty/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "In Berlin, a free app called Gieß den Kiez, which means 'water your neighborhood,' shows people a map of city trees near them and tells them which ones need watering. Thousands of residents have signed up to 'adopt' a tree, checking on it and giving it water just like a pet. It's helping the city's trees survive brutal summer heatwaves that have become more common. What started as a small city project has grown into a real community habit, with neighbors quietly keeping their streets green one watering can at a time.",
+          "why_good": "A real, already-working program getting ordinary people to actively protect city trees during heatwaves.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
