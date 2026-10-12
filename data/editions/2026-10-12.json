@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-12T19:00:01.812168-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Teen's Wish to Return Kindness She Received Sees Her Lemonade Stand Become $5 Million Charity Engine",
+          "url": "https://www.goodnewsnetwork.org/teens-wish-to-return-kindness-she-received-sees-her-lemonade-stand-become-5-million-charity-engine/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Eight years ago, a little girl in Ohio started a simple lemonade stand because she wanted to pass along some kindness she'd once received. That small summer stand has now grown into a citywide tradition that's raised an incredible five million dollars for charity. Kids all over the city set up their own stands every July, inspired by her example. It's a lovely reminder that one small act of generosity can multiply into something huge. The whole thing started with just a cup of lemonade and a big heart.",
+          "why_good": "A real, years-long chain of kindness that actually happened and has measurably helped charities, started by one generous kid.",
+          "evergreen": false,
+          "age_text": "10 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
