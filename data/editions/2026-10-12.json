@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-12",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-12T08:00:02.842130-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Family Sells 650 Acres on East Texas Lake to Become State Park, Saying Land is 'Part of my soul'",
+          "url": "https://www.goodnewsnetwork.org/family-sells-650-acres-on-east-texas-lake-to-become-state-park-saying-land-is-part-of-my-soul/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A Texas family who has owned a beautiful stretch of land on Lake Palestine for generations has sold it so it can become a brand-new state park. The property is the longest unbroken piece of natural shoreline left on the lake, with pine woods, wetlands, bluffs, and pecan trees. Instead of selling to developers, the family chose to let everyone share the place they call part of their soul. Now hikers, campers, and nature lovers will get to enjoy this peaceful spot for generations to come. It's a lovely reminder that sometimes the most meaningful gift a family can give is simply sharing their favorite place with the world.",
+          "why_good": "A real, completed act of generosity that permanently protects a rare piece of unspoiled shoreline for public enjoyment, with no political angle.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
