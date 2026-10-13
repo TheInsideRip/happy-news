@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-13T19:00:02.390932-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Scientists Shocked to Discover 'D-rex', a Giant Fungus from Chinese Forests Dating Back 65 Million Years",
+          "url": "https://www.goodnewsnetwork.org/scientists-shocked-to-discover-d-rex-a-giant-fungus-from-chinese-forests-dating-back-65-million-years/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Deep in the forests of southwest China, researchers found a brand-new species of giant fungus they've nicknamed 'D-rex,' short for its official name Dianjunus rex. It grows tall, upright fruiting bodies unlike almost anything else known, and traces its lineage back an astonishing 65 million years. The discovery is rewriting what scientists thought they knew about just how big and old fungi can get. It's a reminder that even now, nature still has huge surprises hiding in plain sight. Finds like this help scientists understand the deep history of life on Earth.",
+          "why_good": "A genuine, already-happened scientific discovery that expands our understanding of nature without any suffering, disaster, or politics involved.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
