@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-14",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-14T08:00:02.434880-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Wildlife Photographer of the Year 2026, the Winning Images",
+          "url": "https://www.positive.news/society/wildlife-photographer-of-the-year-2026-the-winning-images/",
+          "source": "Positive News",
+          "label": "animals",
+          "summary": "The winners of this year's Wildlife Photographer of the Year competition have just been revealed, chosen from a record-breaking number of entries from around the globe. The winning images capture incredible, rarely-seen moments from nature, from close encounters with wild animals to breathtaking landscapes. Photographers from many different countries were honored, celebrating the beauty and diversity of life on Earth. These photos remind us why protecting wild places matters so much. It's a joyful showcase of talent and the natural world working together.",
+          "why_good": "A completed, concrete event celebrating nature and human creativity, with no suffering or controversy at its core.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
