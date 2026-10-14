@@ -17,7 +17,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-14T14:00:02.658675-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Pittsburgh Water Launches Debt Forgiveness Program to Help Families with Rising Costs",
+          "url": "https://www.goodnewsnetwork.org/pittsburgh-water-launches-debt-forgiveness-program-to-help-families-with-rising-costs/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "Pittsburgh's water authority just rolled out a new program that wipes away old water bill debt for struggling residents over a 24-month period. Customers who qualify have already been enrolled as of September, and all they need to do is keep up with their regular monthly payments going forward. This takes a real weight off families who've been falling behind as utility costs climb. It's a practical, already-working fix, not just a promise on paper.",
+          "why_good": "A local government agency took concrete action to relieve real financial burden on families, and the program is already enrolling people, not just proposed.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
