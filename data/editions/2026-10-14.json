@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-14T19:00:02.097623-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Teen Triathlete Raises More Than $30,000 to Donate Bikes and Riding Lessons to Low-Income Families",
+          "url": "https://www.goodnewsnetwork.org/teen-triathlete-raises-more-than-30000-to-donate-bikes-and-riding-lessons-to-low-income-families/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A Georgia teen named Jonathan Thai turned his love of triathlons into a mission to help others. His nonprofit, the Pedal Forward Foundation, has now raised over $30,000 to give bicycles and free riding lessons to kids and families who couldn't otherwise afford them. Hundreds of children have already received bikes and learned to ride safely. It's a sweet reminder of how one young person's passion can turn into real help for a whole community.",
+          "why_good": "A real, completed charitable effort that has already put bikes in the hands of hundreds of low-income kids and taught them to ride — concrete help, not a plan.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
