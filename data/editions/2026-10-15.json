@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-15T19:00:02.216805-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Inches Below the Forest Floor, Archeologists in Germany Unearthed a Roman Temple to the War God",
+          "url": "https://www.goodnewsnetwork.org/inches-below-the-forest-floor-archeologists-in-germany-unearthed-a-roman-temple-to-the-war-god/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Archeologists digging along an old Roman frontier line near Frankfurt, Germany, just uncovered the floorplans of an ancient temple, a military camp, and a craft center. The whole complex had been hiding only inches beneath the forest floor for nearly two thousand years. It's a rare and detailed window into daily Roman life on the empire's edge, found almost by accident. Finds like this help historians piece together how soldiers, craftspeople, and worshippers actually lived side by side. It's the kind of discovery that makes the past feel suddenly close.",
+          "why_good": "A genuine, completed archeological discovery that expands human knowledge with no downside or controversy.",
+          "evergreen": false,
+          "age_text": "33 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
