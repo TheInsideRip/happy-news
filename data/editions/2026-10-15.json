@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-15T14:00:02.695780-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "ESA's New Sentinel 3C Satellite Makes its Debut with Sumptuous Images of Italy and the Arctic",
+          "url": "https://www.goodnewsnetwork.org/esas-new-sentinel-3c-satellite-makes-its-debut-with-sumptuous-images-of-italy-and-the-arctic/",
+          "source": "Good News Network",
+          "label": "space",
+          "summary": "A brand-new European satellite called Sentinel 3C just sent back its very first pictures of Earth, and they are stunning. The images show Italy's coastline, the Canadian Arctic, and the Caribbean in rich, true-to-life color. This satellite will help scientists track oceans, land, and ice from space for years to come, giving us better tools to understand our changing planet. It's a quiet little triumph of teamwork and engineering, already paying off just two weeks after launch.",
+          "why_good": "A real, completed space mission milestone that benefits environmental science and happened this week, with no political angle.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
