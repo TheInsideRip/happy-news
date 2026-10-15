@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-15",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-15T08:00:02.255377-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "The Library Is Closed. Feel Free to Come In.",
+          "url": "https://reasonstobecheerful.world/the-library-is-closed-feel-free-to-come-in/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "A small town library has found a clever way to serve its community around the clock. Even when no staff are there, residents can use a special access system to let themselves in to read, work, or just get out of the weather. It's especially helpful in rural areas where the library might be the only free indoor gathering spot for miles. People are using the quiet after-hours time to study, meet up, or simply find a warm, welcoming space. It's a simple idea making a real difference in daily life.",
+          "why_good": "A real, already-running program that expands free public access to community space, especially helpful for rural residents with few other options.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
