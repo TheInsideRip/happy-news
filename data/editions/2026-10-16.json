@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-16T19:00:02.132379-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "North America's Largest Wildlife Overpass Is Working: Animal Collisions on I-25 Down 91%",
+          "url": "https://www.goodnewsnetwork.org/north-americas-largest-wildlife-overpass-is-working-animal-collisions-on-i-25-down-91/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Colorado opened North America's biggest wildlife bridge over a busy interstate near Larkspur late last year, giving bears, elk, moose, and other animals a safe way to cross six lanes of traffic. Ten months later, the numbers are in, and they're remarkable: collisions between vehicles and animals in that stretch have dropped by 91 percent. That means fewer injured drivers, fewer heartbreaking roadside deaths for wildlife, and a model other states are already looking to copy. It's proof that a smart piece of infrastructure can quietly save lives, both human and animal, every single day.",
+          "why_good": "A real, already-built structure with a full year of hard data showing it works exactly as hoped, protecting both people and wildlife.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
