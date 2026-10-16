@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-16T14:00:02.341179-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Drape Some of This 'Plant Armor' Fabric Over a Strawberry Patch to Triple Yields with Less Pesticides",
+          "url": "https://www.goodnewsnetwork.org/drape-some-of-this-plant-armor-fabric-over-a-strawberry-patch-to-triple-yields-with-less-pesticides/",
+          "source": "Good News Network",
+          "label": "agriculture",
+          "summary": "Scientists tested a new lightweight fabric called Plant Armor by draping it over strawberry plants in real field trials, and the results were striking. The covered plants produced more than three times as much fruit as uncovered ones, without any harm to the plants. Even better, farmers using it needed noticeably less water and far less pesticide to get that bigger harvest. It's a simple, low-tech fix that could make growing fruit cheaper, cleaner, and more reliable for farmers everywhere.",
+          "why_good": "A real field-tested innovation that already boosted crop yields while cutting pesticide and water use, with no political angle and no hypothetical hedging.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
