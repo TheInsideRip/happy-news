@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-16",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-16T08:00:02.288421-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Largest Private Conservation Project in the US Hits Major Milestone as Free-Roaming Bison Pass 1,000",
+          "url": "https://www.goodnewsnetwork.org/largest-private-conservation-project-in-the-us-hits-major-milestone-as-free-roaming-bison-pass-1000/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Out on the Great Plains, a huge conservation ranch just hit a wonderful milestone: its free-roaming bison herd has grown past 1,000 animals. These bison live much like their wild ancestors did, grazing freely across vast grasslands that are being restored as a result. It's the largest private conservation project of its kind in the country, and this growing herd shows the land and wildlife are genuinely thriving together. A nice reminder that patient, long-term work on the land really can pay off.",
+          "why_good": "A real, measured population milestone (not a projection) showing a successful, ongoing conservation effort restoring American grasslands and wildlife.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
