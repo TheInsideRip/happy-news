@@ -34,7 +34,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-17T19:00:02.124842-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "99-Year-Old Becomes World's Oldest Wing-Walker",
+          "url": "https://www.goodnewsnetwork.org/99-yo-woman-snags-worlds-oldest-wing-walker-title/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A 99-year-old woman named Helga Duffy just earned the Guinness World Record for being the oldest person ever to go wing-walking, strapped to the top of a biplane as it soared through the sky. She was inspired after her niece told her about another elderly woman who'd tried it, and the staff at her assisted-living home encouraged her to go for it herself. Guinness officially confirmed her record this week, making her living proof that it's never too late to try something thrilling and new. It's a joyful reminder that age doesn't have to limit a sense of adventure.",
+          "why_good": "A real, verified accomplishment celebrating courage and joy in later life, with no political or tragic undertones.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
