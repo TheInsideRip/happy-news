@@ -17,7 +17,24 @@
           "age_text": "22 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-17T14:00:02.067203-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Coral Bleaching Reversed at Record Speed Using New Stanford Method",
+          "url": "https://www.goodnewsnetwork.org/coral-bleaching-reversed-at-record-speed-using-new-stanford-method/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Scientists at Stanford found a way to help bleached, ghostly-white coral turn back to full, healthy color in just seven weeks in their lab. That's the fastest recovery from bleaching ever recorded by researchers. Coral bleaching happens when warming waters stress reefs and they lose the colorful algae that keep them alive, so finding a way to speed up their comeback is a big deal. The team says this proves coral reefs are 'not a lost cause, at all,' giving real hope for the oceans. It's a hands-on breakthrough, not just a theory, and it could help guide real reef rescues in the future.",
+          "why_good": "A real, measured scientific success that shows damaged coral reefs can recover far faster than thought possible, offering genuine hope for ocean ecosystems.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
