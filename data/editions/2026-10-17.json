@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-17",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-17T08:00:02.323375-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Teen's Disaster Messaging App Can 'Hop' Across Bluetooth When Cellular Networks Collapse",
+          "url": "https://www.goodnewsnetwork.org/teens-disaster-messaging-app-can-hop-across-bluetooth-when-cellular-networks-collapse/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "A teenager built an app that lets phones talk to each other over Bluetooth, hopping from device to device, even when cell towers are knocked out. The idea came from the 2023 earthquakes in Turkey and Syria, where collapsed networks left people unable to call for help when they needed it most. Because it doesn't rely on cell service or the internet, the app could let neighbors relay emergency messages during hurricanes, earthquakes, or any disaster that takes down the grid. It's a clever, low-cost fix built by someone young enough to have grown up watching these disasters unfold on the news. Simple ideas like this one could genuinely save lives in the next crisis.",
+          "why_good": "A real, working invention that gives ordinary people a way to communicate in disasters when normal networks fail, built and demonstrated rather than merely proposed.",
+          "evergreen": false,
+          "age_text": "22 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
