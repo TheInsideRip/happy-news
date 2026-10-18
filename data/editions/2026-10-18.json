@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-18",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-18T08:00:02.243209-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Massive 70lb Dog the Size of Baby Hippo Sheds Pounds and Gets New Home",
+          "url": "https://www.goodnewsnetwork.org/massive-70lb-dog-the-size-of-baby-hippo-sheds-lbs/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A bulldog named Peggy Sue had grown so overweight she could barely walk, tipping the scales at 70 pounds, which is about the size of a baby hippo. Caring staff at the RSPCA's West Hatch Animal Centre in England took her in and helped her lose the extra weight through a gentle, steady recovery plan. Now healthier and much more mobile, Peggy Sue has found a loving new home where she can enjoy life as a normal-sized, happy dog. It's a sweet reminder of what patience and kindness can do for an animal in need.",
+          "why_good": "A real rescue animal genuinely recovered her health and was adopted into a loving home, with no suffering or loss at its core, just a feel-good happy ending that already happened.",
+          "evergreen": false,
+          "age_text": "22 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
