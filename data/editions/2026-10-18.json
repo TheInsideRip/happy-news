@@ -34,7 +34,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-18T19:00:02.436454-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Village Installs Knitted Traffic Cops to Slow Down Speeding Drivers",
+          "url": "https://www.goodnewsnetwork.org/village-installs-knitted-traffic-cops-to-slow-speeding-drivers/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "In the English village of Fillongley, local residents got creative to solve a problem with speeding cars. A group of knitters made life-sized, lifelike 'traffic cops' and fake speed cameras, dressing them in high-visibility vests so they look real from a distance. The clever trick is already making drivers slow down out of caution, all without spending money on real enforcement. It's a sweet example of neighbors using teamwork and a little humor to make their streets safer. No fines, no confrontation, just a community looking out for itself.",
+          "why_good": "A real, low-cost community solution that actually improved street safety, achieved through cooperation rather than conflict.",
+          "evergreen": false,
+          "age_text": "9 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
