@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-19T14:00:02.533168-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Brazil Ends Long Tradition of 6-Day Workweek via Constitutional Amendment",
+          "url": "https://www.goodnewsnetwork.org/brazil-ends-long-tradition-of-6-day-workweek-via-constitutional-amendment/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "Brazil's senate just voted overwhelmingly, 75 to 1, to pass a constitutional amendment ending the country's long-standing 6-day workweek. Millions of full-time workers there had been putting in 44 hours a week, more than many other nations require. Now the standard moves closer to the kind of 40-hour week common elsewhere, giving workers an extra day to rest, see family, or just breathe. It's a rare case of a government actually following through to improve everyday life for its citizens.",
+          "why_good": "A concrete law has passed that directly improves quality of life for millions of workers, decided through ordinary legislative process rather than conflict.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
