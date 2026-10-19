@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-19T19:00:02.352700-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Mozambique Protects the 'Butterfly Forest' of Mount Mabu, Home to 200 Species",
+          "url": "https://www.goodnewsnetwork.org/mozambique-protects-the-butterfly-forest-of-mount-mabu-home-to-200-species/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Mozambique's government has officially protected 23,000 acres of lush rainforest on Mount Mabu, known as the 'butterfly forest' for its stunning diversity of winged creatures. The decree, signed in August, creates the Mount Mabu Community Conservation Area, safeguarding more than 200 butterfly species along with countless other plants and animals found in this remote, misty mountain range. It's one of the wettest and most biologically rich places in southern Africa, and now it has the legal protection it needs to stay that way. Local communities will be involved in managing the land, so people and nature both benefit.",
+          "why_good": "A real government decree permanently protects a biodiversity hotspot and the communities who live there.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
