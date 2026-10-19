@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-19",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-19T08:00:02.375249-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Simple ‘Soil Steaming’ Found as Effective Replacement for Chemicals in Organic Strawberry Farming",
+          "url": "https://www.goodnewsnetwork.org/simple-soil-steaming-found-as-effective-replacement-for-chemicals-in-organic-strawberry-farming/",
+          "source": "Good News Network",
+          "label": "agriculture",
+          "summary": "Researchers in California have found a surprisingly simple way to grow bigger, healthier organic strawberries without harsh chemical fumigants. By blasting the soil with hot steam before planting, they can kill off pests and disease the same way old-fashioned fumigants do, but without the toxic residue. Field trials showed this steam treatment gave strawberry farmers yields they could count on, a huge win for organic growers who've struggled with unreliable harvests. It's a low-tech fix that could make organic strawberries both more available and more affordable. Great news for anyone who loves fruit grown without chemicals.",
+          "why_good": "A real, tested farming method that already worked in trials, cutting chemical use while helping organic growers get reliable harvests.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
