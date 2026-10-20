@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-20",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-20T08:00:02.256110-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "The New Certification Scheme Helping Solar Farms Become Havens for Wildlife",
+          "url": "https://www.positive.news/environment/the-new-certification-scheme-helping-solar-farms-become-havens-for-wildlife/",
+          "source": "Positive News",
+          "label": "earth",
+          "summary": "A new certification scheme has launched to reward solar farm developers who design their sites to also support local wildlife. Instead of just rows of panels on bare ground, certified farms now include wildflower meadows, hedgerows, and ponds that give bees, birds, and small animals a place to thrive. It's a simple idea that turns clean energy sites into little nature reserves at the same time. Developers are already signing up, meaning more solar farms across the country will soon be doing double duty for the planet.",
+          "why_good": "It's a real, already-launched program that lets renewable energy and wildlife habitat grow side by side, with no political angle.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
