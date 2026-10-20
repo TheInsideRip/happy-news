@@ -17,7 +17,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-20T14:00:02.439579-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Isle of Jersey Expands Marine Protections to Cover 21% of Territorial Waters",
+          "url": "https://www.goodnewsnetwork.org/isle-of-jersey-expands-marine-protections-to-cover-21-of-territorial-waters/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "The island of Jersey just made a big move to protect its seas. Officials expanded the area of ocean shielded from trawling and other damaging fishing from about 7% to nearly 22% of their waters. The new rules took effect on September 1st, giving fish, coral, and seafloor habitats room to recover and thrive. It's a real, binding change, not just a promise, and it shows how even a small island can make an outsized difference for ocean health.",
+          "why_good": "A concrete, already-in-force policy that triples protected ocean area, directly helping marine life recover.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
