@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-20T19:00:02.202135-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Volunteers became salmon, deer and earthworms. Then they set out to save their river",
+          "url": "https://www.positive.news/society/volunteers-became-salmon-deer-and-earthworms-then-they-set-out-to-save-their-river/",
+          "source": "Positive News",
+          "label": "earth",
+          "summary": "In Somerset, England, a group of local volunteers took part in a creative exercise where they imagined themselves as salmon, deer, and even earthworms living along their local river. The idea was to help people see the landscape through the eyes of the wildlife that depends on it. From that exercise, the community built a real 30-year plan to restore the health of the river and its surrounding land. It's a lovely example of neighbors coming together, using imagination and patience, to care for the nature right outside their doors.",
+          "why_good": "A real community took concrete first steps toward a long-term plan to restore a river ecosystem, benefiting both wildlife and people.",
+          "evergreen": false,
+          "age_text": "39 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
