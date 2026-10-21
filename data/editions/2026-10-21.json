@@ -34,7 +34,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-21T19:00:02.185719-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Strangers Help 86-Year-Old Who's Been Building a 62-foot Boat in his Yard Since 1987",
+          "url": "https://www.goodnewsnetwork.org/total-strangers-help-86-year-old-man-make-40-year-dream-reality/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "For almost 40 years, a Texas man named Dale has been welding together a 62-foot steel boat in his own front yard. Word of his lifelong dream spread, and strangers showed up to lend a hand so he could finally see it finished. Volunteers are now pitching in with labor, tools, and encouragement to help an elderly man cross the finish line on a project he started nearly four decades ago. It's a sweet reminder that communities still rally around a good dream. Dale's boat, once just a backyard curiosity, is closer than ever to actually setting sail.",
+          "why_good": "A real community came together to help an elderly man achieve a decades-long dream through pure kindness, with no disaster or conflict involved.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
