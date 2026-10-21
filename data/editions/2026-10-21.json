@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-21",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-21T08:00:02.662694-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Texas Man Finds More Than $128,000 on Top of a Bank's ATM–and Returns Every Dollar",
+          "url": "https://www.goodnewsnetwork.org/texas-man-finds-more-than-128000-on-top-of-a-banks-atm-and-returns-every-dollar/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A man in Texas spotted a bag stuffed with cash sitting on top of an ATM machine and, instead of keeping it, called the police right away. The bag held more than $128,000, likely left behind by a nearby business. Thanks to his honesty, every single dollar made its way back to its rightful owner. It's a simple reminder that there are still people who do the right thing even when no one is watching.",
+          "why_good": "A real act of honesty and integrity that genuinely helped someone, with no suffering or conflict involved.",
+          "evergreen": false,
+          "age_text": "22 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
