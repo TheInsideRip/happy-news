@@ -34,7 +34,24 @@
           "age_text": "28 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-22T19:00:02.464441-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Indonesia Halts 'World's Largest Deforestation Project,' Saving Potentially 4 Million Acres",
+          "url": "https://www.goodnewsnetwork.org/indonesia-calls-an-early-halt-to-worlds-largest-deforestation-project-saving-potentially-4-million-acres/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Indonesia has pulled the plug, ahead of schedule, on what had been called the world's largest deforestation project. The massive land-clearing plan was originally meant to turn rainforest, swamps, and peatlands into farmland to boost rice production. But because the country reached its rice self-sufficiency goals three years early through other means, officials decided the destruction was no longer necessary. That decision is expected to spare roughly 4 million acres of rainforest, swamp, and peatland from being cleared. It's a rare case of a huge environmental threat being called off simply because it turned out not to be needed.",
+          "why_good": "A concrete government decision that already happened, sparing millions of acres of irreplaceable rainforest and wetland habitat.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
