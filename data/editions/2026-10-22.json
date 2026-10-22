@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-22",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-22T08:00:02.637777-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Samoan Island Witnesses Explosion of Native Wildlife Following Removal of Invasive Rats and Pigs",
+          "url": "https://www.goodnewsnetwork.org/samoan-island-witnesses-explosion-of-native-wildlife-following-removal-of-invasive-rats-and-pigs/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A small Samoan island called Nu'utele has come back to life after conservationists cleared out invasive rats and pigs that had been destroying it for decades. Just one year later, the native forest is thriving again, and wildlife that had nearly vanished is bouncing back in a big way. The island is one of Samoa's most important wild places, home to rare birds and plants found almost nowhere else. It's a clear, measurable win showing how removing a harmful invader can let nature heal itself remarkably fast.",
+          "why_good": "A real, completed restoration effort already shows measurable ecological recovery, with no political or combative framing.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
