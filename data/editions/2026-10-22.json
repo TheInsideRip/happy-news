@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-22T14:00:02.532591-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Scientists Discover a Simple, Low-Energy Way to Recycle Acrylic Glass into Brand-New Material",
+          "url": "https://www.goodnewsnetwork.org/scientists-discover-way-to-recycle-acrylic-glass-into-brand-new-material/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Researchers in Switzerland found a simple, low-energy way to break down acrylic glass, the stuff behind plastics like Plexiglas, back into its original building blocks. That means it can be turned into brand-new, high-quality material instead of ending up as waste. The process doesn't need harsh chemicals or huge amounts of energy, which makes it realistic for recycling plants to actually use. Acrylic glass shows up everywhere from car parts to aquariums, so this could cut down a surprising amount of plastic waste. It's a rare case where a lab discovery looks genuinely practical and affordable right away.",
+          "why_good": "A real scientific breakthrough that already happened and offers a practical, affordable way to reduce plastic waste.",
+          "evergreen": false,
+          "age_text": "28 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
