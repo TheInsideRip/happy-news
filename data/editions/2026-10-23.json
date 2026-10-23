@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-23T19:00:02.459677-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Rescuers Ensure Orphaned Baby Walrus Gets a Second Chance",
+          "url": "https://www.goodnewsnetwork.org/rescuers-ensure-orphaned-baby-walrus-gets-a-second-chance-look/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A tiny walrus calf was found all alone on a remote Alaska beach, with no mom in sight and scavengers circling. Wildlife responders stepped in quickly and got him to safety. He's now settling into his new home at SeaWorld Orlando, where a dedicated team is caring for him around the clock. At about 220 pounds and just five months old, he's already got a name, Annautaq, and a whole crew rooting for him. It's a sweet reminder that when animals need help, people show up.",
+          "why_good": "A vulnerable orphaned animal was rescued and is now safe and cared for, a clear real-world positive outcome with no political angle.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
