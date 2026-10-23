@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-23T14:00:02.324495-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "One Teacher's Idea for Daily Positivity Practice Sweeps Through His Elementary School",
+          "url": "https://www.goodnewsnetwork.org/one-teachers-idea-for-daily-positivity-practice-sweeps-through-his-elementary-school/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A first-grade teacher in Kansas named Tyler Richards started having his students say daily affirmations like 'I am kind' and 'I can do hard things' before class begins. The simple habit caught on so well that it has now spread to other classrooms throughout his entire elementary school. Kids are heading home with more confidence and a little extra kindness in their pockets. It's a small thing that's making a real difference in how these children see themselves every day.",
+          "why_good": "A real, already-happening program that is measurably boosting kids' confidence and kindness, with no political angle.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
