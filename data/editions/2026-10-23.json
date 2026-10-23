@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-23",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-23T08:00:01.979375-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Vines Produce Bigger, Healthier Wine Grapes When Grown Under Solar Panels",
+          "url": "https://www.goodnewsnetwork.org/vines-produce-bigger-healthier-wine-grapes-when-grown-under-solar-panels/",
+          "source": "Good News Network",
+          "label": "agriculture",
+          "summary": "Scientists tried something clever: growing wine grapes underneath solar panels instead of in open fields. It turns out the vines liked the shade and protection so much that they produced bigger, healthier grapes than usual. At the same time, the panels overhead were quietly generating clean electricity. It's a neat two-for-one, more food and more renewable power from the very same patch of land. This kind of win-win farming could help both farmers and the planet going forward.",
+          "why_good": "A real study showed that combining solar panels with vineyards improves both crop quality and clean energy output at once, a genuine double benefit that already happened and was measured.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
