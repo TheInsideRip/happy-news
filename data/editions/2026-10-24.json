@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-24T19:00:02.107242-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Minnesota Man Jumps Onto Runaway School Bus and Saves 18 Kids After Driver Has Seizure",
+          "url": "https://www.goodnewsnetwork.org/st-paul-man-jumps-onto-runaway-school-bus-saves-18-children/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "On a quiet Monday in St. Paul, Minnesota, a 27-year-old man named Ebro Ahmed was on a break from work when he saw a school bus rolling by with no one in control. Without hesitating, he ran alongside it, pulled himself aboard, and brought the bus safely to a stop. It turned out the driver had suffered a sudden seizure, but thanks to Ebro's quick thinking, all 18 children on board and the driver were kept completely safe. No one was hurt, and a split-second decision by an ordinary guy turned a scary moment into a story of everyday heroism.",
+          "why_good": "A real, completed act of courage that prevented a disaster before it happened, with everyone safe and no political angle at all.",
+          "evergreen": false,
+          "age_text": "8 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
