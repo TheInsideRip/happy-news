@@ -17,7 +17,24 @@
           "age_text": "22 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-24T14:00:02.639106-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "New U.S. National Park Preserves 'Land of Standing-Up Rocks' and its Apache Culture in Arizona",
+          "url": "https://www.goodnewsnetwork.org/new-us-national-park-preserves-land-of-standing-up-rocks/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Arizona's striking rock-spire landscape, long known as Chiricahua, has officially been upgraded from a national monument to a full national park. The area holds deep meaning for the Apache people, and the new designation honors that heritage while giving the stunning natural formations stronger long-term protection. It's a place full of towering stone pillars that look almost otherworldly, and now more people will discover it and its history. The change also typically brings more resources for preserving the land for future generations.",
+          "why_good": "A real, finalized land designation that protects a unique natural and cultural site, with no political fight involved.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
