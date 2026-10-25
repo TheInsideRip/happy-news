@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-25",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-25T08:00:02.332207-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Star Clusters in Van Gogh's Starry Night Match the Real Taurus Sky From July 1889",
+          "url": "https://www.goodnewsnetwork.org/stars-in-van-gogh-starry-night-matches-sky-in-july-1889/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Researchers took a close look at the swirling sky in Van Gogh's famous painting The Starry Night and found something wonderful: the stars he painted actually match the real night sky over France in July of 1889. Art historians had long guessed roughly when he painted it, but this new comparison of star clusters and the moon's position pins it down with real precision. It's a lovely reminder that Van Gogh wasn't just painting from imagination, he was capturing an actual night he witnessed. Scientists and art lovers teaming up to solve a century-old mystery is just a nice bit of human curiosity at work. It gives one of the world's most beloved paintings an even richer, truer story.",
+          "why_good": "It's a real discovery connecting science and art that happened through actual research, with no suffering, politics, or controversy involved, just a delightful piece of knowledge about a beloved painting.",
+          "evergreen": false,
+          "age_text": "18 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
