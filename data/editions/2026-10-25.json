@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-25T19:00:02.572232-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Live Cheetah Den Webcam Lets You Watch Mom Zura and Her 5 New Cubs",
+          "url": "https://www.goodnewsnetwork.org/live-smithsonian-webcam-for-cheetah-den-and-5-cubs/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A cheetah named Zura gave birth to five healthy cubs earlier this month at the Smithsonian's Conservation Biology Institute in Virginia. Because cheetahs are vulnerable in the wild, every new litter born safely under expert care is a win for the species. Now anyone can tune in any time of day to watch Zura tend to her tiny cubs and even hear her gentle vocal sounds through a live webcam. It's a sweet, calming peek into new life and devoted animal motherhood. Conservationists hope these cubs will one day help support the broader cheetah population.",
+          "why_good": "A real birth of endangered cheetah cubs has already happened and is being cared for successfully, offering a joyful, ongoing window into wildlife conservation with no suffering or controversy involved.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
