@@ -17,7 +17,24 @@
           "age_text": "18 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-25T14:00:02.398192-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "A Chance Meeting in a Chinese Restaurant Saved a Man's Life",
+          "url": "https://www.goodnewsnetwork.org/chance-meeting-in-chinese-restaurant-saved-a-life/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Years ago, a man named David Couture had an ordinary dinner at a Chinese restaurant in Dover, New Hampshire that turned into anything but. A brief, unplanned conversation with a stranger that night ended up leading him somewhere he never expected, and ultimately saved his life. It's the kind of small, everyday moment most of us would forget, except this one mattered more than he could have known at the time. He's been carrying the story with him ever since, a quiet reminder that kindness and chance encounters can change everything.",
+          "why_good": "A real event where an unplanned human connection genuinely helped and protected a person's life, with no political angle.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
