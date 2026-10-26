@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-26",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-26T08:00:02.829379-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Man Named 'Service' Cleans Up NYC Dumping Site on His Own Initiative",
+          "url": "https://www.goodnewsnetwork.org/man-named-service-cleans-up-nyc-dumping-site-on-his-own-initiative/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A Queens man named Joshua Service spotted an illegal dumping site while riding the rails and decided to do something about it instead of just scrolling past. He rolled up his sleeves and cleared the mess himself, turning an eyesore back into a clean public space. No committee, no funding request, just one neighbor deciding the street deserved better. It's a nice reminder that a cleaner block can start with a single person who stops and acts. Sometimes the simplest good deeds are the ones that stick with you.",
+          "why_good": "A real person took real, voluntary action to improve a shared public space, with no political angle and no catch.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
