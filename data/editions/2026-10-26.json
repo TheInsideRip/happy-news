@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-26T19:00:01.968053-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Stunning New Opera House Opens With a Gravity-Defying Grand Staircase",
+          "url": "https://www.goodnewsnetwork.org/stunning-new-opera-house-welcomes-you-with-gravity-defying-grand-staircase-look/",
+          "source": "Good News Network",
+          "label": "world",
+          "summary": "Shanghai has just opened a brand-new opera house, and it's already turning heads around the world. The building sits right on the banks of the Huangpu River and features a jaw-dropping staircase that seems to float in midair. It's the kind of grand, hopeful public project that brings people together to enjoy art and music in a beautiful new space. Cities investing in culture and design like this are a lovely reminder of what communities can build when they aim high.",
+          "why_good": "A real, completed public building that celebrates art and architecture, with no suffering or controversy attached.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
