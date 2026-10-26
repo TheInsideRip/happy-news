@@ -17,7 +17,24 @@
           "age_text": "just now"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-26T14:00:02.326810-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Numbers of Endangered and Sacred River Dolphin Grow by 6 After Successful Breeding Season",
+          "url": "https://www.goodnewsnetwork.org/numbers-of-endangered-and-sacred-river-dolphin-grow-by-6-after-successful-breeding-season/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Six new calves were born this season to the rare Irrawaddy dolphins that live in the Mekong River and are considered sacred by local communities in Cambodia. These gentle river dolphins are critically endangered, so every new calf is a big deal for the species' survival. Conservationists who have been protecting the river and working with fishing communities say this is one of the strongest breeding seasons in years. It's a hopeful sign that patient, local conservation work is paying off for one of the world's rarest dolphins.",
+          "why_good": "A real, counted increase in a critically endangered animal population thanks to successful on-the-ground conservation work.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
