@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-27",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-27T08:00:02.391820-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Tiny Scottish Island's Little Historical Society Makes Massive Discovery",
+          "url": "https://www.goodnewsnetwork.org/tiny-scottish-islands-little-historical-society-makes-massive-discovery/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "A small volunteer historical society on a tiny Scottish island just made a huge discovery. Their digging turned up evidence that the island was actually one of the earliest centers of Christian evangelism anywhere in the British Isles. It's a wonderful reminder that you don't need a big university or a big budget to uncover something historically important. This little island community has now earned a real place on the map of history, all thanks to curious locals who kept asking questions.",
+          "why_good": "A real archaeological discovery made by ordinary community volunteers, with no suffering or conflict involved.",
+          "evergreen": false,
+          "age_text": "20 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
