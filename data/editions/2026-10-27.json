@@ -17,7 +17,24 @@
           "age_text": "20 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-27T14:00:02.440691-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "NGO Celebrates 70 Million Amazon Acres Conserved After Protecting Area Called a 'Link of Life'",
+          "url": "https://www.goodnewsnetwork.org/ngo-celebrates-70-million-amazon-acres-conserved-after-protecting-are-called-a-link-of-life/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "A conservation group called the Rainforest Trust just helped create a massive new 715,000-acre wildlife reserve in Bolivia, along a river so rich with life that scientists call it a 'link of life.' This new reserve pushes the group's total protected land across the Amazon region past 70 million acres. That's an enormous swath of rainforest now safeguarded for the plants, animals, and indigenous communities who depend on it. It's a milestone built one real, completed project at a time, not just a promise for later.",
+          "why_good": "A concrete, already-finished land protection milestone that safeguards a huge, biodiverse region of the Amazon—genuinely good for the planet, fully happened, and free of political conflict.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
