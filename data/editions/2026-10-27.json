@@ -34,7 +34,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-27T19:00:02.356463-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Free Tool Helps Young Men Take Responsibility for Sexual Harm",
+          "url": "https://www.positive.news/society/free-tool-helps-young-men-to-take-responsibility-for-sexual-harm/",
+          "source": "Positive News",
+          "label": "people",
+          "summary": "A new free digital tool is quietly helping young men stop and reflect on their own behavior around sex and consent, before any harm happens. It gives them a thoughtful alternative to the angry 'manosphere' voices many stumble across online, encouraging honest self-examination instead of shame or defensiveness. Young men are actually using it, which is the hopeful part, it shows real appetite for growth rather than just excuses. The goal is simple: fewer harmful situations because people paused to think it through first. It's a small, steady win for safer relationships everywhere.",
+          "why_good": "A real, in-use tool is genuinely helping prevent harm by reaching young men early with reflection rather than punishment, and it's about personal growth, not politics or conflict.",
+          "evergreen": false,
+          "age_text": "34 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
