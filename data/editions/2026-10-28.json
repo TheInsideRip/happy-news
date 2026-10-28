@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-28T19:00:02.048527-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Nature-Inspired Tech Prevents Microplastics Entering Atlantic Ocean Through Wastewater",
+          "url": "https://www.goodnewsnetwork.org/nature-inspired-tech-prevents-microplastics-entering-atlantic-ocean-through-wastewater/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "A group of Princeton graduates built a clever new filter that copies the way certain plants shed water, and it's now up and running in Atlantic City. The device catches tiny plastic particles in wastewater before they can slip out into the ocean. It's already been installed and is working at scale, which is a big deal since most treatment plants can't catch microplastics at all. This kind of quiet infrastructure fix could keep a huge amount of plastic pollution out of the sea over time. It's a hopeful sign that smart, nature-copying design can solve stubborn environmental problems.",
+          "why_good": "A real, already-deployed technology is actively removing ocean-bound plastic pollution at scale, a concrete environmental win rather than a study or proposal.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
