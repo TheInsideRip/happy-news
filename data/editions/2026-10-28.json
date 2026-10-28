@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-28",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-28T08:00:02.333121-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Stranger Anonymously Pays $420 Lunch Tab for 27 Disabled Residents and Caregivers",
+          "url": "https://www.goodnewsnetwork.org/anonymously-pays-dinner-tab-for-27-disability-staff-in-south-korea/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A group of 27 people from a disability community center in Incheon, South Korea, stopped for a barbecue lunch together, just like any other outing. When it came time to pay, the staff told them someone they'd never met had already covered the entire $420 bill and asked to stay anonymous. The quiet generosity left the group, who care for and support disabled residents every day, feeling seen and appreciated. It's a small reminder that kindness between strangers still happens every day, no strings attached.",
+          "why_good": "A real act of anonymous generosity that happened and brightened the day of a group of caregivers and the people they support, with no suffering or conflict at its center.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
