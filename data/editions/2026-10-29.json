@@ -17,7 +17,24 @@
           "age_text": "4 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-29T14:00:02.379143-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Romans Made Color-Changing Glass–and We've Just Replicated After 1,600 Years",
+          "url": "https://www.goodnewsnetwork.org/romans-made-color-changing-glass-and-weve-just-replicated-after-1600-years/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Ancient Roman craftsmen made a stunning goblet that shifts color depending on how light hits it, a trick scientists have marveled at for centuries. Researchers have now figured out exactly how the Romans did it and successfully recreated the technique after 1,600 years. It's a wonderful reminder of just how advanced ancient engineering really was. Beyond the history lesson, the breakthrough could inspire new kinds of color-shifting materials today. It's a little bit of ancient magic brought back to life.",
+          "why_good": "A genuine scientific achievement that actually happened, connecting ancient craftsmanship to modern materials science with no suffering, disaster, or political content involved.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
