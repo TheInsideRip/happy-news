@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-29",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-29T08:00:02.509019-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "Smartphones, ancient tracking skills and a future for desert lions",
+          "url": "https://www.positive.news/society/smartphones-ancient-tracking-skills-and-a-future-for-desert-lions/",
+          "source": "Positive News",
+          "label": "animals",
+          "summary": "In Namibia, local rangers are blending generations-old tracking knowledge with real-time smartphone data to keep tabs on a slowly recovering population of desert lions. The system helps farmers get early warnings when lions wander near their livestock, so conflicts can be avoided before anyone loses an animal or a lion gets killed in retaliation. It's a rare case where modern tech and traditional skill work hand in hand, giving both the lions and the people who live alongside them a better shot at coexisting. The approach is already helping this fragile lion population hold steady and grow.",
+          "why_good": "A real, working program that is helping an endangered lion population recover while protecting farmers' livelihoods -- not a study or a plan, but something happening right now.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
