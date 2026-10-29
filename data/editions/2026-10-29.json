@@ -34,7 +34,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-29T19:00:01.983050-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Disabled Veteran Receives Donated Car Beautifully Refurbished by Auto Collision Students",
+          "url": "https://www.goodnewsnetwork.org/disabled-veteran-receives-donated-car-beautifully-refurbished-by-auto-collision-students/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A disabled veteran in Minneapolis had gone years without a reliable way to get around for errands and appointments. Students at a Minnesota technical school took on his case through the Recycled Rides program, which restores donated cars for people in need. Working hands-on in their auto collision classes, they fully refurbished a 2020 Hyundai Elantra and handed him the keys. It gave the students real-world experience while giving him back his independence. A simple act of teamwork turned into a life-changing gift.",
+          "why_good": "A real donated, fully restored car was given to a veteran in need, a concrete and heartwarming act of community support with no catch.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
