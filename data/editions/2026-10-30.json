@@ -34,7 +34,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "evening": {
+      "published_at": "2026-10-30T19:00:02.367932-04:00",
+      "time_text": "7:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Best Spud Harvest in a Decade Clears the Gloom of Crops Failing from Scorching Summer",
+          "url": "https://www.goodnewsnetwork.org/best-spud-harvest-in-a-decade-clears-the-gloom-of-crops-failing-from-scorching-summer/",
+          "source": "Good News Network",
+          "label": "agriculture",
+          "summary": "After a rough summer that damaged many crops, Japan's potato farmers just had their best harvest in ten years. A perfect mix of rain and temperatures lined up at just the right time, giving growers a much-needed win. It's a reminder that even with a changing climate throwing curveballs, good growing seasons still happen. For farmers who've been worried about their livelihoods, this is a real breath of relief.",
+          "why_good": "A concrete, verified bumper harvest that actually happened, bringing tangible relief to farmers without any political framing.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "2:00 pm"
+  "updated_text": "7:00 pm"
 }
