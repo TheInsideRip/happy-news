@@ -17,7 +17,24 @@
           "age_text": "46 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-30T14:00:02.365715-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "New Texas School Is Named For Longtime Janitor 'Miss Marilyn'",
+          "url": "https://www.goodnewsnetwork.org/new-texas-school-is-named-for-longtime-janitor-miss-marilyn-watch-her-reaction/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A Texas school district just named a brand-new school after Marilyn Hampton, a custodian who spent her career quietly keeping the halls clean and the kids cared for. It's a rare honor, usually reserved for superintendents or donors, but the community decided her decades of steady, loving service deserved the spotlight. Watching her reaction when she found out is the kind of moment that reminds you how much everyday kindness matters. It's a simple, heartfelt way of saying thank you to someone who gave so much without ever asking for recognition.",
+          "why_good": "A real, completed act of community recognition for a person's lifetime of quiet service -- uplifting, not political, no suffering at its core.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
