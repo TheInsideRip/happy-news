@@ -17,7 +17,24 @@
           "age_text": "30 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-10-31T14:00:01.989203-04:00",
+      "time_text": "2:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Retirees Who Lost Spouses Fall in Love Again at 88, After Meeting in the Gym",
+          "url": "https://www.goodnewsnetwork.org/retirees-who-lost-spouses-fall-in-love-again-at-88-meeting-in-gym/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Barbara Thompson and Fred Jenkins both lost their longtime partners and never expected to find love again. Then they crossed paths among the gym equipment at their retirement community and struck up a friendship. That friendship blossomed into romance, and now, at 88 years old, the two are happily in love. It's a sweet reminder that it's never too late for a fresh chapter, even after heartbreak.",
+          "why_good": "A genuine, uplifting human story about resilience and finding joy later in life, with no suffering at its core and nothing political about it.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "8:00 am"
+  "updated_text": "2:00 pm"
 }
