@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-31",
+  "slots": {
+    "morning": {
+      "published_at": "2026-10-31T08:00:02.391558-04:00",
+      "time_text": "8:00 am",
+      "note": null,
+      "stories": [
+        {
+          "title": "UK Closes Loophole That Let Nicotine Products Slip Past Youth Protections",
+          "url": "https://www.positive.news/society/good-news-stories-from-week-44-of-2026/",
+          "source": "Positive News",
+          "label": "health",
+          "summary": "The UK government has officially shut down a legal loophole that was letting nicotine products reach young people without the usual safeguards. This is a real rule change, not just a proposal, and it means stronger protection for kids from nicotine marketing and sales. Health campaigners have been pushing for this fix for a while, so seeing it actually go into effect is a genuine win. It's a small but concrete step that puts children's wellbeing ahead of industry loopholes.",
+          "why_good": "It's a completed government action (not a pledge) that measurably protects young people's health, with no election or political combat involved.",
+          "evergreen": false,
+          "age_text": "30 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "8:00 am"
+}
