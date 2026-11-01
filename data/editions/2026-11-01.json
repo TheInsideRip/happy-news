@@ -17,7 +17,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-01T18:00:02.763702-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Housing Nonprofit Funds $16.5 Million in Eviction Relief to Assist Renters",
+          "url": "https://www.goodnewsnetwork.org/housing-nonprofit-funds-16-5-million-in-eviction-relief-for-renters/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "An Atlanta-based nonprofit has now given out $16.5 million through its Eviction Relief Fund, helping renters stay in their homes instead of losing them. Since the program began during the pandemic, it has supported more than 5,500 families who were struggling to make rent. Affordable-housing landlord Marjy Stagmeier helped build the effort to ease the pressure on tenants during hard times. It's a steady, practical kind of help that keeps real families safely housed.",
+          "why_good": "A concrete, already-completed program has kept thousands of real families in their homes, with no political framing involved.",
+          "evergreen": false,
+          "age_text": "just now"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
