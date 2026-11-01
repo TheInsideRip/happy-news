@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-01",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-01T13:00:02.600049-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "High School Fills Entire Football Field With Groceries to Replenish New Jersey Food Banks",
+          "url": "https://www.goodnewsnetwork.org/high-school-fills-football-field-with-groceries-for-nj-food-banks/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Students at Howell High School in New Jersey turned their football field into a sea of groceries last week, covering it end zone to end zone with bright yellow donation bags. Together they collected more than a quarter million pounds of food for local food banks during the school's second annual food drive. It's a huge show of teenage generosity, proving that when young people organize around a cause, they can make a real dent in hunger in their community. Families who rely on these food banks will feel the difference this winter.",
+          "why_good": "A real, completed act of mass generosity that will directly feed struggling families, with no political angle.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
