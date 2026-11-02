@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-02",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-02T13:00:02.820951-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Islands Near Portugal Turn Off Lights to Protect Seabird Fledglings Every October – 30k Already Saved",
+          "url": "https://www.goodnewsnetwork.org/islands-near-portugal-turn-off-lights-to-protect-seabird-fledglings-every-oct/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Every autumn on tiny Corvo island in the Azores, more than 400 residents turn off their lights for five nights in a row. It's not a power outage, it's on purpose: young seabirds get confused by artificial light and crash into buildings instead of finding their way to sea. Thanks to this simple community blackout, locals have rescued and released around 30,000 fledglings over the years. It's a beautiful example of a whole town pitching in for wildlife, no fancy technology required.",
+          "why_good": "A real, ongoing community conservation effort that has already saved tens of thousands of birds, with no political angle and a clear, happy outcome for the planet.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
