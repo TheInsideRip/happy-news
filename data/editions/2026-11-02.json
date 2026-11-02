@@ -17,7 +17,24 @@
           "age_text": "14 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-02T18:00:02.924698-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Whale Festival Kicks Off on Amelia Island in Florida Celebrating the Return of the Right Whale",
+          "url": "https://www.goodnewsnetwork.org/whale-festival-to-kick-off-amelia-island-in-florida-to-celebrate-the-return-of-the-right-whale/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Every winter, endangered North Atlantic right whales swim down to the warm waters off Florida's Amelia Island to have their calves, and this week the town is throwing its annual festival to celebrate their return. It's been running since 2009, drawing families to watch for whale sightings and learn about the species. These whales are one of the rarest marine mammals on earth, so seeing them come back each year is a genuine bright spot for ocean conservation. The festival turns a conservation milestone into a joyful community event. It's a nice reminder that protecting wildlife and having fun aren't mutually exclusive.",
+          "why_good": "Celebrates the real, recurring return of an endangered species to its calving grounds, an actual event happening now, with no political or tragic framing.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
