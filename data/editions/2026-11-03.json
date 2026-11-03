@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-03",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-03T13:00:02.888042-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "He Donated His Ultra-rare Blood 545 Times While Visiting Every Blood Bank in Australia",
+          "url": "https://www.goodnewsnetwork.org/ultra-rare-blood-carrier-finishes-grand-tour-around-australia-to-donate-at-all-85-blood-banks/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "A 59-year-old Australian police officer named Trevor Bergman has an extremely rare blood type, and he's spent years making sure it gets to people who need it. He just finished a personal mission to visit and donate at every single one of Australia's 85 blood donation centers. Along the way he gave blood an incredible 545 times, likely saving countless lives across the country. It's a wonderfully simple kind of generosity -- just showing up, again and again, because you can help.",
+          "why_good": "A real person completed a real act of sustained generosity that has directly helped patients nationwide, with no political angle at all.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
