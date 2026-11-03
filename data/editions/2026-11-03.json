@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-03T18:00:03.016513-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Loch Ness Is About to Welcome a New Monster Not Seen There in 500 Years–the Beaver!",
+          "url": "https://www.goodnewsnetwork.org/loch-ness-is-about-to-welcome-a-new-monster-the-beaver-500-years-since-it-last-lived-there/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Beavers are returning to Scotland's famous Loch Ness for the first time in about 500 years. These industrious little builders were wiped out centuries ago, but conservationists have now reintroduced them to the area. Beavers are great for the environment because their dams and waterways create homes for all sorts of other wildlife and help control flooding. It's a lovely reminder that lost nature can sometimes come back home.",
+          "why_good": "A real, completed reintroduction of a native species after five centuries, restoring a healthier ecosystem with no downside.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
