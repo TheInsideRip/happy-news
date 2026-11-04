@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-04",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-04T13:00:02.934314-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Italy Sees Collapse in its Homicide Rate to 3rd Lowest in the EU",
+          "url": "https://www.goodnewsnetwork.org/italy-sees-collapse-in-its-homicide-rate-to-3rd-lowest-in-the-eu/",
+          "source": "Good News Network",
+          "label": "government",
+          "summary": "Italy just posted its lowest homicide rate on record, making it the third-safest country in the EU by this measure. This is a huge turnaround from the mafia violence that once plagued parts of the country. Years of steady police work and improved security efforts are clearly paying off. For everyday Italians, it means neighborhoods that are measurably safer than they've been in decades. It's a quiet but real win worth celebrating.",
+          "why_good": "A concrete, measured drop in violent crime that genuinely improves people's safety and daily lives, driven by real government and policing efforts rather than any political fight.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
