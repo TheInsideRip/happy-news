@@ -17,7 +17,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-05T18:00:02.692403-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "The Montana Ranch Where Autistic People Are Wranglers and Guides",
+          "url": "https://reasonstobecheerful.world/montana-guest-ranch-employing-autistic-people/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "On 230 acres of Montana wilderness, a guest ranch called Erik's Ranch & Retreats has built its whole operation around giving autistic adults real, meaningful jobs. The staff work as wranglers, cooks, guides, and concierges, running the ranch for visiting guests just like any other resort. It's a place built on the idea that people with autism don't need to be sidelined from the workforce, they need the right environment to thrive in it. Their own motto says it best: sheets, towels, and lives changed daily. It's a beautiful example of a workplace designed around people, not the other way around.",
+          "why_good": "It's a real, operating program that has already changed how autistic adults are employed and valued, not a proposal or a study.",
+          "evergreen": false,
+          "age_text": "7 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
