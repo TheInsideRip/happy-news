@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-05",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-05T13:00:02.976979-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Seabird Sees Miracle Recovery After Avian Flu Wiped Them Out",
+          "url": "https://www.goodnewsnetwork.org/miracle-recovery-sees-seabirds-reclaim-former-colony-after-avian-flu-wiped-them-out/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Three years ago, avian flu completely wiped out a colony of sandwich terns on England's south coast, leaving zero birds behind. Thanks to years of dedicated conservation work, those terns have come back and multiplied to 756 birds today. Even better, little terns, ringed plovers, and other seabirds have moved in alongside them. It's a real comeback story, built by people who refused to give up on a damaged habitat. Nature, given a chance, found its way back.",
+          "why_good": "A wildlife population that was completely destroyed has fully recovered and grown thanks to real, completed conservation efforts, with no ongoing suffering at the center of the story.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
