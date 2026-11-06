@@ -17,7 +17,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-06T18:00:02.925378-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "People Around the World Help Buy Royal Estate for Wildlife Conservation",
+          "url": "https://www.goodnewsnetwork.org/people-around-the-world-help-buy-royal-estate-for-wildlife-conservation/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A huge stretch of wild land that had belonged to British nobility for generations is now protected for good, thanks to ordinary people chipping in. Donors from all over the world pooled millions of dollars to buy the estate and turn it over to conservation. The land is home to curlews, lapwings, mountain bumblebees, and other wading birds that need wide open space to survive. It's a reminder that when enough people care about the same patch of earth, they can actually buy its safety. No government mandate needed, just a lot of people saying yes.",
+          "why_good": "A real purchase, already completed, that permanently protects biodiverse habitat through voluntary global generosity rather than any political fight.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
