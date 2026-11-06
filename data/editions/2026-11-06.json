@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-06",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-06T13:00:02.902626-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Geothermal Utilities Power Wave of US Affordable Housing with 40% Energy Savings",
+          "url": "https://www.goodnewsnetwork.org/geothermal-utilities-power-wave-of-us-affordable-housing-with-40-energy-savings/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "A gas utility in Vermont just did something no utility had done before: it built a community-scale geothermal system to heat and cool homes instead of burning fuel. The project is already up and running, and it's cutting energy bills by about 40 percent for the people living there. Because it's run through the existing utility, this model could spread to other towns without residents needing to pay for their own new systems. It's a real, working example of cheaper, cleaner energy reaching everyday people, not just a plan on paper.",
+          "why_good": "A geothermal energy deal that actually happened and is already cutting real people's utility bills by 40%, with a scalable model for more communities.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
