@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-07",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-07T13:00:02.853367-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Venomous Primate Believed Extinct for 100 Years Was Hiding in Plain Sight All Along",
+          "url": "https://www.goodnewsnetwork.org/venomous-primate-believed-extinct-for-100-years-was-hiding-in-plain-sight-all-along/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Meet the Bangka slow loris, a tiny big-eyed primate that scientists feared had vanished from the Indonesian island of Bangka a century ago. It turns out these shy creatures were quietly surviving all along, thanks in large part to a local wildlife group that has been rescuing and releasing them back into the forest. Confirmed sightings now show a real, living population, not just a memory in old field notes. It's a wonderful reminder that some 'lost' species are just waiting to be noticed and protected. This one even has a surprising trick: its bite carries venom, making it one of the only venomous primates on Earth.",
+          "why_good": "A species long feared extinct has been confirmed alive and recovering, thanks to real on-the-ground conservation work that already happened.",
+          "evergreen": false,
+          "age_text": "27 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
