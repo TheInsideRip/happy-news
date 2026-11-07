@@ -17,7 +17,24 @@
           "age_text": "27 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-07T18:00:02.848122-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Adventurer Finally Hugs Mom After 28-Year Walk Around the World From Home in UK",
+          "url": "https://www.goodnewsnetwork.org/adventurer-finally-hugs-mom-after-28-year-walk-around-the-world-from-home-in-uk/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A British man named Karl Bushby set off in 1998 on an incredible goal: to walk all the way around the world and return home using only his own two feet. After 28 years and roughly 31,000 miles crossing countries and continents, he finally made it back to his hometown of Hull. Waiting for him was his mother, and the two shared a long, tearful hug as neighbors and media gathered to welcome him home. It's a beautiful reminder of what patience, determination, and love of family can accomplish over a lifetime.",
+          "why_good": "A real person actually completed an extraordinary personal journey and was reunited with his family, pure human triumph with no suffering, crime, or politics involved.",
+          "evergreen": false,
+          "age_text": "8 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
