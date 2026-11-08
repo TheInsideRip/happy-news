@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-08",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-08T13:00:02.752373-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Baby Saved After Racing Heartbeat Detected by Family Doberman",
+          "url": "https://www.goodnewsnetwork.org/baby-saved-as-racing-heartbeat-detected-by-pet/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "A family's dog may have saved their baby's life just by refusing to leave his side. The Doberman, Saraya, started crying and acting unusually clingy around six-month-old Alexander, which caught his mom Kim's attention. When she checked on him, she discovered his heart was racing far faster than it should, and she was able to get him help right away. It's a lovely reminder of just how in tune our pets can be with the people they love. Alexander is doing well now, thanks to his four-legged guardian angel.",
+          "why_good": "A real medical scare was caught early because of a pet's instinct, leading to a good outcome for the baby — a heartwarming, true story about connection and care, not disaster.",
+          "evergreen": false,
+          "age_text": "25 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
