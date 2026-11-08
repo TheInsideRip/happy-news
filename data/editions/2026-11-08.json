@@ -17,7 +17,24 @@
           "age_text": "25 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-08T18:00:02.996740-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Dogs Can Sniff-Out Invasive Plant Species With High Accuracy to Curb Their Destruction",
+          "url": "https://www.goodnewsnetwork.org/dogs-can-sniff-out-invasive-plant-species-with-75pt-accuracy/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "In Germany, scientists trained ordinary volunteers and their pet dogs to sniff out invasive plants that threaten local ecosystems. The dogs turned out to be remarkably good detectives, catching these harmful plants with high accuracy. That matters because invasive species are one of the biggest causes of biodiversity loss on the planet, and finding them early is key to stopping their spread. It's a clever, low-cost way everyday people and their pets can help protect nature.",
+          "why_good": "A real, tested program that gives communities an effective new tool to protect biodiversity from invasive species.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
