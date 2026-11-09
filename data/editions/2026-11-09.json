@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-09",
+  "slots": {
+    "afternoon": {
+      "published_at": "2026-11-09T17:01:19.732014-05:00",
+      "time_text": "5:01 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Fish Stocks Thrive Thanks to This Pink Seaweed and Locals Who Protected It",
+          "url": "https://www.goodnewsnetwork.org/fish-stocks-thrive-thanks-to-this-strange-seaweed-and-locals-who-protected-it/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Ten years ago, a Scottish island community fought to ban industrial scallop dredging that was tearing up the seabed. That ban protected rare pink 'maerl' beds, a kind of living seaweed that acts like a nursery for baby fish and shellfish. Now, a decade later, islanders are celebrating as fish stocks have bounced back and the seabed is flourishing again. Locals call it the most amazing thing to happen to their waters. It's a real proof that protecting the sea actually pays off.",
+          "why_good": "A real, decade-long conservation ban has produced measurable, lasting recovery of marine life, directly improving both the ecosystem and local fishing livelihoods.",
+          "evergreen": false,
+          "age_text": "6 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "5:01 pm"
+}
