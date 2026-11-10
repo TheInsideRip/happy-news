@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-10",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-10T13:00:02.546327-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Teen Built a Free App That's Helping Hundreds of Families Understand Autistic Loved Ones",
+          "url": "https://www.goodnewsnetwork.org/15-yo-teaches-himself-machine-learning-to-build-app-that-interprets-autistic-communication/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "A teenager watched adults struggle to understand his autistic cousin's cues, so he taught himself machine learning and built an app to help. The free app, called Kora, now has over 700 users across 12 countries and is being used by autism therapy centers to help families communicate better. It was built by one determined kid in his spare time, and it's already making daily life easier for hundreds of families. No cost, no catch, just a teenager solving a problem he saw up close.",
+          "why_good": "A real, working tool already helping hundreds of real families understand their loved ones better, built by a teen who saw a need and quietly fixed it.",
+          "evergreen": false,
+          "age_text": "25 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
