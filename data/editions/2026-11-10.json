@@ -17,7 +17,24 @@
           "age_text": "25 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-10T18:00:02.633679-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "World's Driest Desert Erupts into Record-Breaking Bloom",
+          "url": "https://www.goodnewsnetwork.org/worlds-driest-desert-erupts-into-record-breaking-bloom-boom-look/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Chile's Atacama Desert, usually the driest place on Earth, has burst into one of the most spectacular wildflower blooms ever recorded there. Around 200 different flower species have carpeted the sand in color, including some that haven't been seen blooming in that spot for years. It's a rare natural event triggered by unusual rains, turning a barren landscape into a rainbow almost overnight. Scientists and visitors alike are marveling at just how much life was hiding in the soil, waiting for its chance to bloom.",
+          "why_good": "A real, observed natural phenomenon that is purely uplifting, showing nature's resilience with no downside or disaster attached.",
+          "evergreen": false,
+          "age_text": "10 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
