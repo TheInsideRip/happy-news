@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-11",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-11T13:00:02.568692-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Brown Bear Population in Spain Doubles With Incredible Increase of its Breeding Range",
+          "url": "https://www.goodnewsnetwork.org/spain-sees-incredible-doubling-of-her-brown-bear-population-and-its-breeding-range/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Spain's Cantabrian brown bears were down to as few as 140 in the early 2000s, but thanks to two decades of protection efforts, their numbers have now doubled to about 370. Even better, the bears have expanded their territory to roam across 6,500 square miles of northern Spain. It's a real comeback story for a species that was once on the brink. Local conservation programs, habitat protection, and reduced hunting pressure all get credit for turning things around. It's a reminder that when we give wildlife room and time, nature can bounce back.",
+          "why_good": "A documented, measurable wildlife recovery from active conservation efforts, with no suffering or disaster at its core.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
