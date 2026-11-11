@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-11T18:00:02.657204-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "For Centuries, Visitors Walked Right by 280 Unseen Ice Age Cave Paintings",
+          "url": "https://www.goodnewsnetwork.org/for-centuries-visitors-walked-right-by-280-unseen-ice-age-cave-paintings/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Researchers in Spain just found 280 Ice Age engravings that had been hiding in plain sight for centuries. Thousands of visitors had walked right past the cave walls without anyone noticing the ancient artwork carved into the stone. It's now considered the third-largest collection of its kind ever found on Spain's Mediterranean coast. A little closer looking turned up a huge piece of human history that had been there all along.",
+          "why_good": "A real, confirmed archaeological discovery that expands our understanding of ancient human creativity, with no downside or tragedy attached.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
