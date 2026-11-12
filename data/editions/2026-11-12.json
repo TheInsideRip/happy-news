@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-12",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-12T13:00:02.568725-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Documentarian Helps 103-yo D-Day Survivor Recover His Lost War Medals–Just in Time for Veterans Day",
+          "url": "https://www.goodnewsnetwork.org/documentarian-helps-103-yo-d-day-survivor-recover-his-lost-war-medals-just-in-time-for-veterans-day/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A 103-year-old D-Day veteran just got his long-lost war medals back, right in time for Veterans Day. An amateur WWII historian stumbled across the man's military record and tracked down the family to ask if he still had them. He didn't, so the historian helped track the missing medals down and got them returned. It's a touching reminder that someone's service is never forgotten, even a lifetime later. The whole family is overjoyed to have this piece of his history back where it belongs.",
+          "why_good": "A real event that reunited an elderly veteran with meaningful lost history, told with warmth and no controversy.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
