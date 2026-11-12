@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-12T18:00:02.620871-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "China Switches on World's Biggest Liquid-Air Renewable Energy Storage System",
+          "url": "https://www.goodnewsnetwork.org/worlds-largest-liquid-air-renewable-energy-storage-system-switches-on/",
+          "source": "Good News Network",
+          "label": "technology",
+          "summary": "China just turned on the world's largest liquid-air energy storage facility, a clever system that banks extra renewable power by chilling air into liquid and then releasing it to generate electricity when it's needed. It's a cheap, simple way to store wind and solar energy so it's available even when the sun isn't shining or the wind isn't blowing. This kind of storage is a big missing piece for a cleaner power grid, and now there's real proof it can work at massive scale. It's a solid step toward a future with fewer fossil fuels and more reliable green energy.",
+          "why_good": "A real, working piece of infrastructure now exists that helps solve one of clean energy's biggest challenges: storage. It benefits the planet and happened, not just a plan.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
