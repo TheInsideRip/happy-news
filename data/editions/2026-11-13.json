@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-13",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-13T13:00:02.624851-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Infant Goes from 110 Seizures a Day to Seizure-Free with Experimental Treatment",
+          "url": "https://www.goodnewsnetwork.org/infant-goes-from-110-seizures-a-day-to-seizure-free-after-rare-treatment/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "A baby named Adnan was having a seizure almost every 13 minutes from the day he was born. Doctors at a Dubai hospital gave him a still-experimental drug, and his seizures stopped completely that very day. A week later, and the week after that, they still haven't come back. It's a huge relief for his family and a hopeful sign for other babies with the same rare condition.",
+          "why_good": "A real medical treatment actually worked and gave a suffering infant his health back, not a study or a hope for the future.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
