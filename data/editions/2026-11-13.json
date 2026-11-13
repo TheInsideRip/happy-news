@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-13T18:00:02.553563-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "WWII Tryst at the Center of 80+Year Mystery That's Now United Two Families",
+          "url": "https://www.goodnewsnetwork.org/canadian-family-finally-identifies-grandfathers-long-lost-wwii-baby-in-england-after-80-years/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "An 81-year-old man in England grew up never knowing who his biological father was. Across the ocean in Canada, a family had been quietly wondering about a baby their grandfather may have left behind during World War II. After decades of searching, the two families finally connected and confirmed they were related. Rodney Anderson has now met his long-lost relatives, closing a gap that spanned 80 years, a war, and an entire ocean. It's a beautiful reminder that even the oldest family mysteries can have happy endings.",
+          "why_good": "A real, completed reunion that healed an 80-year family mystery with no suffering at its core, just connection and closure.",
+          "evergreen": false,
+          "age_text": "10 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
