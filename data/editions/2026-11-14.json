@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-14",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-14T13:00:02.236509-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Two of the 'Last Wild Ecosystems' Untouched by Humans Are Declared New Sanctuaries",
+          "url": "https://www.goodnewsnetwork.org/two-of-last-wild-ecosystems-untouched-by-humans-declared-new-sanctuaries/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Scientists have found a handful of remote Pacific atolls so untouched by people that they count among the last truly wild, healthy ecosystems left on Earth. These hidden islands are bursting with life, from coral to seabirds, almost exactly as they would have looked before humans arrived anywhere. Rather than just study them, officials have now officially declared two of these pristine spots protected sanctuaries. That means their reefs and wildlife get real, lasting legal shelter from fishing, development, and other human pressures. It's a rare chance to keep a piece of the planet exactly as nature made it.",
+          "why_good": "A concrete, finalized protection of pristine ocean ecosystems — not a proposal or study, but an actual designation safeguarding rare untouched habitat.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
