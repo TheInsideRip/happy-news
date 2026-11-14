@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-14T18:00:02.172950-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Couple with Autism and ADHD Find Passion Cleaning Filthy Street Signs",
+          "url": "https://www.goodnewsnetwork.org/couple-with-autism-and-adhd-find-passion-cleaning-filthy-street-signs/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A married couple named Paul and Ruth started a sweet new hobby together this fall: scrubbing grimy street signs back to a shine. Both have autism and ADHD, and they found that working side by side on this simple task gave them a shared sense of purpose and joy. What began as a way to spend time together has turned into a real passion, with the pair now dreaming of cleaning signs across the whole country. It's a lovely reminder that happiness can be found in the smallest, most ordinary tasks when you do them with someone you love.",
+          "why_good": "It's a heartwarming, true story about a couple finding connection and purpose through a simple shared hobby, with no suffering or controversy at its core.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
