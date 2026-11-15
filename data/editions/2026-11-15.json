@@ -17,7 +17,24 @@
           "age_text": "2 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-15T18:00:02.453278-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "World-First Bone Marrow Transplant Successfully Treats Non-Malignant Disease",
+          "url": "https://www.goodnewsnetwork.org/world-first-bone-marrow-transplant-successfully-treats-non-malignant-disease/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "Doctors in the Midwest pulled off a medical first: using bone marrow from a deceased organ donor to successfully treat a 40-year-old woman with a serious non-cancerous blood disorder called aplastic anemia. This approach had never been reported before for this kind of illness, and it worked. It opens a new door for patients who need a transplant but don't have a matching living donor available. The woman is now doing well thanks to this breakthrough treatment. It's a hopeful sign that more lives could be saved this way in the future.",
+          "why_good": "A real, completed medical first that successfully cured a patient and could expand treatment options for others with similar conditions.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
