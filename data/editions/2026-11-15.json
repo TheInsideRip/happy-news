@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-15",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-15T13:00:02.324733-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "San Francisco Gets its Largest-Ever Gift: $100M for Public Parks From Airbnb Founder",
+          "url": "https://www.goodnewsnetwork.org/san-francisco-gets-100m-gift-for-public-parks-from-airbnb-ceo/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Airbnb's co-founder Brian Chesky just gave San Francisco $100 million to fix up and expand its public parks, the biggest single gift the city has ever received. He stood with the mayor in Golden Gate Park to make the announcement, 18 years after he started his company right there in the city. The money will go toward making green spaces more beautiful and welcoming for everyone who lives there. It's a reminder that hometown success can come back around to help the whole community. Families, dog walkers, and kids on swings are all going to feel the difference.",
+          "why_good": "A real, completed act of generosity that will tangibly improve shared public spaces for an entire city, with no political angle.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
