@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-16",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-16T13:00:02.482876-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "30% Drop in Levels of Forever Chemicals in England's Rivers, 49% in Fish",
+          "url": "https://www.goodnewsnetwork.org/30-drop-in-levels-of-forever-chemicals-in-englands-rivers-49-in-fish-brilliant-to-see/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "Two harmful 'forever chemicals' that were banned internationally over health worries are now showing up far less in England's rivers and the fish that live in them. Measurements found a 30% drop in the water and nearly a 49% drop inside fish, which is a huge sign that banning these substances actually works. Scientists called the results brilliant to see, because forever chemicals are notoriously slow to break down and usually linger for decades. This shows that when countries agree to stop using something dangerous, nature really can start to heal. It's a rare bit of proof that environmental rules pay off.",
+          "why_good": "A real, measured decline in toxic pollution following a ban, showing policy translating into actual environmental improvement.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
