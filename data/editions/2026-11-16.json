@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-16T18:00:02.576776-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Farmer Finds Unknown Seeds in His Attic – and Grows an Ancient 'Miracle' Grain",
+          "url": "https://www.goodnewsnetwork.org/farmer-finds-unknown-seeds-in-his-attic-and-grows-an-ancient-miracle-grain/",
+          "source": "Good News Network",
+          "label": "agriculture",
+          "summary": "An Italian farmer named Claudio Grossi stumbled on a stash of old, shriveled seeds tucked away in his attic and decided to see if they'd grow. To his surprise, they sprouted into an ancient variety of wheat that had all but vanished from modern farms. This heirloom grain turns out to be hardy and nutritious, offering a living piece of agricultural history that could help diversify our food supply. It's a reminder that sometimes the answers to tomorrow's food challenges are hiding in yesterday's attic.",
+          "why_good": "A real, happened event showing how preserving old seeds can revive lost crop diversity, with genuine benefits for farming and food resilience.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
