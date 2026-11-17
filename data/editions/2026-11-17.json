@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-17T18:00:02.475867-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Algeria Returns Kindness Shown by Kansans Who Welcomed its World Cup Team with the Trip of a Lifetime",
+          "url": "https://www.goodnewsnetwork.org/algeria-returns-kindness-shown-by-kansans-who-welcomed-its-world-cup-team-with-the-trip-of-a-lifetime/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Earlier this year, families in Kansas welcomed Algeria's World Cup team with open arms during their stay in the state. Algeria didn't forget that warmth, and this month flew a group of those same Kansas families to Algeria as a thank-you. When the exhausted travelers landed at 4:30 a.m., they were greeted by flowers, hugs, and dozens of government and hospitality officials who wanted to return the favor. It's a lovely reminder that kindness between strangers can turn into lasting friendship between whole communities.",
+          "why_good": "A real act of international goodwill that actually happened, showing ordinary generosity being repaid across borders with no political angle.",
+          "evergreen": false,
+          "age_text": "6 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
