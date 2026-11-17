@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-17",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-17T13:00:02.585949-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Largest Electric Bus Fleet in New York to Serve Bronx Neighborhood Elevated Asthma Rates",
+          "url": "https://www.goodnewsnetwork.org/largest-electric-bus-fleet-in-new-york-to-serve-bronx-neighborhood-riddled-with-asthma/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "New York State's largest fleet of electric school buses is now on the road in the South Bronx, a neighborhood where kids have more than double the national rate of asthma. The family-owned bus company has been serving children with special needs there for over 30 years, and now those rides will be cleaner and quieter. Swapping diesel engines for electric ones means less exhaust pumped into a community that already struggles to breathe easy. It's a simple, real-world fix aimed straight at protecting children's lungs every single school day.",
+          "why_good": "A concrete, already-implemented change that directly reduces air pollution exposure for children in a neighborhood with documented health harm.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
