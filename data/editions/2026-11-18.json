@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-18",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-18T13:00:02.604907-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "This Blue Whale Population Grew 1,000% Since the End of Antarctic Whaling",
+          "url": "https://www.goodnewsnetwork.org/this-blue-whale-population-grew-1000-since-the-end-of-whaling/",
+          "source": "Good News Network",
+          "label": "ocean",
+          "summary": "Antarctic blue whales, the largest animals ever to live on Earth, have made an astonishing comeback. Their numbers have grown from just 418 whales to about 4,018 since 1973, an increase of roughly 1,000%. That works out to steady growth of about 4.5% every year. The recovery followed the end of Antarctic whaling, and it shows that when people stop harming a species and protect it, nature can bounce back.",
+          "why_good": "A real, measured recovery of the planet's largest animal, driven by human protection that actually worked.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
