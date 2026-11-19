@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-19",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-19T13:00:02.602069-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "She Checked on Her 'Loud' Upstairs Neighbor, Inspiring Strangers to Raise More Than $100,000",
+          "url": "https://www.goodnewsnetwork.org/loud-neighbor-parkinsons-gofundme/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Carole is an 87-year-old woman with Parkinson's disease who lives alone upstairs from a neighbor. That neighbor took the time to knock and check on her, and learned Carole needed far more help than anyone knew. Neighbors and total strangers rallied around her and raised more than $109,000. Carole discovered she was much less alone than she had thought.",
+          "why_good": "One small act of checking in on a neighbor grew into real, lasting support for an elderly woman, and it shows how much kindness is out there.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
