@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-19T18:00:02.293598-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Siblings Build 430-Step 'Sky Ladder' for Their Mother Who Refuses to Live in the City",
+          "url": "https://www.goodnewsnetwork.org/siblings-build-430-step-sky-ladder-for-their-mother-who-refuses-to-live-in-the-city/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "The grown children of an elderly mother in China built her a new staircase by hand up the side of a mountain, so she can get home more easily. She has refused to move to the city, and they wanted her to stay in the home she loves. Her youngest daughter remembers her mother holding the children's hands as they walked down the old mountain path. Now the children are helping her up that same mountain. The story has touched millions of people.",
+          "why_good": "A family finished a real, lasting project out of love, so a mother can stay in the home she wants.",
+          "evergreen": false,
+          "age_text": "30 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
