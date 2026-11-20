@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-20",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-20T13:00:01.841905-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Rhino Dung Paper Is How This Family Makes Money and Protects These Amazing Animals",
+          "url": "https://www.goodnewsnetwork.org/father-daughter-business-sells-paper-and-stationery-made-from-rhino-dung/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "A father and daughter in India have found a clever way to turn rhino dung into paper and stationery. Local villagers collect the dung, so they earn money from it. Villagers who once might have clashed with rhinos now see the animals as a steady source of income. That gives them a real reason to protect these magnificent creatures, and the paper is a lovely product too.",
+          "why_good": "A working business is paying local people and giving them a reason to protect rhinos, so both the families and the animals benefit.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
