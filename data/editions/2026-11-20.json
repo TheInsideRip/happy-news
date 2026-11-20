@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-20T18:00:02.704021-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Every Tuesday, This Chef Cooks for 100 People in Need Using Random Food Bank Ingredients",
+          "url": "https://www.goodnewsnetwork.org/every-tuesday-this-chef-cooks-for-100-people-in-need-using-random-food-bank-ingredients/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "Toronto-area chef Maddy Goldberg has spent years giving her Tuesdays to cook for people who need a good meal. Each week she prepares banquet-style, made-from-scratch dishes for 100 guests. She builds the menu from whatever ingredients the food bank happens to have, turning a mixed bag of groceries into something special. She also shares her recipes on social media, where her warmth makes the food look even more inviting.",
+          "why_good": "A real, ongoing weekly program that puts hundreds of hot, thoughtfully made meals in front of people who need them, and treats them as honored guests.",
+          "evergreen": false,
+          "age_text": "10 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
