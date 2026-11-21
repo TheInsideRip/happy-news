@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-21",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-21T13:00:01.893125-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "First Human Trial to Slash Bad Cholesterol by 50% With One Injection of CRISPR Gene-Editing Therapy",
+          "url": "https://www.goodnewsnetwork.org/first-human-trial-to-slash-bad-cholesterol-by-50pt-with-one-crispr-injection/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "Doctors at the Cleveland Clinic in Ohio tried a one-time CRISPR gene-editing treatment to lower dangerous cholesterol in people who struggle with it. A single infusion cut their bad cholesterol by about 52 percent. A year later, the patients were still enjoying that benefit, and no side effects were reported. It was an early-stage trial, but it shows that one treatment could someday replace a lifetime of daily pills.",
+          "why_good": "A single treatment actually lowered cholesterol by half for a full year with no side effects, which could one day protect many people from heart disease.",
+          "evergreen": false,
+          "age_text": "3 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
