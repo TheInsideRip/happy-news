@@ -17,7 +17,24 @@
           "age_text": "3 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-21T18:00:02.518518-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Breath of a Whale Captured by Drone Allows Full Genome Sequencing Without Intrusion",
+          "url": "https://www.goodnewsnetwork.org/breath-of-whale-captured-via-drone-to-complete-genome-sequence/",
+          "source": "Good News Network",
+          "label": "science",
+          "summary": "Scientists have found a gentle new way to learn a whale's genetic secrets: they simply catch its breath. Drones flew over the whales and collected the mist from their blowholes. That mist carried enough genetic material for researchers to complete a whole genome sequence of one of these ocean giants, a first. A team from the University of St. Andrews in Scotland took part in the international effort. The whales never had to be touched, tagged, or disturbed.",
+          "why_good": "It's a real scientific first that lets us study and protect whales without stressing them.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
