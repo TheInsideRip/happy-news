@@ -17,7 +17,24 @@
           "age_text": "26 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-22T18:00:02.616605-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "The First Museum Built in a Children's Hospital Fulfills Dying Boy's Wish For Playtime During Chemo",
+          "url": "https://www.goodnewsnetwork.org/the-first-museum-built-in-a-childrens-hospital-fulfills-dying-boys-wish/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "While a little boy was being treated at the Children's Hospital of New Orleans, he longed for somewhere to get some fresh air and a break from his worries. Before he died, he and his family started a foundation to raise money for that dream. Five years later, the wish has come true with the opening of the first museum built inside a children's hospital. Young patients now have a place to play and be distracted during treatment.",
+          "why_good": "A family turned a child's last wish into a real, lasting space that brings joy to kids going through treatment.",
+          "evergreen": false,
+          "age_text": "4 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
