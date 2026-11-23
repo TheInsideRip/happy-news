@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-23",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-23T13:00:02.047677-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "One-of-a-Kind Refuge to 200,000 Walrus Protected Forever in Alaska",
+          "url": "https://www.goodnewsnetwork.org/one-of-a-kind-refuge-to-200000-walrus-protected-forever-in-alaska/",
+          "source": "Good News Network",
+          "label": "animals",
+          "summary": "Conservationists have secured permanent protection for a one-of-a-kind stretch of Alaska's Bering Sea coast. The barrier islands off the tiny northern village of Point Lay host the largest gatherings of Pacific walrus anywhere in North America, with as many as 200,000 animals hauling out together. That ecosystem is now safeguarded for good. Thousands of walrus, and the community that shares the coastline with them, can count on this special place staying wild.",
+          "why_good": "A finished, lasting protection for one of the world's most remarkable wildlife gatherings, and one of the biggest walrus populations in North America.",
+          "evergreen": false,
+          "age_text": "1 hour ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
