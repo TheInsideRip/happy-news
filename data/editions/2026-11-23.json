@@ -17,7 +17,24 @@
           "age_text": "1 hour ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-23T18:00:02.600474-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "The City That Kicked Out Cars Before It Was Cool",
+          "url": "https://reasonstobecheerful.world/pontevedra-car-free-city/",
+          "source": "Reasons to be Cheerful",
+          "label": "government",
+          "summary": "Pontevedra, a city in northern Spain, decided years ago to take cars out of its centre and give the streets back to people on foot. Today residents stroll, chat and let their children play where traffic used to roar. Even a local taxi driver, who you'd expect to be against the idea, admits the change has him rethinking things. It's a real, lived-in example of a town that made a bold choice and found that it made everyday life calmer and healthier.",
+          "why_good": "A city programme that has been in place long enough to show it works, with cleaner, safer and friendlier streets that other towns can copy.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
