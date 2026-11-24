@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-24",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-24T13:00:01.886638-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Charity Swaps Tuition Fees for Coconuts So Every Islander Can Afford School",
+          "url": "https://www.goodnewsnetwork.org/charity-swaps-tuition-fees-for-coconuts-so-every-islander-can-afford-school/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "The coconut palm is called the Tree of 1,000 Uses, but \"school tuition voucher\" isn't usually on the list. At Faith Christian Academy in Micronesia, it is now. The school accepts coconuts in place of tuition money, so families who have plenty of trees but little cash can still send their children to class. It's a simple, practical idea that turns something islanders already have into a seat in the classroom.",
+          "why_good": "A school found a practical way to keep education within reach for island families who might otherwise be priced out.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
