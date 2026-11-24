@@ -17,7 +17,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-24T18:00:02.712273-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Major Success Sees Viral Infections Fall 68% in Brazil After Releasing Wolbachia-Infected Mosquitoes",
+          "url": "https://www.goodnewsnetwork.org/major-success-sees-viral-infections-fall-68-in-brazil-after-releasing-wolbachia-infected-mosquitoes/",
+          "source": "Good News Network",
+          "label": "health",
+          "summary": "In Brazil, scientists released mosquitoes carrying a harmless bacteria called Wolbachia, which makes it much harder for the insects to spread viruses like dengue. After the release, children living in the treated areas had a 68% lower risk of catching these mosquito-borne diseases. The method has been proven in smaller settings before, and this trial shows it can work across a whole population. It's a gentle, natural way to protect families without relying only on sprays or chemicals.",
+          "why_good": "A real, completed trial showed a large drop in mosquito-borne illness among children, proving a safe method can protect whole communities.",
+          "evergreen": false,
+          "age_text": "2 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
