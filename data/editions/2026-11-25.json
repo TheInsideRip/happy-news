@@ -17,7 +17,24 @@
           "age_text": "5 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-25T18:00:02.658756-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "'Autos for Love' Owners Delight in Giving Away Cars to Needy Neighbors",
+          "url": "https://www.goodnewsnetwork.org/texas-auto-shop-couple-is-hungry-to-keep-giving-cars-away-to-neighbors-in-need/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "A couple who run an auto-repair shop in Texas used to refurbish one donated car a year and hand the keys to someone in their community who needed it. Thanks to their own generosity and gifts from others, they've been able to speed things up. Now multiple vehicles are going out to neighbors in need. For someone without reliable transportation, a car can mean getting to work, school, and the doctor.",
+          "why_good": "Neighbors in need are getting the keys to cars, and the giving is growing because others joined in.",
+          "evergreen": false,
+          "age_text": "8 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
