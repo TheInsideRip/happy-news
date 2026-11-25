@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-25",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-25T13:00:01.915738-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Land Returned to Native American Ownership 400 Years After the First Thanksgiving",
+          "url": "https://www.goodnewsnetwork.org/land-returned-indigenous-care-first-encounter-beach/",
+          "source": "Good News Network",
+          "label": "earth",
+          "summary": "On October 30, The Nature Conservancy gave about 126 acres of salt marsh and natural habitat in Eastham, Massachusetts, to the Native Land Conservancy, an Indigenous-led land trust. The area is on Cape Cod, where the Pilgrims first explored more than 400 years ago. The land is now back in Native American hands, and the new owners will care for it. It's a quiet, hopeful way to mark Thanksgiving week.",
+          "why_good": "Land was actually handed back to Indigenous stewardship, and the marsh and wildlife habitat stay protected.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
