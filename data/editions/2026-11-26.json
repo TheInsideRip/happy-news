@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-26",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-26T13:00:01.978159-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Texans Work for Free on Farms That Aren't Theirs to Send Others' Kids to College",
+          "url": "https://www.goodnewsnetwork.org/texans-work-for-free-on-farms-that-arent-theirs-to-send-others-kids-to-college/",
+          "source": "Good News Network",
+          "label": "people",
+          "summary": "In Texas, residents volunteer their time to farm land that isn't theirs, and the money it raises goes to college scholarships for kids they don't know. The tradition is now 15 years old. In that time it has paid out $3 million in scholarships. It's a simple idea that has quietly helped a lot of young people get to college.",
+          "why_good": "A community has turned free labor into $3 million of real college help for young people over 15 years.",
+          "evergreen": false,
+          "age_text": "5 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
