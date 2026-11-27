@@ -17,7 +17,24 @@
           "age_text": "33 hours ago"
         }
       ]
+    },
+    "afternoon": {
+      "published_at": "2026-11-27T18:00:02.747079-05:00",
+      "time_text": "6:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "Making Peace With a Himalayan 'Ghost'",
+          "url": "https://reasonstobecheerful.world/snow-leopard-conservation-himalayas/",
+          "source": "Reasons to be Cheerful",
+          "label": "animals",
+          "summary": "In the high desert of Ladakh in the Indian Himalayas, villagers like Deachen Chuskit share their winter grazing lands with the elusive snow leopard. When snow covers the nearby pastures, herders have to take their livestock farther from home, which can put animals and big cats in each other's way. This story looks at how local people and conservationists are working to live alongside the 'ghost of the mountains' rather than against it. It is a hopeful look at communities and wildlife finding a way to share the same mountains.",
+          "why_good": "It shows people and one of the world's most elusive big cats finding a way to coexist, a conservation approach that is already under way in the communities it describes.",
+          "evergreen": false,
+          "age_text": "14 hours ago"
+        }
+      ]
     }
   },
-  "updated_text": "1:00 pm"
+  "updated_text": "6:00 pm"
 }
