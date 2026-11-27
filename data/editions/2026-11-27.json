@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-27",
+  "slots": {
+    "morning": {
+      "published_at": "2026-11-27T13:00:01.886928-05:00",
+      "time_text": "1:00 pm",
+      "note": null,
+      "stories": [
+        {
+          "title": "The Portlanders Turning Rescued Food Into Restaurant-Quality Meals",
+          "url": "https://reasonstobecheerful.world/portland-urban-gleaners/",
+          "source": "Reasons to be Cheerful",
+          "label": "people",
+          "summary": "In Portland, Oregon, a group called Urban Gleaners collects good food that would otherwise be thrown away. Chef Bradley Cohen and his team turn it into real, restaurant-quality meals. On a typical morning he might open the walk-in fridge to a pan of pork loins and a crate of fresh kale and zucchini, and invent a menu on the spot. The food reaches neighbors who need a good meal, and it stays out of the trash.",
+          "why_good": "A working local programme that cuts food waste and feeds people well, with dignity and care.",
+          "evergreen": false,
+          "age_text": "33 hours ago"
+        }
+      ]
+    }
+  },
+  "updated_text": "1:00 pm"
+}
